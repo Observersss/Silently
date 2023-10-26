@@ -65,7 +65,7 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         info = new QLabel(frame);
         info->setObjectName("info");
-        info->setGeometry(QRect(10, 10, 58, 16));
+        info->setGeometry(QRect(10, 10, 101, 16));
         change_space = new QPushButton(frame);
         change_space->setObjectName("change_space");
         change_space->setGeometry(QRect(10, 30, 100, 32));

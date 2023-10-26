@@ -14,6 +14,7 @@ SOURCES += \
     RPGspace/Inventory/inventory.cpp \
     RPGspace/Item/item.cpp \
     RPGspace/Quest/quest.cpp \
+    ShowInfoQuest/showinfoquest.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -24,10 +25,12 @@ HEADERS += \
     RPGspace/Inventory/inventory.h \
     RPGspace/Item/item.h \
     RPGspace/Quest/quest.h \
+    ShowInfoQuest/showinfoquest.h \
     mainwindow.h
 
 FORMS += \
     AddQuest/addquest.ui \
+    ShowInfoQuest/showinfoquest.ui \
     mainwindow.ui
 
 # Default rules for deployment.

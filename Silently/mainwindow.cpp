@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "QMessageBox"
+#include "Library/library.h"
 #include "AddQuest/addquest.h"
+#include "ShowInfoQuest/showinfoquest.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -9,13 +10,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     //Оновлення інформації про персонажа
+    on_change_space_clicked();
     on_button_update_clicked();
 
-//    //Обрання головного інтерфейсу нотаток
-//    on_change_space_clicked();
 
-//    quest.setTitle("Testing");
-//    ui->QuestList->addItem("test");
+
+   ui->QuestList->addItem("test");
 }
 void MainWindow::addActiveQuest(Quest* quest){
     character.addActiveQuest(quest);
@@ -75,8 +75,7 @@ void MainWindow::on_button_update_clicked()
     Quest quest = quests[0];
     QString title = QString::fromStdString(quest.getTitle());
     ui->QuestList->addItem(title);
-//    QString title = QString::fromStdString(quest.getTitle());
-//    ui->QuestList->addItem(title);
+
     } /*else {
     QMessageBox::warning(this, "Предупреждение", "Вектор квестов пустой");
 
@@ -87,12 +86,15 @@ void MainWindow::on_button_update_clicked()
 
 void MainWindow::on_AddingQuest_clicked()
 {
-    //    Quest *quest = new Quest;
-    //    quest->setTitle("LOL");
-    //    character.addActiveQuest(quest);
-    //    QString namequest = QString::fromStdString(quest->getTitle());
-    //    ui->QuestList->addItem(namequest);
     AddQuest window(this);
+    window.show();
+    window.exec();
+}
+
+
+void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
+{
+    ShowInfoQuest window(this);
     window.show();
     window.exec();
 }

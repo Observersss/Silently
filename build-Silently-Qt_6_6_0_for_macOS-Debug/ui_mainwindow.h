@@ -65,7 +65,7 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         info = new QLabel(frame);
         info->setObjectName("info");
-        info->setGeometry(QRect(10, 10, 58, 16));
+        info->setGeometry(QRect(10, 10, 101, 16));
         change_space = new QPushButton(frame);
         change_space->setObjectName("change_space");
         change_space->setGeometry(QRect(10, 30, 100, 32));
@@ -118,6 +118,7 @@ public:
         QuestList = new QListWidget(frame_3);
         QuestList->setObjectName("QuestList");
         QuestList->setGeometry(QRect(0, 0, 301, 161));
+        QuestList->setStyleSheet(QString::fromUtf8("color:black;"));
         AddingQuest = new QPushButton(frame_3);
         AddingQuest->setObjectName("AddingQuest");
         AddingQuest->setGeometry(QRect(0, 160, 100, 32));

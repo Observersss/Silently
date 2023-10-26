@@ -34,7 +34,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>58</width>
+       <width>101</width>
        <height>16</height>
       </rect>
      </property>
@@ -164,6 +164,9 @@
          <width>301</width>
          <height>161</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="AddingQuest">

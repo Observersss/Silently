@@ -5,9 +5,10 @@
 #include <vector>
 #include <string>
 #include <QPixmap>
-#include <iostream>
-#include<string>
 #include <chrono>
 #include <ctime>
+#include "QMessageBox"
+#include <QDateTimeEdit>
+#include <QListWidget>
 
 #endif // LIBRARY_H
