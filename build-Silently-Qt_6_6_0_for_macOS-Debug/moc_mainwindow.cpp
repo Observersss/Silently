@@ -41,11 +41,11 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "MainWindow",
     "on_change_space_clicked",
     "",
-    "on_button_update_clicked",
     "on_AddingQuest_clicked",
     "on_QuestList_itemDoubleClicked",
     "QListWidgetItem*",
-    "item"
+    "item",
+    "checkDeadlines"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
@@ -53,11 +53,11 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     char stringdata0[11];
     char stringdata1[24];
     char stringdata2[1];
-    char stringdata3[25];
-    char stringdata4[23];
-    char stringdata5[31];
-    char stringdata6[17];
-    char stringdata7[5];
+    char stringdata3[23];
+    char stringdata4[31];
+    char stringdata5[17];
+    char stringdata6[5];
+    char stringdata7[15];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -66,20 +66,20 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
         QT_MOC_LITERAL(11, 23),  // "on_change_space_clicked"
         QT_MOC_LITERAL(35, 0),  // ""
-        QT_MOC_LITERAL(36, 24),  // "on_button_update_clicked"
-        QT_MOC_LITERAL(61, 22),  // "on_AddingQuest_clicked"
-        QT_MOC_LITERAL(84, 30),  // "on_QuestList_itemDoubleClicked"
-        QT_MOC_LITERAL(115, 16),  // "QListWidgetItem*"
-        QT_MOC_LITERAL(132, 4)   // "item"
+        QT_MOC_LITERAL(36, 22),  // "on_AddingQuest_clicked"
+        QT_MOC_LITERAL(59, 30),  // "on_QuestList_itemDoubleClicked"
+        QT_MOC_LITERAL(90, 16),  // "QListWidgetItem*"
+        QT_MOC_LITERAL(107, 4),  // "item"
+        QT_MOC_LITERAL(112, 14)   // "checkDeadlines"
     },
     "MainWindow",
     "on_change_space_clicked",
     "",
-    "on_button_update_clicked",
     "on_AddingQuest_clicked",
     "on_QuestList_itemDoubleClicked",
     "QListWidgetItem*",
-    "item"
+    "item",
+    "checkDeadlines"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -101,14 +101,14 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
        1,    0,   38,    2, 0x08,    1 /* Private */,
        3,    0,   39,    2, 0x08,    2 /* Private */,
-       4,    0,   40,    2, 0x08,    3 /* Private */,
-       5,    1,   41,    2, 0x08,    4 /* Private */,
+       4,    1,   40,    2, 0x08,    3 /* Private */,
+       7,    0,   43,    2, 0x08,    5 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 6,    7,
 
        0        // eod
 };
@@ -124,13 +124,13 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
         // method 'on_change_space_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_button_update_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_AddingQuest_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_QuestList_itemDoubleClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        // method 'checkDeadlines'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -142,9 +142,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->on_change_space_clicked(); break;
-        case 1: _t->on_button_update_clicked(); break;
-        case 2: _t->on_AddingQuest_clicked(); break;
-        case 3: _t->on_QuestList_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 1: _t->on_AddingQuest_clicked(); break;
+        case 2: _t->on_QuestList_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 3: _t->checkDeadlines(); break;
         default: ;
         }
     }

@@ -6,6 +6,7 @@ AddQuest::AddQuest(QWidget* parent) :
     ui(new Ui::AddQuest)
 {
     ui->setupUi(this);
+    //Спочатку frame_2 де знаходиться ввід дати і часу дедлайну скритий
     ui->frame_2->hide();
 }
 
@@ -43,7 +44,7 @@ void AddQuest::on_pushButton_clicked()
     }
 
     QDateTime selectedDateTime = ui->dateTimeEdit->dateTime();
-    if(ui->dateTimeEdit->YearSection==00){
+    if(ui->dateTimeEdit->YearSection==00&&ui->dateTimeEdit->MonthSection==00&&ui->dateTimeEdit->DaySection==00){
 
     }else{
     std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(selectedDateTime.toSecsSinceEpoch());
@@ -53,17 +54,21 @@ void AddQuest::on_pushButton_clicked()
     MainWindow* w = dynamic_cast<MainWindow*>(parent());
 
     if (w) {
-        w->addActiveQuest(quest);
+
+        w->addActiveQuest(quest);//Додоємо до вектора квестів персонажа
+        w->updateInfoOnQuest();  //Відображаємо назву квесту у QListWidget
+
         hide();
     } else {
-        // Обработка ошибки - не удалось получить указатель на MainWindow
-        // Можно вывести сообщение об ошибке или выполнить другие действия
-        QMessageBox::warning(this, "Предупреждение", "Неудалось передать квест");
+        //Вивід повідомлення що не вдалося передати квест
+        QMessageBox::warning(this, "Предупреждение", "Невдалося передати квест");
     }
 }
 
 void AddQuest::on_pushButton_2_clicked()
 {
+    //Якщо юзер натиснув кнопку Set deadline то frame_2 де знаходиться DateTimeEdit відображається
+    //І задається дата і час актуальні
     ui->frame_2->show();
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
 }

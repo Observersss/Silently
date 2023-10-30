@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>img/axe_2.jpg</file>
+        <file>img/axe.jpg</file>
+        <file>img/beach-hat.jpg</file>
+        <file>img/chainsaw.jpg</file>
+        <file>img/creepy-mask.jpg</file>
+        <file>img/hamster.jpg</file>
+        <file>img/katana_2.jpg</file>
+        <file>img/katana.jpg</file>
+        <file>img/kendang.jpg</file>
+        <file>img/level-up-icon.jpg.avif</file>
+        <file>img/magical-ring.jpg</file>
+        <file>img/magical-staff-2.jpg.avif</file>
+        <file>img/magical-staff.jpg</file>
+        <file>img/milk.jpg</file>
+        <file>img/onigiri.jpg</file>
+        <file>img/panda.jpg</file>
+        <file>img/parking-sign.jpg</file>
+        <file>img/ribbon.jpg</file>
+        <file>img/sailor-hat-2.jpg</file>
+        <file>img/sailor-hat.jpg</file>
+        <file>img/sandwich.jpg</file>
+        <file>img/star.jpg</file>
+        <file>img/torch.jpg.avif</file>
+        <file>img/violin.jpg</file>
+        <file>img/watermelon.jpg</file>
+        <file>img/wifi-icon.jpg</file>
+    </qresource>
+</RCC>

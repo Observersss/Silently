@@ -1,17 +1,48 @@
 #include "character.h"
-//#include"RPGspace/Inventory/inventory.h"
-//#include "RPGspace/Quest/quest.h"
 
 Character::Character(){
     health = 100;
-    mana = 100;
+    mana = 50;
     experience = 0;
     level = 1;
 }
 
+
+void Character::completeQuest(){
+
+}
+
+
 void Character::addActiveQuest(Quest* quest) {
-    Quest newQuest = *quest; // Создайте копию объекта Quest
-    activeQuest.push_back(newQuest); // Добавьте копию в вектор activeQuest
+    Quest newQuest = *quest; // Створюємо копію об'єкта Quest
+    activeQuest.push_back(newQuest); // Додаємо його у вектор
+}
+
+Quest Character::findQuest(const std::string& title){
+    for (const Quest& quest : activeQuest) {
+        if (quest.getTitle() == title) {
+            return quest; // Якщо квест знайшли то виходимо з функції
+        }
+    }
+
+    //Квест не знайдемо виведеться помилка при перевірці чи повернуло квест
+    Quest quest_eror;
+    quest_eror.setTitle(nullptr);
+    return quest_eror;
+}
+
+void Character::deleteActiveQuest(Quest& quest) {
+    //Використовуюємо цикл foreach для перебору елементів вектора
+    for (auto it = activeQuest.begin(); it != activeQuest.end(); ++it) {
+
+        //Порівнюємо назву квеста з getTitile()
+        if (it->getTitle() == quest.getTitle()) {
+
+            //Видаляємо квест з вектора
+            activeQuest.erase(it);
+            break; //Ми знайшли і видалили квест тому виходимо з цикла
+        }
+    }
 }
 
 void Character::increaseExperience(){

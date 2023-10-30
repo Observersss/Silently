@@ -28,25 +28,27 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QGridLayout *gridLayout_2;
+    QFrame *frame_2;
     QFrame *frame;
     QLabel *info;
     QPushButton *change_space;
-    QPushButton *button_update;
     QStackedWidget *spaces;
     QWidget *RPG_space;
+    QGridLayout *gridLayout_4;
+    QFrame *frame_3;
+    QGridLayout *gridLayout_5;
+    QListWidget *QuestList;
+    QPushButton *AddingQuest;
+    QLabel *character_icon;
+    QFrame *active_item;
+    QPushButton *Open_inventory;
     QFrame *infoCharacter;
     QGridLayout *gridLayout;
-    QLabel *HealthLabel;
     QLabel *ManaLabel;
     QLabel *LevelLabel;
     QLabel *ExperienceLabel;
-    QFrame *frame_3;
-    QListWidget *QuestList;
-    QPushButton *AddingQuest;
-    QPushButton *InfoQuest;
-    QFrame *active_item;
-    QFrame *inventory_items;
-    QFrame *character_img;
+    QLabel *HealthLabel;
     QWidget *Note_space;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -55,12 +57,19 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
+        MainWindow->resize(720, 515);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        frame = new QFrame(centralwidget);
+        gridLayout_2 = new QGridLayout(centralwidget);
+        gridLayout_2->setObjectName("gridLayout_2");
+        frame_2 = new QFrame(centralwidget);
+        frame_2->setObjectName("frame_2");
+        frame_2->setMinimumSize(QSize(131, 431));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        frame = new QFrame(frame_2);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(0, 0, 141, 101));
+        frame->setGeometry(QRect(0, 0, 131, 71));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         info = new QLabel(frame);
@@ -69,90 +78,106 @@ public:
         change_space = new QPushButton(frame);
         change_space->setObjectName("change_space");
         change_space->setGeometry(QRect(10, 30, 100, 32));
-        button_update = new QPushButton(frame);
-        button_update->setObjectName("button_update");
-        button_update->setGeometry(QRect(10, 70, 100, 32));
+
+        gridLayout_2->addWidget(frame_2, 0, 0, 1, 1);
+
         spaces = new QStackedWidget(centralwidget);
         spaces->setObjectName("spaces");
-        spaces->setGeometry(QRect(130, 0, 651, 431));
         spaces->setStyleSheet(QString::fromUtf8("background-color:silver;"));
         RPG_space = new QWidget();
         RPG_space->setObjectName("RPG_space");
+        gridLayout_4 = new QGridLayout(RPG_space);
+        gridLayout_4->setObjectName("gridLayout_4");
+        frame_3 = new QFrame(RPG_space);
+        frame_3->setObjectName("frame_3");
+        frame_3->setMinimumSize(QSize(210, 201));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        gridLayout_5 = new QGridLayout(frame_3);
+        gridLayout_5->setObjectName("gridLayout_5");
+        QuestList = new QListWidget(frame_3);
+        QuestList->setObjectName("QuestList");
+        QuestList->setMinimumSize(QSize(0, 0));
+        QuestList->setStyleSheet(QString::fromUtf8("color:black;"));
+
+        gridLayout_5->addWidget(QuestList, 1, 0, 1, 1);
+
+        AddingQuest = new QPushButton(frame_3);
+        AddingQuest->setObjectName("AddingQuest");
+        AddingQuest->setStyleSheet(QString::fromUtf8("color:black;"));
+
+        gridLayout_5->addWidget(AddingQuest, 2, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(frame_3, 1, 1, 1, 1);
+
+        character_icon = new QLabel(RPG_space);
+        character_icon->setObjectName("character_icon");
+        character_icon->setMinimumSize(QSize(135, 199));
+        character_icon->setMaximumSize(QSize(16777215, 16777215));
+        character_icon->setStyleSheet(QString::fromUtf8(""));
+        character_icon->setInputMethodHints(Qt::ImhNone);
+
+        gridLayout_4->addWidget(character_icon, 0, 1, 1, 1);
+
+        active_item = new QFrame(RPG_space);
+        active_item->setObjectName("active_item");
+        active_item->setMinimumSize(QSize(135, 398));
+        active_item->setStyleSheet(QString::fromUtf8("background-color:black;"));
+        active_item->setFrameShape(QFrame::StyledPanel);
+        active_item->setFrameShadow(QFrame::Raised);
+        Open_inventory = new QPushButton(active_item);
+        Open_inventory->setObjectName("Open_inventory");
+        Open_inventory->setGeometry(QRect(9, 380, 121, 32));
+
+        gridLayout_4->addWidget(active_item, 0, 3, 2, 1);
+
         infoCharacter = new QFrame(RPG_space);
         infoCharacter->setObjectName("infoCharacter");
-        infoCharacter->setGeometry(QRect(0, 0, 161, 231));
+        infoCharacter->setMinimumSize(QSize(136, 201));
         infoCharacter->setFrameShape(QFrame::StyledPanel);
         infoCharacter->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(infoCharacter);
         gridLayout->setObjectName("gridLayout");
-        HealthLabel = new QLabel(infoCharacter);
-        HealthLabel->setObjectName("HealthLabel");
-        HealthLabel->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout->addWidget(HealthLabel, 0, 0, 1, 1);
-
         ManaLabel = new QLabel(infoCharacter);
         ManaLabel->setObjectName("ManaLabel");
         ManaLabel->setStyleSheet(QString::fromUtf8("color:black;\n"
 ""));
 
-        gridLayout->addWidget(ManaLabel, 1, 0, 1, 1);
+        gridLayout->addWidget(ManaLabel, 1, 1, 1, 1);
 
         LevelLabel = new QLabel(infoCharacter);
         LevelLabel->setObjectName("LevelLabel");
         LevelLabel->setStyleSheet(QString::fromUtf8("color:black;"));
 
-        gridLayout->addWidget(LevelLabel, 2, 0, 1, 1);
+        gridLayout->addWidget(LevelLabel, 3, 1, 1, 1);
 
         ExperienceLabel = new QLabel(infoCharacter);
         ExperienceLabel->setObjectName("ExperienceLabel");
         ExperienceLabel->setStyleSheet(QString::fromUtf8("color:black;"));
 
-        gridLayout->addWidget(ExperienceLabel, 3, 0, 1, 1);
+        gridLayout->addWidget(ExperienceLabel, 4, 1, 1, 1);
 
-        frame_3 = new QFrame(RPG_space);
-        frame_3->setObjectName("frame_3");
-        frame_3->setGeometry(QRect(0, 230, 301, 201));
-        frame_3->setFrameShape(QFrame::StyledPanel);
-        frame_3->setFrameShadow(QFrame::Raised);
-        QuestList = new QListWidget(frame_3);
-        QuestList->setObjectName("QuestList");
-        QuestList->setGeometry(QRect(0, 0, 301, 161));
-        QuestList->setStyleSheet(QString::fromUtf8("color:black;"));
-        AddingQuest = new QPushButton(frame_3);
-        AddingQuest->setObjectName("AddingQuest");
-        AddingQuest->setGeometry(QRect(0, 160, 100, 32));
-        AddingQuest->setStyleSheet(QString::fromUtf8("color:black;"));
-        InfoQuest = new QPushButton(frame_3);
-        InfoQuest->setObjectName("InfoQuest");
-        InfoQuest->setGeometry(QRect(120, 160, 171, 32));
-        InfoQuest->setStyleSheet(QString::fromUtf8("color:black;"));
-        active_item = new QFrame(RPG_space);
-        active_item->setObjectName("active_item");
-        active_item->setGeometry(QRect(300, 0, 161, 431));
-        active_item->setStyleSheet(QString::fromUtf8("background-color:black;"));
-        active_item->setFrameShape(QFrame::StyledPanel);
-        active_item->setFrameShadow(QFrame::Raised);
-        inventory_items = new QFrame(RPG_space);
-        inventory_items->setObjectName("inventory_items");
-        inventory_items->setGeometry(QRect(460, 0, 191, 431));
-        inventory_items->setStyleSheet(QString::fromUtf8("background-color:orange;"));
-        inventory_items->setFrameShape(QFrame::StyledPanel);
-        inventory_items->setFrameShadow(QFrame::Raised);
-        character_img = new QFrame(RPG_space);
-        character_img->setObjectName("character_img");
-        character_img->setGeometry(QRect(160, 0, 141, 231));
-        character_img->setStyleSheet(QString::fromUtf8("background-color:pink;"));
-        character_img->setFrameShape(QFrame::StyledPanel);
-        character_img->setFrameShadow(QFrame::Raised);
+        HealthLabel = new QLabel(infoCharacter);
+        HealthLabel->setObjectName("HealthLabel");
+        HealthLabel->setStyleSheet(QString::fromUtf8("color:black;"));
+
+        gridLayout->addWidget(HealthLabel, 0, 1, 1, 1);
+
+
+        gridLayout_4->addWidget(infoCharacter, 0, 2, 2, 1);
+
         spaces->addWidget(RPG_space);
         Note_space = new QWidget();
         Note_space->setObjectName("Note_space");
         spaces->addWidget(Note_space);
+
+        gridLayout_2->addWidget(spaces, 0, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 24));
+        menubar->setGeometry(QRect(0, 0, 720, 24));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -166,15 +191,21 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        info->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        info->setText(QCoreApplication::translate("MainWindow", "Space", nullptr));
         change_space->setText(QCoreApplication::translate("MainWindow", "Change space", nullptr));
-        button_update->setText(QCoreApplication::translate("MainWindow", "Update", nullptr));
-        HealthLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        ManaLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        LevelLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         AddingQuest->setText(QCoreApplication::translate("MainWindow", "Add Quest", nullptr));
-        InfoQuest->setText(QCoreApplication::translate("MainWindow", "Show info quest", nullptr));
+#if QT_CONFIG(tooltip)
+        character_icon->setToolTip(QCoreApplication::translate("MainWindow", "\320\246\320\265 \321\202\320\262\321\226\320\271 \320\277\320\265\321\200\321\201\320\276\320\275\320\260\320\266", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        character_icon->setWhatsThis(QCoreApplication::translate("MainWindow", "\320\246\320\265 \321\202\320\262\321\226\320\271 \320\277\320\265\321\200\321\201\320\276\320\275\320\260\320\266", nullptr));
+#endif // QT_CONFIG(whatsthis)
+        character_icon->setText(QString());
+        Open_inventory->setText(QCoreApplication::translate("MainWindow", "Open inventory", nullptr));
+        ManaLabel->setText(QCoreApplication::translate("MainWindow", "Mana", nullptr));
+        LevelLabel->setText(QCoreApplication::translate("MainWindow", "Level", nullptr));
+        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
+        HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));
     } // retranslateUi
 
 };

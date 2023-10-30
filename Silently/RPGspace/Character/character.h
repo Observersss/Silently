@@ -2,7 +2,7 @@
 #define CHARACTER_H
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
-
+#include "Library/library.h"
 class Character
 {
 private:
@@ -17,9 +17,15 @@ public:
     //Конструктор який ініціалізує об'єкт і надає персонажу базові параметри(health,mana,experience,level)
     Character();
 
+    void completeQuest();
+
     void addActiveQuest(Quest* quest);
 
+    //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
+    //Повертає об'єкт класса Quest
+    Quest findQuest(const std::string& title);
 
+    void deleteActiveQuest(Quest& quest);
 
     //Збільшити досвід на певне значення
     void increaseExperience();

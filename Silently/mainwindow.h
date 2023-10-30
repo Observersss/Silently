@@ -13,21 +13,28 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     void addActiveQuest(Quest* quest);
-    bool applicationSupportsSecureRestorableState() const {
-        return true;
-    }
+
+    void updateInfoOnCharacter();
+
+    void updateInfoOnQuest();
+
+    void handleQuestInfoClosed();
+
+    void deleteQuest();
+
+    void questComplete();
+
+
     ~MainWindow();
 private slots:
     void on_change_space_clicked();
 
-    void on_button_update_clicked();
-
-
-
-
     void on_AddingQuest_clicked();
 
     void on_QuestList_itemDoubleClicked(QListWidgetItem *item);
+
+    void checkDeadlines();
+
 
 private:
     Ui::MainWindow *ui;

@@ -34,6 +34,7 @@ public:
     std::chrono::system_clock::time_point getDeadline()const;
 
 
+
 };
 
 #endif // QUEST_H
