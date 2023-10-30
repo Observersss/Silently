@@ -5,6 +5,14 @@ Character::Character(){
     mana = 50;
     experience = 0;
     level = 1;
+
+    damage = 15;
+    chanceOfCriticalDamade = 5;
+    criticalDamage = 50;
+    dexterity = 5;
+    force = 8;
+    intelligence = 7;
+    luck = 3;
 }
 
 
@@ -55,8 +63,16 @@ void Character::increaseExperience(){
 void Character::updateLevel(){
     level+=1;
     experience=0;
+
     increaseHealth(10);
     increaseMana(5);
+    increaseDamage(4);
+    increaseChanceOfCriticalDamade(1);
+    increaseCriticalDamage(2);
+    increaseDexterity(1);
+    increaseForce(1);
+    increaseIntelligence(1);
+    increaseLuck(1);
 }
 
 void Character::increaseHealth(int amount){
@@ -65,6 +81,28 @@ void Character::increaseHealth(int amount){
 
 void Character::increaseMana(int amount){
     mana+=amount;
+}
+
+void Character::increaseDamage(int amount){
+    damage+=amount;
+}
+void Character::increaseChanceOfCriticalDamade(int amount){
+    chanceOfCriticalDamade+=amount;
+}
+void Character::increaseCriticalDamage(int amount){
+    criticalDamage+=amount;
+}
+void Character::increaseDexterity(int amount){
+    dexterity+=amount;
+}
+void Character::increaseForce(int amount){
+    force+=amount;
+}
+void Character::increaseIntelligence(int amount){
+    intelligence+=amount;
+}
+void Character::increaseLuck(int amount){
+    luck+=amount;
 }
 
 int Character::getHealth()const{
@@ -79,6 +117,29 @@ int Character::getLevel()const{
 int Character::getExperience()const{
     return experience;
 }
+
+int Character::getDamage() const{
+    return damage;
+}
+int Character::getChanceOfCriticalDamade() const{
+    return chanceOfCriticalDamade;
+}
+int Character::getCriticalDamage() const{
+    return criticalDamage;
+}
+int Character::getDexterity() const{
+    return dexterity;
+}
+int Character::getForce() const{
+    return force;
+}
+int Character::getIntelligence() const{
+    return intelligence;
+}
+int Character::getLuck() const{
+    return luck;
+}
+
 std::vector<Quest> Character::getActiveQuest(){
     return activeQuest;
 }

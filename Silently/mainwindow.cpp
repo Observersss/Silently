@@ -3,6 +3,7 @@
 #include "Library/library.h"
 #include "AddQuest/addquest.h"
 #include "ShowInfoQuest/showinfoquest.h"
+#include "MoreCharacteristics/morecharacteristics.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -146,4 +147,12 @@ void MainWindow::questComplete(){
 
 
 
+
+
+void MainWindow::on_more_characteristics_clicked()
+{
+    MoreCharacteristics window(this,character);
+    window.show();
+    window.exec();
+}
 

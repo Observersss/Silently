@@ -47,8 +47,9 @@ public:
     QGridLayout *gridLayout;
     QLabel *ManaLabel;
     QLabel *LevelLabel;
-    QLabel *ExperienceLabel;
     QLabel *HealthLabel;
+    QLabel *ExperienceLabel;
+    QPushButton *more_characteristics;
     QWidget *Note_space;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -144,25 +145,31 @@ public:
         ManaLabel->setStyleSheet(QString::fromUtf8("color:black;\n"
 ""));
 
-        gridLayout->addWidget(ManaLabel, 1, 1, 1, 1);
+        gridLayout->addWidget(ManaLabel, 3, 1, 1, 1);
 
         LevelLabel = new QLabel(infoCharacter);
         LevelLabel->setObjectName("LevelLabel");
         LevelLabel->setStyleSheet(QString::fromUtf8("color:black;"));
 
-        gridLayout->addWidget(LevelLabel, 3, 1, 1, 1);
-
-        ExperienceLabel = new QLabel(infoCharacter);
-        ExperienceLabel->setObjectName("ExperienceLabel");
-        ExperienceLabel->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout->addWidget(ExperienceLabel, 4, 1, 1, 1);
+        gridLayout->addWidget(LevelLabel, 0, 1, 1, 1);
 
         HealthLabel = new QLabel(infoCharacter);
         HealthLabel->setObjectName("HealthLabel");
         HealthLabel->setStyleSheet(QString::fromUtf8("color:black;"));
 
-        gridLayout->addWidget(HealthLabel, 0, 1, 1, 1);
+        gridLayout->addWidget(HealthLabel, 2, 1, 1, 1);
+
+        ExperienceLabel = new QLabel(infoCharacter);
+        ExperienceLabel->setObjectName("ExperienceLabel");
+        ExperienceLabel->setStyleSheet(QString::fromUtf8("color:black;"));
+
+        gridLayout->addWidget(ExperienceLabel, 1, 1, 1, 1);
+
+        more_characteristics = new QPushButton(infoCharacter);
+        more_characteristics->setObjectName("more_characteristics");
+        more_characteristics->setStyleSheet(QString::fromUtf8("color:black;"));
+
+        gridLayout->addWidget(more_characteristics, 4, 1, 1, 1);
 
 
         gridLayout_4->addWidget(infoCharacter, 0, 2, 2, 1);
@@ -177,7 +184,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 720, 24));
+        menubar->setGeometry(QRect(0, 0, 720, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -204,8 +211,9 @@ public:
         Open_inventory->setText(QCoreApplication::translate("MainWindow", "Open inventory", nullptr));
         ManaLabel->setText(QCoreApplication::translate("MainWindow", "Mana", nullptr));
         LevelLabel->setText(QCoreApplication::translate("MainWindow", "Level", nullptr));
-        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
         HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));
+        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
+        more_characteristics->setText(QCoreApplication::translate("MainWindow", "More", nullptr));
     } // retranslateUi
 
 };

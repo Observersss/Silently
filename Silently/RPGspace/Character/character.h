@@ -6,10 +6,20 @@
 class Character
 {
 private:
+    //Добавление новых характеристик(урон, шанс крит.,крит., уворот, сила, ловкость, интелект, удача)
     int health;
     int mana;
     int experience;
     int level;
+
+    int damage;
+    int chanceOfCriticalDamade;
+    int criticalDamage;
+    int dexterity;
+    int force;
+    int intelligence;
+    int luck;
+
     Inventory inventory;
     std::vector<Quest>activeQuest;
     QPixmap characterImage;
@@ -33,17 +43,32 @@ public:
     //Перевірити і оновити рівень персонажа, якщо необхідно
     void updateLevel();
 
-    //Збільшити здоров'я на певне значення
+    //Збільшення характеристик на певне значення
     void increaseHealth(int amount);
+    void increaseMana(int amount);
+    void increaseDamage(int amount);
+    void increaseChanceOfCriticalDamade(int amount);
+    void increaseCriticalDamage(int amount);
+    void increaseDexterity(int amount);
+    void increaseForce(int amount);
+    void increaseIntelligence(int amount);
+    void increaseLuck(int amount);
 
-    //Збільшити ману на певне значення
-    void increaseMana(int mana);
 
     //Геттери
     int getHealth() const;
-    int getMana()const;
+    int getMana() const;
     int getLevel() const;
     int getExperience() const;
+
+    int getDamage() const;
+    int getChanceOfCriticalDamade() const;
+    int getCriticalDamage() const;
+    int getDexterity() const;
+    int getForce() const;
+    int getIntelligence() const;
+    int getLuck() const;
+
     std::vector<Quest> getActiveQuest();
 };
 

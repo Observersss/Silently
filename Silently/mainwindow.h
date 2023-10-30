@@ -33,8 +33,7 @@ private slots:
 
     void on_QuestList_itemDoubleClicked(QListWidgetItem *item);
 
-    void checkDeadlines();
-
+    void on_more_characteristics_clicked();
 
 private:
     Ui::MainWindow *ui;

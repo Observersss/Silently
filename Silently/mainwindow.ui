@@ -172,9 +172,9 @@
           <widget class="QPushButton" name="Open_inventory">
            <property name="geometry">
             <rect>
-             <x>9</x>
+             <x>0</x>
              <y>380</y>
-             <width>121</width>
+             <width>131</width>
              <height>32</height>
             </rect>
            </property>
@@ -199,7 +199,7 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="1" column="1">
+           <item row="3" column="1">
             <widget class="QLabel" name="ManaLabel">
              <property name="styleSheet">
               <string notr="true">color:black;
@@ -210,7 +210,7 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
+           <item row="0" column="1">
             <widget class="QLabel" name="LevelLabel">
              <property name="styleSheet">
               <string notr="true">color:black;</string>
@@ -220,7 +220,17 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="2" column="1">
+            <widget class="QLabel" name="HealthLabel">
+             <property name="styleSheet">
+              <string notr="true">color:black;</string>
+             </property>
+             <property name="text">
+              <string>Health</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
             <widget class="QLabel" name="ExperienceLabel">
              <property name="styleSheet">
               <string notr="true">color:black;</string>
@@ -230,13 +240,13 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="HealthLabel">
+           <item row="4" column="1">
+            <widget class="QPushButton" name="more_characteristics">
              <property name="styleSheet">
               <string notr="true">color:black;</string>
              </property>
              <property name="text">
-              <string>Health</string>
+              <string>More</string>
              </property>
             </widget>
            </item>
@@ -256,7 +266,7 @@
      <x>0</x>
      <y>0</y>
      <width>720</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
