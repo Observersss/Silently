@@ -21,6 +21,6 @@
 
 #include <algorithm>
 
-#include <QTimer>
+//include <QTimer>
 
 #endif // LIBRARY_H

@@ -129,7 +129,7 @@ public:
         active_item->setFrameShadow(QFrame::Raised);
         Open_inventory = new QPushButton(active_item);
         Open_inventory->setObjectName("Open_inventory");
-        Open_inventory->setGeometry(QRect(9, 380, 121, 32));
+        Open_inventory->setGeometry(QRect(0, 380, 131, 32));
 
         gridLayout_4->addWidget(active_item, 0, 3, 2, 1);
 
