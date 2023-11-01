@@ -43,6 +43,7 @@ public:
     QLabel *character_icon;
     QFrame *active_item;
     QPushButton *Open_inventory;
+    QLabel *label;
     QFrame *infoCharacter;
     QGridLayout *gridLayout;
     QLabel *ManaLabel;
@@ -130,6 +131,9 @@ public:
         Open_inventory = new QPushButton(active_item);
         Open_inventory->setObjectName("Open_inventory");
         Open_inventory->setGeometry(QRect(0, 380, 131, 32));
+        label = new QLabel(active_item);
+        label->setObjectName("label");
+        label->setGeometry(QRect(0, 0, 131, 16));
 
         gridLayout_4->addWidget(active_item, 0, 3, 2, 1);
 
@@ -209,6 +213,7 @@ public:
 #endif // QT_CONFIG(whatsthis)
         character_icon->setText(QString());
         Open_inventory->setText(QCoreApplication::translate("MainWindow", "Open inventory", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Active Item", nullptr));
         ManaLabel->setText(QCoreApplication::translate("MainWindow", "Mana", nullptr));
         LevelLabel->setText(QCoreApplication::translate("MainWindow", "Level", nullptr));
         HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));

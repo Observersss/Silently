@@ -1,18 +1,49 @@
 #include "item.h"
 
+//std::map<std::string, QPixmap> Item::itemImages_ = {
+//    {"Катана", QPixmap(":/icon/img/katana.jpg")},
+//    {"Меч квітів", QPixmap(":/icon/img/katana_2.jpg")},
+//    {"Перстень", QPixmap(":/icon/img/magical-ring.jpg")},
+//    {"Посох", QPixmap(":/icon/img/magical-staff.jpg")},
+//    {"Страшний шолом", QPixmap(":/icon/img/creepy-mask.jpg")},
+//    {"Хомяк", QPixmap(":/icon/img/hamster.jpg")},
+//    {"Cолом'яний шолом", QPixmap(":/icon/img/beach-hat.jpg")},
+//    {"Wi-Fi", QPixmap(":/icon/img/wifi-icon.jpg")},
+//    {"Сендвіч", QPixmap(":/icon/img/sandwich.jpg")},
+//    {"Зірка", QPixmap(":/icon/img/star.jpg")},
+//    {"Факел", QPixmap(":/icon/img/torch.jpg.avif")},
+//    {"Кавун", QPixmap(":/icon/img/watermelon.jpg")},
+//    {"Молочний продукт", QPixmap(":/icon/img/milk.jpg")},
+//    {"Знак", QPixmap(":/icon/img/parking-sign.jpg")},
+//    {"Онігірі", QPixmap(":/icon/img/onigiri.jpg")},
+//    {"Бантик", QPixmap(":/icon/img/ribbon.jpg")},
+//    {"Музичний інструмент", QPixmap(":/icon/img/violin.jpg")},
+//    {"Шолом капітана", QPixmap(":/icon/img/sailor-hat-2.jpg")},
+//    {"Шолом матроса", QPixmap(":/icon/img/sailor-hat.jpg")},
+//    {"Топор", QPixmap(":/icon/img/axe.jpg")},
+//    {"Варварський топор", QPixmap(":/icon/img/axe_2.jpg")},
+//    {"Небесний знак", QPixmap(":/icon/img/star.jpg")},
+//    {"Дрин", QPixmap(":/icon/img/chainsaw.jpg")},
+//    {"Панда",QPixmap(":/icon/img/panda.jpg")},
+//    {"Посох Архімага",QPixmap(":/icon/img/magical-staff-2.jpg.avif")}
+
+//    // Добавьте остальные предметы и соответствующие им изображения
+//};
+
 int Item::itemCount=0;
 Item::Item(){
     itemCount+=1;
     index=itemCount;
 
-    generateRandomRank();
-    generateCharacteristics();
-    generateName();
+//    generateRandomRank();
+//    generateCharacteristics();
+//    generateName();
 
 }
 
 void Item::generateRandomRank() {
-        int randomRankIndex = std::rand() % 5; // Генерируем случайное число от 0 до 4
+    int randomRankIndex = arc4random() % 5; // Генерируем случайное число от 0 до 4
+
 
         // В зависимости от значения randomRankIndex выбираем ранг
         switch (randomRankIndex) {
@@ -74,19 +105,19 @@ void Item::generateName() {
     int nounIndex = arc4random() % nouns.size();
     nameOfItem = adjectives[adjectiveIndex] + " " + nouns[nounIndex];
 
-    generateImage(nouns[nounIndex]);
+    //generateImage(nouns[nounIndex]);
 }
 
-void generateImage(const std::string& name) {
-    if (itemImages_.find(name) != itemImages_.end()) {
-            // Найдено изображение для данного имени
-            imageOfItem = itemImages_[name];
-    } else {
-            // Изображение не найдено, обработайте это по вашему усмотрению
-            // Например, установите изображение по умолчанию
-            imageOfItem = QPixmap(":/icon/img/level-up-icon.jpg.avif");
-    }
-}
+//void Item::generateImage(const std::string& name) {
+//    if (itemImages_.find(name) != itemImages_.end()) {
+//            // Найдено изображение для данного имени
+//            imageOfItem = itemImages_[name];
+//    } else {
+//            // Изображение не найдено, обработайте это по вашему усмотрению
+//            // Например, установите изображение по умолчанию
+//            imageOfItem = QPixmap(":/icon/img/level-up-icon.jpg.avif");
+//    }
+//}
 
 void Item::setName(std::string name){
     nameOfItem=name;
