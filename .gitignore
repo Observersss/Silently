@@ -9,3 +9,12 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+*.stash
+*.o
+*.o
+*.o
+build-Silently-Qt_6_6_0_for_macOS-Debug/.qmake.stash
+build-Silently-Qt_6_6_0_for_macOS-Debug/addquest.o
+build-Silently-Qt_6_6_0_for_macOS-Debug/character.o
+build-Silently-Qt_6_6_0_for_macOS-Debug/inventory.o
+build-Silently-Qt_6_6_0_for_macOS-Debug/item.o
