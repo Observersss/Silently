@@ -53,3 +53,16 @@ std::vector<Item> Inventory::getItemInInventory() const {
 std::vector<Item> Inventory::getItemEquipment()const{
     return itemEquipment;
 }
+size_t Inventory::getItemInInventoryCount() const{
+    return itemInInventory.size();
+}
+const Item& Inventory::getItemAtIndex(size_t index) const{
+    // Реализуйте логику для получения элемента по указанному индексу
+    // Например, если внутри Inventory у вас есть вектор items, вы можете обратиться к элементу в этом векторе
+    if (index < itemInInventory.size()) {
+        return itemInInventory[index];
+    }
+    // Возвращайте элемент или бросайте исключение в зависимости от вашей логики
+    // Например, если элемент с данным индексом не существует, вы можете бросить исключение
+    throw std::out_of_range("Index out of range");
+}

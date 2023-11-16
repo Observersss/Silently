@@ -4,6 +4,7 @@
 #include "AddQuest/addquest.h"
 #include "ShowInfoQuest/showinfoquest.h"
 #include "MoreCharacteristics/morecharacteristics.h"
+#include "InventoryWindow/inventorywindow.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -16,14 +17,15 @@ MainWindow::MainWindow(QWidget *parent)
     updateInfoOnCharacter();
 
 
-    QPixmap pix(":/icon/img/hamster.jpg");
+    QPixmap pix(":/icon/img/Character.jpg");
     int w = ui->character_icon->width();
     int h = ui->character_icon->height();
 
     ui->character_icon->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
 
     //ТЕСТИРОВАНИЕ
-
+    Item item;
+    character.addItemToInventory(item);
     //ТЕСТИРОВАНИЕ
 }
 void MainWindow::addActiveQuest(Quest* quest){
@@ -152,6 +154,15 @@ void MainWindow::questComplete(){
 void MainWindow::on_more_characteristics_clicked()
 {
     MoreCharacteristics window(this,character);
+    window.show();
+    window.exec();
+}
+
+
+void MainWindow::on_Open_inventory_clicked()
+{
+    Inventory inventory=character.getInventory();
+    InventoryWindow window(this,inventory);
     window.show();
     window.exec();
 }

@@ -9,9 +9,7 @@
         <file>img/katana_2.jpg</file>
         <file>img/katana.jpg</file>
         <file>img/kendang.jpg</file>
-        <file>img/level-up-icon.jpg.avif</file>
         <file>img/magical-ring.jpg</file>
-        <file>img/magical-staff-2.jpg.avif</file>
         <file>img/magical-staff.jpg</file>
         <file>img/milk.jpg</file>
         <file>img/onigiri.jpg</file>
@@ -22,9 +20,12 @@
         <file>img/sailor-hat.jpg</file>
         <file>img/sandwich.jpg</file>
         <file>img/star.jpg</file>
-        <file>img/torch.jpg.avif</file>
         <file>img/violin.jpg</file>
         <file>img/watermelon.jpg</file>
         <file>img/wifi-icon.jpg</file>
+        <file>img/level-up-icon.jpg</file>
+        <file>img/magical-staff-2.jpg</file>
+        <file>img/torch.jpg</file>
+        <file>img/Character.jpg</file>
     </qresource>
 </RCC>

@@ -26,10 +26,11 @@ private:
     QPixmap imageOfItem;
     static int itemCount; // Статична змінна для підрахунку елементів
     int index; // Індекс предмета
-    //static std::map<std::string, QPixmap> itemImages_;
+    static std::map<std::string, QString> itemImages_;
 
 
 public:
+
     //Пустий базовий конструктор
     Item();
 
@@ -72,6 +73,7 @@ public:
 
 
     //Геттери
+    std::string getRank()const;
     std::string getnameOfitem()const;
     std::string getdiscriptionOfItem()const;
     std::vector<std::pair<std::string, int>> getCharacteristics() const;

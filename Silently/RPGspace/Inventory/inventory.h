@@ -32,6 +32,17 @@ public:
     //Повертає вектор всіх предметів
     std::vector<Item> getItemInInventory() const;
     std::vector<Item> getItemEquipment()const;
+    size_t getItemInInventoryCount() const;
+    const Item& getItemAtIndex(size_t index)const;
+
+    auto begin() {
+        return itemInInventory.begin();
+    }
+
+    auto end() {
+        return itemInInventory.end();
+    }
+
 };
 
 #endif // INVENTORY_H

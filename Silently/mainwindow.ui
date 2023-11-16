@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>720</width>
+    <width>732</width>
     <height>515</height>
    </rect>
   </property>
@@ -80,7 +80,7 @@
       </property>
       <widget class="QWidget" name="RPG_space">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QFrame" name="frame_3">
           <property name="minimumSize">
            <size>
@@ -95,7 +95,17 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
-           <item row="1" column="0">
+           <item row="2" column="1">
+            <widget class="QPushButton" name="AddingQuest">
+             <property name="styleSheet">
+              <string notr="true">color:black;</string>
+             </property>
+             <property name="text">
+              <string>Add Quest</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
             <widget class="QListWidget" name="QuestList">
              <property name="minimumSize">
               <size>
@@ -108,100 +118,24 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="AddingQuest">
+           <item row="3" column="1">
+            <widget class="QPushButton" name="Open_inventory">
              <property name="styleSheet">
               <string notr="true">color:black;</string>
              </property>
              <property name="text">
-              <string>Add Quest</string>
+              <string>Open inventory</string>
              </property>
             </widget>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="character_icon">
-          <property name="minimumSize">
-           <size>
-            <width>135</width>
-            <height>199</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Це твій персонаж</string>
-          </property>
-          <property name="whatsThis">
-           <string>Це твій персонаж</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="inputMethodHints">
-           <set>Qt::ImhNone</set>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3" rowspan="2">
-         <widget class="QFrame" name="active_item">
-          <property name="minimumSize">
-           <size>
-            <width>135</width>
-            <height>398</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color:black;</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <widget class="QPushButton" name="Open_inventory">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>380</y>
-             <width>131</width>
-             <height>32</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Open inventory</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>131</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Active Item</string>
-           </property>
-          </widget>
-         </widget>
-        </item>
-        <item row="0" column="2" rowspan="2">
+        <item row="0" column="2" rowspan="3">
          <widget class="QFrame" name="infoCharacter">
           <property name="minimumSize">
            <size>
-            <width>136</width>
+            <width>160</width>
             <height>201</height>
            </size>
           </property>
@@ -266,6 +200,37 @@
           </layout>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="character_icon">
+          <property name="minimumSize">
+           <size>
+            <width>135</width>
+            <height>199</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Це твій персонаж</string>
+          </property>
+          <property name="whatsThis">
+           <string>Це твій персонаж</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="Note_space"/>
@@ -278,8 +243,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>720</width>
-     <height>22</height>
+     <width>732</width>
+     <height>24</height>
     </rect>
    </property>
   </widget>

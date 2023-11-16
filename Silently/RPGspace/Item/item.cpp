@@ -1,45 +1,46 @@
 #include "item.h"
 
-//std::map<std::string, QPixmap> Item::itemImages_ = {
-//    {"Катана", QPixmap(":/icon/img/katana.jpg")},
-//    {"Меч квітів", QPixmap(":/icon/img/katana_2.jpg")},
-//    {"Перстень", QPixmap(":/icon/img/magical-ring.jpg")},
-//    {"Посох", QPixmap(":/icon/img/magical-staff.jpg")},
-//    {"Страшний шолом", QPixmap(":/icon/img/creepy-mask.jpg")},
-//    {"Хомяк", QPixmap(":/icon/img/hamster.jpg")},
-//    {"Cолом'яний шолом", QPixmap(":/icon/img/beach-hat.jpg")},
-//    {"Wi-Fi", QPixmap(":/icon/img/wifi-icon.jpg")},
-//    {"Сендвіч", QPixmap(":/icon/img/sandwich.jpg")},
-//    {"Зірка", QPixmap(":/icon/img/star.jpg")},
-//    {"Факел", QPixmap(":/icon/img/torch.jpg.avif")},
-//    {"Кавун", QPixmap(":/icon/img/watermelon.jpg")},
-//    {"Молочний продукт", QPixmap(":/icon/img/milk.jpg")},
-//    {"Знак", QPixmap(":/icon/img/parking-sign.jpg")},
-//    {"Онігірі", QPixmap(":/icon/img/onigiri.jpg")},
-//    {"Бантик", QPixmap(":/icon/img/ribbon.jpg")},
-//    {"Музичний інструмент", QPixmap(":/icon/img/violin.jpg")},
-//    {"Шолом капітана", QPixmap(":/icon/img/sailor-hat-2.jpg")},
-//    {"Шолом матроса", QPixmap(":/icon/img/sailor-hat.jpg")},
-//    {"Топор", QPixmap(":/icon/img/axe.jpg")},
-//    {"Варварський топор", QPixmap(":/icon/img/axe_2.jpg")},
-//    {"Небесний знак", QPixmap(":/icon/img/star.jpg")},
-//    {"Дрин", QPixmap(":/icon/img/chainsaw.jpg")},
-//    {"Панда",QPixmap(":/icon/img/panda.jpg")},
-//    {"Посох Архімага",QPixmap(":/icon/img/magical-staff-2.jpg.avif")}
+std::map<std::string, QString> Item::itemImages_ = {
+    {"Катана", ":/icon/img/katana.jpg"},
+    {"Меч квітів",":/icon/img/katana_2.jpg"},
+    {"Перстень",":/icon/img/magical-ring.jpg"},
+    {"Посох",":/icon/img/magical-staff.jpg"},
+    {"Страшний шолом",":/icon/img/creepy-mask.jpg"},
+    {"Хомяк", ":/icon/img/hamster.jpg"},
+    {"Cолом'яний шолом", ":/icon/img/beach-hat.jpg"},
+    {"Wi-Fi", ":/icon/img/wifi-icon.jpg"},
+    {"Сендвіч", ":/icon/img/sandwich.jpg"},
+    {"Зірка", ":/icon/img/star.jpg"},
+    {"Факел", ":/icon/img/torch.jpg.avif"},
+    {"Кавун", ":/icon/img/watermelon.jpg"},
+    {"Молочний продукт", ":/icon/img/milk.jpg"},
+    {"Знак",":/icon/img/parking-sign.jpg"},
+    {"Онігірі", ":/icon/img/onigiri.jpg"},
+    {"Бантик", ":/icon/img/ribbon.jpg"},
+    {"Музичний інструмент", ":/icon/img/violin.jpg"},
+    {"Шолом капітана", ":/icon/img/sailor-hat-2.jpg"},
+    {"Шолом матроса", ":/icon/img/sailor-hat.jpg"},
+    {"Топор", ":/icon/img/axe.jpg"},
+    {"Варварський топор", ":/icon/img/axe_2.jpg"},
+    {"Небесний знак", ":/icon/img/star.jpg"},
+    {"Дрин", ":/icon/img/chainsaw.jpg"},
+    {"Панда",":/icon/img/panda.jpg"},
+    {"Посох Архімага",":/icon/img/magical-staff-2.jpg.avif"}
 
-//    // Добавьте остальные предметы и соответствующие им изображения
-//};
+    // Добавьте остальные предметы и соответствующие им изображения
+};
 
 int Item::itemCount=0;
 Item::Item(){
+
     itemCount+=1;
     index=itemCount;
 
-//    generateRandomRank();
-//    generateCharacteristics();
-//    generateName();
+    generateRandomRank();
+    generateCharacteristics();
+    generateName();
 
-}
+    }
 
 void Item::generateRandomRank() {
     int randomRankIndex = arc4random() % 5; // Генерируем случайное число от 0 до 4
@@ -104,20 +105,25 @@ void Item::generateName() {
     int adjectiveIndex = arc4random() % adjectives.size();
     int nounIndex = arc4random() % nouns.size();
     nameOfItem = adjectives[adjectiveIndex] + " " + nouns[nounIndex];
+    std::cout << "Сгенерировано имя предмета: " << nameOfItem << std::endl;
+    generateImage(nouns[nounIndex]);
 
-    //generateImage(nouns[nounIndex]);
 }
 
-//void Item::generateImage(const std::string& name) {
-//    if (itemImages_.find(name) != itemImages_.end()) {
-//            // Найдено изображение для данного имени
-//            imageOfItem = itemImages_[name];
-//    } else {
-//            // Изображение не найдено, обработайте это по вашему усмотрению
-//            // Например, установите изображение по умолчанию
-//            imageOfItem = QPixmap(":/icon/img/level-up-icon.jpg.avif");
-//    }
-//}
+void Item::generateImage(const std::string& name) {
+    std::cout << "Поиск изображения для предмета: " << name << std::endl;
+    auto it = itemImages_.find(name);
+    if (it != itemImages_.end()) {
+            // Найдено изображение для данного имени
+            std::cout << "Найдено изображение для предмета: " << name << std::endl;
+            imageOfItem = QPixmap(it->second);
+    } else {
+            // Изображение не найдено, обработайте это по вашему усмотрению
+            // Например, установите изображение по умолчанию
+            std::cout << "Изображение не найдено для предмета: " << name << std::endl;
+            imageOfItem = QPixmap(":/icon/img/axe.jpg");
+    }
+}
 
 void Item::setName(std::string name){
     nameOfItem=name;
@@ -143,8 +149,9 @@ void Item::setImage(std::string name){
 
 
 //Функції getter для всіх змінних:
-
-
+std::string Item::getRank()const{
+    return rank;
+}
 std::string Item::getnameOfitem()const{
     return nameOfItem;
 }
@@ -165,3 +172,4 @@ QPixmap Item::getImageOfItem() const {
 int Item::getIndex()const{
     return index;
 }
+

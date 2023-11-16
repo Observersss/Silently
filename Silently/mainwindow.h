@@ -35,6 +35,8 @@ private slots:
 
     void on_more_characteristics_clicked();
 
+    void on_Open_inventory_clicked();
+
 private:
     Ui::MainWindow *ui;
     Character character;

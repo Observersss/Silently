@@ -26,6 +26,15 @@ void Character::addActiveQuest(Quest* quest) {
     activeQuest.push_back(newQuest); // Додаємо його у вектор
 }
 
+void Character::addItemToInventory(Item item){
+    inventory.addItemInInventory(item);
+}
+
+void Character::removeItemFromInventory(Item item){
+    inventory.deleteItemInInventory(item);
+}
+
+
 Quest Character::findQuest(const std::string& title){
     for (const Quest& quest : activeQuest) {
         if (quest.getTitle() == title) {
@@ -139,7 +148,12 @@ int Character::getIntelligence() const{
 int Character::getLuck() const{
     return luck;
 }
+Inventory Character::getInventory() const{
+    return inventory;
+}
 
 std::vector<Quest> Character::getActiveQuest(){
     return activeQuest;
 }
+
+

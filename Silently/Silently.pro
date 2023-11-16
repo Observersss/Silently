@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     AddQuest/addquest.cpp \
+    InventoryWindow/inventorywindow.cpp \
     MoreCharacteristics/morecharacteristics.cpp \
     RPGspace/Character/character.cpp \
     RPGspace/Inventory/inventory.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     AddQuest/addquest.h \
+    InventoryWindow/inventorywindow.h \
     Library/library.h \
     MoreCharacteristics/morecharacteristics.h \
     RPGspace/Character/character.h \
@@ -32,6 +34,7 @@ HEADERS += \
 
 FORMS += \
     AddQuest/addquest.ui \
+    InventoryWindow/inventorywindow.ui \
     MoreCharacteristics/morecharacteristics.ui \
     ShowInfoQuest/showinfoquest.ui \
     mainwindow.ui

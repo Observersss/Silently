@@ -2,6 +2,7 @@
 #define CHARACTER_H
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
+#include "RPGspace/Item/item.h"
 #include "Library/library.h"
 class Character
 {
@@ -30,6 +31,10 @@ public:
     void completeQuest();
 
     void addActiveQuest(Quest* quest);
+
+    void addItemToInventory(Item item);
+
+    void removeItemFromInventory(Item item);
 
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
@@ -68,7 +73,7 @@ public:
     int getForce() const;
     int getIntelligence() const;
     int getLuck() const;
-
+    Inventory getInventory() const;
     std::vector<Quest> getActiveQuest();
 };
 
