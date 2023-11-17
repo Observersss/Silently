@@ -18,6 +18,17 @@ void Inventory::deleteItemInInventory(Item item){
         }
     }
 }
+void Inventory::deleteItemEuipment(Item item){
+    for (auto it = itemEquipment.begin(); it != itemEquipment.end(); ++it) {
+
+        if (it->getIndex() == item.getIndex()) {
+            // Используйте метод erase(), чтобы удалить элемент из вектора
+            itemEquipment.erase(it);
+            // Выход из цикла после удаления элемента (по желанию)
+            break;
+        }
+    }
+}
 
 void Inventory::addToEquipment(const Item& item) {
 
@@ -55,6 +66,9 @@ std::vector<Item> Inventory::getItemEquipment()const{
 }
 size_t Inventory::getItemInInventoryCount() const{
     return itemInInventory.size();
+}
+size_t Inventory::getItemInEquipCount()const{
+    return itemEquipment.size();
 }
 const Item& Inventory::getItemAtIndex(size_t index) const{
     // Реализуйте логику для получения элемента по указанному индексу

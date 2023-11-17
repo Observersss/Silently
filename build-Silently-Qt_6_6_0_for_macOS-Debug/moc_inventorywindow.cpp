@@ -42,16 +42,24 @@ static constexpr auto qt_meta_stringdata_CLASSInventoryWindowENDCLASS = QtMocHel
     "on_listWidget_itemClicked",
     "",
     "QListWidgetItem*",
-    "item"
+    "item",
+    "on_Equip_clicked",
+    "on_take_off_clicked",
+    "on_Delete_clicked",
+    "on_Delete_2_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSInventoryWindowENDCLASS_t {
-    uint offsetsAndSizes[10];
+    uint offsetsAndSizes[18];
     char stringdata0[16];
     char stringdata1[26];
     char stringdata2[1];
     char stringdata3[17];
     char stringdata4[5];
+    char stringdata5[17];
+    char stringdata6[20];
+    char stringdata7[18];
+    char stringdata8[20];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSInventoryWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -61,13 +69,21 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSInventoryWindowENDCLASS_t qt_me
         QT_MOC_LITERAL(16, 25),  // "on_listWidget_itemClicked"
         QT_MOC_LITERAL(42, 0),  // ""
         QT_MOC_LITERAL(43, 16),  // "QListWidgetItem*"
-        QT_MOC_LITERAL(60, 4)   // "item"
+        QT_MOC_LITERAL(60, 4),  // "item"
+        QT_MOC_LITERAL(65, 16),  // "on_Equip_clicked"
+        QT_MOC_LITERAL(82, 19),  // "on_take_off_clicked"
+        QT_MOC_LITERAL(102, 17),  // "on_Delete_clicked"
+        QT_MOC_LITERAL(120, 19)   // "on_Delete_2_clicked"
     },
     "InventoryWindow",
     "on_listWidget_itemClicked",
     "",
     "QListWidgetItem*",
-    "item"
+    "item",
+    "on_Equip_clicked",
+    "on_take_off_clicked",
+    "on_Delete_clicked",
+    "on_Delete_2_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -79,7 +95,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSInventoryWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -87,10 +103,18 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSInventoryWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   20,    2, 0x08,    1 /* Private */,
+       1,    1,   44,    2, 0x08,    1 /* Private */,
+       5,    0,   47,    2, 0x08,    3 /* Private */,
+       6,    0,   48,    2, 0x08,    4 /* Private */,
+       7,    0,   49,    2, 0x08,    5 /* Private */,
+       8,    0,   50,    2, 0x08,    6 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -106,7 +130,15 @@ Q_CONSTINIT const QMetaObject InventoryWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<InventoryWindow, std::true_type>,
         // method 'on_listWidget_itemClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        // method 'on_Equip_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_take_off_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_Delete_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_Delete_2_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -118,6 +150,10 @@ void InventoryWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         (void)_t;
         switch (_id) {
         case 0: _t->on_listWidget_itemClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 1: _t->on_Equip_clicked(); break;
+        case 2: _t->on_take_off_clicked(); break;
+        case 3: _t->on_Delete_clicked(); break;
+        case 4: _t->on_Delete_2_clicked(); break;
         default: ;
         }
     }
@@ -142,13 +178,13 @@ int InventoryWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }

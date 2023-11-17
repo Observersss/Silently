@@ -24,12 +24,6 @@ class Ui_InventoryWindow
 {
 public:
     QGridLayout *gridLayout_2;
-    QFrame *frame_2;
-    QGridLayout *gridLayout;
-    QListWidget *listWidget;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QLabel *label;
     QFrame *textOption_3;
     QGridLayout *gridLayout_3;
     QLabel *label_5;
@@ -40,45 +34,25 @@ public:
     QLabel *Option2;
     QLabel *textRank;
     QLabel *Rank;
+    QFrame *frame;
+    QGridLayout *gridLayout_4;
+    QListWidget *Equip_Item;
+    QPushButton *take_off;
+    QPushButton *Delete_2;
+    QLabel *label;
+    QFrame *frame_2;
+    QGridLayout *gridLayout;
+    QListWidget *listWidget;
+    QPushButton *Equip;
+    QPushButton *Delete;
 
     void setupUi(QDialog *InventoryWindow)
     {
         if (InventoryWindow->objectName().isEmpty())
             InventoryWindow->setObjectName("InventoryWindow");
-        InventoryWindow->resize(830, 556);
+        InventoryWindow->resize(830, 589);
         gridLayout_2 = new QGridLayout(InventoryWindow);
         gridLayout_2->setObjectName("gridLayout_2");
-        frame_2 = new QFrame(InventoryWindow);
-        frame_2->setObjectName("frame_2");
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        gridLayout = new QGridLayout(frame_2);
-        gridLayout->setObjectName("gridLayout");
-        listWidget = new QListWidget(frame_2);
-        listWidget->setObjectName("listWidget");
-        listWidget->setMinimumSize(QSize(300, 450));
-
-        gridLayout->addWidget(listWidget, 0, 0, 1, 2);
-
-        pushButton = new QPushButton(frame_2);
-        pushButton->setObjectName("pushButton");
-
-        gridLayout->addWidget(pushButton, 1, 0, 1, 1);
-
-        pushButton_2 = new QPushButton(frame_2);
-        pushButton_2->setObjectName("pushButton_2");
-
-        gridLayout->addWidget(pushButton_2, 1, 1, 1, 1);
-
-
-        gridLayout_2->addWidget(frame_2, 0, 1, 3, 1);
-
-        label = new QLabel(InventoryWindow);
-        label->setObjectName("label");
-        label->setMinimumSize(QSize(300, 300));
-
-        gridLayout_2->addWidget(label, 0, 0, 1, 1);
-
         textOption_3 = new QFrame(InventoryWindow);
         textOption_3->setObjectName("textOption_3");
         textOption_3->setMinimumSize(QSize(200, 200));
@@ -127,7 +101,64 @@ public:
         gridLayout_3->addWidget(Rank, 0, 1, 1, 1);
 
 
-        gridLayout_2->addWidget(textOption_3, 1, 0, 1, 1);
+        gridLayout_2->addWidget(textOption_3, 2, 0, 1, 1);
+
+        frame = new QFrame(InventoryWindow);
+        frame->setObjectName("frame");
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        gridLayout_4 = new QGridLayout(frame);
+        gridLayout_4->setObjectName("gridLayout_4");
+        Equip_Item = new QListWidget(frame);
+        Equip_Item->setObjectName("Equip_Item");
+        Equip_Item->setMinimumSize(QSize(0, 150));
+
+        gridLayout_4->addWidget(Equip_Item, 0, 0, 1, 2);
+
+        take_off = new QPushButton(frame);
+        take_off->setObjectName("take_off");
+
+        gridLayout_4->addWidget(take_off, 1, 0, 1, 1);
+
+        Delete_2 = new QPushButton(frame);
+        Delete_2->setObjectName("Delete_2");
+
+        gridLayout_4->addWidget(Delete_2, 1, 1, 1, 1);
+
+
+        gridLayout_2->addWidget(frame, 2, 1, 1, 1);
+
+        label = new QLabel(InventoryWindow);
+        label->setObjectName("label");
+        label->setMinimumSize(QSize(300, 300));
+
+        gridLayout_2->addWidget(label, 1, 0, 1, 1);
+
+        frame_2 = new QFrame(InventoryWindow);
+        frame_2->setObjectName("frame_2");
+        frame_2->setMinimumSize(QSize(0, 300));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        gridLayout = new QGridLayout(frame_2);
+        gridLayout->setObjectName("gridLayout");
+        listWidget = new QListWidget(frame_2);
+        listWidget->setObjectName("listWidget");
+        listWidget->setMinimumSize(QSize(300, 240));
+
+        gridLayout->addWidget(listWidget, 0, 0, 1, 2);
+
+        Equip = new QPushButton(frame_2);
+        Equip->setObjectName("Equip");
+
+        gridLayout->addWidget(Equip, 1, 0, 1, 1);
+
+        Delete = new QPushButton(frame_2);
+        Delete->setObjectName("Delete");
+
+        gridLayout->addWidget(Delete, 1, 1, 1, 1);
+
+
+        gridLayout_2->addWidget(frame_2, 1, 1, 1, 1);
 
 
         retranslateUi(InventoryWindow);
@@ -138,9 +169,6 @@ public:
     void retranslateUi(QDialog *InventoryWindow)
     {
         InventoryWindow->setWindowTitle(QCoreApplication::translate("InventoryWindow", "Dialog", nullptr));
-        pushButton->setText(QCoreApplication::translate("InventoryWindow", "PushButton", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("InventoryWindow", "PushButton", nullptr));
-        label->setText(QString());
         label_5->setText(QCoreApplication::translate("InventoryWindow", "Option 3", nullptr));
         Option3->setText(QCoreApplication::translate("InventoryWindow", "TextLabel", nullptr));
         textOption->setText(QCoreApplication::translate("InventoryWindow", "Option 1", nullptr));
@@ -149,6 +177,11 @@ public:
         Option2->setText(QCoreApplication::translate("InventoryWindow", "TextLabel", nullptr));
         textRank->setText(QCoreApplication::translate("InventoryWindow", "Rank", nullptr));
         Rank->setText(QCoreApplication::translate("InventoryWindow", "Rank:", nullptr));
+        take_off->setText(QCoreApplication::translate("InventoryWindow", "take off", nullptr));
+        Delete_2->setText(QCoreApplication::translate("InventoryWindow", "Delete", nullptr));
+        label->setText(QString());
+        Equip->setText(QCoreApplication::translate("InventoryWindow", "Equip", nullptr));
+        Delete->setText(QCoreApplication::translate("InventoryWindow", "Delete", nullptr));
     } // retranslateUi
 
 };

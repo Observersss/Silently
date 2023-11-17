@@ -13,6 +13,8 @@
 
 #include <ctime>
 
+#include <QRandomGenerator>
+
 #include "QMessageBox"
 
 #include <QDateTimeEdit>

@@ -18,6 +18,7 @@ public:
     //Видалення предмату
     //Приймає об'єкт классу Item і видаляє його з вектора itemInInventory
     void deleteItemInInventory(Item item);
+    void deleteItemEuipment(Item item);
 
     //Додавання предмету який користувач одягає на персонажа
     //Приймає об'єкт класса Item і додає його у itemEquipment
@@ -33,6 +34,7 @@ public:
     std::vector<Item> getItemInInventory() const;
     std::vector<Item> getItemEquipment()const;
     size_t getItemInInventoryCount() const;
+    size_t getItemInEquipCount()const;
     const Item& getItemAtIndex(size_t index)const;
 
     auto begin() {

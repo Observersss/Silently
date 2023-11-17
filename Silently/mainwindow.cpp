@@ -143,6 +143,22 @@ void MainWindow::questComplete(){
     QMessageBox::information(this,"New level","New Level");
     }
 
+
+    // Настройка генератора случайных чисел
+    QRandomGenerator randomGenerator(static_cast<quint32>(std::time(nullptr)));
+
+    // Генерация случайного числа от 0 до 99
+    int randomNumber = randomGenerator.bounded(100);
+
+    // Проверка на выполнение функции с 30% шансом (от 0 до 29)
+    if (randomNumber < 30) {
+    Item item;
+    QMessageBox::information(this,"New Item","You find new Item");
+    character.addItemToInventory(item);
+    } else {
+    qDebug() << "Функция не выполнена.";
+    }
+
     updateInfoOnCharacter();
 }
 

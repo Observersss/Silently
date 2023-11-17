@@ -1,6 +1,7 @@
 #include "item.h"
 
 std::map<std::string, QString> Item::itemImages_ = {
+
     {"Катана", ":/icon/img/katana.jpg"},
     {"Меч квітів",":/icon/img/katana_2.jpg"},
     {"Перстень",":/icon/img/magical-ring.jpg"},
@@ -11,7 +12,7 @@ std::map<std::string, QString> Item::itemImages_ = {
     {"Wi-Fi", ":/icon/img/wifi-icon.jpg"},
     {"Сендвіч", ":/icon/img/sandwich.jpg"},
     {"Зірка", ":/icon/img/star.jpg"},
-    {"Факел", ":/icon/img/torch.jpg.avif"},
+    {"Факел", ":/icon/img/torch.jpg"},
     {"Кавун", ":/icon/img/watermelon.jpg"},
     {"Молочний продукт", ":/icon/img/milk.jpg"},
     {"Знак",":/icon/img/parking-sign.jpg"},
@@ -25,12 +26,12 @@ std::map<std::string, QString> Item::itemImages_ = {
     {"Небесний знак", ":/icon/img/star.jpg"},
     {"Дрин", ":/icon/img/chainsaw.jpg"},
     {"Панда",":/icon/img/panda.jpg"},
-    {"Посох Архімага",":/icon/img/magical-staff-2.jpg.avif"}
+    {"Посох Архімага",":/icon/img/magical-staff-2.jpg"}
 
-    // Добавьте остальные предметы и соответствующие им изображения
 };
 
 int Item::itemCount=0;
+
 Item::Item(){
 
     itemCount+=1;
@@ -43,6 +44,7 @@ Item::Item(){
     }
 
 void Item::generateRandomRank() {
+
     int randomRankIndex = arc4random() % 5; // Генерируем случайное число от 0 до 4
 
 
@@ -67,61 +69,62 @@ void Item::generateRandomRank() {
 }
 
 void Item::generateCharacteristics() {
-        const std::vector<std::string> nameCharacteristic =
-            {"health", "mana", "damage", "chanceOfCriticalDamage", "criticalDamage", "dexterity", "force", "intelligence", "luck"};
 
-        int numCharacteristics = arc4random() % 3 + 1; // Генерируем случайное количество характеристик (от 1 до 3)
+    const std::vector<std::string> nameCharacteristic =
+    {"health", "mana", "damage", "chanceOfCriticalDamage", "criticalDamage", "dexterity", "force", "intelligence", "luck"};
 
-        for (int i = 0; i < numCharacteristics; i++) {
-            int characteristicType = arc4random() % nameCharacteristic.size(); // Выбираем случайный тип характеристики
-            int characteristicValue;
+    int numCharacteristics = arc4random() % 3 + 1; // Генерируем случайное количество характеристик (от 1 до 3)
 
-            if (rank == "D") {
-                characteristicValue = arc4random() % 3 + 1; // Для ранга D: 1-3
-            } else if (rank == "C") {
-                characteristicValue = arc4random() % 4 + 2; // Для ранга C: 2-5
-            } else if (rank == "B") {
-                characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 3 + 1); // Для ранга B: 3-7 (damage), 1-3 (chanceOfCriticalDamage)
-            } else if (rank == "A") {
-                characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 4 + 2); // Для ранга A: 3-7 (damage), 2-5 (mana)
-            } else if (rank == "S") {
-                characteristicValue = (characteristicType == 0) ? (arc4random() % 4 + 5) : (characteristicType == 1) ? (arc4random() % 4 + 4) : (arc4random() % 4 + 2); // Для ранга S: 5-8 (health), 4-7 (mana), 2-5 (damage)
-            }
+    for (int i = 0; i < numCharacteristics; i++) {
+        int characteristicType = arc4random() % nameCharacteristic.size(); // Выбираем случайный тип характеристики
+        int characteristicValue;
 
-            Characteristics.push_back(std::make_pair(nameCharacteristic[characteristicType], characteristicValue));
+        if (rank == "D") {
+            characteristicValue = arc4random() % 3 + 1; // Для ранга D: 1-3
+        } else if (rank == "C") {
+            characteristicValue = arc4random() % 4 + 2; // Для ранга C: 2-5
+        } else if (rank == "B") {
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 3 + 1); // Для ранга B: 3-7 (damage), 1-3 (chanceOfCriticalDamage)
+        } else if (rank == "A") {
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 4 + 2); // Для ранга A: 3-7 (damage), 2-5 (mana)
+        } else if (rank == "S") {
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 4 + 5) : (characteristicType == 1) ? (arc4random() % 4 + 4) : (arc4random() % 4 + 2); // Для ранга S: 5-8 (health), 4-7 (mana), 2-5 (damage)
+        }
+
+        Characteristics.push_back(std::make_pair(nameCharacteristic[characteristicType], characteristicValue));
         }
 }
 
 
 
 void Item::generateName() {
-    // Генерация имени предмета
-    const std::vector<std::string> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений" };
-        const std::vector<std::string> nouns =
-        { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
-        "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
-//    int adjectiveIndex = rand() % adjectives.size();
-//    int nounIndex = rand() % nouns.size();
+
+    // Генерація імені для предмету
+    const std::vector<std::string> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений","" };
+
+    const std::vector<std::string> nouns =
+    { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
+    "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
+
     int adjectiveIndex = arc4random() % adjectives.size();
     int nounIndex = arc4random() % nouns.size();
     nameOfItem = adjectives[adjectiveIndex] + " " + nouns[nounIndex];
-    std::cout << "Сгенерировано имя предмета: " << nameOfItem << std::endl;
+
     generateImage(nouns[nounIndex]);
 
 }
 
 void Item::generateImage(const std::string& name) {
-    std::cout << "Поиск изображения для предмета: " << name << std::endl;
+
     auto it = itemImages_.find(name);
     if (it != itemImages_.end()) {
-            // Найдено изображение для данного имени
-            std::cout << "Найдено изображение для предмета: " << name << std::endl;
-            imageOfItem = QPixmap(it->second);
+
+        imageOfItem = QPixmap(it->second);
+
     } else {
-            // Изображение не найдено, обработайте это по вашему усмотрению
-            // Например, установите изображение по умолчанию
-            std::cout << "Изображение не найдено для предмета: " << name << std::endl;
-            imageOfItem = QPixmap(":/icon/img/axe.jpg");
+
+        imageOfItem = QPixmap(":/icon/img/axe.jpg");
+
     }
 }
 

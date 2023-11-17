@@ -63,7 +63,7 @@ void Character::deleteActiveQuest(Quest& quest) {
 }
 
 void Character::increaseExperience(){
-    experience+=100;
+    experience+=10;
     if(experience==100){
         updateLevel();
     }
