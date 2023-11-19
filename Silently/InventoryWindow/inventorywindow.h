@@ -18,7 +18,7 @@ class InventoryWindow : public QDialog
 public:
     explicit InventoryWindow(QWidget *parent = nullptr,Inventory originventory=Inventory());
 
-    Item* findItemByName(const QString& itemName, const std::vector<Item>& items);
+    Item findItemByName(const QString& itemName, const std::vector<Item>& items);
 
     void addItemToListWidget(const QString& itemName, QListWidget* listWidget);
 

@@ -31,6 +31,7 @@ InventoryWindow::InventoryWindow(QWidget *parent,Inventory originventory):
     }
 }
 
+
 InventoryWindow::~InventoryWindow()
 {
     delete ui;
@@ -81,18 +82,10 @@ void InventoryWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     }
 }
 
-Item* InventoryWindow::findItemByName(const QString& itemName, const std::vector<Item>& items) {
-//    for (size_t i = 0; i < items.size(); ++i) {
-//        if (QString::fromStdString(items[i].getnameOfitem()) == itemName) {
-//            std::cout<<"1\n";
-//            return const_cast<Item*>(&items[i]);
-//        }
-//    }
-//    return nullptr;
+Item InventoryWindow::findItemByName(const QString& itemName, const std::vector<Item>& items) {
 
     for (const Item& item : items) {
         if (QString::fromStdString(item.getnameOfitem()) == itemName) {
-            std::cout << "1\n";
             return item; // Возвращаем копию объекта Item
         }
     }
@@ -119,11 +112,13 @@ void InventoryWindow::on_Equip_clicked() {
             QString selectedName = selectedItemWidget->text();
             ui->Equip_Item->addItem(selectedName);
 
-            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            std::cout<<foundItem->getnameOfitem();
-            if (foundItem) {
-                inventory.addToEquipment(*foundItem);
+            Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            std::cout<<foundItem.getnameOfitem();
+            if (!foundItem.getnameOfitem().empty()) {
+
+                inventory.addToEquipment(foundItem);
                 removeItemFromListWidget(ui->listWidget, selectedIndex);
+
             }
         }
     }
@@ -137,45 +132,49 @@ void InventoryWindow::on_take_off_clicked() {
             QString selectedName = selectedItemWidget->text();
             ui->listWidget->addItem(selectedName);
 
-            Item* foundItem = findItemByName(selectedName, inventory.getItemEquipment());
-            std::cout<<"2\n";
-            if (foundItem) {
-                std::cout<<"3\n";
-                inventory.removeFromEquipment(*foundItem);
+            Item foundItem = findItemByName(selectedName, inventory.getItemEquipment());
+
+            if (!foundItem.getnameOfitem().empty()) {
+                inventory.removeFromEquipment(foundItem);
                 removeItemFromListWidget(ui->Equip_Item, selectedIndex);
             }
         }
     }
 }
 
-void InventoryWindow::on_Delete_clicked() {
+
+void InventoryWindow::on_Delete_clicked()
+{
     int selectedIndex = ui->listWidget->currentRow();
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
         QListWidgetItem* selectedItemWidget = ui->listWidget->item(selectedIndex);
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            if (foundItem) {
-                inventory.deleteItemInInventory(*foundItem);
-                removeItemFromListWidget(ui->listWidget, selectedIndex);
+            Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            if (!foundItem.getnameOfitem().empty()) {
+                    inventory.deleteItemInInventory(foundItem);
+                    removeItemFromListWidget(ui->listWidget, selectedIndex);
             }
         }
     }
 }
 
-void InventoryWindow::on_Delete_2_clicked() {
+
+void InventoryWindow::on_Delete_2_clicked()
+{
     int selectedIndex = ui->Equip_Item->currentRow();
     if (selectedIndex >= 0 && selectedIndex <= inventory.getItemInEquipCount()) {
         QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
-
-            Item* foundItem = findItemByName(selectedName, inventory.getItemEquipment());
-            if (foundItem) {
-                inventory.removeFromEquipment(*foundItem);
-                removeItemFromListWidget(ui->Equip_Item, selectedIndex);
+            Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            if (!foundItem.getnameOfitem().empty()) {
+                    inventory.deleteItemEuipment(foundItem);
+                    removeItemFromListWidget(ui->listWidget, selectedIndex);
             }
         }
     }
 }
+
+

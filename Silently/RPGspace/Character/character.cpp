@@ -34,6 +34,41 @@ void Character::removeItemFromInventory(Item item){
     inventory.deleteItemInInventory(item);
 }
 
+void Character::updateCharacteristicsFromInventory() {
+    // Получаем все предметы из активного инвентаря
+    std::vector<Item> activeItems = inventory.getItemEquipment();
+
+    // Проходим по всем предметам и изменяем характеристики персонажа
+    for (const auto& item : activeItems) {
+        std::vector<std::pair<std::string, int>> itemCharacteristics = item.getCharacteristics();
+
+        // Применяем характеристики предмета к характеристикам персонажа
+        for (const auto& characteristic : itemCharacteristics) {
+            if (characteristic.first == "health") {
+                increaseHealth(characteristic.second);
+            } else if (characteristic.first == "mana") {
+                increaseMana(characteristic.second);
+            }
+            // Продолжайте для остальных характеристик в соответствии с вашими правилами
+        }
+    }
+}
+
+void Character::removeCharacteristicsFromUnequippedItems(const Item& item) {
+    std::vector<std::pair<std::string, int>> itemCharacteristics = item.getCharacteristics();
+
+    // Применяем характеристики предмета к характеристикам персонажа
+    for (const auto& characteristic : itemCharacteristics) {
+        if (characteristic.first == "health") {
+            increaseHealth(-characteristic.second); // Уменьшаем характеристики на обратное значение
+        } else if (characteristic.first == "mana") {
+            increaseMana(-characteristic.second); // Уменьшаем характеристики на обратное значение
+        }
+        // Продолжайте для остальных характеристик в соответствии с вашими правилами
+    }
+}
+
+
 
 Quest Character::findQuest(const std::string& title){
     for (const Quest& quest : activeQuest) {

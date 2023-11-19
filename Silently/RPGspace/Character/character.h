@@ -36,6 +36,10 @@ public:
 
     void removeItemFromInventory(Item item);
 
+    //Функції які оновлюють дані про персонажа додаючи до його характреристик характеристики екіпійованих предметів
+    void updateCharacteristicsFromInventory();
+    void removeCharacteristicsFromUnequippedItems(const Item& item);
+
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
     Quest findQuest(const std::string& title);
