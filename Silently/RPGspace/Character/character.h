@@ -1,18 +1,31 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
+
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
-#include "RPGspace/Item/item.h"
 #include "Library/library.h"
+
 class Character
 {
 private:
-    //Добавление новых характеристик(урон, шанс крит.,крит., уворот, сила, ловкость, интелект, удача)
+    /*Основні характеристики персонажа:
+     *Здоров'я
+     *Мана
+     *Рівень
+     *Досвід
+     *
+     *Урон
+     *Шанс крит.
+     *Крит. урон
+     *Спритність
+     *Сила
+     *Інтелект
+     *Удача
+ */
     int health;
     int mana;
     int experience;
     int level;
-
     int damage;
     int chanceOfCriticalDamade;
     int criticalDamage;
@@ -21,38 +34,46 @@ private:
     int intelligence;
     int luck;
 
+    /*Інвентар персонажа(складається з вектора активних предметів та неактивних)
+     *Вектор з створених користувачем квестів
+     *Зображення самого персонажа
+    */
     Inventory inventory;
     std::vector<Quest>activeQuest;
     QPixmap characterImage;
 public:
-    //Конструктор який ініціалізує об'єкт і надає персонажу базові параметри(health,mana,experience,level)
+    //Конструктор який ініціалізує об'єкт і надає персонажу базові дані про параметри
     Character();
 
-    void completeQuest();
+                /*Функції для роботи з квестами*/
 
     void addActiveQuest(Quest* quest);
-
-    void addItemToInventory(Item item);
-
-    void removeItemFromInventory(Item item);
-
-    //Функції які оновлюють дані про персонажа додаючи до його характреристик характеристики екіпійованих предметів
-    void updateCharacteristicsFromInventory();
-    void removeCharacteristicsFromUnequippedItems(const Item& item);
+    void deleteActiveQuest(Quest& quest);
 
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
-    Quest findQuest(const std::string& title);
+    Quest findQuest(const QString& title);
 
-    void deleteActiveQuest(Quest& quest);
+                /*Функції для роботи з інвентарем*/
 
-    //Збільшити досвід на певне значення
+    void addItemToInventory(Item item);
+    void removeItemFromInventory(Item item);
+    void setInventory(Inventory value);
+
+                /*Функції для оновлення характеристик персонажа на основі екіпірованих предметів*/
+
+    void updateCharacteristicsFromInventory();
+    void removeCharacteristicsFromUnequippedItems(const Item& item);
+
+
+                /*Функції для збільшення показників характеристик персонажа*/
+
+    /*Функція додавання досвіду до персонажа
+     * Якщо досвід = 100 то запускається updateLevel яка збільшує всі інші характеристики
+     * за допомогою функцій типу increase...
+    */
     void increaseExperience();
-
-    //Перевірити і оновити рівень персонажа, якщо необхідно
     void updateLevel();
-
-    //Збільшення характеристик на певне значення
     void increaseHealth(int amount);
     void increaseMana(int amount);
     void increaseDamage(int amount);
@@ -64,12 +85,12 @@ public:
     void increaseLuck(int amount);
 
 
-    //Геттери
+                /*Геттери*/
+
     int getHealth() const;
     int getMana() const;
     int getLevel() const;
     int getExperience() const;
-
     int getDamage() const;
     int getChanceOfCriticalDamade() const;
     int getCriticalDamage() const;
@@ -77,7 +98,7 @@ public:
     int getForce() const;
     int getIntelligence() const;
     int getLuck() const;
-    Inventory getInventory() const;
+    Inventory getInventory() ;
     std::vector<Quest> getActiveQuest();
 };
 

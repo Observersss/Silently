@@ -1,36 +1,33 @@
 #include "inventorywindow.h"
 #include "ui_inventorywindow.h"
 
-InventoryWindow::InventoryWindow(QWidget *parent,Inventory originventory):
+InventoryWindow::InventoryWindow(QWidget *parent, Character *playerCharacter) :
     QDialog(parent),
     ui(new Ui::InventoryWindow),
-    inventory(originventory)
+    character(playerCharacter)
 {
     ui->setupUi(this);
 
-    std::vector<Item> itemInInventory=inventory.getItemInInventory();
-    std::vector<Item> equipItem=inventory.getItemEquipment();
-    if(!itemInInventory.empty()){
+    std::vector<Item> itemInInventory = character->getInventory().getItemInInventory();
+    std::vector<Item> equipItem = character->getInventory().getItemEquipment();
+    if (!itemInInventory.empty()) {
+        for (auto &item : itemInInventory) {
+            QString name = item.getnameOfitem();
 
-    for(auto &item : itemInInventory){
-        QString name = QString::fromStdString(item.getnameOfitem());
-        // Вывод информации о предмете
-        ui->listWidget->addItem(name);
+            //Вивід назви предмета
+            ui->listWidget->addItem(name);
+        }
     }
 
-    }
+    if (!equipItem.empty()) {
+        for (auto &item : equipItem) {
+            QString name =item.getnameOfitem();
 
-    if(!equipItem.empty()){
-
-    for(auto &item : equipItem){
-        QString name = QString::fromStdString(item.getnameOfitem());
-        // Вывод информации о предмете
-        ui->Equip_Item->addItem(name);
-    }
-
+            //Вивід назви предмета
+            ui->Equip_Item->addItem(name);
+        }
     }
 }
-
 
 InventoryWindow::~InventoryWindow()
 {
@@ -39,54 +36,51 @@ InventoryWindow::~InventoryWindow()
 
 void InventoryWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    // Получаем индекс выбранного элемента
+    Inventory inventory=character->getInventory();
+
     int selectedIndex = ui->listWidget->currentRow();
 
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
-        // Получаем объект Inventory по индексу
         try {
             const Item& selectedItem = inventory.getItemAtIndex(selectedIndex);
-            // Используйте selectedItem для выполнения нужных действий с выбранным элементом
 
-            QString rank=QString::fromStdString(selectedItem.getRank());
+            QString rank =selectedItem.getRank();
             ui->Rank->setText(rank);
 
-            std::vector<std::pair<std::string, int>> characteristics = selectedItem.getCharacteristics();
+            std::vector<std::pair<QString, int>> characteristics = selectedItem.getCharacteristics();
 
-            QPixmap image=selectedItem.getImageOfItem();
+            QPixmap image = selectedItem.getImageOfItem();
 
             if (rank == "D" || rank == "C") {
-                ui->Option1->setText(QString::fromStdString(characteristics[0].first) + ":  " + QString::number(characteristics[0].second));
+                ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
                 ui->Option2->setText("0");
                 ui->Option3->setText("0");
             } else if (rank == "A" || rank == "B") {
-                ui->Option1->setText(QString::fromStdString(characteristics[0].first) + ":  " + QString::number(characteristics[0].second));
-                ui->Option2->setText(QString::fromStdString(characteristics[1].first) + ":  " + QString::number(characteristics[1].second));
+                ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
+                ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
                 ui->Option3->setText("0");
             } else if (rank == "S") {
-                ui->Option1->setText(QString::fromStdString(characteristics[0].first) + ":  " + QString::number(characteristics[0].second));
-                ui->Option2->setText(QString::fromStdString(characteristics[1].first) + ":  " + QString::number(characteristics[1].second));
-                ui->Option3->setText(QString::fromStdString(characteristics[2].first) + ":  " + QString::number(characteristics[2].second));
+                ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
+                ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
+                ui->Option3->setText(characteristics[2].first + ":  " + QString::number(characteristics[2].second));
             }
-            // Отображение изображения предмета
+
             int w = ui->label->width();
             int h = ui->label->height();
             ui->label->setPixmap(image.scaled(w, h, Qt::KeepAspectRatio));
 
         } catch (const std::out_of_range& e) {
-            // Обработайте ситуацию, когда индекс недопустим
-            // Например, выведите сообщение об ошибке
             qDebug() << "Error: " << e.what();
         }
-
+    } else{
+        qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_listWidget_itemClicked \n";
     }
 }
 
 Item InventoryWindow::findItemByName(const QString& itemName, const std::vector<Item>& items) {
-
     for (const Item& item : items) {
-        if (QString::fromStdString(item.getnameOfitem()) == itemName) {
-            return item; // Возвращаем копию объекта Item
+        if (item.getnameOfitem() == itemName) {
+            return item;
         }
     }
     return Item();
@@ -102,9 +96,8 @@ void InventoryWindow::removeItemFromListWidget(QListWidget* listWidget, int sele
     delete item;
 }
 
-
-
 void InventoryWindow::on_Equip_clicked() {
+     Inventory inventory=character->getInventory();
     int selectedIndex = ui->listWidget->currentRow();
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
         QListWidgetItem* selectedItemWidget = ui->listWidget->item(selectedIndex);
@@ -113,18 +106,20 @@ void InventoryWindow::on_Equip_clicked() {
             ui->Equip_Item->addItem(selectedName);
 
             Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            std::cout<<foundItem.getnameOfitem();
-            if (!foundItem.getnameOfitem().empty()) {
-
+            if ((!foundItem.getnameOfitem().isEmpty())) {
                 inventory.addToEquipment(foundItem);
                 removeItemFromListWidget(ui->listWidget, selectedIndex);
-
+                character->setInventory(inventory);
             }
         }
+    }else{
+        qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_Equip_clicked \n";
     }
 }
 
 void InventoryWindow::on_take_off_clicked() {
+     Inventory inventory=character->getInventory();
+
     int selectedIndex = ui->Equip_Item->currentRow();
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInEquipCount()) {
         QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
@@ -133,18 +128,22 @@ void InventoryWindow::on_take_off_clicked() {
             ui->listWidget->addItem(selectedName);
 
             Item foundItem = findItemByName(selectedName, inventory.getItemEquipment());
-
-            if (!foundItem.getnameOfitem().empty()) {
+            if ((!foundItem.getnameOfitem().isEmpty())) {
                 inventory.removeFromEquipment(foundItem);
                 removeItemFromListWidget(ui->Equip_Item, selectedIndex);
+                character->removeCharacteristicsFromUnequippedItems(foundItem);
+                character->setInventory(inventory);
             }
         }
+    }else{
+        qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_take_off_clicked \n";
     }
 }
 
-
 void InventoryWindow::on_Delete_clicked()
 {
+    Inventory inventory=character->getInventory();
+
     int selectedIndex = ui->listWidget->currentRow();
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
         QListWidgetItem* selectedItemWidget = ui->listWidget->item(selectedIndex);
@@ -152,29 +151,38 @@ void InventoryWindow::on_Delete_clicked()
             QString selectedName = selectedItemWidget->text();
 
             Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            if (!foundItem.getnameOfitem().empty()) {
-                    inventory.deleteItemInInventory(foundItem);
-                    removeItemFromListWidget(ui->listWidget, selectedIndex);
+            if ((!foundItem.getnameOfitem().isEmpty())) {
+                inventory.deleteItemInInventory(foundItem);
+                removeItemFromListWidget(ui->listWidget, selectedIndex);
+                character->setInventory(inventory);
             }
         }
+    }else{
+        qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_Delete_clicked \n";
     }
 }
 
-
 void InventoryWindow::on_Delete_2_clicked()
 {
+     Inventory inventory=character->getInventory();
+
     int selectedIndex = ui->Equip_Item->currentRow();
     if (selectedIndex >= 0 && selectedIndex <= inventory.getItemInEquipCount()) {
         QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
             Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            if (!foundItem.getnameOfitem().empty()) {
-                    inventory.deleteItemEuipment(foundItem);
-                    removeItemFromListWidget(ui->listWidget, selectedIndex);
+            if ((!foundItem.getnameOfitem().isEmpty())) {
+                inventory.deleteItemEuipment(foundItem);
+                removeItemFromListWidget(ui->listWidget, selectedIndex);
+                character->setInventory(inventory);
             }
         }
+    }else{
+        qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_Delete_2_clicked \n";
     }
 }
+
+
 
 

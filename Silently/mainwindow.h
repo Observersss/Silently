@@ -24,6 +24,8 @@ public:
 
     void questComplete();
 
+    void updateCharacterEquipment(const std::vector<Item>& equipment);
+
 
     ~MainWindow();
 private slots:

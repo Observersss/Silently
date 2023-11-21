@@ -21,12 +21,10 @@ void AddQuest::on_pushButton_clicked()
     Quest* quest = new Quest;
 
     QString title = ui->Title->text();
-    std::string stdTitle = title.toStdString();
-    quest->setTitle(stdTitle);
+    quest->setTitle(title);
 
     QString discription = ui->Discription->text();
-    std::string stdDiscription = discription.toStdString();
-    quest->setDiscription(stdDiscription);
+    quest->setDiscription(discription);
 
     quest->setDifficulti(0);
 
@@ -61,7 +59,7 @@ void AddQuest::on_pushButton_clicked()
         hide();
     } else {
         //Вивід повідомлення що не вдалося передати квест
-        QMessageBox::warning(this, "Предупреждение", "Невдалося передати квест");
+        qDebug()<<"Невдалося передати квест \n";
     }
 }
 

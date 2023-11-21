@@ -14,19 +14,17 @@ enum Equipment{
     CLOAKS
 };
 
-//место сравнения индексов в целом можна просто сравнивать сами обьекты
-//или создать компараторы для сравнения чтобы сравнение ишло быстрее
 class Item{
 private:
-    std::string rank;
-    std::string nameOfItem;
-    std::string discriptionOfItem;
-    std::vector<std::pair<std::string ,int>> Characteristics;
+    QString rank;
+    QString nameOfItem;
+    QString discriptionOfItem;
+    std::vector<std::pair<QString ,int>> Characteristics;
     Equipment typeItem;
     QPixmap imageOfItem;
     static int itemCount; // Статична змінна для підрахунку елементів
     int index; // Індекс предмета
-    static std::map<std::string, QString> itemImages_;
+    static std::map<QString, QString> itemImages_;
 
 
 public:
@@ -40,7 +38,7 @@ public:
 
     void generateName();
 
-    void generateImage(const std::string& name);
+    void generateImage(const QString& name);
 
 
 
@@ -50,18 +48,18 @@ public:
 
     //задання ім'я предмету
     //Прймае string (звичану назву) і передає у nameOfItem
-    void setName(std::string name);
+    void setName(QString name);
 
 
     //Задання опису
     //Приймає string і передає у  discriptionOfItem
-    void setDiscription(std::string discription);
+    void setDiscription(QString discription);
 
 
     //Задання бонусів які надає предмет
     //Приймає string(назва характеристики) і double(значення)
     //Передає у вектор Characteristics у вигляді пари
-    void setCharacteristics(std::string nameCharacteristic,double value);
+    void setCharacteristics(QString nameCharacteristic,double value);
 
     //Задання типу предмета
     //Приймає int і передає у typeItem
@@ -69,14 +67,14 @@ public:
 
     //Задання зображення предмету
     //Приймає string(повний шлях до зображення і передає у imageOfItem
-    void setImage(std::string name);
+    void setImage(QString name);
 
 
     //Геттери
-    std::string getRank()const;
-    std::string getnameOfitem()const;
-    std::string getdiscriptionOfItem()const;
-    std::vector<std::pair<std::string, int>> getCharacteristics() const;
+    QString getRank()const;
+    QString getnameOfitem()const;
+    QString getdiscriptionOfItem()const;
+    std::vector<std::pair<QString, int>> getCharacteristics() const;
     Equipment getTypeItem()const;
     QPixmap getImageOfItem() const;
     int getIndex()const;

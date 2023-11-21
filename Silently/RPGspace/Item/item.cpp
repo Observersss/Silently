@@ -1,6 +1,6 @@
 #include "item.h"
 
-std::map<std::string, QString> Item::itemImages_ = {
+std::map<QString, QString> Item::itemImages_ = {
 
     {"Катана", ":/icon/img/katana.jpg"},
     {"Меч квітів",":/icon/img/katana_2.jpg"},
@@ -45,10 +45,10 @@ Item::Item(){
 
 void Item::generateRandomRank() {
 
-    int randomRankIndex = arc4random() % 5; // Генерируем случайное число от 0 до 4
+    int randomRankIndex = arc4random() % 5; // Генеруєм випадкове число від 0 до 4
 
 
-        // В зависимости от значения randomRankIndex выбираем ранг
+        //В залежності від значення randomRankIndex обраємо ранг
         switch (randomRankIndex) {
         case 0:
             rank = "S";
@@ -70,13 +70,13 @@ void Item::generateRandomRank() {
 
 void Item::generateCharacteristics() {
 
-    const std::vector<std::string> nameCharacteristic =
+    const std::vector<QString> nameCharacteristic =
     {"health", "mana", "damage", "chanceOfCriticalDamage", "criticalDamage", "dexterity", "force", "intelligence", "luck"};
 
-    int numCharacteristics = arc4random() % 3 + 1; // Генерируем случайное количество характеристик (от 1 до 3)
+    int numCharacteristics = arc4random() % 3 + 1; //Генеруємо випадкову кількість характеристик (від 1 до 3)
 
     for (int i = 0; i < numCharacteristics; i++) {
-        int characteristicType = arc4random() % nameCharacteristic.size(); // Выбираем случайный тип характеристики
+        int characteristicType = arc4random() % nameCharacteristic.size(); // Вибираємо випадковий тип характеристики
         int characteristicValue;
 
         if (rank == "D") {
@@ -100,9 +100,9 @@ void Item::generateCharacteristics() {
 void Item::generateName() {
 
     // Генерація імені для предмету
-    const std::vector<std::string> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений","" };
+    const std::vector<QString> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений","" };
 
-    const std::vector<std::string> nouns =
+    const std::vector<QString> nouns =
     { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
     "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
 
@@ -114,7 +114,7 @@ void Item::generateName() {
 
 }
 
-void Item::generateImage(const std::string& name) {
+void Item::generateImage(const QString& name) {
 
     auto it = itemImages_.find(name);
     if (it != itemImages_.end()) {
@@ -128,16 +128,16 @@ void Item::generateImage(const std::string& name) {
     }
 }
 
-void Item::setName(std::string name){
+void Item::setName(QString name){
     nameOfItem=name;
 }
 
 
-void Item::setDiscription(std::string discription){
+void Item::setDiscription(QString discription){
     discriptionOfItem=discription;
 }
 
-void Item::setCharacteristics(std::string nameCharacteristic,double value){
+void Item::setCharacteristics(QString nameCharacteristic,double value){
     Characteristics.push_back({nameCharacteristic,value});
 }
 
@@ -145,23 +145,22 @@ void Item::setEqipment(Equipment type){
     typeItem=type;
 }
 
-void Item::setImage(std::string name){
-    QString fileName = QString::fromStdString(name);
-    QPixmap imageOfItem(fileName); // Загрузка изображения из файла
+void Item::setImage(QString name){
+    QPixmap imageOfItem(name); // Завантаження зображення з файлу
 }
 
 
 //Функції getter для всіх змінних:
-std::string Item::getRank()const{
+QString Item::getRank()const{
     return rank;
 }
-std::string Item::getnameOfitem()const{
+QString Item::getnameOfitem()const{
     return nameOfItem;
 }
-std::string Item::getdiscriptionOfItem()const{
+QString Item::getdiscriptionOfItem()const{
     return discriptionOfItem;
 }
-std::vector<std::pair<std::string, int>> Item::getCharacteristics()const{
+std::vector<std::pair<QString, int>> Item::getCharacteristics()const{
     return Characteristics;
 }
 Equipment Item::getTypeItem()const{

@@ -68,12 +68,12 @@ void MainWindow::on_AddingQuest_clicked()
 void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 {
     QString titleName = item->text(); // Отримали назву квесту
-    std::string titleString = titleName.toStdString(); // перетворили у string
-    quest = character.findQuest(titleString); // І передали у функцію findQuest для пошуку по назві
+    quest = character.findQuest(titleName); // І передали у функцію findQuest для пошуку по назві
 
     //Перевірка на quest_eror якщо квест не був знайдений
     if(quest.getTitle()=="0"){
-    QMessageBox::warning(this,"Помилка","Квест не знайдено");
+//    QMessageBox::warning(this,"Помилка","Квест не знайдено");
+    qDebug() << "Квест не знайдено mainwindow.cpp/on_QuestList_itemDoubleClicked";
     }
     else{
     //Якщо перевірку пройдено запускається нове вікно ShowInfoQuest
@@ -88,7 +88,7 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::updateInfoOnCharacter(){
     //Оновлення інформації про характеристики персонажа
-    {
+
     int health = character.getHealth();
     QString healthText = QString("Здоровье: %1").arg(health);
     ui->HealthLabel->setText(healthText);
@@ -104,22 +104,21 @@ void MainWindow::updateInfoOnCharacter(){
     int experience = character.getExperience();
     QString experinceText =QString("Досвід: %1").arg(experience);
     ui->ExperienceLabel->setText(experinceText);
-    }
+
 }
 
 void MainWindow::updateInfoOnQuest(){
     std::vector<Quest> quests = character.getActiveQuest();
 
     if (!quests.empty()) {
-    // Вектор не пустой, можно получить доступ к элементам
+    //Вектор не пустий, можна отримати доступ до елементів
     Quest quest = quests.back();
-    QString title = QString::fromStdString(quest.getTitle());
+    QString title = quest.getTitle();
     ui->QuestList->addItem(title);
 
-    } /*else {
-    QMessageBox::warning(this, "Предупреждение", "Вектор квестов пустой");
-
-    }*/
+    } else {
+    qDebug() << "Вектора квестів пустий mainwindow.cpp/updateInfoOnQuest";
+    }
 }
 
 void MainWindow::handleQuestInfoClosed() {
@@ -144,19 +143,17 @@ void MainWindow::questComplete(){
     }
 
 
-    // Настройка генератора случайных чисел
+    //Налаштування псевдо генератора випадкових чисел
     QRandomGenerator randomGenerator(static_cast<quint32>(std::time(nullptr)));
 
-    // Генерация случайного числа от 0 до 99
+    //Генерація випадкового числа від 0 до 99
     int randomNumber = randomGenerator.bounded(100);
 
-    // Проверка на выполнение функции с 30% шансом (от 0 до 29)
-    if (randomNumber < 30) {
+    //Перевірка на виконання функції з 30% вірогідністю(від 0 до 19)
+    if (randomNumber < 20) {
     Item item;
     QMessageBox::information(this,"New Item","You find new Item");
     character.addItemToInventory(item);
-    } else {
-    qDebug() << "Функция не выполнена.";
     }
 
     updateInfoOnCharacter();
@@ -177,9 +174,17 @@ void MainWindow::on_more_characteristics_clicked()
 
 void MainWindow::on_Open_inventory_clicked()
 {
-    Inventory inventory=character.getInventory();
-    InventoryWindow window(this,inventory);
+    InventoryWindow window(this,&character);
     window.show();
     window.exec();
+    Inventory inventory=character.getInventory();
+
+    // После закрытия окна обновите экипировку персонажа
+    updateCharacterEquipment(inventory.getItemEquipment());
+}
+
+void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {
+    character.updateCharacteristicsFromInventory(); // Подобная функция должна быть в классе Character
+    // Обновите представление персонажа в соответствии с изменениями
 }
 

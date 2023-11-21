@@ -6,12 +6,12 @@ bool Quest::checkDeadline()const{
 }
 
 
-void Quest::setTitle(std::string newTitle){
+void Quest::setTitle(QString newTitle){
     title=newTitle;
 }
 
 
-void Quest::setDiscription(std::string newDiscription){
+void Quest::setDiscription(QString newDiscription){
     discription=newDiscription;
 }
 
@@ -26,10 +26,10 @@ void Quest::setDeadline(std::chrono::system_clock::time_point newDeadline){
 }
 
 
-std::string Quest::getTitle()const{
+QString Quest::getTitle()const{
     return title;
 }
-std::string Quest::getDiscription()const{
+QString Quest::getDiscription()const{
     return discription;
 }
 int Quest::getDifficulty()const{
