@@ -34,48 +34,62 @@ InventoryWindow::~InventoryWindow()
     delete ui;
 }
 
-void InventoryWindow::on_listWidget_itemClicked(QListWidgetItem *item)
-{
-    Inventory inventory=character->getInventory();
+void InventoryWindow::showItemDetails(const Item& selectedItem) {
+    QString rank = selectedItem.getRank();
+    std::vector<std::pair<QString, int>> characteristics = selectedItem.getCharacteristics();
+    QPixmap image = selectedItem.getImageOfItem();
+    // Встановлення тексту із характеристиками предмета
+    if (rank == "D" || rank == "C") {
+        ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
+        ui->Option2->setText("0");
+        ui->Option3->setText("0");
+    } else if (rank == "A" || rank == "B") {
+        ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
+        ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
+        ui->Option3->setText("0");
+    } else if (rank == "S") {
+        ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
+        ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
+        ui->Option3->setText(characteristics[2].first + ":  " + QString::number(characteristics[2].second));
+    }
 
+    // Встановлення зображення предмета
+    int w = ui->label->width();
+    int h = ui->label->height();
+    ui->label->setPixmap(image.scaled(w, h, Qt::KeepAspectRatio));
+}
+
+void InventoryWindow::on_Equip_Item_itemClicked(QListWidgetItem *item) {
+    Inventory inventory = character->getInventory();
+    int selectedIndex = ui->Equip_Item->currentRow();
+    if (selectedIndex >= 0 && selectedIndex < inventory.getItemInEquipCount()) {
+        try {
+            const Item& selectedItem = inventory.getItemAtIndexEquip(selectedIndex);
+            showItemDetails(selectedItem);
+        } catch (const std::out_of_range& e) {
+            qDebug() << "Error: " << e.what();
+        }
+    } else {
+        qDebug() << "Індекс за межами вектора inventorywindow.cpp/on_Equip_Item_itemClicked";
+    }
+}
+
+void InventoryWindow::on_listWidget_itemClicked(QListWidgetItem *item) {
+    Inventory inventory = character->getInventory();
     int selectedIndex = ui->listWidget->currentRow();
 
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
         try {
             const Item& selectedItem = inventory.getItemAtIndex(selectedIndex);
-
-            QString rank =selectedItem.getRank();
-            ui->Rank->setText(rank);
-
-            std::vector<std::pair<QString, int>> characteristics = selectedItem.getCharacteristics();
-
-            QPixmap image = selectedItem.getImageOfItem();
-
-            if (rank == "D" || rank == "C") {
-                ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
-                ui->Option2->setText("0");
-                ui->Option3->setText("0");
-            } else if (rank == "A" || rank == "B") {
-                ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
-                ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
-                ui->Option3->setText("0");
-            } else if (rank == "S") {
-                ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
-                ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
-                ui->Option3->setText(characteristics[2].first + ":  " + QString::number(characteristics[2].second));
-            }
-
-            int w = ui->label->width();
-            int h = ui->label->height();
-            ui->label->setPixmap(image.scaled(w, h, Qt::KeepAspectRatio));
-
+            showItemDetails(selectedItem);
         } catch (const std::out_of_range& e) {
             qDebug() << "Error: " << e.what();
         }
-    } else{
-        qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_listWidget_itemClicked \n";
+    } else {
+        qDebug() << "Індекс за межами вектора inventorywindow.cpp/on_listWidget_itemClicked";
     }
 }
+
 
 Item InventoryWindow::findItemByName(const QString& itemName, const std::vector<Item>& items) {
     for (const Item& item : items) {
@@ -182,7 +196,6 @@ void InventoryWindow::on_Delete_2_clicked()
         qDebug()<<"Індекс за межами вектора inventorywindow.cpp/on_Delete_2_clicked \n";
     }
 }
-
 
 
 

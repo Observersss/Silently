@@ -80,4 +80,12 @@ const Item& Inventory::getItemAtIndex(size_t index) const {
     // Якщо індекс за межами діапазону, генеруємо помилку
     throw std::out_of_range("Індекс вийшов за межі");
 }
+const Item& Inventory::getItemAtIndexEquip(size_t index) const{
+    if (index < itemEquipment.size()) {
+        // Повернення предмету за вказаним індексом
+        return itemEquipment[index];
+    }
+    // Якщо індекс за межами діапазону, генеруємо помилку
+    throw std::out_of_range("Індекс вийшов за межі");
+}
 

@@ -41,6 +41,7 @@ public:
 
     // Отримання предмету за індексом
     const Item& getItemAtIndex(size_t index) const;
+    const Item& getItemAtIndexEquip(size_t index) const;
 
     // Ітератор початку вектора інвентаря
     auto begin() {

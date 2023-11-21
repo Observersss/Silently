@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
@@ -25,6 +26,7 @@ QT_BEGIN_NAMESPACE
 class Ui_AddQuest
 {
 public:
+    QGridLayout *gridLayout_4;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLabel *label_Title;
@@ -33,21 +35,27 @@ public:
     QLineEdit *Discription;
     QFrame *frame;
     QGridLayout *gridLayout_2;
+    QRadioButton *dead;
     QLabel *label;
+    QRadioButton *meduim;
     QRadioButton *easy;
     QRadioButton *hard;
-    QRadioButton *meduim;
-    QRadioButton *dead;
+    QFrame *frame_2;
+    QGridLayout *gridLayout_3;
+    QLabel *label_2;
+    QDateTimeEdit *dateTimeEdit;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
 
     void setupUi(QDialog *AddQuest)
     {
         if (AddQuest->objectName().isEmpty())
             AddQuest->setObjectName("AddQuest");
-        AddQuest->resize(314, 397);
+        AddQuest->resize(406, 454);
+        gridLayout_4 = new QGridLayout(AddQuest);
+        gridLayout_4->setObjectName("gridLayout_4");
         groupBox = new QGroupBox(AddQuest);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(0, 10, 291, 211));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName("gridLayout");
         label_Title = new QLabel(groupBox);
@@ -70,41 +78,72 @@ public:
 
         gridLayout->addWidget(Discription, 1, 2, 1, 1);
 
+
+        gridLayout_4->addWidget(groupBox, 0, 0, 1, 2);
+
         frame = new QFrame(AddQuest);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(30, 240, 228, 64));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         gridLayout_2 = new QGridLayout(frame);
         gridLayout_2->setObjectName("gridLayout_2");
+        dead = new QRadioButton(frame);
+        dead->setObjectName("dead");
+
+        gridLayout_2->addWidget(dead, 2, 2, 1, 1);
+
         label = new QLabel(frame);
         label->setObjectName("label");
 
-        gridLayout_2->addWidget(label, 0, 0, 1, 1);
-
-        easy = new QRadioButton(frame);
-        easy->setObjectName("easy");
-
-        gridLayout_2->addWidget(easy, 0, 1, 1, 1);
-
-        hard = new QRadioButton(frame);
-        hard->setObjectName("hard");
-
-        gridLayout_2->addWidget(hard, 0, 2, 1, 1);
+        gridLayout_2->addWidget(label, 2, 0, 1, 1);
 
         meduim = new QRadioButton(frame);
         meduim->setObjectName("meduim");
 
-        gridLayout_2->addWidget(meduim, 1, 1, 1, 1);
+        gridLayout_2->addWidget(meduim, 2, 1, 1, 1);
 
-        dead = new QRadioButton(frame);
-        dead->setObjectName("dead");
+        easy = new QRadioButton(frame);
+        easy->setObjectName("easy");
 
-        gridLayout_2->addWidget(dead, 1, 2, 1, 1);
+        gridLayout_2->addWidget(easy, 1, 1, 1, 1);
+
+        hard = new QRadioButton(frame);
+        hard->setObjectName("hard");
+
+        gridLayout_2->addWidget(hard, 1, 2, 1, 1);
+
+
+        gridLayout_4->addWidget(frame, 1, 0, 1, 2);
+
+        frame_2 = new QFrame(AddQuest);
+        frame_2->setObjectName("frame_2");
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        gridLayout_3 = new QGridLayout(frame_2);
+        gridLayout_3->setObjectName("gridLayout_3");
+        label_2 = new QLabel(frame_2);
+        label_2->setObjectName("label_2");
+
+        gridLayout_3->addWidget(label_2, 0, 0, 1, 1);
+
+        dateTimeEdit = new QDateTimeEdit(frame_2);
+        dateTimeEdit->setObjectName("dateTimeEdit");
+
+        gridLayout_3->addWidget(dateTimeEdit, 1, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(frame_2, 2, 0, 1, 1);
 
         pushButton = new QPushButton(AddQuest);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(100, 330, 100, 32));
+
+        gridLayout_4->addWidget(pushButton, 3, 1, 1, 1);
+
+        pushButton_2 = new QPushButton(AddQuest);
+        pushButton_2->setObjectName("pushButton_2");
+
+        gridLayout_4->addWidget(pushButton_2, 3, 0, 1, 1);
+
 
         retranslateUi(AddQuest);
 
@@ -117,12 +156,14 @@ public:
         groupBox->setTitle(QCoreApplication::translate("AddQuest", "Adding new Quest", nullptr));
         label_Title->setText(QCoreApplication::translate("AddQuest", "Title", nullptr));
         label_Discription->setText(QCoreApplication::translate("AddQuest", "Discription", nullptr));
+        dead->setText(QCoreApplication::translate("AddQuest", "dead", nullptr));
         label->setText(QCoreApplication::translate("AddQuest", "Difficulty", nullptr));
+        meduim->setText(QCoreApplication::translate("AddQuest", "meduim", nullptr));
         easy->setText(QCoreApplication::translate("AddQuest", "easy", nullptr));
         hard->setText(QCoreApplication::translate("AddQuest", "hard", nullptr));
-        meduim->setText(QCoreApplication::translate("AddQuest", "meduim", nullptr));
-        dead->setText(QCoreApplication::translate("AddQuest", "dead", nullptr));
+        label_2->setText(QCoreApplication::translate("AddQuest", "Set deadline(yy.mm.dd.hh.mm):", nullptr));
         pushButton->setText(QCoreApplication::translate("AddQuest", "Add Quest", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("AddQuest", "Set deadline", nullptr));
     } // retranslateUi
 
 };

@@ -181,6 +181,7 @@ void MainWindow::on_Open_inventory_clicked()
 
     // После закрытия окна обновите экипировку персонажа
     updateCharacterEquipment(inventory.getItemEquipment());
+    updateInfoOnCharacter();
 }
 
 void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {

@@ -16,6 +16,9 @@ class InventoryWindow : public QDialog {
 
 public:
     explicit InventoryWindow(QWidget *parent = nullptr, Character *playerCharacter = nullptr);
+
+    void showItemDetails(const Item& selectedItem);
+
     ~InventoryWindow();
 
 private slots:
@@ -24,6 +27,8 @@ private slots:
     void on_take_off_clicked();
     void on_Delete_clicked();
     void on_Delete_2_clicked();
+
+    void on_Equip_Item_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::InventoryWindow *ui;
