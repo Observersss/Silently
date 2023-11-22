@@ -11,11 +11,14 @@ CONFIG += c++17
 SOURCES += \
     AddQuest/addquest.cpp \
     MoreCharacteristics/morecharacteristics.cpp \
+    NOTEspace/Note/note.cpp \
+    NOTEspace/Tag/tag.cpp \
     RPGspace/Character/character.cpp \
     RPGspace/Inventory/inventory.cpp \
     RPGspace/Item/item.cpp \
     RPGspace/Quest/quest.cpp \
     ShowInfoQuest/showinfoquest.cpp \
+    addTag/addtag.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -23,17 +26,21 @@ HEADERS += \
     AddQuest/addquest.h \
     Library/library.h \
     MoreCharacteristics/morecharacteristics.h \
+    NOTEspace/Note/note.h \
+    NOTEspace/Tag/tag.h \
     RPGspace/Character/character.h \
     RPGspace/Inventory/inventory.h \
     RPGspace/Item/item.h \
     RPGspace/Quest/quest.h \
     ShowInfoQuest/showinfoquest.h \
+    addTag/addtag.h \
     mainwindow.h
 
 FORMS += \
     AddQuest/addquest.ui \
     MoreCharacteristics/morecharacteristics.ui \
     ShowInfoQuest/showinfoquest.ui \
+    addTag/addtag.ui \
     mainwindow.ui
 
 # Default rules for deployment.

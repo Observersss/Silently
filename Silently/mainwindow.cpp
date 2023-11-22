@@ -4,6 +4,8 @@
 #include "AddQuest/addquest.h"
 #include "ShowInfoQuest/showinfoquest.h"
 #include "MoreCharacteristics/morecharacteristics.h"
+#include "addTag/addtag.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -23,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->character_icon->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
 
     //ТЕСТИРОВАНИЕ
-
+    ui->tags_option->setText("+");
     //ТЕСТИРОВАНИЕ
 }
 void MainWindow::addActiveQuest(Quest* quest){
@@ -147,12 +149,96 @@ void MainWindow::questComplete(){
 
 
 
-
-
 void MainWindow::on_more_characteristics_clicked()
 {
     MoreCharacteristics window(this,character);
     window.show();
     window.exec();
+}
+
+/*-----------------------------------------------------------*/
+
+
+void MainWindow::on_Test1_clicked()
+{
+
+    QString title = ui ->TitleNote ->text();
+    std::vector<QString> noteTag;
+
+    std::vector<QString> noteText;
+    QString text = ui ->TextNote ->toPlainText();
+    QStringList lines = text.split(QChar('\n'), Qt::KeepEmptyParts);
+    for(const QString& line:lines){
+    noteText.push_back(line);
+
+    }
+
+    note.setText(noteText);
+    note.setTitle(title);
+
+}
+
+
+void MainWindow::on_pTest2_clicked()
+{
+    QString title = note.getTitle();
+    std::vector<QString> noteText = note.getText();
+    for(const QString& line:noteText){
+    ui ->TextNote ->append(line);
+    }
+
+
+}
+
+
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    QMessageBox::warning(this,"Помилка","Теги не знайдено");
+}
+
+
+
+
+
+
+void MainWindow::on_tags_option_clicked()
+{
+    if(ui->tags_option->text()=="+"){
+    AddTag window(this);
+    window.show();
+    window.exec();
+    }
+    if(ui->tags_option->text()=="-"){
+      deleteTag();
+    }
+}
+
+void MainWindow::addTag(QString nametag){
+    Tag tag(nametag);
+    note.addActiveTag(tag);
+}
+
+void MainWindow::updateInfoTag(){
+
+    std::vector<Tag> activetags=note.getActiveTag();
+
+    if(!activetags.empty()){
+
+    Tag tag=activetags.back();
+    QString tagname=tag.getNameTag();
+    ui->listTag->addItem(tagname);
+
+    }
+}
+
+
+void MainWindow::on_listTag_itemClicked(QListWidgetItem *item)
+{
+    ui->tags_option->setText("-");
+}
+
+void MainWindow::deleteTag(){
+    std::vector<Tag> activetag=note.getActiveTag();
 }
 

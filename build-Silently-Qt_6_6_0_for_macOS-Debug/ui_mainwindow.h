@@ -14,12 +14,14 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,6 +35,9 @@ public:
     QFrame *frame;
     QLabel *info;
     QPushButton *change_space;
+    QPushButton *Test1;
+    QPushButton *pTest2;
+    QPushButton *pushButton;
     QStackedWidget *spaces;
     QWidget *RPG_space;
     QGridLayout *gridLayout_4;
@@ -52,6 +57,11 @@ public:
     QLabel *ExperienceLabel;
     QPushButton *more_characteristics;
     QWidget *Note_space;
+    QTextEdit *TextNote;
+    QLineEdit *TitleNote;
+    QListWidget *listTag;
+    QLabel *NoteTime;
+    QPushButton *tags_option;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -80,6 +90,15 @@ public:
         change_space = new QPushButton(frame);
         change_space->setObjectName("change_space");
         change_space->setGeometry(QRect(10, 30, 100, 32));
+        Test1 = new QPushButton(frame_2);
+        Test1->setObjectName("Test1");
+        Test1->setGeometry(QRect(10, 100, 100, 32));
+        pTest2 = new QPushButton(frame_2);
+        pTest2->setObjectName("pTest2");
+        pTest2->setGeometry(QRect(10, 150, 100, 32));
+        pushButton = new QPushButton(frame_2);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(10, 200, 100, 32));
 
         gridLayout_2->addWidget(frame_2, 0, 0, 1, 1);
 
@@ -181,6 +200,29 @@ public:
         spaces->addWidget(RPG_space);
         Note_space = new QWidget();
         Note_space->setObjectName("Note_space");
+        TextNote = new QTextEdit(Note_space);
+        TextNote->setObjectName("TextNote");
+        TextNote->setGeometry(QRect(100, 50, 451, 391));
+        TextNote->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;\n"
+""));
+        TitleNote = new QLineEdit(Note_space);
+        TitleNote->setObjectName("TitleNote");
+        TitleNote->setGeometry(QRect(100, 0, 441, 21));
+        TitleNote->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;"));
+        listTag = new QListWidget(Note_space);
+        listTag->setObjectName("listTag");
+        listTag->setGeometry(QRect(100, 20, 221, 31));
+        NoteTime = new QLabel(Note_space);
+        NoteTime->setObjectName("NoteTime");
+        NoteTime->setGeometry(QRect(350, 25, 191, 21));
+        tags_option = new QPushButton(Note_space);
+        tags_option->setObjectName("tags_option");
+        tags_option->setGeometry(QRect(320, 20, 31, 32));
+        tags_option->setStyleSheet(QString::fromUtf8("\n"
+"color:black;\n"
+"background-color:rgb(129, 255, 134);"));
         spaces->addWidget(Note_space);
 
         gridLayout_2->addWidget(spaces, 0, 1, 1, 1);
@@ -193,6 +235,14 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
+        QWidget::setTabOrder(change_space, Test1);
+        QWidget::setTabOrder(Test1, pTest2);
+        QWidget::setTabOrder(pTest2, QuestList);
+        QWidget::setTabOrder(QuestList, AddingQuest);
+        QWidget::setTabOrder(AddingQuest, Open_inventory);
+        QWidget::setTabOrder(Open_inventory, more_characteristics);
+        QWidget::setTabOrder(more_characteristics, TextNote);
+        QWidget::setTabOrder(TextNote, TitleNote);
 
         retranslateUi(MainWindow);
 
@@ -204,6 +254,9 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         info->setText(QCoreApplication::translate("MainWindow", "Space", nullptr));
         change_space->setText(QCoreApplication::translate("MainWindow", "Change space", nullptr));
+        Test1->setText(QCoreApplication::translate("MainWindow", "Test1", nullptr));
+        pTest2->setText(QCoreApplication::translate("MainWindow", "Test2", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         AddingQuest->setText(QCoreApplication::translate("MainWindow", "Add Quest", nullptr));
 #if QT_CONFIG(tooltip)
         character_icon->setToolTip(QCoreApplication::translate("MainWindow", "\320\246\320\265 \321\202\320\262\321\226\320\271 \320\277\320\265\321\200\321\201\320\276\320\275\320\260\320\266", nullptr));
@@ -219,6 +272,16 @@ public:
         HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));
         ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
         more_characteristics->setText(QCoreApplication::translate("MainWindow", "More", nullptr));
+        TextNote->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        NoteTime->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        tags_option->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
     } // retranslateUi
 
 };

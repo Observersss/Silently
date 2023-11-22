@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include "RPGspace/Character/character.h"
+#include "NOTEspace/Note/note.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,6 +25,11 @@ public:
 
     void questComplete();
 
+    void addTag(QString nametag);
+
+    void updateInfoTag();
+
+    void deleteTag();
 
     ~MainWindow();
 private slots:
@@ -35,10 +41,22 @@ private slots:
 
     void on_more_characteristics_clicked();
 
+    void on_Test1_clicked();
+
+    void on_pTest2_clicked();
+
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
+
+    void on_tags_option_clicked();
+
+    void on_listTag_itemClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     Character character;
     Quest quest;
+    Note note;
 
 };
 #endif // MAINWINDOW_H
