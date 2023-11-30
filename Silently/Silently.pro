@@ -12,6 +12,7 @@ SOURCES += \
     AddQuest/addquest.cpp \
     MoreCharacteristics/morecharacteristics.cpp \
     NOTEspace/Note/note.cpp \
+    NOTEspace/NoteService/noteservice.cpp \
     NOTEspace/Tag/tag.cpp \
     RPGspace/Character/character.cpp \
     RPGspace/Inventory/inventory.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     RPGspace/Quest/quest.cpp \
     ShowInfoQuest/showinfoquest.cpp \
     addTag/addtag.cpp \
+    createNewNoteSpaceWindow/createnewnotespacewindow.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -27,6 +29,7 @@ HEADERS += \
     Library/library.h \
     MoreCharacteristics/morecharacteristics.h \
     NOTEspace/Note/note.h \
+    NOTEspace/NoteService/noteservice.h \
     NOTEspace/Tag/tag.h \
     RPGspace/Character/character.h \
     RPGspace/Inventory/inventory.h \
@@ -34,6 +37,7 @@ HEADERS += \
     RPGspace/Quest/quest.h \
     ShowInfoQuest/showinfoquest.h \
     addTag/addtag.h \
+    createNewNoteSpaceWindow/createnewnotespacewindow.h \
     mainwindow.h
 
 FORMS += \
@@ -41,6 +45,7 @@ FORMS += \
     MoreCharacteristics/morecharacteristics.ui \
     ShowInfoQuest/showinfoquest.ui \
     addTag/addtag.ui \
+    createNewNoteSpaceWindow/createnewnotespacewindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.

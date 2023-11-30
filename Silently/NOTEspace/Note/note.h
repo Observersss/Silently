@@ -9,7 +9,8 @@ class Note{
         std::vector<QString> text;
         std::chrono::system_clock::time_point data_time;
         std::vector<Tag> activeTag;
-        static std::vector<Tag> allTag;
+        static int idMaxValue;
+        int id;
     public:
 
         //базовий конструктор, який передає час створення
@@ -25,10 +26,14 @@ class Note{
 
         void setText(std::vector<QString> newText);
 
+        void setData_time(std::chrono::system_clock::time_point timePoint);
+
 
         //додавання тегу
         //приймає Tag і передає у teg
         void addActiveTag(Tag newActiveTag);
+        void addActiveTag(const QString& newActiveTag);
+        void addActiveTag(std::vector<QString> newActiveTags);
 
         void deleteTag(const QString& tagName);
 
@@ -37,6 +42,7 @@ class Note{
         QString getTitle()const;
         std::vector<QString> getText()const;
         std::chrono::system_clock::time_point getDataTime()const;
+        int getIdNote()const;
 };
 
 #endif // NOTE_H

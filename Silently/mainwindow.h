@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include "RPGspace/Character/character.h"
-#include "NOTEspace/Note/note.h"
+#include "NOTEspace/NoteService/noteservice.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -25,11 +25,33 @@ public:
 
     void questComplete();
 
-    void addTag(QString nametag);
+    void saveInfoNote();
+    void savePreviousCurrentNote(QListWidgetItem *previous);
+
+    void unloadInfoNote();
+
+    Note saveInfoInNewNote();
+
+    NoteService returnNoteService();
+
+    void updateListNote();
+
+    void addNewNoteToList(QString nameNote);
+
+    void deleteTag(Note note);
+
+    void addTag(QString name);
 
     void updateInfoTag();
+    NoteService* returnNoteServicePtr();
 
-    void deleteTag();
+    int findIdNote(QString nameNote);
+    void changeNameNoteInVector(QString newName,int oldID);
+
+    void removeNoteFromVector(int oldID);
+
+    void createNewNoteSpace(QString nameNoteService);
+    void deleteNoteSpace(QString nameNoteService);
 
     ~MainWindow();
 private slots:
@@ -41,22 +63,30 @@ private slots:
 
     void on_more_characteristics_clicked();
 
-    void on_Test1_clicked();
-
-    void on_pTest2_clicked();
-
-    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
-
-
     void on_tags_option_clicked();
 
     void on_listTag_itemClicked(QListWidgetItem *item);
+
+    void on_listNote_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_pushButton_clicked();
+
+    void on_delete_Note_clicked();
+
+    void on_createNewNoteSpace_clicked();
+
+    void on_delete_Note_Service_clicked();
 
 private:
     Ui::MainWindow *ui;
     Character character;
     Quest quest;
-    Note note;
+    std::vector<NoteService> noteSpaces;
+    int bufferNoteId;
+    std::vector<std::pair<QString,int>> NameNoteAndNoteID;
+    //Переменная используеться для подсчёта новой заметки для уникальности
+    //Для правильного поиска по названию чтобы избежать возвращаения индекса
+    static int noteCounter;
 
 };
 #endif // MAINWINDOW_H

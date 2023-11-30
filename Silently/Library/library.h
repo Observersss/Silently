@@ -21,6 +21,12 @@
 
 #include <algorithm>
 
+#include <sstream>
+
+#include <iomanip>
+
+#include <QString>
+
 //include <QTimer>
 
 #endif // LIBRARY_H
