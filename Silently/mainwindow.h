@@ -38,17 +38,14 @@ public:
 
     void addNewNoteToList(QString nameNote);
 
-    void deleteTag(Note note);
+    //void deleteTag(Note *note);
 
     void addTag(QString name);
 
     void updateInfoTag();
     NoteService* returnNoteServicePtr();
 
-    int findIdNote(QString nameNote);
-    void changeNameNoteInVector(QString newName,int oldID);
 
-    void removeNoteFromVector(int oldID);
 
     void createNewNoteSpace(QString nameNoteService);
     void deleteNoteSpace(QString nameNoteService);
@@ -79,13 +76,15 @@ private slots:
 
     void on_NoteSpaces_currentIndexChanged(int index);
 
+    void on_listTag_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     Character character;
     Quest quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
-    std::vector<std::pair<QString,int>> NameNoteAndNoteID;
+    //std::vector<std::pair<QString,int>> NameNoteAndNoteID;
     //Переменная используеться для подсчёта новой заметки для уникальности
     //Для правильного поиска по названию чтобы избежать возвращаения индекса
     static int noteCounter;

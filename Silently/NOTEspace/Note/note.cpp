@@ -31,8 +31,13 @@ void Note::addActiveTag(const QString& newActiveTag) {
     activeTag.push_back(newTag);
 }
 void Note::addActiveTag(std::vector<QString> newActiveTags){
-    for(QString& tagName:newActiveTags){
-        addActiveTag(tagName);
+//    for(QString& tagName:newActiveTags){
+//        addActiveTag(tagName);
+//    }
+    activeTag.clear();
+    for(QString& tagname:newActiveTags){
+        Tag tag(tagname);
+        activeTag.push_back(tag);
     }
 }
 

@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //ПОИСК СРЕДИ  ЗАМЕТКО ПРОИСХОДИТ ЛОМАЕТЬСЯ ИБО ОНО ИЩЕТ НОВОЕ НАЗВАНИЕ СРЕДИ СТАРЫХ НАЗВАНИЙ
 
+    //Чтоби пофиксить баг с внезапным завершением програмы нужно правильно настроить когда и как нужно запустить сохранение
+    //заметки перед сменой пространства(Note Spaces)
+
     //Оновлення інформації про персонажа
     on_change_space_clicked();
     updateInfoOnQuest();
@@ -31,8 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
     //ТЕСТИРОВАНИЕ
     ui->tags_option->setText("+");
     NoteService noteService;
-    noteSpaces.push_back(noteService);
     Note *firstNote=noteService.getFirstNote();
+    //noteService.addNewElementToNameNoteAndNoteID(firstNote->getTitle(),firstNote->getIdNote());
+    noteSpaces.push_back(noteService);
 
     qDebug()<<firstNote->getIdNote();
     qDebug()<<firstNote->getTitle();
@@ -59,15 +63,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     //bufferNoteId=firstNote.getIdNote();
     //qDebug()<<bufferNoteId;
-    if (ui->listNote->count() > 0) {
-        QListWidgetItem *firstItem = ui->listNote->item(0);
-        if (firstItem) {
-            ui->listNote->setCurrentItem(firstItem);
-        }
-    }
 
-    int id=firstNote->getIdNote();
-    NameNoteAndNoteID.push_back(std::pair(title,id));
+
 
     //unloadInfoNote();
     //////////////////////////////////////////////
@@ -309,7 +306,8 @@ void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
 
     QString title=ui->TitleNote->text();
     //Note newNote=returnNoteServicePtr()->getNote(title);//Создаём новую заметку
-    bufferNoteId=findIdNote(previous->text());
+    bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
+    qDebug()<<"Название предыдущего елемента "<<previous->text();
     qDebug()<<"ID предыдущей заметки в момент сохранения в буффер"<<bufferNoteId;
     //Note* newNote=returnNoteServicePtr()->getNotePtr(title);//Создаём новую заметку
     //bufferNameNote=previous->text();
@@ -369,8 +367,8 @@ void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
     newNote->addActiveTag(tagNames);
     //noteService->setChangNote(bufferNoteId,newNote);
     previous->setText(newNote->getTitle());
-    changeNameNoteInVector(newNote->getTitle(),bufferNoteId);
-    bufferNoteId=findIdNote(ui->listNote->currentItem()->text());
+    noteService->changeNameNoteInVector(newNote->getTitle(),bufferNoteId);
+    bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
 }
 
 void MainWindow::unloadInfoNote(){
@@ -410,7 +408,9 @@ void MainWindow::unloadInfoNote(){
     std::string timeString = stream.str();
     QString qTimeString = QString::fromStdString(timeString);
 
-//     Установка строки в QLabel
+
+    updateInfoTag();
+//  Установка строки в QLabel
     ui->date_create_note->setText(qTimeString);
     ui->date_create_note->setStyleSheet("QLabel { padding-top: 7px; font-size:11px; }");
 
@@ -428,43 +428,35 @@ void MainWindow::on_tags_option_clicked()
     window.exec();
     }
     else if (ui->tags_option->text() == "-") {
-    // Получаем сервис заметок
-    NoteService noteService = returnNoteService();
-
-    // Получаем текущий заголовок заметки из списка заметок
-    QString title = ui->listNote->currentItem()->text();
-    Note note; // Изменили тип переменной note на Note, а не Note*
+    // Получаем  заметку
+    Note *note = returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()));
 
     // Проверяем, есть ли заголовок
-    if (title.isEmpty()) {
+    if (note->getTitle().isEmpty()) {
         // Если заголовок пустой, получаем заметку по умолчанию
-        QString defaultNameNote="Your first note";
-        note = noteService.getNote(defaultNameNote);
-    } else {
-        // Получаем заметку по выбранному заголовку
-        note = noteService.getNote(title);
+        return;
+        qDebug()<<"Заголовок заметки пустой mainwindow.h/on_tags_option_clicked";
     }
-    deleteTag(note); // Передаем заметку на удаление тега
+    //deleteTag(note); // Передаем заметку на удаление тега
    }
 
 }
 
 
 
-void MainWindow::deleteTag(Note note) {
-    QListWidget *currentList = ui->listTag;
-    if (currentList->currentItem() != nullptr) { // Проверка на наличие текущего элемента
-    QString tagName = currentList->currentItem()->text();
-//    if (!note.isEmpty()) { // Проверка на наличие заметки
-//        note.deleteTag(tagName);
+//void MainWindow::deleteTag(Note *note) {
+//   QListWidget *currentList = ui->listTag;
+//   if (currentList->currentItem() != nullptr) { // Проверка на наличие текущего элемента
+//    QString tagName = currentList->currentItem()->text();
+//    if (note != nullptr) { // Проверка на наличие заметки
+//        note->deleteTag(tagName);
 //    } else {
 //        // Обработка ситуации, когда заметка пустая или отсутствует
 //    }
-    note.deleteTag(tagName);
-    } else {
-    // Обработка ситуации, когда текущий элемент не выбран
-    }
-}
+//   } else {
+//    // Обработка ситуации, когда текущий элемент не выбран
+//   }
+//}
 
 
 void MainWindow::on_listTag_itemClicked(QListWidgetItem *item)
@@ -488,9 +480,11 @@ NoteService MainWindow::returnNoteService(){
 
 NoteService* MainWindow::returnNoteServicePtr() {
     QString nameNoteService = ui->NoteSpaces->currentText();
+    qDebug()<<ui->NoteSpaces->currentText();
     for (NoteService& value : noteSpaces) {
     if (value.getNameSpaceNote() == nameNoteService) {
         // Возвращаем указатель на объект NoteService из списка noteSpaces
+        qDebug()<<"Елемент какой возвращает поиск returnNoteServicePtr "<<value.getNameSpaceNote();
         return &value;
     }
     }
@@ -499,15 +493,44 @@ NoteService* MainWindow::returnNoteServicePtr() {
     return nullptr; // Или выбросить исключение, чтобы обработать ошибку не найденного объекта NoteService
 }
 
+
 void MainWindow::updateListNote(){
     qDebug()<<"Функция запустилась";
+    qDebug()<<returnNoteServicePtr()->getNameSpaceNote();
     //ui->listNote->clear();
-    NoteService currentSpace= returnNoteService();
-    qDebug()<<ui->NoteSpaces->currentText();
-    std::vector<Note> notes=currentSpace.getAllNotes();
-    for(const Note& note:notes){
-    ui->listNote->addItem(note.getTitle());
+    //qDebug()<<ui->NoteSpaces->currentText();
+//    qDebug()<<returnNoteServicePtr()->getFirstNote()->getTitle();
+//    std::vector<Note> notes=returnNoteServicePtr()->getAllNotes();
+
+//    qDebug()<<notes.size();
+//    for(const Note& note:notes){
+//    ui->listNote->addItem(note.getTitle());
+//    }
+
+//    for (const auto& pair : NameNoteAndNoteID) {
+//    if (pair.first == nameNote) {
+//        qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
+//        qDebug()<<"ID какое возвращает функция поиска findIdNote"<<pair.second;
+//        return pair.second; // Возвращаем идентификатор заметки, если найдено соответствие
+//    }
+//    qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
+//    }
+//    return -1; // Возвращаем -1, если заметка не найдена
+    //ui->listNote->clear();
+    qDebug()<<"Проверка на выполнение";
+    std::vector<std::pair<QString,int>> NameNoteAndNoteID=returnNoteServicePtr()->returnNameNoteAndNoteID();
+    qDebug()<<"Проверка на выполнение";
+    for(const auto& pair : NameNoteAndNoteID){
+    QString item=returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(pair.first))->getTitle();
+    qDebug()<<returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(pair.first))->getTitle();
+    if (item.isEmpty()) {
+        ui->listNote->addItem(item);
+        qDebug()<<"item  не пустой  mainwindow.h/updateListNote";
     }
+    qDebug()<<"item   пустой  mainwindow.h/updateListNote";
+    }
+
+
     qDebug()<<"Функция закончилась";
 }
 
@@ -529,44 +552,17 @@ void MainWindow::addTag(QString name) {
 
     // Получаем заметку по выбранному заголовку
     //Note note = returnNoteService().getNote(title);
-    Note note = returnNoteService().getNote(title);
-
-    // Проверяем, есть ли заголовок
-    if (title.isEmpty()) {
-    // Если заголовок пустой, добавляем тег к новой заметке
-    QString defaultNameTag = "Your first note";
-    std::cout<<"Проблема \n";
-    note.addActiveTag(defaultNameTag);
-
-    returnNoteService().setChangNote(note);
-    // Теперь можно сделать что-то с этой новой заметкой, например, сохранить её или использовать дальше
-    } else {
-
-        // Добавляем тег к существующей заметке
-        note.addActiveTag(name);
-        NoteService* noteService = returnNoteServicePtr();
-        if (noteService != nullptr) {
-        noteService->setChangNote(note); // Изменения будут применены к оригинальному объекту NoteService
-        }
-        std::cout<<"Проблема 2 \n";
-        // Теперь заметке был добавлен тег
-        // Можно добавить дополнительную логику или сохранить изменения
-        std::vector<Tag> tags=note.getActiveTag();
-        for(const Tag& tag:tags){
-            int i=0;
-            std::cout<<i<<std::endl;
-            i+=1;
-        }
-    }
+    Note *note = returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(title));
+    note->addActiveTag(name);
 }
 
 
 void MainWindow::updateInfoTag() {
-//    std::vector<Tag> tagInNote = returnNoteService().getNote(ui->listNote->currentItem()->text()).getActiveTag();
-//    ui->listTag->clear();
-
-//    for (const Tag& tag : tagInNote)
-//        ui->listTag->addItem(tag.getNameTag());
+    ui->listTag->clear();
+    std::vector<Tag> tags=returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()))->getActiveTag();
+    for(const Tag& tag:tags){
+    ui->listTag->addItem(tag.getNameTag());
+    }
 }
 
 
@@ -576,8 +572,9 @@ void MainWindow::on_listNote_currentItemChanged(QListWidgetItem *current, QListW
     //saveInfoNote();
     if(ui->listNote->count()<=1)
         saveInfoNote();
-    else
-        savePreviousCurrentNote(previous);
+//    if(ui->NoteSpaces->count()>1)
+//        savePreviousCurrentNote(current);
+
 
     ui->TitleNote->clear();
     ui->TextNote->clear();
@@ -600,45 +597,20 @@ void MainWindow::on_pushButton_clicked()
 
     addNewNoteToList(nameNote);
 //  Получение указателя на последний элемент
-    QListWidgetItem *lastItem = ui->listNote->item(ui->listNote->count()-1);
+    //QListWidgetItem *lastItem = ui->listNote->item(ui->listNote->count()-1);
 
     // Установка последнего элемента в качестве текущего
-    if (lastItem) {
+    //if (lastItem) {
         //ui->listNote->setCurrentItem(lastItem);
         noteService->addNote(note);
-        NameNoteAndNoteID.push_back(std::pair(note.getTitle(),note.getIdNote()));
+        noteService->addNewElementToNameNoteAndNoteID(note.getTitle(),note.getIdNote());
         qDebug()<<"ID только что созданой заметки"<<note.getIdNote();
-    }
+   // }
 
     }
 }
 
-int MainWindow::findIdNote(QString nameNote){
-    for (const auto& pair : NameNoteAndNoteID) {
-    if (pair.first == nameNote) {
-        qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
-        qDebug()<<"ID какое возвращает функция поиска findIdNote"<<pair.second;
-        return pair.second; // Возвращаем идентификатор заметки, если найдено соответствие
-    }
-    }
-    return -1; // Возвращаем -1, если заметка не найдена
-}
-void MainWindow::changeNameNoteInVector(QString newName,int oldID){
-    for (auto& pair : NameNoteAndNoteID) {
-    if (pair.second == oldID) {
-        pair.first = newName;
-        break; // Если нашли идентификатор, меняем значение и выходим из цикла
-    }
-    }
-}
-void MainWindow::removeNoteFromVector(int oldID) {
-    auto it = std::remove_if(NameNoteAndNoteID.begin(), NameNoteAndNoteID.end(),
-                             [oldID](const auto& pair) { return pair.second == oldID; });
 
-    if (it != NameNoteAndNoteID.end()) {
-    NameNoteAndNoteID.erase(it, NameNoteAndNoteID.end());
-    }
-}
 
 void MainWindow::on_delete_Note_clicked()
 {
@@ -648,7 +620,7 @@ void MainWindow::on_delete_Note_clicked()
      * и найденый индекс какой возвращает функция передаёться в removeNoteFromVector
      * для удаления из вектора NameNoteAndNoteID
     */
-    removeNoteFromVector(findIdNote(ui->listNote->currentItem()->text()));
+    returnNoteServicePtr()->removeNoteFromVector(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()));
     QListWidgetItem *current=ui->listNote->currentItem();
     delete current;
 }
@@ -656,8 +628,12 @@ void MainWindow::on_delete_Note_clicked()
 void MainWindow::createNewNoteSpace(QString nameNoteService){
     NoteService noteService;
     noteService.setNameSpaceNote(nameNoteService);
+    qDebug()<<noteService.getNameSpaceNote();
 
+    //updateListNote();
+    qDebug()<<noteSpaces.size();
     noteSpaces.push_back(noteService);
+    qDebug() << noteSpaces.back().getNameSpaceNote();
     ui->NoteSpaces->addItem(nameNoteService);
 }
 void MainWindow::deleteNoteSpace(QString nameNoteService){
@@ -682,9 +658,28 @@ void MainWindow::on_delete_Note_Service_clicked()
 
 void MainWindow::on_NoteSpaces_currentIndexChanged(int index)
 {
-    if(ui->NoteSpaces->count()>1)
-    updateListNote();
+    if(ui->NoteSpaces->count()>=1){
+    QListWidget *listWidget = ui->listNote; // Замените "yourListWidget" на имя вашего QListWidget
+
+    while (listWidget->count() > 1) {
+        QListWidgetItem *item = listWidget->takeItem(0); // Удаление элемента из индекса 0
+        delete item; // Освобождение памяти, занятой элементом
+    }
+    }
+
+        bufferNoteId=returnNoteServicePtr()->getFirstNote()->getIdNote();
+        qDebug()<<"Id первой созданой заметки нового пространства "<<returnNoteServicePtr()->getFirstNote()->getIdNote();
+        qDebug()<<returnNoteServicePtr()->getNameSpaceNote();
+        updateListNote();
+
     qDebug()<<ui->NoteSpaces->currentText();
 }
 
+
+
+void MainWindow::on_listTag_itemDoubleClicked(QListWidgetItem *item)
+{
+    returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()))->deleteTag(item->text());
+    updateInfoTag();
+}
 

@@ -8,6 +8,7 @@ NoteService::NoteService()
     nameSpaceNote="FirstNoteSpace";
     note.setTitle("Your first note");
     notes.push_back(note);
+    NameNoteAndNoteID.push_back(std::pair(note.getTitle(),note.getIdNote()));
 }
 NoteService::NoteService(QString nameSpace):nameSpaceNote(nameSpace){
     Note note;
@@ -149,6 +150,9 @@ void NoteService::addToAllTag(QString tagName){
 std::vector<Note> NoteService::getAllNotes()const{
     return notes;
 }
+std::vector<Note>* NoteService::getAllNotesPtr(){
+    return &notes;
+}
 
 QString NoteService::getNameSpaceNote() const{
     return nameSpaceNote;
@@ -170,4 +174,41 @@ Note* NoteService::getNotePtr(const int &id) {
 //    }
 //    return nullptr; // Если заметка не найдена, возвращаем nullptr
 //}
+
+int NoteService::findIdNote(QString nameNote){
+    for (const auto& pair : NameNoteAndNoteID) {
+        if (pair.first == nameNote) {
+            qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
+            qDebug()<<"ID какое возвращает функция поиска findIdNote"<<pair.second;
+            return pair.second; // Возвращаем идентификатор заметки, если найдено соответствие
+        }
+        qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
+    }
+    return -1; // Возвращаем -1, если заметка не найдена
+}
+void NoteService::changeNameNoteInVector(QString newName,int oldID){
+    for (auto& pair : NameNoteAndNoteID) {
+        if (pair.second == oldID) {
+            pair.first = newName;
+            qDebug()<<"Сохранение прошло успешно";
+            return; // Если нашли идентификатор, меняем значение и выходим из цикла
+        }
+    }
+    qDebug()<<"Сохранение не удалось";
+}
+
+void NoteService::removeNoteFromVector(int oldID){
+    auto it = std::remove_if(NameNoteAndNoteID.begin(), NameNoteAndNoteID.end(),
+                             [oldID](const auto& pair) { return pair.second == oldID; });
+
+    if (it != NameNoteAndNoteID.end()) {
+        NameNoteAndNoteID.erase(it, NameNoteAndNoteID.end());
+    }
+}
+void NoteService::addNewElementToNameNoteAndNoteID(QString title,int id){
+    NameNoteAndNoteID.push_back(std::pair(title,id));
+}
+std::vector<std::pair<QString,int>> NoteService::returnNameNoteAndNoteID()const{
+    return NameNoteAndNoteID;
+}
 
