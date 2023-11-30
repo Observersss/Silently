@@ -77,6 +77,8 @@ private slots:
 
     void on_delete_Note_Service_clicked();
 
+    void on_NoteSpaces_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     Character character;

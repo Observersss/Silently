@@ -500,14 +500,15 @@ NoteService* MainWindow::returnNoteServicePtr() {
 }
 
 void MainWindow::updateListNote(){
-
-    ui->listNote->clear();
+    qDebug()<<"Функция запустилась";
+    //ui->listNote->clear();
     NoteService currentSpace= returnNoteService();
+    qDebug()<<ui->NoteSpaces->currentText();
     std::vector<Note> notes=currentSpace.getAllNotes();
     for(const Note& note:notes){
-    QString title=note.getTitle();
-    ui->listNote->addItem(title);
+    ui->listNote->addItem(note.getTitle());
     }
+    qDebug()<<"Функция закончилась";
 }
 
 void MainWindow::addNewNoteToList(QString nameNote){
@@ -561,12 +562,11 @@ void MainWindow::addTag(QString name) {
 
 
 void MainWindow::updateInfoTag() {
-    QString nameNote = ui->listNote->currentItem()->text();
-    std::vector<Tag> tagInNote = returnNoteService().getNote(nameNote).getActiveTag();
-    ui->listTag->clear();
+//    std::vector<Tag> tagInNote = returnNoteService().getNote(ui->listNote->currentItem()->text()).getActiveTag();
+//    ui->listTag->clear();
 
-    for (const Tag& tag : tagInNote)
-        ui->listTag->addItem(tag.getNameTag());
+//    for (const Tag& tag : tagInNote)
+//        ui->listTag->addItem(tag.getNameTag());
 }
 
 
@@ -654,8 +654,10 @@ void MainWindow::on_delete_Note_clicked()
 }
 
 void MainWindow::createNewNoteSpace(QString nameNoteService){
-    NoteService *noteService=new NoteService();
-    noteSpaces.push_back(*noteService);
+    NoteService noteService;
+    noteService.setNameSpaceNote(nameNoteService);
+
+    noteSpaces.push_back(noteService);
     ui->NoteSpaces->addItem(nameNoteService);
 }
 void MainWindow::deleteNoteSpace(QString nameNoteService){
@@ -663,6 +665,7 @@ void MainWindow::deleteNoteSpace(QString nameNoteService){
                                     [&nameNoteService](const NoteService& note) { return note.getNameSpaceNote() == nameNoteService; }),
                      noteSpaces.end());
 }
+
 void MainWindow::on_createNewNoteSpace_clicked()
 {
     CreateNewNoteSpaceWindow window(this);
@@ -673,6 +676,15 @@ void MainWindow::on_createNewNoteSpace_clicked()
 
 void MainWindow::on_delete_Note_Service_clicked()
 {
-
+    deleteNoteSpace(ui->NoteSpaces->currentText());
 }
+
+
+void MainWindow::on_NoteSpaces_currentIndexChanged(int index)
+{
+    if(ui->NoteSpaces->count()>1)
+    updateListNote();
+    qDebug()<<ui->NoteSpaces->currentText();
+}
+
 
