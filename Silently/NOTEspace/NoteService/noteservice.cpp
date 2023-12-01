@@ -178,11 +178,11 @@ Note* NoteService::getNotePtr(const int &id) {
 int NoteService::findIdNote(QString nameNote){
     for (const auto& pair : NameNoteAndNoteID) {
         if (pair.first == nameNote) {
-            qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
-            qDebug()<<"ID какое возвращает функция поиска findIdNote"<<pair.second;
+//            qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
+//            qDebug()<<"ID какое возвращает функция поиска findIdNote"<<pair.second;
             return pair.second; // Возвращаем идентификатор заметки, если найдено соответствие
         }
-        qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
+        //qDebug()<<"Название заметки при поиске findIdNote"<<pair.first;
     }
     return -1; // Возвращаем -1, если заметка не найдена
 }
