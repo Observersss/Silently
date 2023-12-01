@@ -25,6 +25,11 @@
 #include <algorithm>
 
 #include <map>
+#include <sstream>
+
+#include <iomanip>
+
+#include <QString>
 
 //include <QTimer>
 

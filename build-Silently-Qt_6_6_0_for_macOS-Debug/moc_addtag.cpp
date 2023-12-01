@@ -1,12 +1,12 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'addquest.h'
+** Meta object code from reading C++ file 'addtag.h'
 **
 ** Created by: The Qt Meta Object Compiler version 68 (Qt 6.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../Silently/AddQuest/addquest.h"
+#include "../Silently/addTag/addtag.h"
 #include <QtCore/qmetatype.h>
 
 #if __has_include(<QtCore/qtmochelpers.h>)
@@ -19,7 +19,7 @@ QT_BEGIN_MOC_NAMESPACE
 #include <memory>
 
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'addquest.h' doesn't include <QObject>."
+#error "The header file 'addtag.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
 #error "This file was generated using the moc from 6.6.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -36,31 +36,43 @@ QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSAddQuestENDCLASS_t {};
-static constexpr auto qt_meta_stringdata_CLASSAddQuestENDCLASS = QtMocHelpers::stringData(
-    "AddQuest",
+struct qt_meta_stringdata_CLASSAddTagENDCLASS_t {};
+static constexpr auto qt_meta_stringdata_CLASSAddTagENDCLASS = QtMocHelpers::stringData(
+    "AddTag",
     "on_pushButton_clicked",
     "",
     "on_pushButton_2_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
+<<<<<<< HEAD:build-Silently-Qt_6_6_0_for_macOS-Profile/moc_addquest.cpp
 struct qt_meta_stringdata_CLASSAddQuestENDCLASS_t {
     uint offsetsAndSizes[8];
     char stringdata0[9];
+=======
+struct qt_meta_stringdata_CLASSAddTagENDCLASS_t {
+    uint offsetsAndSizes[6];
+    char stringdata0[7];
+>>>>>>> origin/dev_Vika:build-Silently-Qt_6_6_0_for_macOS-Debug/moc_addtag.cpp
     char stringdata1[22];
     char stringdata2[1];
     char stringdata3[24];
 };
 #define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSAddQuestENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSAddQuestENDCLASS_t qt_meta_stringdata_CLASSAddQuestENDCLASS = {
+    uint(sizeof(qt_meta_stringdata_CLASSAddTagENDCLASS_t::offsetsAndSizes) + ofs), len 
+Q_CONSTINIT static const qt_meta_stringdata_CLASSAddTagENDCLASS_t qt_meta_stringdata_CLASSAddTagENDCLASS = {
     {
+<<<<<<< HEAD:build-Silently-Qt_6_6_0_for_macOS-Profile/moc_addquest.cpp
         QT_MOC_LITERAL(0, 8),  // "AddQuest"
         QT_MOC_LITERAL(9, 21),  // "on_pushButton_clicked"
         QT_MOC_LITERAL(31, 0),  // ""
         QT_MOC_LITERAL(32, 23)   // "on_pushButton_2_clicked"
+=======
+        QT_MOC_LITERAL(0, 6),  // "AddTag"
+        QT_MOC_LITERAL(7, 21),  // "on_pushButton_clicked"
+        QT_MOC_LITERAL(29, 0)   // ""
+>>>>>>> origin/dev_Vika:build-Silently-Qt_6_6_0_for_macOS-Debug/moc_addtag.cpp
     },
-    "AddQuest",
+    "AddTag",
     "on_pushButton_clicked",
     "",
     "on_pushButton_2_clicked"
@@ -69,7 +81,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSAddQuestENDCLASS_t qt_meta_stri
 #endif // !QT_MOC_HAS_STRING_DATA
 } // unnamed namespace
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSAddQuestENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_CLASSAddTagENDCLASS[] = {
 
  // content:
       12,       // revision
@@ -93,15 +105,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSAddQuestENDCLASS[] = {
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject AddQuest::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject AddTag::staticMetaObject = { {
     QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_meta_stringdata_CLASSAddQuestENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSAddQuestENDCLASS,
+    qt_meta_stringdata_CLASSAddTagENDCLASS.offsetsAndSizes,
+    qt_meta_data_CLASSAddTagENDCLASS,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSAddQuestENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSAddTagENDCLASS_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<AddQuest, std::true_type>,
+        QtPrivate::TypeAndForceComplete<AddTag, std::true_type>,
         // method 'on_pushButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_pushButton_2_clicked'
@@ -110,10 +122,10 @@ Q_CONSTINIT const QMetaObject AddQuest::staticMetaObject = { {
     nullptr
 } };
 
-void AddQuest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void AddTag::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<AddQuest *>(_o);
+        auto *_t = static_cast<AddTag *>(_o);
         (void)_t;
         switch (_id) {
         case 0: _t->on_pushButton_clicked(); break;
@@ -124,20 +136,20 @@ void AddQuest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     (void)_a;
 }
 
-const QMetaObject *AddQuest::metaObject() const
+const QMetaObject *AddTag::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *AddQuest::qt_metacast(const char *_clname)
+void *AddTag::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSAddQuestENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_CLASSAddTagENDCLASS.stringdata0))
         return static_cast<void*>(this);
     return QDialog::qt_metacast(_clname);
 }
 
-int AddQuest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int AddTag::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)

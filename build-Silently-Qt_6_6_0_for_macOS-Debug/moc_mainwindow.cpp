@@ -46,11 +46,30 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "QListWidgetItem*",
     "item",
     "on_more_characteristics_clicked",
+<<<<<<< HEAD
     "on_Open_inventory_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     uint offsetsAndSizes[18];
+=======
+    "on_tags_option_clicked",
+    "on_listTag_itemClicked",
+    "on_listNote_currentItemChanged",
+    "current",
+    "previous",
+    "on_pushButton_clicked",
+    "on_delete_Note_clicked",
+    "on_createNewNoteSpace_clicked",
+    "on_delete_Note_Service_clicked",
+    "on_NoteSpaces_currentIndexChanged",
+    "index",
+    "on_listTag_itemDoubleClicked"
+);
+#else  // !QT_MOC_HAS_STRING_DATA
+struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
+    uint offsetsAndSizes[40];
+>>>>>>> origin/dev_Vika
     char stringdata0[11];
     char stringdata1[24];
     char stringdata2[1];
@@ -59,7 +78,22 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     char stringdata5[17];
     char stringdata6[5];
     char stringdata7[32];
+<<<<<<< HEAD
     char stringdata8[26];
+=======
+    char stringdata8[23];
+    char stringdata9[23];
+    char stringdata10[31];
+    char stringdata11[8];
+    char stringdata12[9];
+    char stringdata13[22];
+    char stringdata14[23];
+    char stringdata15[30];
+    char stringdata16[31];
+    char stringdata17[34];
+    char stringdata18[6];
+    char stringdata19[29];
+>>>>>>> origin/dev_Vika
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -73,7 +107,22 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(90, 16),  // "QListWidgetItem*"
         QT_MOC_LITERAL(107, 4),  // "item"
         QT_MOC_LITERAL(112, 31),  // "on_more_characteristics_clicked"
+<<<<<<< HEAD
         QT_MOC_LITERAL(144, 25)   // "on_Open_inventory_clicked"
+=======
+        QT_MOC_LITERAL(144, 22),  // "on_tags_option_clicked"
+        QT_MOC_LITERAL(167, 22),  // "on_listTag_itemClicked"
+        QT_MOC_LITERAL(190, 30),  // "on_listNote_currentItemChanged"
+        QT_MOC_LITERAL(221, 7),  // "current"
+        QT_MOC_LITERAL(229, 8),  // "previous"
+        QT_MOC_LITERAL(238, 21),  // "on_pushButton_clicked"
+        QT_MOC_LITERAL(260, 22),  // "on_delete_Note_clicked"
+        QT_MOC_LITERAL(283, 29),  // "on_createNewNoteSpace_clicked"
+        QT_MOC_LITERAL(313, 30),  // "on_delete_Note_Service_clicked"
+        QT_MOC_LITERAL(344, 33),  // "on_NoteSpaces_currentIndexCha..."
+        QT_MOC_LITERAL(378, 5),  // "index"
+        QT_MOC_LITERAL(384, 28)   // "on_listTag_itemDoubleClicked"
+>>>>>>> origin/dev_Vika
     },
     "MainWindow",
     "on_change_space_clicked",
@@ -83,7 +132,22 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
     "QListWidgetItem*",
     "item",
     "on_more_characteristics_clicked",
+<<<<<<< HEAD
     "on_Open_inventory_clicked"
+=======
+    "on_tags_option_clicked",
+    "on_listTag_itemClicked",
+    "on_listNote_currentItemChanged",
+    "current",
+    "previous",
+    "on_pushButton_clicked",
+    "on_delete_Note_clicked",
+    "on_createNewNoteSpace_clicked",
+    "on_delete_Note_Service_clicked",
+    "on_NoteSpaces_currentIndexChanged",
+    "index",
+    "on_listTag_itemDoubleClicked"
+>>>>>>> origin/dev_Vika
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -95,7 +159,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
+<<<<<<< HEAD
        5,   14, // methods
+=======
+      13,   14, // methods
+>>>>>>> origin/dev_Vika
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -103,11 +171,27 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
+<<<<<<< HEAD
        1,    0,   44,    2, 0x08,    1 /* Private */,
        3,    0,   45,    2, 0x08,    2 /* Private */,
        4,    1,   46,    2, 0x08,    3 /* Private */,
        7,    0,   49,    2, 0x08,    5 /* Private */,
        8,    0,   50,    2, 0x08,    6 /* Private */,
+=======
+       1,    0,   92,    2, 0x08,    1 /* Private */,
+       3,    0,   93,    2, 0x08,    2 /* Private */,
+       4,    1,   94,    2, 0x08,    3 /* Private */,
+       7,    0,   97,    2, 0x08,    5 /* Private */,
+       8,    0,   98,    2, 0x08,    6 /* Private */,
+       9,    1,   99,    2, 0x08,    7 /* Private */,
+      10,    2,  102,    2, 0x08,    9 /* Private */,
+      13,    0,  107,    2, 0x08,   12 /* Private */,
+      14,    0,  108,    2, 0x08,   13 /* Private */,
+      15,    0,  109,    2, 0x08,   14 /* Private */,
+      16,    0,  110,    2, 0x08,   15 /* Private */,
+      17,    1,  111,    2, 0x08,   16 /* Private */,
+      19,    1,  114,    2, 0x08,   18 /* Private */,
+>>>>>>> origin/dev_Vika
 
  // slots: parameters
     QMetaType::Void,
@@ -115,6 +199,17 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void,
     QMetaType::Void,
+<<<<<<< HEAD
+=======
+    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 5,   11,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   18,
+    QMetaType::Void, 0x80000000 | 5,    6,
+>>>>>>> origin/dev_Vika
 
        0        // eod
 };
@@ -137,8 +232,34 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
         // method 'on_more_characteristics_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+<<<<<<< HEAD
         // method 'on_Open_inventory_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
+=======
+        // method 'on_tags_option_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_listTag_itemClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        // method 'on_listNote_currentItemChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>,
+        // method 'on_pushButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_delete_Note_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_createNewNoteSpace_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_delete_Note_Service_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_NoteSpaces_currentIndexChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'on_listTag_itemDoubleClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>
+>>>>>>> origin/dev_Vika
     >,
     nullptr
 } };
@@ -153,7 +274,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->on_AddingQuest_clicked(); break;
         case 2: _t->on_QuestList_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
         case 3: _t->on_more_characteristics_clicked(); break;
+<<<<<<< HEAD
         case 4: _t->on_Open_inventory_clicked(); break;
+=======
+        case 4: _t->on_tags_option_clicked(); break;
+        case 5: _t->on_listTag_itemClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 6: _t->on_listNote_currentItemChanged((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[2]))); break;
+        case 7: _t->on_pushButton_clicked(); break;
+        case 8: _t->on_delete_Note_clicked(); break;
+        case 9: _t->on_createNewNoteSpace_clicked(); break;
+        case 10: _t->on_delete_Note_Service_clicked(); break;
+        case 11: _t->on_NoteSpaces_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 12: _t->on_listTag_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+>>>>>>> origin/dev_Vika
         default: ;
         }
     }
@@ -178,6 +311,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
+<<<<<<< HEAD
         if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 5;
@@ -185,6 +319,15 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
         _id -= 5;
+=======
+        if (_id < 13)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 13;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 13)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 13;
+>>>>>>> origin/dev_Vika
     }
     return _id;
 }
