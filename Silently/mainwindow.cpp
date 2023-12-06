@@ -52,8 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     std::string timeString = stream.str();
     QString qTimeString = QString::fromStdString(timeString);
 
-    QListWidget *listWidget=ui->listNote;
-    listWidget->setCurrentRow(1);
+//    QListWidget *listWidget=ui->listNote;
+//    listWidget->setCurrentRow(1);
 
     QString nameSpaceNote=noteService.getNameSpaceNote();
     ui->NoteSpaces->addItem(nameSpaceNote);
@@ -322,13 +322,25 @@ void MainWindow::saveInfoNote(){
     }
 }
 void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
+    if(previous==nullptr){
+    bufferNoteId=returnNoteServicePtr()->getFirstNote()->getIdNote();
+    return;
+    }
 
-    bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
-    Note*newNote=returnNoteServicePtr()->getNotePtr(bufferNoteId);
+    NoteService* noteService=findPreviousNoteServiceToSave(previous->text());
+    //ПОМИЛКА ПОВИННА БУТИ ТУТ
+    //Скоріш за все що воно шукає нотатку в новому просторі
+
+    bufferNoteId=noteService->findIdNote(previous->text());
+    qDebug()<<bufferNoteId;
+
+    qDebug()<<"Name NoteService"<<noteService->getNameSpaceNote();
+
+    Note*newNote=noteService->getNotePtr(bufferNoteId);
 
     QString title=ui->TitleNote->text();
+    //NoteService* noteservice= noteSpaces[0];
 
-    bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
     previous->setText(title);
     newNote->setTitle(title);
 
@@ -370,7 +382,6 @@ void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
     tagNames.push_back(itemText);
     }
 
-    NoteService *noteService=returnNoteServicePtr();
 
     newNote->addActiveTag(tagNames);
 
@@ -382,17 +393,94 @@ void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
     qDebug()<<"pointer is empty";
     return;
     }
+    if(noteService->getNameSpaceNote()!=ui->NoteSpaces->currentText()){
     bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
+    }else
+    bufferNoteId=noteService->findIdNote(ui->listNote->currentItem()->text());
+    qDebug()<<"Функция закончила выполнение загрузки данной заметки";
 }
 
-void MainWindow::unloadInfoNote(){
-    NoteService *noteService=returnNoteServicePtr();
-    if(noteService->getNameSpaceNote()==nullptr){
-    std::cout<<"LOX\n";
+
+void MainWindow::savePreviousCurrentNote(NoteService *noteService,QString previousText){
+
+    bufferNoteId=noteService->findIdNote(previousText);
+    qDebug()<<"bufferNoteID = "<<bufferNoteId;
+
+    Note*newNote=noteService->getNotePtr(bufferNoteId);
+
+    QString title=ui->TitleNote->text();
+    //NoteService* noteservice= noteSpaces[0];
+
+    //previous->setText(title);
+    newNote->setTitle(title);
+
+
+    QString text = ui->TextNote->toPlainText();
+
+    QStringList lines = text.split('\n');
+
+    std::vector<QString> textLines;
+    for (const QString &line : lines)
+    textLines.push_back(line);
+
+    newNote->setText(textLines);
+
+    //Далі ми зчитуємо час створення нотатки, переоснащуємо його в std::chrono::system_clock::time_point і так само передаємо в newNote
+
+
+    // Отримання тексту з QLabel
+    QString qTimeString = ui->date_create_note->text();
+
+    // Перетворення QString на std::string
+    std::string timeString = qTimeString.toStdString();
+
+    // Перетворення рядка на std::tm
+    std::tm tmTime = {};
+    std::stringstream stream(timeString);
+    stream >> std::get_time(&tmTime, "%a %b %d %H:%M:%S %Y"); // Вказуйте тут потрібний формат, який відповідає формату часу
+
+    // Перетворення std::tm на std::chrono::system_clock::time_point
+    std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(std::mktime(&tmTime));
+
+    newNote->setData_time(timePoint);
+
+    std::vector<QString> tagNames;
+
+    for (int i = 0; i < ui->listTag->count(); ++i) {
+    QListWidgetItem *item = ui->listTag->item(i);
+    QString itemText = item->text();
+    tagNames.push_back(itemText);
     }
 
 
-    bool noteChecked=noteService->noteExists(bufferNoteId);
+
+    newNote->addActiveTag(tagNames);
+
+    noteService->tagsExists(tagNames);
+    noteService->changeNameNoteInVector(newNote->getTitle(),bufferNoteId);
+
+    //previous->setText(newNote->getTitle());
+    if(ui->listNote->currentItem()==nullptr){
+    qDebug()<<"pointer is empty";
+    return;
+    }
+    bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
+}
+
+
+
+void MainWindow::unloadInfoNote(){
+    NoteService *noteService=returnNoteServicePtr();
+//    if(noteService->getNameSpaceNote()==nullptr){
+//    std::cout<<"pointer \n";
+//    }
+
+
+    //bool noteChecked=noteService->noteExists(bufferNoteId);
+    qDebug()<<"Name noteService in unloadNote"<<returnNoteServicePtr()->getNameSpaceNote();
+    //bool noteChecked=returnNoteServicePtr()->noteExists(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()));
+    bool noteChecked=returnNoteServicePtr()->noteExists(returnNoteServicePtr()->findIdNote(returnNoteServicePtr()->getFirstNote()->getTitle()));
+    //qDebug()<<"RESOULT"<<returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
 
     if(noteChecked==true){
     if(ui->listNote->currentItem()==nullptr){
@@ -424,6 +512,7 @@ void MainWindow::unloadInfoNote(){
     ui->date_create_note->setText(qTimeString);
     ui->date_create_note->setStyleSheet("QLabel { padding-top: 7px; font-size:11px; }");
 
+    qDebug()<<"Функция закончила выполнение загрузки данной заметки";
     }else
     std::cout<<"Заметка не найдена что-то не так mainWindow.h/unloadInfoNote \n";
 }
@@ -484,7 +573,10 @@ NoteService* MainWindow::returnNoteServicePtr() {
 
 void MainWindow::updateListNote(){
     std::vector<std::pair<QString,int>> NameNoteAndNoteID=returnNoteServicePtr()->returnNameNoteAndNoteID();
+    qDebug()<<returnNoteServicePtr()->getNameSpaceNote();
+    qDebug()<<"COUNT SIZE NameNoteAndNoteID"<<NameNoteAndNoteID.size();
     for(const auto& pair:NameNoteAndNoteID){
+    qDebug()<<"Название заметки"<<pair.first;
     ui->listNote->addItem(pair.first);
     }
 }
@@ -522,12 +614,19 @@ void MainWindow::on_listNote_currentItemChanged(QListWidgetItem *current, QListW
     if(ui->listNote->count()<=1)
         saveInfoNote();
     if(previous!=nullptr){
-        qDebug()<<"if СРАБОТАЛ";
+        qDebug()<<"if СРАБОТАЛ"<<previous->text();
        savePreviousCurrentNote(previous);
-    }
+
+//        QString previousText;
+//        previousText = previous->text();
+//        NoteService* noteservice= &noteSpaces[0];
+//        savePreviousCurrentNote(noteservice,previousText);
+    }else
+       saveInfoNote();
 
     ui->TitleNote->clear();
     ui->TextNote->clear();
+
 
     unloadInfoNote();
 }
@@ -596,7 +695,7 @@ void MainWindow::on_delete_Note_Service_clicked()
 
 void MainWindow::on_NoteSpaces_currentIndexChanged(int index)
 {
-    if(ui->NoteSpaces->count()!=1)
+    if(ui->NoteSpaces->count()!=0)
     savePreviousCurrentNote(ui->listNote->currentItem());
 //    if(ui->NoteSpaces->count()>=1){
 //    QListWidget *listWidget = ui->listNote; // Замените "yourListWidget" на имя вашего QListWidget
@@ -608,9 +707,17 @@ void MainWindow::on_NoteSpaces_currentIndexChanged(int index)
 //    }
 
         bufferNoteId=returnNoteServicePtr()->getFirstNote()->getIdNote();
+
         //qDebug()<<"Id первой созданой заметки нового пространства "<<returnNoteServicePtr()->getFirstNote()->getIdNote();
         //qDebug()<<returnNoteServicePtr()->getNameSpaceNote();
+        ui->listNote->clear();
+
+
+        qDebug()<<"ФУНКЦИЯ НЕ ЗАПУСТИЛАСЬ ЕЩЁ";
         updateListNote();
+        qDebug()<<"ФУНКЦИЯ ЗАКОНЧИЛА ВЫПОЛНЕНИЕ";
+        ui->listNote->setCurrentRow(0);
+        //ui->listNote->setCurrentRow(0);
 
     qDebug()<<ui->NoteSpaces->currentText();
 }
@@ -623,3 +730,12 @@ void MainWindow::on_listTag_itemDoubleClicked(QListWidgetItem *item)
     updateInfoTag();
 }
 
+NoteService* MainWindow::findPreviousNoteServiceToSave(QString text){
+    int id;
+    for(NoteService &noteService:noteSpaces){
+    id=noteService.findIdNote(text);
+    if(id!=-1)
+        return &noteService;
+
+    }
+}

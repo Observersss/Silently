@@ -29,6 +29,7 @@ public:
 
     void saveInfoNote();
     void savePreviousCurrentNote(QListWidgetItem *previous);
+    void savePreviousCurrentNote(NoteService *noteService,QString previousText);
 
     void unloadInfoNote();
 
@@ -51,6 +52,7 @@ public:
 
     void createNewNoteSpace(QString nameNoteService);
     void deleteNoteSpace(QString nameNoteService);
+    NoteService* findPreviousNoteServiceToSave(QString text);
 
     ~MainWindow();
 private slots:
