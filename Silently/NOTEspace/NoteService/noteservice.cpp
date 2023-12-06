@@ -6,7 +6,8 @@ NoteService::NoteService()
 {
     Note note;
     nameSpaceNote="FirstNoteSpace";
-    note.setTitle("Your first note");
+    note.setTitle("Your first note "+ QString::number(note.getIdNote()));
+
     notes.push_back(note);
     NameNoteAndNoteID.push_back(std::pair(note.getTitle(),note.getIdNote()));
 }

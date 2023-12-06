@@ -53,6 +53,7 @@ public:
     void createNewNoteSpace(QString nameNoteService);
     void deleteNoteSpace(QString nameNoteService);
     NoteService* findPreviousNoteServiceToSave(QString text);
+    NoteService* findPreviousNoteServiceToSave();
 
     ~MainWindow();
 private slots:

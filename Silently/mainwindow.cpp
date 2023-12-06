@@ -479,7 +479,7 @@ void MainWindow::unloadInfoNote(){
     //bool noteChecked=noteService->noteExists(bufferNoteId);
     qDebug()<<"Name noteService in unloadNote"<<returnNoteServicePtr()->getNameSpaceNote();
     //bool noteChecked=returnNoteServicePtr()->noteExists(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()));
-    bool noteChecked=returnNoteServicePtr()->noteExists(returnNoteServicePtr()->findIdNote(returnNoteServicePtr()->getFirstNote()->getTitle()));
+    bool noteChecked=findPreviousNoteServiceToSave()->noteExists(returnNoteServicePtr()->findIdNote(returnNoteServicePtr()->getFirstNote()->getTitle()));
     //qDebug()<<"RESOULT"<<returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
 
     if(noteChecked==true){
@@ -572,7 +572,7 @@ NoteService* MainWindow::returnNoteServicePtr() {
 
 
 void MainWindow::updateListNote(){
-    std::vector<std::pair<QString,int>> NameNoteAndNoteID=returnNoteServicePtr()->returnNameNoteAndNoteID();
+    std::vector<std::pair<QString,int>> NameNoteAndNoteID=findPreviousNoteServiceToSave()->returnNameNoteAndNoteID();
     qDebug()<<returnNoteServicePtr()->getNameSpaceNote();
     qDebug()<<"COUNT SIZE NameNoteAndNoteID"<<NameNoteAndNoteID.size();
     for(const auto& pair:NameNoteAndNoteID){
@@ -708,16 +708,11 @@ void MainWindow::on_NoteSpaces_currentIndexChanged(int index)
 
         bufferNoteId=returnNoteServicePtr()->getFirstNote()->getIdNote();
 
-        //qDebug()<<"Id первой созданой заметки нового пространства "<<returnNoteServicePtr()->getFirstNote()->getIdNote();
-        //qDebug()<<returnNoteServicePtr()->getNameSpaceNote();
+
         ui->listNote->clear();
-
-
-        qDebug()<<"ФУНКЦИЯ НЕ ЗАПУСТИЛАСЬ ЕЩЁ";
         updateListNote();
-        qDebug()<<"ФУНКЦИЯ ЗАКОНЧИЛА ВЫПОЛНЕНИЕ";
         ui->listNote->setCurrentRow(0);
-        //ui->listNote->setCurrentRow(0);
+
 
     qDebug()<<ui->NoteSpaces->currentText();
 }
@@ -736,6 +731,11 @@ NoteService* MainWindow::findPreviousNoteServiceToSave(QString text){
     id=noteService.findIdNote(text);
     if(id!=-1)
         return &noteService;
-
+    }
+}
+NoteService* MainWindow::findPreviousNoteServiceToSave(){
+    for(NoteService &noteService:noteSpaces){
+    if(noteService.getNameSpaceNote()==ui->NoteSpaces->currentText())
+        return &noteService;
     }
 }
