@@ -81,11 +81,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-<<<<<<< HEAD
-        MainWindow->resize(732, 515);
-=======
         MainWindow->resize(875, 661);
->>>>>>> origin/dev_Vika
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout_2 = new QGridLayout(centralwidget);
@@ -343,11 +339,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-<<<<<<< HEAD
-        menubar->setGeometry(QRect(0, 0, 732, 24));
-=======
         menubar->setGeometry(QRect(0, 0, 875, 24));
->>>>>>> origin/dev_Vika
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -382,15 +374,6 @@ public:
         character_icon->setWhatsThis(QCoreApplication::translate("MainWindow", "\320\246\320\265 \321\202\320\262\321\226\320\271 \320\277\320\265\321\200\321\201\320\276\320\275\320\260\320\266", nullptr));
 #endif // QT_CONFIG(whatsthis)
         character_icon->setText(QString());
-<<<<<<< HEAD
-=======
-        Open_inventory->setText(QCoreApplication::translate("MainWindow", "Open inventory", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Active Item", nullptr));
-        ManaLabel->setText(QCoreApplication::translate("MainWindow", "Mana", nullptr));
-        LevelLabel->setText(QCoreApplication::translate("MainWindow", "Level", nullptr));
-        HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));
-        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
-        more_characteristics->setText(QCoreApplication::translate("MainWindow", "More", nullptr));
         createNewNoteSpace->setText(QCoreApplication::translate("MainWindow", "New  space", nullptr));
         delete_Note_Service->setText(QCoreApplication::translate("MainWindow", "delete space", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "add note", nullptr));
@@ -405,7 +388,6 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         tags_option->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         date_create_note->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
->>>>>>> origin/dev_Vika
     } // retranslateUi
 
 };

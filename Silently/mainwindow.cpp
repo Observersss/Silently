@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     updateInfoOnCharacter();
 
 
-    QPixmap pix(":/icon/img/Character.jpg");
+    QPixmap pix(":/img/img/Character.jpg");
     int w = ui->character_icon->width();
     int h = ui->character_icon->height();
 
@@ -233,6 +233,10 @@ void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {
 //Функція створює замітку та повністю зчитує всі дані та повертає цю замітку
 //Функція використовується в saveInfoNote
 Note MainWindow::saveInfoInNewNote(){
+    if(ui->listNote->currentItem()==nullptr){
+    qDebug()<<"pointer is empty saveInfoInNewNote";
+    return Note();
+    }
     QString title=ui->listNote->currentItem()->text();
     Note newNote;
     newNote.setTitle(title);
@@ -306,6 +310,9 @@ void MainWindow::saveInfoNote(){
     if(noteChecked==true){
     Note changeNote=saveInfoInNewNote();
     noteService->setChangNote(changeNote);
+    if(ui->listNote->currentItem()==nullptr){
+        return;
+    }
     ui->listNote->currentItem()->setText(changeNote.getTitle());
     std::cout<<"1 \n";
 
@@ -371,7 +378,10 @@ void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
     noteService->changeNameNoteInVector(newNote->getTitle(),bufferNoteId);
 
     previous->setText(newNote->getTitle());
-
+    if(ui->listNote->currentItem()==nullptr){
+    qDebug()<<"pointer is empty";
+    return;
+    }
     bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
 }
 
@@ -385,6 +395,10 @@ void MainWindow::unloadInfoNote(){
     bool noteChecked=noteService->noteExists(bufferNoteId);
 
     if(noteChecked==true){
+    if(ui->listNote->currentItem()==nullptr){
+        qDebug()<<"pointer is empty unloadInfoNote";
+        return;
+    }
     bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
     Note note=noteService->getNote(bufferNoteId);
 
@@ -469,7 +483,10 @@ NoteService* MainWindow::returnNoteServicePtr() {
 
 
 void MainWindow::updateListNote(){
-
+    std::vector<std::pair<QString,int>> NameNoteAndNoteID=returnNoteServicePtr()->returnNameNoteAndNoteID();
+    for(const auto& pair:NameNoteAndNoteID){
+    ui->listNote->addItem(pair.first);
+    }
 }
 
 void MainWindow::addNewNoteToList(QString nameNote){
@@ -579,6 +596,8 @@ void MainWindow::on_delete_Note_Service_clicked()
 
 void MainWindow::on_NoteSpaces_currentIndexChanged(int index)
 {
+    if(ui->NoteSpaces->count()!=1)
+    savePreviousCurrentNote(ui->listNote->currentItem());
 //    if(ui->NoteSpaces->count()>=1){
 //    QListWidget *listWidget = ui->listNote; // Замените "yourListWidget" на имя вашего QListWidget
 

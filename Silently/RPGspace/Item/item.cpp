@@ -2,31 +2,31 @@
 
 std::map<QString, QString> Item::itemImages_ = {
 
-    {"Катана", ":/icon/img/katana.jpg"},
-    {"Меч квітів",":/icon/img/katana_2.jpg"},
-    {"Перстень",":/icon/img/magical-ring.jpg"},
-    {"Посох",":/icon/img/magical-staff.jpg"},
-    {"Страшний шолом",":/icon/img/creepy-mask.jpg"},
-    {"Хомяк", ":/icon/img/hamster.jpg"},
-    {"Cолом'яний шолом", ":/icon/img/beach-hat.jpg"},
-    {"Wi-Fi", ":/icon/img/wifi-icon.jpg"},
-    {"Сендвіч", ":/icon/img/sandwich.jpg"},
-    {"Зірка", ":/icon/img/star.jpg"},
-    {"Факел", ":/icon/img/torch.jpg"},
-    {"Кавун", ":/icon/img/watermelon.jpg"},
-    {"Молочний продукт", ":/icon/img/milk.jpg"},
-    {"Знак",":/icon/img/parking-sign.jpg"},
-    {"Онігірі", ":/icon/img/onigiri.jpg"},
-    {"Бантик", ":/icon/img/ribbon.jpg"},
-    {"Музичний інструмент", ":/icon/img/violin.jpg"},
-    {"Шолом капітана", ":/icon/img/sailor-hat-2.jpg"},
-    {"Шолом матроса", ":/icon/img/sailor-hat.jpg"},
-    {"Топор", ":/icon/img/axe.jpg"},
-    {"Варварський топор", ":/icon/img/axe_2.jpg"},
-    {"Небесний знак", ":/icon/img/star.jpg"},
-    {"Дрин", ":/icon/img/chainsaw.jpg"},
-    {"Панда",":/icon/img/panda.jpg"},
-    {"Посох Архімага",":/icon/img/magical-staff-2.jpg"}
+    {"Катана", ":/img/img/katana.jpg"},
+    {"Меч квітів",":/img/img/katana_2.jpg"},
+    {"Перстень",":/img/img/magical-ring.jpg"},
+    {"Посох",":/img/img/magical-staff.jpg"},
+    {"Страшний шолом",":/img/img/creepy-mask.jpg"},
+    {"Хомяк", ":/img/img/hamster.jpg"},
+    {"Cолом'яний шолом", ":/img/img/beach-hat.jpg"},
+    {"Wi-Fi", ":/img/img/wifi-img.jpg"},
+    {"Сендвіч", ":/img/img/sandwich.jpg"},
+    {"Зірка", ":/img/img/star.jpg"},
+    {"Факел", ":/img/img/torch.jpg"},
+    {"Кавун", ":/img/img/watermelon.jpg"},
+    {"Молочний продукт", ":/img/img/milk.jpg"},
+    {"Знак",":/img/img/parking-sign.jpg"},
+    {"Онігірі", ":/img/img/onigiri.jpg"},
+    {"Бантик", ":/img/img/ribbon.jpg"},
+    {"Музичний інструмент", ":/img/img/violin.jpg"},
+    {"Шолом капітана", ":/img/img/sailor-hat-2.jpg"},
+    {"Шолом матроса", ":/img/img/sailor-hat.jpg"},
+    {"Топор", ":/img/img/axe.jpg"},
+    {"Варварський топор", ":/img/img/axe_2.jpg"},
+    {"Небесний знак", "::/img/img/star.jpg"},
+    {"Дрин", ":/img/img/chainsaw.jpg"},
+    {"Панда","::/img/img//panda.jpg"},
+    {"Посох Архімага",":/img/img/magical-staff-2.jpg"}
 
 };
 
@@ -123,7 +123,7 @@ void Item::generateImage(const QString& name) {
 
     } else {
 
-        imageOfItem = QPixmap(":/icon/img/axe.jpg");
+        imageOfItem = QPixmap(":/img/img/axe.jpg");
 
     }
 }
