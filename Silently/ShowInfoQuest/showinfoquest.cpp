@@ -8,11 +8,9 @@ ShowInfoQuest::ShowInfoQuest(QWidget *parent,Quest mainQuest) :
 {
     ui->setupUi(this);
 
-    QString qtitle = QString::fromStdString(quest.getTitle());
-    ui->Title->setText(qtitle);
+    ui->Title->setText(quest.getTitle());
 
-    QString qdiscription = QString::fromStdString(quest.getDiscription());
-    ui->Discription->setText(qdiscription);
+    ui->Discription->setText(quest.getDiscription());
 
     int difficulty = quest.getDifficulty();
     QString qdifficulty = QString::number(difficulty);
@@ -54,12 +52,10 @@ ShowInfoQuest::~ShowInfoQuest()
 void ShowInfoQuest::on_change_button_clicked()
 {
     QString title = ui->Title->text();
-    std::string stdTitle = title.toStdString();
-    quest.setTitle(stdTitle);
+    quest.setTitle(title);
 
     QString discription = ui->Discription->text();
-    std::string stdDiscription = discription.toStdString();
-    quest.setDiscription(stdDiscription);
+    quest.setDiscription(discription);
 
     QString qdifficulty = ui->Difficulty->text();
     int difficulty = qdifficulty.toInt();

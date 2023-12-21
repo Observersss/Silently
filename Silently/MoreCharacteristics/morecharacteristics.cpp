@@ -8,48 +8,37 @@ MoreCharacteristics::MoreCharacteristics(QWidget *parent,Character maincharacter
 {
     ui->setupUi(this);
 
-    int health = character.getHealth();
-    QString healthText = QString("%1").arg(health);
+    QString healthText = QString("%1").arg(character.getHealth());
     ui->HealthLabel->setText(healthText);
 
-    int mana = character.getMana();
-    QString manatext = QString("%1").arg(mana);
+    QString manatext = QString("%1").arg(character.getMana());
     ui->ManaLabel->setText(manatext);
 
-    int level = character.getLevel();
-    QString levelText =QString("%1").arg(level);
+    QString levelText =QString("%1").arg(character.getLevel());
     ui->LevelLabel->setText(levelText);
 
-    int experience = character.getExperience();
-    QString experinceText =QString("%1").arg(experience);
+    QString experinceText =QString("%1").arg(character.getExperience());
     ui->ExperienceLabel->setText(experinceText);
 
-    int damage = character.getDamage();
-    QString damageText = QString("%1").arg(damage);
+    QString damageText = QString("%1").arg(character.getDamage());
     ui->DamgeLabel->setText(damageText);
 
-    int chanceOfCriticalDamade = character.getChanceOfCriticalDamade();
-    QString chanceOfCriticalDamadeText = QString("%1").arg(chanceOfCriticalDamade);
+    QString chanceOfCriticalDamadeText = QString("%1").arg(character.getChanceOfCriticalDamade());
     ui->ChanceLabel->setText(chanceOfCriticalDamadeText);
 
-    int criticalDamage = character.getCriticalDamage();
-    QString criticalDamageText = QString("%1").arg(criticalDamage);
+    QString criticalDamageText = QString("%1").arg(character.getCriticalDamage());
     ui->CriticalLabel->setText(criticalDamageText);
 
-    int dexterity = character.getDexterity();
-    QString dexterityText = QString("%1").arg(dexterity);
+    QString dexterityText = QString("%1").arg(character.getDexterity());
     ui->DexterityLabel->setText(dexterityText);
 
-    int force = character.getForce();
-    QString forceText = QString("%1").arg(force);
+    QString forceText = QString("%1").arg(character.getForce());
     ui->ForceLabel->setText(forceText);
 
-    int intelligence = character.getIntelligence();
-    QString intelligenceText = QString("%1").arg(intelligence);
+    QString intelligenceText = QString("%1").arg(character.getIntelligence());
     ui->IntelligenceLabel->setText(intelligenceText);
 
-    int luck = character.getLuck();
-    QString luckText = QString("%1").arg(luck);
+    QString luckText = QString("%1").arg(character.getLuck());
     ui->LucklLabel->setText(luckText);
 
 }

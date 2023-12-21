@@ -2,36 +2,57 @@
 #define INVENTORY_H
 #include "RPGspace/Item/item.h"
 #include "Library/library.h"
-class Inventory{
+
+class Inventory {
 private:
-    std::vector<Item> itemInInventory;// Предмети які знаходяться в інвентарі користувача
-    std::vector<Item> itemEquipment;//Предмети які зараз активні
-        //Якщо предмет активний то він зникає з інветаря
+    std::vector<Item> itemInInventory;   // Предмети, що знаходяться в інвентарі користувача
+    std::vector<Item> itemEquipment;    // Предмети, що зараз активні (обладнання)
+
 public:
-    //Пустий базовий класс
+    // Пустий конструктор класу
     Inventory();
 
-    //Додавання предмету
-    //Приймає об'єкт классу Item і виконуює push_back до вектора
+    // Додавання предмету в інвентар
     void addItemInInventory(Item item);
 
-    //Видалення предмату
-    //Приймає об'єкт классу Item і видаляє його з вектора itemInInventory
+    // Видалення предмету з інвентаря
     void deleteItemInInventory(Item item);
 
-    //Додавання предмету який користувач одягає на персонажа
-    //Приймає об'єкт класса Item і додає його у itemEquipment
-    //Причому з itemInInventory предмет зникає
+    // Видалення предмету з обладнання
+    void deleteItemEuipment(Item item);
+
+    // Додавання предмету в обладнання (використовується на персонажі)
     void addToEquipment(const Item& item);
 
-    //Зняття активного предмету з персонажу
-    //Приймає об'єкт класса Item і додає його у itemInInventory
-    //Причому з itemEquipment предмет зникає
+    // Зняття предмету з обладнання
     void removeFromEquipment(Item item);
 
-    //Повертає вектор всіх предметів
+    // Отримання вектора всіх предметів в інвентарі
     std::vector<Item> getItemInInventory() const;
-    std::vector<Item> getItemEquipment()const;
+
+    // Отримання вектора предметів у обладнанні
+    std::vector<Item> getItemEquipment() const;
+
+    // Отримання кількості предметів в інвентарі
+    size_t getItemInInventoryCount() const;
+
+    // Отримання кількості предметів у обладнанні
+    size_t getItemInEquipCount() const;
+
+    // Отримання предмету за індексом
+    const Item& getItemAtIndex(size_t index) const;
+    const Item& getItemAtIndexEquip(size_t index) const;
+
+    // Ітератор початку вектора інвентаря
+    auto begin() {
+        return itemInInventory.begin();
+    }
+
+    // Ітератор кінця вектора інвентаря
+    auto end() {
+        return itemInInventory.end();
+    }
 };
+
 
 #endif // INVENTORY_H

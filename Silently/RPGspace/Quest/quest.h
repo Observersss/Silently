@@ -3,8 +3,8 @@
 #include "Library/library.h"
 class Quest{
 private:
-    std::string title;
-    std::string discription;
+    QString title;
+    QString discription;
     int difficulty;
     std::chrono::system_clock::time_point deadline;
 public:
@@ -16,10 +16,10 @@ public:
     bool checkDeadline()const;
 
     //Сеттер для назви
-    void setTitle(std::string newTitle);
+    void setTitle(QString newTitle);
 
     //Сеттер для опису
-    void setDiscription(std::string newDiscription);
+    void setDiscription(QString newDiscription);
 
     //Сеттер для складності
     void setDifficulti(int newDifficulty);
@@ -28,8 +28,8 @@ public:
     void setDeadline(std::chrono::system_clock::time_point newDeadline);
 
     //Геттери
-    std::string getTitle()const;
-    std::string getDiscription()const;
+    QString getTitle()const;
+    QString getDiscription()const;
     int getDifficulty()const;
     std::chrono::system_clock::time_point getDeadline()const;
 

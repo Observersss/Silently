@@ -10,30 +10,45 @@ CONFIG += c++17
 
 SOURCES += \
     AddQuest/addquest.cpp \
+    InventoryWindow/inventorywindow.cpp \
     MoreCharacteristics/morecharacteristics.cpp \
+    NOTEspace/Note/note.cpp \
+    NOTEspace/NoteService/noteservice.cpp \
+    NOTEspace/Tag/tag.cpp \
     RPGspace/Character/character.cpp \
     RPGspace/Inventory/inventory.cpp \
     RPGspace/Item/item.cpp \
     RPGspace/Quest/quest.cpp \
     ShowInfoQuest/showinfoquest.cpp \
+    addTag/addtag.cpp \
+    createNewNoteSpaceWindow/createnewnotespacewindow.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     AddQuest/addquest.h \
+    InventoryWindow/inventorywindow.h \
     Library/library.h \
     MoreCharacteristics/morecharacteristics.h \
+    NOTEspace/Note/note.h \
+    NOTEspace/NoteService/noteservice.h \
+    NOTEspace/Tag/tag.h \
     RPGspace/Character/character.h \
     RPGspace/Inventory/inventory.h \
     RPGspace/Item/item.h \
     RPGspace/Quest/quest.h \
     ShowInfoQuest/showinfoquest.h \
+    addTag/addtag.h \
+    createNewNoteSpaceWindow/createnewnotespacewindow.h \
     mainwindow.h
 
 FORMS += \
     AddQuest/addquest.ui \
+    InventoryWindow/inventorywindow.ui \
     MoreCharacteristics/morecharacteristics.ui \
     ShowInfoQuest/showinfoquest.ui \
+    addTag/addtag.ui \
+    createNewNoteSpaceWindow/createnewnotespacewindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.

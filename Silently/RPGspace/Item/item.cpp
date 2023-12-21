@@ -1,51 +1,54 @@
 #include "item.h"
 
-//std::map<std::string, QPixmap> Item::itemImages_ = {
-//    {"Катана", QPixmap(":/icon/img/katana.jpg")},
-//    {"Меч квітів", QPixmap(":/icon/img/katana_2.jpg")},
-//    {"Перстень", QPixmap(":/icon/img/magical-ring.jpg")},
-//    {"Посох", QPixmap(":/icon/img/magical-staff.jpg")},
-//    {"Страшний шолом", QPixmap(":/icon/img/creepy-mask.jpg")},
-//    {"Хомяк", QPixmap(":/icon/img/hamster.jpg")},
-//    {"Cолом'яний шолом", QPixmap(":/icon/img/beach-hat.jpg")},
-//    {"Wi-Fi", QPixmap(":/icon/img/wifi-icon.jpg")},
-//    {"Сендвіч", QPixmap(":/icon/img/sandwich.jpg")},
-//    {"Зірка", QPixmap(":/icon/img/star.jpg")},
-//    {"Факел", QPixmap(":/icon/img/torch.jpg.avif")},
-//    {"Кавун", QPixmap(":/icon/img/watermelon.jpg")},
-//    {"Молочний продукт", QPixmap(":/icon/img/milk.jpg")},
-//    {"Знак", QPixmap(":/icon/img/parking-sign.jpg")},
-//    {"Онігірі", QPixmap(":/icon/img/onigiri.jpg")},
-//    {"Бантик", QPixmap(":/icon/img/ribbon.jpg")},
-//    {"Музичний інструмент", QPixmap(":/icon/img/violin.jpg")},
-//    {"Шолом капітана", QPixmap(":/icon/img/sailor-hat-2.jpg")},
-//    {"Шолом матроса", QPixmap(":/icon/img/sailor-hat.jpg")},
-//    {"Топор", QPixmap(":/icon/img/axe.jpg")},
-//    {"Варварський топор", QPixmap(":/icon/img/axe_2.jpg")},
-//    {"Небесний знак", QPixmap(":/icon/img/star.jpg")},
-//    {"Дрин", QPixmap(":/icon/img/chainsaw.jpg")},
-//    {"Панда",QPixmap(":/icon/img/panda.jpg")},
-//    {"Посох Архімага",QPixmap(":/icon/img/magical-staff-2.jpg.avif")}
+std::map<QString, QString> Item::itemImages_ = {
 
-//    // Добавьте остальные предметы и соответствующие им изображения
-//};
+    {"Катана", ":/icon/img/katana.jpg"},
+    {"Меч квітів",":/icon/img/katana_2.jpg"},
+    {"Перстень",":/icon/img/magical-ring.jpg"},
+    {"Посох",":/icon/img/magical-staff.jpg"},
+    {"Страшний шолом",":/icon/img/creepy-mask.jpg"},
+    {"Хомяк", ":/icon/img/hamster.jpg"},
+    {"Cолом'яний шолом", ":/icon/img/beach-hat.jpg"},
+    {"Wi-Fi", ":/icon/img/wifi-icon.jpg"},
+    {"Сендвіч", ":/icon/img/sandwich.jpg"},
+    {"Зірка", ":/icon/img/star.jpg"},
+    {"Факел", ":/icon/img/torch.jpg"},
+    {"Кавун", ":/icon/img/watermelon.jpg"},
+    {"Молочний продукт", ":/icon/img/milk.jpg"},
+    {"Знак",":/icon/img/parking-sign.jpg"},
+    {"Онігірі", ":/icon/img/onigiri.jpg"},
+    {"Бантик", ":/icon/img/ribbon.jpg"},
+    {"Музичний інструмент", ":/icon/img/violin.jpg"},
+    {"Шолом капітана", ":/icon/img/sailor-hat-2.jpg"},
+    {"Шолом матроса", ":/icon/img/sailor-hat.jpg"},
+    {"Топор", ":/icon/img/axe.jpg"},
+    {"Варварський топор", ":/icon/img/axe_2.jpg"},
+    {"Небесний знак", ":/icon/img/star.jpg"},
+    {"Дрин", ":/icon/img/chainsaw.jpg"},
+    {"Панда",":/icon/img/panda.jpg"},
+    {"Посох Архімага",":/icon/img/magical-staff-2.jpg"}
+
+};
 
 int Item::itemCount=0;
+
 Item::Item(){
+
     itemCount+=1;
     index=itemCount;
 
-//    generateRandomRank();
-//    generateCharacteristics();
-//    generateName();
+    generateRandomRank();
+    generateCharacteristics();
+    generateName();
 
-}
+    }
 
 void Item::generateRandomRank() {
-    int randomRankIndex = arc4random() % 5; // Генерируем случайное число от 0 до 4
+
+    int randomRankIndex = arc4random() % 5; // Генеруєм випадкове число від 0 до 4
 
 
-        // В зависимости от значения randomRankIndex выбираем ранг
+        //В залежності від значення randomRankIndex обраємо ранг
         switch (randomRankIndex) {
         case 0:
             rank = "S";
@@ -66,69 +69,75 @@ void Item::generateRandomRank() {
 }
 
 void Item::generateCharacteristics() {
-        const std::vector<std::string> nameCharacteristic =
-            {"health", "mana", "damage", "chanceOfCriticalDamage", "criticalDamage", "dexterity", "force", "intelligence", "luck"};
 
-        int numCharacteristics = arc4random() % 3 + 1; // Генерируем случайное количество характеристик (от 1 до 3)
+    const std::vector<QString> nameCharacteristic =
+    {"health", "mana", "damage", "chanceOfCriticalDamage", "criticalDamage", "dexterity", "force", "intelligence", "luck"};
 
-        for (int i = 0; i < numCharacteristics; i++) {
-            int characteristicType = arc4random() % nameCharacteristic.size(); // Выбираем случайный тип характеристики
-            int characteristicValue;
+    int numCharacteristics = arc4random() % 3 + 1; //Генеруємо випадкову кількість характеристик (від 1 до 3)
 
-            if (rank == "D") {
-                characteristicValue = arc4random() % 3 + 1; // Для ранга D: 1-3
-            } else if (rank == "C") {
-                characteristicValue = arc4random() % 4 + 2; // Для ранга C: 2-5
-            } else if (rank == "B") {
-                characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 3 + 1); // Для ранга B: 3-7 (damage), 1-3 (chanceOfCriticalDamage)
-            } else if (rank == "A") {
-                characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 4 + 2); // Для ранга A: 3-7 (damage), 2-5 (mana)
-            } else if (rank == "S") {
-                characteristicValue = (characteristicType == 0) ? (arc4random() % 4 + 5) : (characteristicType == 1) ? (arc4random() % 4 + 4) : (arc4random() % 4 + 2); // Для ранга S: 5-8 (health), 4-7 (mana), 2-5 (damage)
-            }
+    for (int i = 0; i < numCharacteristics; i++) {
+        int characteristicType = arc4random() % nameCharacteristic.size(); // Вибираємо випадковий тип характеристики
+        int characteristicValue;
 
-            Characteristics.push_back(std::make_pair(nameCharacteristic[characteristicType], characteristicValue));
+        if (rank == "D") {
+            characteristicValue = arc4random() % 3 + 1; // Для ранга D: 1-3
+        } else if (rank == "C") {
+            characteristicValue = arc4random() % 4 + 2; // Для ранга C: 2-5
+        } else if (rank == "B") {
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 3 + 1); // Для ранга B: 3-7 (damage), 1-3 (chanceOfCriticalDamage)
+        } else if (rank == "A") {
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 4 + 2); // Для ранга A: 3-7 (damage), 2-5 (mana)
+        } else if (rank == "S") {
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 4 + 5) : (characteristicType == 1) ? (arc4random() % 4 + 4) : (arc4random() % 4 + 2); // Для ранга S: 5-8 (health), 4-7 (mana), 2-5 (damage)
+        }
+
+        Characteristics.push_back(std::make_pair(nameCharacteristic[characteristicType], characteristicValue));
         }
 }
 
 
 
 void Item::generateName() {
-    // Генерация имени предмета
-    const std::vector<std::string> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений" };
-        const std::vector<std::string> nouns =
-        { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
-        "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
-//    int adjectiveIndex = rand() % adjectives.size();
-//    int nounIndex = rand() % nouns.size();
+
+    // Генерація імені для предмету
+    const std::vector<QString> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений","" };
+
+    const std::vector<QString> nouns =
+    { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
+    "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
+
     int adjectiveIndex = arc4random() % adjectives.size();
     int nounIndex = arc4random() % nouns.size();
     nameOfItem = adjectives[adjectiveIndex] + " " + nouns[nounIndex];
 
-    //generateImage(nouns[nounIndex]);
+    generateImage(nouns[nounIndex]);
+
 }
 
-//void Item::generateImage(const std::string& name) {
-//    if (itemImages_.find(name) != itemImages_.end()) {
-//            // Найдено изображение для данного имени
-//            imageOfItem = itemImages_[name];
-//    } else {
-//            // Изображение не найдено, обработайте это по вашему усмотрению
-//            // Например, установите изображение по умолчанию
-//            imageOfItem = QPixmap(":/icon/img/level-up-icon.jpg.avif");
-//    }
-//}
+void Item::generateImage(const QString& name) {
 
-void Item::setName(std::string name){
+    auto it = itemImages_.find(name);
+    if (it != itemImages_.end()) {
+
+        imageOfItem = QPixmap(it->second);
+
+    } else {
+
+        imageOfItem = QPixmap(":/icon/img/axe.jpg");
+
+    }
+}
+
+void Item::setName(QString name){
     nameOfItem=name;
 }
 
 
-void Item::setDiscription(std::string discription){
+void Item::setDiscription(QString discription){
     discriptionOfItem=discription;
 }
 
-void Item::setCharacteristics(std::string nameCharacteristic,double value){
+void Item::setCharacteristics(QString nameCharacteristic,double value){
     Characteristics.push_back({nameCharacteristic,value});
 }
 
@@ -136,22 +145,22 @@ void Item::setEqipment(Equipment type){
     typeItem=type;
 }
 
-void Item::setImage(std::string name){
-    QString fileName = QString::fromStdString(name);
-    QPixmap imageOfItem(fileName); // Загрузка изображения из файла
+void Item::setImage(QString name){
+    QPixmap imageOfItem(name); // Завантаження зображення з файлу
 }
 
 
 //Функції getter для всіх змінних:
-
-
-std::string Item::getnameOfitem()const{
+QString Item::getRank()const{
+    return rank;
+}
+QString Item::getnameOfitem()const{
     return nameOfItem;
 }
-std::string Item::getdiscriptionOfItem()const{
+QString Item::getdiscriptionOfItem()const{
     return discriptionOfItem;
 }
-std::vector<std::pair<std::string, int>> Item::getCharacteristics()const{
+std::vector<std::pair<QString, int>> Item::getCharacteristics()const{
     return Characteristics;
 }
 Equipment Item::getTypeItem()const{
@@ -165,3 +174,4 @@ QPixmap Item::getImageOfItem() const {
 int Item::getIndex()const{
     return index;
 }
+
