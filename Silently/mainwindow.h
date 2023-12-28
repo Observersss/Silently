@@ -90,10 +90,10 @@ private:
     Quest quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
+    static int noteCounter;
     //std::vector<std::pair<QString,int>> NameNoteAndNoteID;
     //Переменная используеться для подсчёта новой заметки для уникальности
     //Для правильного поиска по названию чтобы избежать возвращаения индекса
-    static int noteCounter;
 
 };
 #endif // MAINWINDOW_H
