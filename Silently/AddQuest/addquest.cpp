@@ -8,6 +8,7 @@ AddQuest::AddQuest(QWidget* parent) :
     ui->setupUi(this);
     //Спочатку frame_2 де знаходиться ввід дати і часу дедлайну скритий
     ui->frame_2->hide();
+
 }
 
 
