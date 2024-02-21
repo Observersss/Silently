@@ -4,6 +4,8 @@
 #include "NOTEspace/Note/note.h"
 
 
+#include <vector>
+
 class NoteService
 {
     QString nameSpaceNote;

@@ -3,6 +3,7 @@
 
 #include "NOTEspace/Tag/tag.h"
 
+#include <vector>
 
 class Note{
     private:
