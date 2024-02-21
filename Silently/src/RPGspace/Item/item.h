@@ -1,9 +1,9 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include<QString>
 #include <QPixmap>
 #include <map>
-#include <vector>
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
 enum Equipment{

@@ -1,6 +1,8 @@
 #ifndef QUEST_H
 #define QUEST_H
-#include "Library/library.h"
+
+#include <QString>
+
 class Quest{
 private:
     QString title;

@@ -1,7 +1,8 @@
 #ifndef NOTE_H
 #define NOTE_H
-#include "Library/library.h"
+
 #include "NOTEspace/Tag/tag.h"
+
 
 class Note{
     private:

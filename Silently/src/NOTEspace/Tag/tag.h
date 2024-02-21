@@ -1,7 +1,7 @@
 #ifndef TAG_H
 #define TAG_H
-#include "Library/library.h"
 
+#include <QString>
 
 class Tag{
 private:

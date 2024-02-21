@@ -1,7 +1,9 @@
 #ifndef NOTESERVICE_H
 #define NOTESERVICE_H
-#include "Library/library.h"
+
 #include "NOTEspace/Note/note.h"
+
+
 class NoteService
 {
     QString nameSpaceNote;

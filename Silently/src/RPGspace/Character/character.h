@@ -3,7 +3,8 @@
 
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
-#include "Library/library.h"
+
+#include <iostream>
 
 class Character
 {

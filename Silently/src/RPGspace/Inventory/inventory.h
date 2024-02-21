@@ -1,7 +1,7 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 #include "RPGspace/Item/item.h"
-#include "Library/library.h"
+
 
 class Inventory {
 private:

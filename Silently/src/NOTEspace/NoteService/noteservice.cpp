@@ -98,12 +98,12 @@ bool NoteService::noteExists(std::chrono::system_clock::time_point noteTime) {
 bool NoteService::noteExists(QString noteTitle){
     for (const Note& note : notes) {
         if (note.getTitle() == noteTitle) {
-            qDebug()<<"Название заметки правильной заметки"<<note.getTitle();
-            qDebug()<<"Название заметки"<<noteTitle;
+            //qDebug()<<"Название заметки правильной заметки"<<note.getTitle();
+            //qDebug()<<"Название заметки"<<noteTitle;
             return true; // Нотатка з таким заголовком існує повертаємо true
         }
-        qDebug()<<"Остальные заметки\n";
-        qDebug()<<note.getTitle();
+        //qDebug()<<"Остальные заметки\n";
+        //qDebug()<<note.getTitle();
         //qDebug()<<"Название заметки"<<noteTitle;
     }
     return false;// Нотатка не існує тому false
@@ -112,11 +112,11 @@ bool NoteService::noteExists(int noteID){
     for (const Note& note : notes) {
         // Предполагаем, что getTime() возвращает время создания заметки типа std::chrono::system_clock::time_point
         if (note.getIdNote() == noteID) {
-            qDebug()<<"ID какое нашло при проверки noteExists"<<note.getIdNote();
+            //qDebug()<<"ID какое нашло при проверки noteExists"<<note.getIdNote();
             return true; // Если найдена заметка с указанным временем, возвращаем true
         }
     }
-    qDebug()<<"ID какое не найдено при проверки noteExists"<<noteID;
+    //qDebug()<<"ID какое не найдено при проверки noteExists"<<noteID;
     return false; // Если заметка с указанным временем не найдена, возвращаем false
 }
 
@@ -190,11 +190,11 @@ void NoteService::changeNameNoteInVector(QString newName,int oldID){
     for (auto& pair : NameNoteAndNoteID) {
         if (pair.second == oldID) {
             pair.first = newName;
-            qDebug()<<"Сохранение прошло успешно";
+            //qDebug()<<"Сохранение прошло успешно";
             return; // Если нашли идентификатор, меняем значение и выходим из цикла
         }
     }
-    qDebug()<<"Сохранение не удалось";
+    //qDebug()<<"Сохранение не удалось";
 }
 
 void NoteService::removeNoteFromVector(int oldID){
