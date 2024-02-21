@@ -154,7 +154,7 @@ void NoteServiceTest::testTagsExists() {
     QCOMPARE(noteService.getAllTags().size(), 2);
 }
 
-// Add more test cases for the remaining functions...
+
 
 QTEST_MAIN(NoteServiceTest) // Define the test runner
 
