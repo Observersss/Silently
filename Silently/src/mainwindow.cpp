@@ -91,12 +91,14 @@ void MainWindow::on_change_space_clicked()
         ui->info->setText("Space now: RPG");
         updateInfoOnQuest();
         updateInfoOnCharacter();
+        ui->stackedWidget->setCurrentIndex(1);
 
     } else
     {
         ui->spaces->setCurrentIndex(1);
         ui->change_space->setText("Go RPG");
         ui->info->setText("Space now: Notes");
+        ui->stackedWidget->setCurrentIndex(0);
     }
 }
 

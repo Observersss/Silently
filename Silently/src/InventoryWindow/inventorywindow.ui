@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:silver;</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="2" column="0">
     <widget class="QFrame" name="textOption_3">
@@ -21,6 +24,11 @@
        <width>200</width>
        <height>200</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius:12px;
+color:white;
+background-color:rgb(0, 150, 255);</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -90,6 +98,9 @@
    </item>
    <item row="2" column="1">
     <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">border:none;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -105,10 +116,25 @@
           <height>150</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius:18px;
+background-color:white;
+color:black;</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="take_off">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:orange;
+border-radius:10px;</string>
+        </property>
         <property name="text">
          <string>take off</string>
         </property>
@@ -116,6 +142,16 @@
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="Delete_2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:orange;
+border-radius:10px;</string>
+        </property>
         <property name="text">
          <string>Delete</string>
         </property>
@@ -145,6 +181,9 @@
        <height>300</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -160,10 +199,25 @@
           <height>240</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius:18px;
+background-color:white;
+color:black;</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="Equip">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:orange;
+border-radius:10px;</string>
+        </property>
         <property name="text">
          <string>Equip</string>
         </property>
@@ -171,6 +225,16 @@
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="Delete">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:orange;
+border-radius:10px;</string>
+        </property>
         <property name="text">
          <string>Delete</string>
         </property>

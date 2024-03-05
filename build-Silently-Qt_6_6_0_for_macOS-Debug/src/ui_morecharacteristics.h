@@ -49,115 +49,145 @@ public:
         if (MoreCharacteristics->objectName().isEmpty())
             MoreCharacteristics->setObjectName("MoreCharacteristics");
         MoreCharacteristics->resize(375, 507);
+        QFont font;
+        font.setPointSize(16);
+        MoreCharacteristics->setFont(font);
+        MoreCharacteristics->setStyleSheet(QString::fromUtf8("border-radius:12px;\n"
+"color:white;\n"
+"background-color:rgb(0, 100, 200);"));
         gridLayout = new QGridLayout(MoreCharacteristics);
         gridLayout->setObjectName("gridLayout");
         Force = new QLabel(MoreCharacteristics);
         Force->setObjectName("Force");
+        QFont font1;
+        font1.setPointSize(15);
+        Force->setFont(font1);
 
         gridLayout->addWidget(Force, 8, 0, 1, 1);
 
         Intelligence = new QLabel(MoreCharacteristics);
         Intelligence->setObjectName("Intelligence");
+        Intelligence->setFont(font1);
 
         gridLayout->addWidget(Intelligence, 9, 0, 1, 1);
 
         Level = new QLabel(MoreCharacteristics);
         Level->setObjectName("Level");
+        Level->setFont(font1);
 
         gridLayout->addWidget(Level, 0, 0, 1, 1);
 
         Dexterity = new QLabel(MoreCharacteristics);
         Dexterity->setObjectName("Dexterity");
+        Dexterity->setFont(font1);
 
         gridLayout->addWidget(Dexterity, 7, 0, 1, 1);
 
         Mana = new QLabel(MoreCharacteristics);
         Mana->setObjectName("Mana");
+        Mana->setFont(font1);
 
         gridLayout->addWidget(Mana, 3, 0, 1, 1);
 
         CriticalDamage = new QLabel(MoreCharacteristics);
         CriticalDamage->setObjectName("CriticalDamage");
+        CriticalDamage->setFont(font1);
 
         gridLayout->addWidget(CriticalDamage, 6, 0, 1, 1);
 
         Luck = new QLabel(MoreCharacteristics);
         Luck->setObjectName("Luck");
+        Luck->setFont(font1);
 
         gridLayout->addWidget(Luck, 10, 0, 1, 1);
 
         Health = new QLabel(MoreCharacteristics);
         Health->setObjectName("Health");
+        Health->setFont(font1);
 
         gridLayout->addWidget(Health, 2, 0, 1, 1);
 
         Exp = new QLabel(MoreCharacteristics);
         Exp->setObjectName("Exp");
+        Exp->setFont(font1);
 
         gridLayout->addWidget(Exp, 1, 0, 1, 1);
 
         ChanceOfCriticalDamage = new QLabel(MoreCharacteristics);
         ChanceOfCriticalDamage->setObjectName("ChanceOfCriticalDamage");
+        ChanceOfCriticalDamage->setFont(font1);
 
         gridLayout->addWidget(ChanceOfCriticalDamage, 5, 0, 1, 1);
 
         Damage = new QLabel(MoreCharacteristics);
         Damage->setObjectName("Damage");
+        Damage->setFont(font1);
 
         gridLayout->addWidget(Damage, 4, 0, 1, 1);
 
         LevelLabel = new QLabel(MoreCharacteristics);
         LevelLabel->setObjectName("LevelLabel");
+        LevelLabel->setFont(font1);
 
         gridLayout->addWidget(LevelLabel, 0, 1, 1, 1);
 
         ExperienceLabel = new QLabel(MoreCharacteristics);
         ExperienceLabel->setObjectName("ExperienceLabel");
+        ExperienceLabel->setFont(font1);
 
         gridLayout->addWidget(ExperienceLabel, 1, 1, 1, 1);
 
         HealthLabel = new QLabel(MoreCharacteristics);
         HealthLabel->setObjectName("HealthLabel");
+        HealthLabel->setFont(font1);
 
         gridLayout->addWidget(HealthLabel, 2, 1, 1, 1);
 
         ManaLabel = new QLabel(MoreCharacteristics);
         ManaLabel->setObjectName("ManaLabel");
+        ManaLabel->setFont(font1);
 
         gridLayout->addWidget(ManaLabel, 3, 1, 1, 1);
 
         DamgeLabel = new QLabel(MoreCharacteristics);
         DamgeLabel->setObjectName("DamgeLabel");
+        DamgeLabel->setFont(font1);
 
         gridLayout->addWidget(DamgeLabel, 4, 1, 1, 1);
 
         ChanceLabel = new QLabel(MoreCharacteristics);
         ChanceLabel->setObjectName("ChanceLabel");
+        ChanceLabel->setFont(font1);
 
         gridLayout->addWidget(ChanceLabel, 5, 1, 1, 1);
 
         CriticalLabel = new QLabel(MoreCharacteristics);
         CriticalLabel->setObjectName("CriticalLabel");
+        CriticalLabel->setFont(font1);
 
         gridLayout->addWidget(CriticalLabel, 6, 1, 1, 1);
 
         DexterityLabel = new QLabel(MoreCharacteristics);
         DexterityLabel->setObjectName("DexterityLabel");
+        DexterityLabel->setFont(font1);
 
         gridLayout->addWidget(DexterityLabel, 7, 1, 1, 1);
 
         ForceLabel = new QLabel(MoreCharacteristics);
         ForceLabel->setObjectName("ForceLabel");
+        ForceLabel->setFont(font1);
 
         gridLayout->addWidget(ForceLabel, 8, 1, 1, 1);
 
         IntelligenceLabel = new QLabel(MoreCharacteristics);
         IntelligenceLabel->setObjectName("IntelligenceLabel");
+        IntelligenceLabel->setFont(font1);
 
         gridLayout->addWidget(IntelligenceLabel, 9, 1, 1, 1);
 
         LucklLabel = new QLabel(MoreCharacteristics);
         LucklLabel->setObjectName("LucklLabel");
+        LucklLabel->setFont(font1);
 
         gridLayout->addWidget(LucklLabel, 10, 1, 1, 1);
 

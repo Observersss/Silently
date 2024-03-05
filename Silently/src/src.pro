@@ -58,3 +58,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     ico-img.qrc
+
+STATECHARTS += \
+    activiti diagram.scxml

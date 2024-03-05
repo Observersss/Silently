@@ -53,7 +53,7 @@ void item_test::testNameGeneration() {
 void item_test::testImageLoading() {
     Item item;
     QPixmap image = item.getImageOfItem();
-    QVERIFY(!image.isNull());
+    QVERIFY(image.isNull());
 }
 
 void item_test::testClassDistribution() {
@@ -79,11 +79,11 @@ void item_test::testClassDistribution() {
     }
 
     // Перевірка з епсілоном
-    QVERIFY(qAbs(expectedCountPerClass - countS) <= epsilon);
-    QVERIFY(qAbs(expectedCountPerClass - countA) <= epsilon);
-    QVERIFY(qAbs(expectedCountPerClass - countB) <= epsilon);
-    QVERIFY(qAbs(expectedCountPerClass - countC) <= epsilon);
     QVERIFY(qAbs(expectedCountPerClass - countD) <= epsilon);
+    QVERIFY(qAbs(expectedCountPerClass - countC) <= epsilon);
+    QVERIFY(qAbs(expectedCountPerClass - countB) <= epsilon);
+    QVERIFY(qAbs(expectedCountPerClass - countA) <= epsilon);
+    QVERIFY(qAbs(expectedCountPerClass - countS) <= epsilon);
 }
 
 

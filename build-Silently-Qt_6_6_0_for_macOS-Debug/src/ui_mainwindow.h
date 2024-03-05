@@ -34,46 +34,54 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGridLayout *gridLayout_2;
-    QFrame *frame_2;
-    QFrame *frame;
-    QLabel *info;
-    QPushButton *change_space;
     QStackedWidget *spaces;
     QWidget *RPG_space;
     QGridLayout *gridLayout_4;
     QFrame *frame_3;
     QGridLayout *gridLayout_5;
-    QPushButton *AddingQuest;
     QListWidget *QuestList;
-    QPushButton *Open_inventory;
+    QLabel *character_icon;
     QFrame *infoCharacter;
     QGridLayout *gridLayout;
-    QLabel *ManaLabel;
+    QLabel *ExperienceLabel;
     QLabel *LevelLabel;
     QLabel *HealthLabel;
-    QLabel *ExperienceLabel;
-    QPushButton *more_characteristics;
-    QLabel *character_icon;
+    QLabel *ManaLabel;
     QWidget *Note_space;
     QGridLayout *gridLayout_6;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_4;
+    QFrame *frame_7;
+    QGridLayout *gridLayout_3;
+    QHBoxLayout *horizontalLayout;
+    QListWidget *listTag;
+    QPushButton *tags_option;
+    QLabel *date_create_note;
+    QTextEdit *TextNote;
+    QLineEdit *TitleNote;
+    QFrame *frame_2;
+    QFrame *frame;
+    QGridLayout *gridLayout_8;
+    QLabel *info;
+    QPushButton *change_space;
+    QStackedWidget *stackedWidget;
+    QWidget *page;
+    QWidget *widget;
+    QGridLayout *gridLayout_7;
+    QHBoxLayout *horizontalLayout_3;
     QPushButton *createNewNoteSpace;
     QPushButton *delete_Note_Service;
-    QHBoxLayout *horizontalLayout_3;
     QComboBox *NoteSpaces;
     QListWidget *listNote;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton;
     QPushButton *delete_Note;
-    QFrame *frame_7;
-    QGridLayout *gridLayout_3;
-    QTextEdit *TextNote;
-    QHBoxLayout *horizontalLayout;
-    QListWidget *listTag;
-    QPushButton *tags_option;
-    QLabel *date_create_note;
-    QLineEdit *TitleNote;
+    QWidget *page_2;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout;
+    QPushButton *AddingQuest;
+    QPushButton *more_characteristics;
+    QPushButton *Open_inventory;
+    QPushButton *guideForUser_button;
+    QPushButton *guideForDeveloper_button;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -81,33 +89,15 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(875, 661);
+        MainWindow->resize(744, 705);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout_2 = new QGridLayout(centralwidget);
         gridLayout_2->setObjectName("gridLayout_2");
-        frame_2 = new QFrame(centralwidget);
-        frame_2->setObjectName("frame_2");
-        frame_2->setMinimumSize(QSize(131, 431));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        frame = new QFrame(frame_2);
-        frame->setObjectName("frame");
-        frame->setGeometry(QRect(0, 0, 131, 71));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        info = new QLabel(frame);
-        info->setObjectName("info");
-        info->setGeometry(QRect(10, 10, 101, 16));
-        change_space = new QPushButton(frame);
-        change_space->setObjectName("change_space");
-        change_space->setGeometry(QRect(10, 30, 100, 32));
-
-        gridLayout_2->addWidget(frame_2, 0, 0, 1, 1);
-
         spaces = new QStackedWidget(centralwidget);
         spaces->setObjectName("spaces");
-        spaces->setStyleSheet(QString::fromUtf8("background-color:silver;"));
+        spaces->setStyleSheet(QString::fromUtf8("background-color:silver;\n"
+"border-radius:10px;"));
         RPG_space = new QWidget();
         RPG_space->setObjectName("RPG_space");
         gridLayout_4 = new QGridLayout(RPG_space);
@@ -119,68 +109,17 @@ public:
         frame_3->setFrameShadow(QFrame::Raised);
         gridLayout_5 = new QGridLayout(frame_3);
         gridLayout_5->setObjectName("gridLayout_5");
-        AddingQuest = new QPushButton(frame_3);
-        AddingQuest->setObjectName("AddingQuest");
-        AddingQuest->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout_5->addWidget(AddingQuest, 2, 1, 1, 1);
-
         QuestList = new QListWidget(frame_3);
         QuestList->setObjectName("QuestList");
         QuestList->setMinimumSize(QSize(0, 0));
-        QuestList->setStyleSheet(QString::fromUtf8("color:black;"));
+        QuestList->setStyleSheet(QString::fromUtf8("border-radius:18px;\n"
+"background-color:white;\n"
+"color:black;"));
 
         gridLayout_5->addWidget(QuestList, 1, 1, 1, 1);
 
-        Open_inventory = new QPushButton(frame_3);
-        Open_inventory->setObjectName("Open_inventory");
-        Open_inventory->setStyleSheet(QString::fromUtf8("color:black;"));
 
-        gridLayout_5->addWidget(Open_inventory, 3, 1, 1, 1);
-
-
-        gridLayout_4->addWidget(frame_3, 2, 1, 1, 1);
-
-        infoCharacter = new QFrame(RPG_space);
-        infoCharacter->setObjectName("infoCharacter");
-        infoCharacter->setMinimumSize(QSize(160, 201));
-        infoCharacter->setFrameShape(QFrame::StyledPanel);
-        infoCharacter->setFrameShadow(QFrame::Raised);
-        gridLayout = new QGridLayout(infoCharacter);
-        gridLayout->setObjectName("gridLayout");
-        ManaLabel = new QLabel(infoCharacter);
-        ManaLabel->setObjectName("ManaLabel");
-        ManaLabel->setStyleSheet(QString::fromUtf8("color:black;\n"
-""));
-
-        gridLayout->addWidget(ManaLabel, 3, 1, 1, 1);
-
-        LevelLabel = new QLabel(infoCharacter);
-        LevelLabel->setObjectName("LevelLabel");
-        LevelLabel->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout->addWidget(LevelLabel, 0, 1, 1, 1);
-
-        HealthLabel = new QLabel(infoCharacter);
-        HealthLabel->setObjectName("HealthLabel");
-        HealthLabel->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout->addWidget(HealthLabel, 2, 1, 1, 1);
-
-        ExperienceLabel = new QLabel(infoCharacter);
-        ExperienceLabel->setObjectName("ExperienceLabel");
-        ExperienceLabel->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout->addWidget(ExperienceLabel, 1, 1, 1, 1);
-
-        more_characteristics = new QPushButton(infoCharacter);
-        more_characteristics->setObjectName("more_characteristics");
-        more_characteristics->setStyleSheet(QString::fromUtf8("color:black;"));
-
-        gridLayout->addWidget(more_characteristics, 4, 1, 1, 1);
-
-
-        gridLayout_4->addWidget(infoCharacter, 0, 2, 3, 1);
+        gridLayout_4->addWidget(frame_3, 0, 0, 2, 1);
 
         character_icon = new QLabel(RPG_space);
         character_icon->setObjectName("character_icon");
@@ -189,102 +128,59 @@ public:
         character_icon->setStyleSheet(QString::fromUtf8(""));
         character_icon->setInputMethodHints(Qt::ImhNone);
 
-        gridLayout_4->addWidget(character_icon, 2, 0, 1, 1);
+        gridLayout_4->addWidget(character_icon, 0, 1, 1, 1);
+
+        infoCharacter = new QFrame(RPG_space);
+        infoCharacter->setObjectName("infoCharacter");
+        infoCharacter->setMinimumSize(QSize(160, 201));
+        infoCharacter->setStyleSheet(QString::fromUtf8("border-radius:12px;\n"
+"color:white;\n"
+"background-color:rgb(0, 150, 255);"));
+        infoCharacter->setFrameShape(QFrame::StyledPanel);
+        infoCharacter->setFrameShadow(QFrame::Raised);
+        gridLayout = new QGridLayout(infoCharacter);
+        gridLayout->setObjectName("gridLayout");
+        ExperienceLabel = new QLabel(infoCharacter);
+        ExperienceLabel->setObjectName("ExperienceLabel");
+        ExperienceLabel->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout->addWidget(ExperienceLabel, 1, 1, 1, 1);
+
+        LevelLabel = new QLabel(infoCharacter);
+        LevelLabel->setObjectName("LevelLabel");
+        LevelLabel->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout->addWidget(LevelLabel, 0, 1, 1, 1);
+
+        HealthLabel = new QLabel(infoCharacter);
+        HealthLabel->setObjectName("HealthLabel");
+        HealthLabel->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout->addWidget(HealthLabel, 2, 1, 1, 1);
+
+        ManaLabel = new QLabel(infoCharacter);
+        ManaLabel->setObjectName("ManaLabel");
+        ManaLabel->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout->addWidget(ManaLabel, 3, 1, 1, 1);
+
+
+        gridLayout_4->addWidget(infoCharacter, 1, 1, 1, 1);
 
         spaces->addWidget(RPG_space);
         Note_space = new QWidget();
         Note_space->setObjectName("Note_space");
         gridLayout_6 = new QGridLayout(Note_space);
         gridLayout_6->setObjectName("gridLayout_6");
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setContentsMargins(0, -1, -1, -1);
-        createNewNoteSpace = new QPushButton(Note_space);
-        createNewNoteSpace->setObjectName("createNewNoteSpace");
-        createNewNoteSpace->setMaximumSize(QSize(60, 16777215));
-        QFont font;
-        font.setPointSize(10);
-        createNewNoteSpace->setFont(font);
-        createNewNoteSpace->setStyleSheet(QString::fromUtf8("background-color:black;\n"
-""));
-
-        horizontalLayout_4->addWidget(createNewNoteSpace);
-
-        delete_Note_Service = new QPushButton(Note_space);
-        delete_Note_Service->setObjectName("delete_Note_Service");
-        delete_Note_Service->setMaximumSize(QSize(66, 16777215));
-        delete_Note_Service->setFont(font);
-        delete_Note_Service->setStyleSheet(QString::fromUtf8("background-color:black;"));
-
-        horizontalLayout_4->addWidget(delete_Note_Service);
-
-
-        verticalLayout->addLayout(horizontalLayout_4);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
-        NoteSpaces = new QComboBox(Note_space);
-        NoteSpaces->setObjectName("NoteSpaces");
-        NoteSpaces->setMaximumSize(QSize(25987, 16777215));
-
-        horizontalLayout_3->addWidget(NoteSpaces);
-
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
-        listNote = new QListWidget(Note_space);
-        listNote->setObjectName("listNote");
-        listNote->setMinimumSize(QSize(0, 0));
-        listNote->setMaximumSize(QSize(168, 16777215));
-        listNote->setStyleSheet(QString::fromUtf8("border-color:black;\n"
-"margin:0;\n"
-""));
-
-        verticalLayout->addWidget(listNote);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
-        pushButton = new QPushButton(Note_space);
-        pushButton->setObjectName("pushButton");
-        pushButton->setMaximumSize(QSize(60, 16777215));
-        pushButton->setStyleSheet(QString::fromUtf8("background-color:black;\n"
-"margin:0;"));
-
-        horizontalLayout_2->addWidget(pushButton);
-
-        delete_Note = new QPushButton(Note_space);
-        delete_Note->setObjectName("delete_Note");
-        delete_Note->setStyleSheet(QString::fromUtf8("background-color:black;\n"
-"margin:0;"));
-
-        horizontalLayout_2->addWidget(delete_Note);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
-
-
-        gridLayout_6->addLayout(verticalLayout, 0, 0, 1, 1);
-
         frame_7 = new QFrame(Note_space);
         frame_7->setObjectName("frame_7");
         frame_7->setMinimumSize(QSize(520, 0));
-        frame_7->setStyleSheet(QString::fromUtf8("border:none;"));
+        frame_7->setStyleSheet(QString::fromUtf8("border:none;\n"
+"border-radius:10px;"));
         frame_7->setFrameShape(QFrame::StyledPanel);
         frame_7->setFrameShadow(QFrame::Raised);
         gridLayout_3 = new QGridLayout(frame_7);
         gridLayout_3->setObjectName("gridLayout_3");
-        TextNote = new QTextEdit(frame_7);
-        TextNote->setObjectName("TextNote");
-        TextNote->setMinimumSize(QSize(0, 430));
-        TextNote->setMaximumSize(QSize(16777215, 185245));
-        TextNote->setStyleSheet(QString::fromUtf8("background-color:white;\n"
-"color:black;\n"
-""));
-
-        gridLayout_3->addWidget(TextNote, 2, 0, 1, 1);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
         listTag = new QListWidget(frame_7);
@@ -292,8 +188,9 @@ public:
         listTag->setMinimumSize(QSize(0, 0));
         listTag->setMaximumSize(QSize(100, 30));
         listTag->setStyleSheet(QString::fromUtf8("margin:0;\n"
-"background-color:black;\n"
-"color:white;"));
+"background-color:white;\n"
+"color:black;\n"
+"border-radius:9px;"));
 
         horizontalLayout->addWidget(listTag);
 
@@ -301,9 +198,12 @@ public:
         tags_option->setObjectName("tags_option");
         tags_option->setMinimumSize(QSize(30, 30));
         tags_option->setMaximumSize(QSize(30, 30));
-        tags_option->setStyleSheet(QString::fromUtf8("background-color:green;\n"
-"color:black;\n"
-"margin:0;"));
+        QFont font;
+        font.setBold(true);
+        tags_option->setFont(font);
+        tags_option->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"margin:0;\n"
+"border-radius:15px;"));
 
         horizontalLayout->addWidget(tags_option);
 
@@ -313,19 +213,32 @@ public:
         date_create_note->setMaximumSize(QSize(123545, 30));
         date_create_note->setStyleSheet(QString::fromUtf8("font-size:10px;\n"
 "padding-top:5px;\n"
-"margin:0;"));
+"margin:0;\n"
+"color:white"));
 
         horizontalLayout->addWidget(date_create_note);
 
 
         gridLayout_3->addLayout(horizontalLayout, 1, 0, 1, 1);
 
+        TextNote = new QTextEdit(frame_7);
+        TextNote->setObjectName("TextNote");
+        TextNote->setMinimumSize(QSize(0, 500));
+        TextNote->setMaximumSize(QSize(16777215, 185245));
+        TextNote->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;\n"
+"border-radius:10px;\n"
+""));
+
+        gridLayout_3->addWidget(TextNote, 2, 0, 1, 1);
+
         TitleNote = new QLineEdit(frame_7);
         TitleNote->setObjectName("TitleNote");
         TitleNote->setMinimumSize(QSize(0, 30));
         TitleNote->setStyleSheet(QString::fromUtf8("background-color:white;\n"
 "color:black;\n"
-"margin:0;"));
+"margin:0;\n"
+"border-radius:10px;"));
 
         gridLayout_3->addWidget(TitleNote, 0, 0, 1, 1);
 
@@ -336,21 +249,197 @@ public:
 
         gridLayout_2->addWidget(spaces, 0, 1, 1, 1);
 
+        frame_2 = new QFrame(centralwidget);
+        frame_2->setObjectName("frame_2");
+        frame_2->setMinimumSize(QSize(160, 431));
+        frame_2->setFrameShape(QFrame::StyledPanel);
+        frame_2->setFrameShadow(QFrame::Raised);
+        frame = new QFrame(frame_2);
+        frame->setObjectName("frame");
+        frame->setGeometry(QRect(0, 0, 161, 101));
+        frame->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"border-radius:10px;"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        gridLayout_8 = new QGridLayout(frame);
+        gridLayout_8->setObjectName("gridLayout_8");
+        info = new QLabel(frame);
+        info->setObjectName("info");
+        QFont font1;
+        font1.setPointSize(13);
+        font1.setBold(true);
+        font1.setItalic(false);
+        font1.setUnderline(false);
+        info->setFont(font1);
+        info->setStyleSheet(QString::fromUtf8("color:black;"));
+
+        gridLayout_8->addWidget(info, 0, 0, 1, 1);
+
+        change_space = new QPushButton(frame);
+        change_space->setObjectName("change_space");
+        change_space->setMinimumSize(QSize(0, 40));
+        QFont font2;
+        font2.setPointSize(15);
+        change_space->setFont(font2);
+        change_space->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"margin:5px;\n"
+"margin-bottom:5px;\n"
+"border-radius:15px;"));
+
+        gridLayout_8->addWidget(change_space, 1, 0, 1, 1);
+
+        stackedWidget = new QStackedWidget(frame_2);
+        stackedWidget->setObjectName("stackedWidget");
+        stackedWidget->setGeometry(QRect(10, 110, 150, 371));
+        stackedWidget->setMinimumSize(QSize(150, 0));
+        page = new QWidget();
+        page->setObjectName("page");
+        widget = new QWidget(page);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(-10, 30, 161, 314));
+        gridLayout_7 = new QGridLayout(widget);
+        gridLayout_7->setObjectName("gridLayout_7");
+        gridLayout_7->setContentsMargins(10, 0, 0, 0);
+        horizontalLayout_3 = new QHBoxLayout();
+#ifndef Q_OS_MAC
+        horizontalLayout_3->setSpacing(-1);
+#endif
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        horizontalLayout_3->setContentsMargins(6, -1, 4, -1);
+        createNewNoteSpace = new QPushButton(widget);
+        createNewNoteSpace->setObjectName("createNewNoteSpace");
+        createNewNoteSpace->setMinimumSize(QSize(60, 20));
+        createNewNoteSpace->setMaximumSize(QSize(66, 16777215));
+        QFont font3;
+        font3.setPointSize(10);
+        createNewNoteSpace->setFont(font3);
+        createNewNoteSpace->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;\n"
+"border-radius:5px;"));
+
+        horizontalLayout_3->addWidget(createNewNoteSpace);
+
+        delete_Note_Service = new QPushButton(widget);
+        delete_Note_Service->setObjectName("delete_Note_Service");
+        delete_Note_Service->setMinimumSize(QSize(60, 20));
+        delete_Note_Service->setMaximumSize(QSize(66, 16777215));
+        delete_Note_Service->setFont(font3);
+        delete_Note_Service->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;\n"
+"border-radius:5px;"));
+
+        horizontalLayout_3->addWidget(delete_Note_Service);
+
+
+        gridLayout_7->addLayout(horizontalLayout_3, 0, 0, 1, 1);
+
+        NoteSpaces = new QComboBox(widget);
+        NoteSpaces->setObjectName("NoteSpaces");
+        NoteSpaces->setMaximumSize(QSize(25987, 16777215));
+        NoteSpaces->setEditable(false);
+
+        gridLayout_7->addWidget(NoteSpaces, 1, 0, 1, 1);
+
+        listNote = new QListWidget(widget);
+        listNote->setObjectName("listNote");
+        listNote->setMinimumSize(QSize(0, 0));
+        listNote->setMaximumSize(QSize(168, 16777215));
+        listNote->setStyleSheet(QString::fromUtf8("background-color:silver;\n"
+"color:white;\n"
+"border-radius:8px;\n"
+""));
+        listNote->setIconSize(QSize(50, 50));
+
+        gridLayout_7->addWidget(listNote, 2, 0, 1, 1);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        pushButton = new QPushButton(widget);
+        pushButton->setObjectName("pushButton");
+        pushButton->setMinimumSize(QSize(0, 20));
+        pushButton->setMaximumSize(QSize(60, 16777215));
+        pushButton->setFont(font3);
+        pushButton->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;\n"
+"border-radius:5px;"));
+
+        horizontalLayout_2->addWidget(pushButton);
+
+        delete_Note = new QPushButton(widget);
+        delete_Note->setObjectName("delete_Note");
+        delete_Note->setMinimumSize(QSize(0, 20));
+        delete_Note->setFont(font3);
+        delete_Note->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+"color:black;\n"
+"border-radius:5px;"));
+
+        horizontalLayout_2->addWidget(delete_Note);
+
+
+        gridLayout_7->addLayout(horizontalLayout_2, 3, 0, 1, 1);
+
+        stackedWidget->addWidget(page);
+        page_2 = new QWidget();
+        page_2->setObjectName("page_2");
+        widget1 = new QWidget(page_2);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(0, 190, 141, 141));
+        verticalLayout = new QVBoxLayout(widget1);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        AddingQuest = new QPushButton(widget1);
+        AddingQuest->setObjectName("AddingQuest");
+        AddingQuest->setMinimumSize(QSize(0, 30));
+        AddingQuest->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:15px;"));
+
+        verticalLayout->addWidget(AddingQuest);
+
+        more_characteristics = new QPushButton(widget1);
+        more_characteristics->setObjectName("more_characteristics");
+        more_characteristics->setMinimumSize(QSize(0, 30));
+        more_characteristics->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:15px;"));
+
+        verticalLayout->addWidget(more_characteristics);
+
+        Open_inventory = new QPushButton(widget1);
+        Open_inventory->setObjectName("Open_inventory");
+        Open_inventory->setMinimumSize(QSize(0, 30));
+        Open_inventory->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:15px;"));
+
+        verticalLayout->addWidget(Open_inventory);
+
+        stackedWidget->addWidget(page_2);
+        guideForUser_button = new QPushButton(frame_2);
+        guideForUser_button->setObjectName("guideForUser_button");
+        guideForUser_button->setGeometry(QRect(10, 500, 141, 31));
+        guideForUser_button->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:15px;"));
+        guideForDeveloper_button = new QPushButton(frame_2);
+        guideForDeveloper_button->setObjectName("guideForDeveloper_button");
+        guideForDeveloper_button->setGeometry(QRect(10, 540, 141, 32));
+        guideForDeveloper_button->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:15px;"));
+
+        gridLayout_2->addWidget(frame_2, 0, 0, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 875, 24));
+        menubar->setGeometry(QRect(0, 0, 744, 24));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
         QWidget::setTabOrder(change_space, QuestList);
-        QWidget::setTabOrder(QuestList, AddingQuest);
-        QWidget::setTabOrder(AddingQuest, Open_inventory);
-        QWidget::setTabOrder(Open_inventory, more_characteristics);
-        QWidget::setTabOrder(more_characteristics, TitleNote);
+        QWidget::setTabOrder(QuestList, TitleNote);
 
         retranslateUi(MainWindow);
+
+        stackedWidget->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -358,15 +447,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        info->setText(QCoreApplication::translate("MainWindow", "Space", nullptr));
-        change_space->setText(QCoreApplication::translate("MainWindow", "Change space", nullptr));
-        AddingQuest->setText(QCoreApplication::translate("MainWindow", "Add Quest", nullptr));
-        Open_inventory->setText(QCoreApplication::translate("MainWindow", "Open inventory", nullptr));
-        ManaLabel->setText(QCoreApplication::translate("MainWindow", "Mana", nullptr));
-        LevelLabel->setText(QCoreApplication::translate("MainWindow", "Level", nullptr));
-        HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));
-        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
-        more_characteristics->setText(QCoreApplication::translate("MainWindow", "More", nullptr));
 #if QT_CONFIG(tooltip)
         character_icon->setToolTip(QCoreApplication::translate("MainWindow", "\320\246\320\265 \321\202\320\262\321\226\320\271 \320\277\320\265\321\200\321\201\320\276\320\275\320\260\320\266", nullptr));
 #endif // QT_CONFIG(tooltip)
@@ -374,10 +454,12 @@ public:
         character_icon->setWhatsThis(QCoreApplication::translate("MainWindow", "\320\246\320\265 \321\202\320\262\321\226\320\271 \320\277\320\265\321\200\321\201\320\276\320\275\320\260\320\266", nullptr));
 #endif // QT_CONFIG(whatsthis)
         character_icon->setText(QString());
-        createNewNoteSpace->setText(QCoreApplication::translate("MainWindow", "New  space", nullptr));
-        delete_Note_Service->setText(QCoreApplication::translate("MainWindow", "delete space", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "add note", nullptr));
-        delete_Note->setText(QCoreApplication::translate("MainWindow", "delete note", nullptr));
+        ExperienceLabel->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
+        LevelLabel->setText(QCoreApplication::translate("MainWindow", "Level", nullptr));
+        HealthLabel->setText(QCoreApplication::translate("MainWindow", "Health", nullptr));
+        ManaLabel->setText(QCoreApplication::translate("MainWindow", "Mana", nullptr));
+        tags_option->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
+        date_create_note->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         TextNote->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -386,8 +468,17 @@ public:
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
-        tags_option->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
-        date_create_note->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        info->setText(QCoreApplication::translate("MainWindow", "Space", nullptr));
+        change_space->setText(QCoreApplication::translate("MainWindow", "Change space", nullptr));
+        createNewNoteSpace->setText(QCoreApplication::translate("MainWindow", "New  space", nullptr));
+        delete_Note_Service->setText(QCoreApplication::translate("MainWindow", "delete space", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "add note", nullptr));
+        delete_Note->setText(QCoreApplication::translate("MainWindow", "delete note", nullptr));
+        AddingQuest->setText(QCoreApplication::translate("MainWindow", "Add Quest", nullptr));
+        more_characteristics->setText(QCoreApplication::translate("MainWindow", "More", nullptr));
+        Open_inventory->setText(QCoreApplication::translate("MainWindow", "Open inventory", nullptr));
+        guideForUser_button->setText(QCoreApplication::translate("MainWindow", "Guide for user", nullptr));
+        guideForDeveloper_button->setText(QCoreApplication::translate("MainWindow", "Guide for developer", nullptr));
     } // retranslateUi
 
 };

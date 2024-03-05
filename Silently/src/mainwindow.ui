@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>875</width>
-    <height>661</height>
+    <width>744</width>
+    <height>705</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,72 +15,15 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QFrame" name="frame_2">
-      <property name="minimumSize">
-       <size>
-        <width>131</width>
-        <height>431</height>
-       </size>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <widget class="QFrame" name="frame">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>131</width>
-         <height>71</height>
-        </rect>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QLabel" name="info">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>101</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Space</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="change_space">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>100</width>
-          <height>32</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Change space</string>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QStackedWidget" name="spaces">
       <property name="styleSheet">
-       <string notr="true">background-color:silver;</string>
+       <string notr="true">background-color:silver;
+border-radius:10px;</string>
       </property>
       <widget class="QWidget" name="RPG_space">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="2" column="1">
+        <item row="0" column="0" rowspan="2">
          <widget class="QFrame" name="frame_3">
           <property name="minimumSize">
            <size>
@@ -95,16 +38,6 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
-           <item row="2" column="1">
-            <widget class="QPushButton" name="AddingQuest">
-             <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-             <property name="text">
-              <string>Add Quest</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="1">
             <widget class="QListWidget" name="QuestList">
              <property name="minimumSize">
@@ -114,93 +47,16 @@
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="Open_inventory">
-             <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-             <property name="text">
-              <string>Open inventory</string>
+              <string notr="true">border-radius:18px;
+background-color:white;
+color:black;</string>
              </property>
             </widget>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="0" column="2" rowspan="3">
-         <widget class="QFrame" name="infoCharacter">
-          <property name="minimumSize">
-           <size>
-            <width>160</width>
-            <height>201</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="3" column="1">
-            <widget class="QLabel" name="ManaLabel">
-             <property name="styleSheet">
-              <string notr="true">color:black;
-</string>
-             </property>
-             <property name="text">
-              <string>Mana</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="LevelLabel">
-             <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-             <property name="text">
-              <string>Level</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="HealthLabel">
-             <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-             <property name="text">
-              <string>Health</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="ExperienceLabel">
-             <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-             <property name="text">
-              <string>Exp</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="more_characteristics">
-             <property name="styleSheet">
-              <string notr="true">color:black;</string>
-             </property>
-             <property name="text">
-              <string>More</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="2" column="0">
+        <item row="0" column="1">
          <widget class="QLabel" name="character_icon">
           <property name="minimumSize">
            <size>
@@ -231,131 +87,73 @@
           </property>
          </widget>
         </item>
+        <item row="1" column="1">
+         <widget class="QFrame" name="infoCharacter">
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>201</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius:12px;
+color:white;
+background-color:rgb(0, 150, 255);</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="1" column="1">
+            <widget class="QLabel" name="ExperienceLabel">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Exp</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="LevelLabel">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Level</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="HealthLabel">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Health</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="ManaLabel">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Mana</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="Note_space">
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="createNewNoteSpace">
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:black;
-</string>
-              </property>
-              <property name="text">
-               <string>New  space</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="delete_Note_Service">
-              <property name="maximumSize">
-               <size>
-                <width>66</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:black;</string>
-              </property>
-              <property name="text">
-               <string>delete space</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QComboBox" name="NoteSpaces">
-              <property name="maximumSize">
-               <size>
-                <width>25987</width>
-                <height>16777215</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listNote">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>168</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border-color:black;
-margin:0;
-</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:black;
-margin:0;</string>
-              </property>
-              <property name="text">
-               <string>add note</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="delete_Note">
-              <property name="styleSheet">
-               <string notr="true">background-color:black;
-margin:0;</string>
-              </property>
-              <property name="text">
-               <string>delete note</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
         <item row="0" column="1">
          <widget class="QFrame" name="frame_7">
           <property name="minimumSize">
@@ -365,7 +163,8 @@ margin:0;</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">border:none;</string>
+           <string notr="true">border:none;
+border-radius:10px;</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -374,37 +173,6 @@ margin:0;</string>
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="2" column="0">
-            <widget class="QTextEdit" name="TextNote">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>430</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>185245</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:white;
-color:black;
-</string>
-             </property>
-             <property name="html">
-              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
@@ -423,8 +191,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
                </property>
                <property name="styleSheet">
                 <string notr="true">margin:0;
-background-color:black;
-color:white;</string>
+background-color:white;
+color:black;
+border-radius:9px;</string>
                </property>
               </widget>
              </item>
@@ -442,10 +211,15 @@ color:white;</string>
                  <height>30</height>
                 </size>
                </property>
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="styleSheet">
-                <string notr="true">background-color:green;
-color:black;
-margin:0;</string>
+                <string notr="true">background-color:orange;
+margin:0;
+border-radius:15px;</string>
                </property>
                <property name="text">
                 <string>+</string>
@@ -469,7 +243,8 @@ margin:0;</string>
                <property name="styleSheet">
                 <string notr="true">font-size:10px;
 padding-top:5px;
-margin:0;</string>
+margin:0;
+color:white</string>
                </property>
                <property name="text">
                 <string>TextLabel</string>
@@ -477,6 +252,38 @@ margin:0;</string>
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="2" column="0">
+            <widget class="QTextEdit" name="TextNote">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>500</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>185245</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:white;
+color:black;
+border-radius:10px;
+</string>
+             </property>
+             <property name="html">
+              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
            </item>
            <item row="0" column="0">
             <widget class="QLineEdit" name="TitleNote">
@@ -489,7 +296,8 @@ margin:0;</string>
              <property name="styleSheet">
               <string notr="true">background-color:white;
 color:black;
-margin:0;</string>
+margin:0;
+border-radius:10px;</string>
              </property>
             </widget>
            </item>
@@ -500,6 +308,389 @@ margin:0;</string>
       </widget>
      </widget>
     </item>
+    <item row="0" column="0">
+     <widget class="QFrame" name="frame_2">
+      <property name="minimumSize">
+       <size>
+        <width>160</width>
+        <height>431</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QFrame" name="frame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>161</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:white;
+border-radius:10px;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="0" column="0">
+         <widget class="QLabel" name="info">
+          <property name="font">
+           <font>
+            <pointsize>13</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+            <underline>false</underline>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:black;</string>
+          </property>
+          <property name="text">
+           <string>Space</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="change_space">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:orange;
+margin:5px;
+margin-bottom:5px;
+border-radius:15px;</string>
+          </property>
+          <property name="text">
+           <string>Change space</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QStackedWidget" name="stackedWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>150</width>
+         <height>371</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <widget class="QWidget" name="page">
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>-10</x>
+           <y>30</y>
+           <width>161</width>
+           <height>314</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>-1</number>
+            </property>
+            <property name="leftMargin">
+             <number>6</number>
+            </property>
+            <property name="rightMargin">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="createNewNoteSpace">
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>66</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;
+color:black;
+border-radius:5px;</string>
+              </property>
+              <property name="text">
+               <string>New  space</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="delete_Note_Service">
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>66</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;
+color:black;
+border-radius:5px;</string>
+              </property>
+              <property name="text">
+               <string>delete space</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="NoteSpaces">
+            <property name="maximumSize">
+             <size>
+              <width>25987</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="editable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QListWidget" name="listNote">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>168</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:silver;
+color:white;
+border-radius:8px;
+</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;
+color:black;
+border-radius:5px;</string>
+              </property>
+              <property name="text">
+               <string>add note</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="delete_Note">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;
+color:black;
+border-radius:5px;</string>
+              </property>
+              <property name="text">
+               <string>delete note</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="page_2">
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>190</y>
+           <width>141</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QPushButton" name="AddingQuest">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:orange;
+border-radius:15px;</string>
+            </property>
+            <property name="text">
+             <string>Add Quest</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="more_characteristics">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:orange;
+border-radius:15px;</string>
+            </property>
+            <property name="text">
+             <string>More</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Open_inventory">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:orange;
+border-radius:15px;</string>
+            </property>
+            <property name="text">
+             <string>Open inventory</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="guideForUser_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>500</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:orange;
+border-radius:15px;</string>
+       </property>
+       <property name="text">
+        <string>Guide for user</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="guideForDeveloper_button">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>540</y>
+         <width>141</width>
+         <height>32</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:orange;
+border-radius:15px;</string>
+       </property>
+       <property name="text">
+        <string>Guide for developer</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -507,7 +698,7 @@ margin:0;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>875</width>
+     <width>744</width>
      <height>24</height>
     </rect>
    </property>
@@ -517,9 +708,6 @@ margin:0;</string>
  <tabstops>
   <tabstop>change_space</tabstop>
   <tabstop>QuestList</tabstop>
-  <tabstop>AddingQuest</tabstop>
-  <tabstop>Open_inventory</tabstop>
-  <tabstop>more_characteristics</tabstop>
   <tabstop>TitleNote</tabstop>
  </tabstops>
  <resources/>

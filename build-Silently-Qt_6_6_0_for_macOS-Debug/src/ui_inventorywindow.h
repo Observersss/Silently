@@ -51,11 +51,15 @@ public:
         if (InventoryWindow->objectName().isEmpty())
             InventoryWindow->setObjectName("InventoryWindow");
         InventoryWindow->resize(830, 589);
+        InventoryWindow->setStyleSheet(QString::fromUtf8("background-color:silver;"));
         gridLayout_2 = new QGridLayout(InventoryWindow);
         gridLayout_2->setObjectName("gridLayout_2");
         textOption_3 = new QFrame(InventoryWindow);
         textOption_3->setObjectName("textOption_3");
         textOption_3->setMinimumSize(QSize(200, 200));
+        textOption_3->setStyleSheet(QString::fromUtf8("border-radius:12px;\n"
+"color:white;\n"
+"background-color:rgb(0, 150, 255);"));
         textOption_3->setFrameShape(QFrame::StyledPanel);
         textOption_3->setFrameShadow(QFrame::Raised);
         gridLayout_3 = new QGridLayout(textOption_3);
@@ -105,6 +109,7 @@ public:
 
         frame = new QFrame(InventoryWindow);
         frame->setObjectName("frame");
+        frame->setStyleSheet(QString::fromUtf8("border:none;"));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         gridLayout_4 = new QGridLayout(frame);
@@ -112,16 +117,25 @@ public:
         Equip_Item = new QListWidget(frame);
         Equip_Item->setObjectName("Equip_Item");
         Equip_Item->setMinimumSize(QSize(0, 150));
+        Equip_Item->setStyleSheet(QString::fromUtf8("border-radius:18px;\n"
+"background-color:white;\n"
+"color:black;"));
 
         gridLayout_4->addWidget(Equip_Item, 0, 0, 1, 2);
 
         take_off = new QPushButton(frame);
         take_off->setObjectName("take_off");
+        take_off->setMinimumSize(QSize(0, 20));
+        take_off->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:10px;"));
 
         gridLayout_4->addWidget(take_off, 1, 0, 1, 1);
 
         Delete_2 = new QPushButton(frame);
         Delete_2->setObjectName("Delete_2");
+        Delete_2->setMinimumSize(QSize(0, 20));
+        Delete_2->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:10px;"));
 
         gridLayout_4->addWidget(Delete_2, 1, 1, 1, 1);
 
@@ -137,6 +151,7 @@ public:
         frame_2 = new QFrame(InventoryWindow);
         frame_2->setObjectName("frame_2");
         frame_2->setMinimumSize(QSize(0, 300));
+        frame_2->setStyleSheet(QString::fromUtf8("border:none;"));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(frame_2);
@@ -144,16 +159,25 @@ public:
         listWidget = new QListWidget(frame_2);
         listWidget->setObjectName("listWidget");
         listWidget->setMinimumSize(QSize(300, 240));
+        listWidget->setStyleSheet(QString::fromUtf8("border-radius:18px;\n"
+"background-color:white;\n"
+"color:black;"));
 
         gridLayout->addWidget(listWidget, 0, 0, 1, 2);
 
         Equip = new QPushButton(frame_2);
         Equip->setObjectName("Equip");
+        Equip->setMinimumSize(QSize(0, 20));
+        Equip->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:10px;"));
 
         gridLayout->addWidget(Equip, 1, 0, 1, 1);
 
         Delete = new QPushButton(frame_2);
         Delete->setObjectName("Delete");
+        Delete->setMinimumSize(QSize(0, 20));
+        Delete->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
+"border-radius:10px;"));
 
         gridLayout->addWidget(Delete, 1, 1, 1, 1);
 

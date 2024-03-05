@@ -13,11 +13,36 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:white;</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="label_2">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:orange;
+</string>
+     </property>
      <property name="text">
       <string>Quest info</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -25,6 +50,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="Title_label">
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
         <string>Title:</string>
        </property>
@@ -32,6 +60,11 @@
      </item>
      <item>
       <widget class="QLineEdit" name="Title">
+       <property name="styleSheet">
+        <string notr="true">border-radius:10px;
+color:black;
+border: 3px solid silver;</string>
+       </property>
        <property name="text">
         <string>Title</string>
        </property>
@@ -43,6 +76,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="Discription_label">
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
         <string>Discription</string>
        </property>
@@ -50,6 +86,11 @@
      </item>
      <item>
       <widget class="QLineEdit" name="Discription">
+       <property name="styleSheet">
+        <string notr="true">color:black;
+border-radius:10px;
+border: 3px solid silver;</string>
+       </property>
        <property name="text">
         <string>Discription</string>
        </property>
@@ -61,6 +102,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QLabel" name="Difficulty_label">
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
         <string>Difficulty</string>
        </property>
@@ -68,6 +112,11 @@
      </item>
      <item>
       <widget class="QLineEdit" name="Difficulty">
+       <property name="styleSheet">
+        <string notr="true">border-radius:10px;
+color:black;
+border: 3px solid silver;</string>
+       </property>
        <property name="text">
         <string>Difficulty</string>
        </property>
@@ -79,13 +128,20 @@
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
         <string>Deadline to:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+      <widget class="QDateTimeEdit" name="dateTimeEdit">
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -93,6 +149,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QLabel" name="label_3">
+       <property name="styleSheet">
+        <string notr="true">color:black;</string>
+       </property>
        <property name="text">
         <string>If you change info:</string>
        </property>
@@ -100,6 +159,16 @@
      </item>
      <item>
       <widget class="QPushButton" name="change_button">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:orange;
+border-radius:10px;</string>
+       </property>
        <property name="text">
         <string>Change</string>
        </property>
@@ -111,6 +180,16 @@
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
       <widget class="QPushButton" name="Delete_Quest">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:orange;
+border-radius:10px;</string>
+       </property>
        <property name="text">
         <string>Delete Quest</string>
        </property>
@@ -118,6 +197,16 @@
      </item>
      <item>
       <widget class="QPushButton" name="Quest_complete">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:orange;
+border-radius:10px;</string>
+       </property>
        <property name="text">
         <string>Quest complete</string>
        </property>

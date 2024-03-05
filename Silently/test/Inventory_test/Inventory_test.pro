@@ -1,13 +1,17 @@
 QT += testlib
 QT += gui
-CONFIG += qt warn_on depend_includepath testcase
+
+CONFIG += qt console warn_on depend_includepath testcase
+CONFIG -= app_bundle
 
 TEMPLATE = app
 
 INCDIR = ../../src
 INCLUDEPATH += $$INCDIR
 
-HEADERS += $$INCDIR/RPGspace/Inventory/Inventory.h
+HEADERS += $$INCDIR/RPGspace/Inventory/inventory.h \
+           $$INCDIR/RPGspace/Item/item.h
 
 SOURCES +=  tst_inventory_test.cpp \
-            $$INCDIR/RPGspace/Inventory/Inventory.cpp
+            $$INCDIR/RPGspace/Inventory/inventory.cpp \
+            $$INCDIR/RPGspace/Item/item.cpp

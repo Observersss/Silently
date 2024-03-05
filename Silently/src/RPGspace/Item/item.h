@@ -35,6 +35,7 @@ public:
 
     //Пустий базовий конструктор
     Item();
+    //Item(int idx, const QString& nm) : index(idx), nameOfItem(nm) {}
 
     void generateRandomRank();
 
