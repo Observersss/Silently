@@ -50,7 +50,7 @@ public:
 
 
 
-    void createNewNoteSpace(QString nameNoteService);
+    void AddNoteSpace(QString nameNoteService);
     void deleteNoteSpace(QString nameNoteService);
 
     ~MainWindow();
@@ -74,7 +74,7 @@ private slots:
 
     void on_delete_Note_clicked();
 
-    void on_createNewNoteSpace_clicked();
+    void on_AddNoteSpace_clicked();
 
     void on_delete_Note_Service_clicked();
 

@@ -54,7 +54,7 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "previous",
     "on_pushButton_clicked",
     "on_delete_Note_clicked",
-    "on_createNewNoteSpace_clicked",
+    "on_AddNoteSpace_clicked",
     "on_delete_Note_Service_clicked",
     "on_NoteSpaces_currentIndexChanged",
     "index",
@@ -79,7 +79,7 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     char stringdata13[9];
     char stringdata14[22];
     char stringdata15[23];
-    char stringdata16[30];
+    char stringdata16[24];
     char stringdata17[31];
     char stringdata18[34];
     char stringdata19[6];
@@ -105,11 +105,11 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(255, 8),  // "previous"
         QT_MOC_LITERAL(264, 21),  // "on_pushButton_clicked"
         QT_MOC_LITERAL(286, 22),  // "on_delete_Note_clicked"
-        QT_MOC_LITERAL(309, 29),  // "on_createNewNoteSpace_clicked"
-        QT_MOC_LITERAL(339, 30),  // "on_delete_Note_Service_clicked"
-        QT_MOC_LITERAL(370, 33),  // "on_NoteSpaces_currentIndexCha..."
-        QT_MOC_LITERAL(404, 5),  // "index"
-        QT_MOC_LITERAL(410, 28)   // "on_listTag_itemDoubleClicked"
+        QT_MOC_LITERAL(309, 23),  // "on_AddNoteSpace_clicked"
+        QT_MOC_LITERAL(333, 30),  // "on_delete_Note_Service_clicked"
+        QT_MOC_LITERAL(364, 33),  // "on_NoteSpaces_currentIndexCha..."
+        QT_MOC_LITERAL(398, 5),  // "index"
+        QT_MOC_LITERAL(404, 28)   // "on_listTag_itemDoubleClicked"
     },
     "MainWindow",
     "on_change_space_clicked",
@@ -127,7 +127,7 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
     "previous",
     "on_pushButton_clicked",
     "on_delete_Note_clicked",
-    "on_createNewNoteSpace_clicked",
+    "on_AddNoteSpace_clicked",
     "on_delete_Note_Service_clicked",
     "on_NoteSpaces_currentIndexChanged",
     "index",
@@ -218,7 +218,7 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_delete_Note_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_createNewNoteSpace_clicked'
+        // method 'on_AddNoteSpace_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_delete_Note_Service_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -248,7 +248,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 7: _t->on_listNote_currentItemChanged((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[2]))); break;
         case 8: _t->on_pushButton_clicked(); break;
         case 9: _t->on_delete_Note_clicked(); break;
-        case 10: _t->on_createNewNoteSpace_clicked(); break;
+        case 10: _t->on_AddNoteSpace_clicked(); break;
         case 11: _t->on_delete_Note_Service_clicked(); break;
         case 12: _t->on_NoteSpaces_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 13: _t->on_listTag_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;

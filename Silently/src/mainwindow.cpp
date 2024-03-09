@@ -5,12 +5,12 @@
 #include <QMessageBox>
 #include <QRandomGenerator>
 
-#include "AddQuest/addquest.h"
-#include "ShowInfoQuest/showinfoquest.h"
-#include "MoreCharacteristics/morecharacteristics.h"
-#include "InventoryWindow/inventorywindow.h"
-#include "addTag/addtag.h"
-#include "createNewNoteSpaceWindow/createnewnotespacewindow.h"
+#include "addQuest_DialogWindow/addQuest_DialogWindow.h"
+#include "ShowInfoQuest_DialogWindow/ShowInfoQuest_DialogWindow.h"
+#include "MoreCharacteristics_DialogWindow/MoreCharacteristics_DialogWindow.h"
+#include "Inventory_DialogWindow/Inventory_DialogWindow.h"
+#include "AddTag_DialogWindow/AddTag_dialogwindow.h"
+#include "AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h"
 int MainWindow::noteCounter=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -108,8 +108,8 @@ void MainWindow::on_change_space_clicked()
 
 void MainWindow::on_AddingQuest_clicked()
 {
-    AddQuest window(this);
-    window.show();
+    addQuest_DialogWindow window(this);
+
     window.exec();
 }
 
@@ -124,11 +124,11 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
     qDebug() << "Квест не знайдено mainwindow.cpp/on_QuestList_itemDoubleClicked";
     }
     else{
-    //Якщо перевірку пройдено запускається нове вікно ShowInfoQuest
-    ShowInfoQuest window(this,quest);
+    //Якщо перевірку пройдено запускається нове вікно ShowInfoQuest_DialogWindow
+    ShowInfoQuest_DialogWindow window(this,quest);
 
 
-    window.show();
+
     window.exec();
     }
 
@@ -209,16 +209,16 @@ void MainWindow::questComplete(){
 
 void MainWindow::on_more_characteristics_clicked()
 {
-    MoreCharacteristics window(this,character);
-    window.show();
+    MoreCharacteristics_DialogWindow window(this,character);
+
     window.exec();
 }
 
 
 void MainWindow::on_Open_inventory_clicked()
 {
-    InventoryWindow window(this,&character);
-    window.show();
+    Inventory_DialogWindow window(this,&character);
+
     window.exec();
     Inventory inventory=character.getInventory();
 
@@ -425,8 +425,8 @@ void MainWindow::unloadInfoNote(){
 void MainWindow::on_tags_option_clicked()
 {
     if (ui->tags_option->text() == "+") {
-    AddTag window(this);
-    window.show();
+    AddTag_DialogWindow window(this);
+
     window.exec();
     }
     else if (ui->tags_option->text() == "-") {
@@ -558,7 +558,7 @@ void MainWindow::on_delete_Note_clicked()
     delete current;
 }
 
-void MainWindow::createNewNoteSpace(QString nameNoteService){
+void MainWindow::AddNoteSpace(QString nameNoteService){
     NoteService noteService;
     noteService.setNameSpaceNote(nameNoteService);
     noteSpaces.push_back(noteService);
@@ -567,13 +567,6 @@ void MainWindow::createNewNoteSpace(QString nameNoteService){
 void MainWindow::deleteNoteSpace(QString nameNoteService){
     noteSpaces.erase(std::remove_if(noteSpaces.begin(), noteSpaces.end(),[&nameNoteService](const NoteService& note)
                                    { return note.getNameSpaceNote() == nameNoteService; }),noteSpaces.end());
-}
-
-void MainWindow::on_createNewNoteSpace_clicked()
-{
-    CreateNewNoteSpaceWindow window(this);
-    window.show();
-    window.exec();
 }
 
 
@@ -608,5 +601,13 @@ void MainWindow::on_listTag_itemDoubleClicked(QListWidgetItem *item)
 {
     returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()))->deleteTag(item->text());
     updateInfoTag();
+}
+
+
+void MainWindow::on_AddNoteSpace_clicked()
+{
+    AddNoteSpace_DialogWindow window(this);
+
+    window.exec();
 }
 

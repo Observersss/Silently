@@ -64,10 +64,10 @@ public:
     QPushButton *change_space;
     QStackedWidget *stackedWidget;
     QWidget *page;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QGridLayout *gridLayout_7;
     QHBoxLayout *horizontalLayout_3;
-    QPushButton *createNewNoteSpace;
+    QPushButton *AddNoteSpace;
     QPushButton *delete_Note_Service;
     QComboBox *NoteSpaces;
     QListWidget *listNote;
@@ -75,7 +75,7 @@ public:
     QPushButton *pushButton;
     QPushButton *delete_Note;
     QWidget *page_2;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QPushButton *AddingQuest;
     QPushButton *more_characteristics;
@@ -294,10 +294,10 @@ public:
         stackedWidget->setMinimumSize(QSize(150, 0));
         page = new QWidget();
         page->setObjectName("page");
-        widget = new QWidget(page);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(-10, 30, 161, 314));
-        gridLayout_7 = new QGridLayout(widget);
+        layoutWidget = new QWidget(page);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(-10, 30, 161, 314));
+        gridLayout_7 = new QGridLayout(layoutWidget);
         gridLayout_7->setObjectName("gridLayout_7");
         gridLayout_7->setContentsMargins(10, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
@@ -306,20 +306,20 @@ public:
 #endif
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         horizontalLayout_3->setContentsMargins(6, -1, 4, -1);
-        createNewNoteSpace = new QPushButton(widget);
-        createNewNoteSpace->setObjectName("createNewNoteSpace");
-        createNewNoteSpace->setMinimumSize(QSize(60, 20));
-        createNewNoteSpace->setMaximumSize(QSize(66, 16777215));
+        AddNoteSpace = new QPushButton(layoutWidget);
+        AddNoteSpace->setObjectName("AddNoteSpace");
+        AddNoteSpace->setMinimumSize(QSize(60, 20));
+        AddNoteSpace->setMaximumSize(QSize(66, 16777215));
         QFont font3;
         font3.setPointSize(10);
-        createNewNoteSpace->setFont(font3);
-        createNewNoteSpace->setStyleSheet(QString::fromUtf8("background-color:white;\n"
+        AddNoteSpace->setFont(font3);
+        AddNoteSpace->setStyleSheet(QString::fromUtf8("background-color:white;\n"
 "color:black;\n"
 "border-radius:5px;"));
 
-        horizontalLayout_3->addWidget(createNewNoteSpace);
+        horizontalLayout_3->addWidget(AddNoteSpace);
 
-        delete_Note_Service = new QPushButton(widget);
+        delete_Note_Service = new QPushButton(layoutWidget);
         delete_Note_Service->setObjectName("delete_Note_Service");
         delete_Note_Service->setMinimumSize(QSize(60, 20));
         delete_Note_Service->setMaximumSize(QSize(66, 16777215));
@@ -333,14 +333,14 @@ public:
 
         gridLayout_7->addLayout(horizontalLayout_3, 0, 0, 1, 1);
 
-        NoteSpaces = new QComboBox(widget);
+        NoteSpaces = new QComboBox(layoutWidget);
         NoteSpaces->setObjectName("NoteSpaces");
         NoteSpaces->setMaximumSize(QSize(25987, 16777215));
         NoteSpaces->setEditable(false);
 
         gridLayout_7->addWidget(NoteSpaces, 1, 0, 1, 1);
 
-        listNote = new QListWidget(widget);
+        listNote = new QListWidget(layoutWidget);
         listNote->setObjectName("listNote");
         listNote->setMinimumSize(QSize(0, 0));
         listNote->setMaximumSize(QSize(168, 16777215));
@@ -354,7 +354,7 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        pushButton = new QPushButton(widget);
+        pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName("pushButton");
         pushButton->setMinimumSize(QSize(0, 20));
         pushButton->setMaximumSize(QSize(60, 16777215));
@@ -365,7 +365,7 @@ public:
 
         horizontalLayout_2->addWidget(pushButton);
 
-        delete_Note = new QPushButton(widget);
+        delete_Note = new QPushButton(layoutWidget);
         delete_Note->setObjectName("delete_Note");
         delete_Note->setMinimumSize(QSize(0, 20));
         delete_Note->setFont(font3);
@@ -381,13 +381,13 @@ public:
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
-        widget1 = new QWidget(page_2);
-        widget1->setObjectName("widget1");
-        widget1->setGeometry(QRect(0, 190, 141, 141));
-        verticalLayout = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(page_2);
+        layoutWidget1->setObjectName("layoutWidget1");
+        layoutWidget1->setGeometry(QRect(0, 190, 141, 141));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        AddingQuest = new QPushButton(widget1);
+        AddingQuest = new QPushButton(layoutWidget1);
         AddingQuest->setObjectName("AddingQuest");
         AddingQuest->setMinimumSize(QSize(0, 30));
         AddingQuest->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
@@ -395,7 +395,7 @@ public:
 
         verticalLayout->addWidget(AddingQuest);
 
-        more_characteristics = new QPushButton(widget1);
+        more_characteristics = new QPushButton(layoutWidget1);
         more_characteristics->setObjectName("more_characteristics");
         more_characteristics->setMinimumSize(QSize(0, 30));
         more_characteristics->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
@@ -403,7 +403,7 @@ public:
 
         verticalLayout->addWidget(more_characteristics);
 
-        Open_inventory = new QPushButton(widget1);
+        Open_inventory = new QPushButton(layoutWidget1);
         Open_inventory->setObjectName("Open_inventory");
         Open_inventory->setMinimumSize(QSize(0, 30));
         Open_inventory->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
@@ -438,7 +438,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -470,7 +470,7 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         info->setText(QCoreApplication::translate("MainWindow", "Space", nullptr));
         change_space->setText(QCoreApplication::translate("MainWindow", "Change space", nullptr));
-        createNewNoteSpace->setText(QCoreApplication::translate("MainWindow", "New  space", nullptr));
+        AddNoteSpace->setText(QCoreApplication::translate("MainWindow", "New  space", nullptr));
         delete_Note_Service->setText(QCoreApplication::translate("MainWindow", "delete space", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "add note", nullptr));
         delete_Note->setText(QCoreApplication::translate("MainWindow", "delete note", nullptr));

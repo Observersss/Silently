@@ -13,18 +13,20 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDateTimeEdit>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_ShowInfoQuest
 {
 public:
-    QGridLayout *gridLayout;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QHBoxLayout *horizontalLayout;
     QLabel *Title_label;
@@ -51,9 +53,13 @@ public:
             ShowInfoQuest->setObjectName("ShowInfoQuest");
         ShowInfoQuest->resize(328, 382);
         ShowInfoQuest->setStyleSheet(QString::fromUtf8("background-color:white;"));
-        gridLayout = new QGridLayout(ShowInfoQuest);
-        gridLayout->setObjectName("gridLayout");
-        label_2 = new QLabel(ShowInfoQuest);
+        widget = new QWidget(ShowInfoQuest);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(12, 12, 213, 228));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label_2 = new QLabel(widget);
         label_2->setObjectName("label_2");
         label_2->setMaximumSize(QSize(16777215, 50));
         QFont font;
@@ -65,17 +71,17 @@ public:
 ""));
         label_2->setAlignment(Qt::AlignCenter);
 
-        gridLayout->addWidget(label_2, 0, 0, 1, 1);
+        verticalLayout->addWidget(label_2);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        Title_label = new QLabel(ShowInfoQuest);
+        Title_label = new QLabel(widget);
         Title_label->setObjectName("Title_label");
         Title_label->setStyleSheet(QString::fromUtf8("color:black;"));
 
         horizontalLayout->addWidget(Title_label);
 
-        Title = new QLineEdit(ShowInfoQuest);
+        Title = new QLineEdit(widget);
         Title->setObjectName("Title");
         Title->setStyleSheet(QString::fromUtf8("border-radius:10px;\n"
 "color:black;\n"
@@ -84,17 +90,17 @@ public:
         horizontalLayout->addWidget(Title);
 
 
-        gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        Discription_label = new QLabel(ShowInfoQuest);
+        Discription_label = new QLabel(widget);
         Discription_label->setObjectName("Discription_label");
         Discription_label->setStyleSheet(QString::fromUtf8("color:black;"));
 
         horizontalLayout_2->addWidget(Discription_label);
 
-        Discription = new QLineEdit(ShowInfoQuest);
+        Discription = new QLineEdit(widget);
         Discription->setObjectName("Discription");
         Discription->setStyleSheet(QString::fromUtf8("color:black;\n"
 "border-radius:10px;\n"
@@ -103,17 +109,17 @@ public:
         horizontalLayout_2->addWidget(Discription);
 
 
-        gridLayout->addLayout(horizontalLayout_2, 2, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        Difficulty_label = new QLabel(ShowInfoQuest);
+        Difficulty_label = new QLabel(widget);
         Difficulty_label->setObjectName("Difficulty_label");
         Difficulty_label->setStyleSheet(QString::fromUtf8("color:black;"));
 
         horizontalLayout_3->addWidget(Difficulty_label);
 
-        Difficulty = new QLineEdit(ShowInfoQuest);
+        Difficulty = new QLineEdit(widget);
         Difficulty->setObjectName("Difficulty");
         Difficulty->setStyleSheet(QString::fromUtf8("border-radius:10px;\n"
 "color:black;\n"
@@ -122,34 +128,34 @@ public:
         horizontalLayout_3->addWidget(Difficulty);
 
 
-        gridLayout->addLayout(horizontalLayout_3, 3, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_3);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        label = new QLabel(ShowInfoQuest);
+        label = new QLabel(widget);
         label->setObjectName("label");
         label->setStyleSheet(QString::fromUtf8("color:black;"));
 
         horizontalLayout_4->addWidget(label);
 
-        dateTimeEdit = new QDateTimeEdit(ShowInfoQuest);
+        dateTimeEdit = new QDateTimeEdit(widget);
         dateTimeEdit->setObjectName("dateTimeEdit");
         dateTimeEdit->setStyleSheet(QString::fromUtf8("color:black;"));
 
         horizontalLayout_4->addWidget(dateTimeEdit);
 
 
-        gridLayout->addLayout(horizontalLayout_4, 4, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_4);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName("horizontalLayout_5");
-        label_3 = new QLabel(ShowInfoQuest);
+        label_3 = new QLabel(widget);
         label_3->setObjectName("label_3");
         label_3->setStyleSheet(QString::fromUtf8("color:black;"));
 
         horizontalLayout_5->addWidget(label_3);
 
-        change_button = new QPushButton(ShowInfoQuest);
+        change_button = new QPushButton(widget);
         change_button->setObjectName("change_button");
         change_button->setMinimumSize(QSize(0, 20));
         change_button->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
@@ -158,11 +164,11 @@ public:
         horizontalLayout_5->addWidget(change_button);
 
 
-        gridLayout->addLayout(horizontalLayout_5, 5, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_5);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName("horizontalLayout_6");
-        Delete_Quest = new QPushButton(ShowInfoQuest);
+        Delete_Quest = new QPushButton(widget);
         Delete_Quest->setObjectName("Delete_Quest");
         Delete_Quest->setMinimumSize(QSize(0, 20));
         Delete_Quest->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
@@ -170,7 +176,7 @@ public:
 
         horizontalLayout_6->addWidget(Delete_Quest);
 
-        Quest_complete = new QPushButton(ShowInfoQuest);
+        Quest_complete = new QPushButton(widget);
         Quest_complete->setObjectName("Quest_complete");
         Quest_complete->setMinimumSize(QSize(0, 20));
         Quest_complete->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
@@ -179,7 +185,7 @@ public:
         horizontalLayout_6->addWidget(Quest_complete);
 
 
-        gridLayout->addLayout(horizontalLayout_6, 6, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_6);
 
 
         retranslateUi(ShowInfoQuest);

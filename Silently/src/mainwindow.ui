@@ -402,10 +402,10 @@ border-radius:15px;</string>
         </size>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>-10</x>
@@ -430,7 +430,7 @@ border-radius:15px;</string>
              <number>4</number>
             </property>
             <item>
-             <widget class="QPushButton" name="createNewNoteSpace">
+             <widget class="QPushButton" name="AddNoteSpace">
               <property name="minimumSize">
                <size>
                 <width>60</width>
@@ -590,7 +590,7 @@ border-radius:5px;</string>
         </widget>
        </widget>
        <widget class="QWidget" name="page_2">
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
