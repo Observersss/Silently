@@ -36,6 +36,8 @@ InventoryWindow::~InventoryWindow()
 
 void InventoryWindow::showItemDetails(const Item& selectedItem) {
     QString rank = selectedItem.getRank();
+    ui->Rank->setText(rank);
+
     std::vector<std::pair<QString, int>> characteristics = selectedItem.getCharacteristics();
     QPixmap image = selectedItem.getImageOfItem();
     // Встановлення тексту із характеристиками предмета
