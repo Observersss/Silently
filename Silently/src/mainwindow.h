@@ -3,7 +3,7 @@
 #include <QMainWindow>
 #include "RPGspace/Character/character.h"
 #include "NOTEspace/NoteService/noteservice.h"
-#include <Library/library.h>
+#include <QListWidgetItem>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

@@ -1,6 +1,6 @@
 #include "createnewnotespacewindow.h"
 #include "ui_createnewnotespacewindow.h"
-
+#include <QMessageBox>
 CreateNewNoteSpaceWindow::CreateNewNoteSpaceWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CreateNewNoteSpaceWindow)

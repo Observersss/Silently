@@ -1,6 +1,6 @@
 #include "addtag.h"
 #include "ui_addtag.h"
-
+#include <QMessageBox>
 AddTag::AddTag(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddTag)

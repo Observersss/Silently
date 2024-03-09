@@ -28,7 +28,6 @@ SOURCES += \
 HEADERS += \
     AddQuest/addquest.h \
     InventoryWindow/inventorywindow.h \
-    Library/library.h \
     MoreCharacteristics/morecharacteristics.h \
     NOTEspace/Note/note.h \
     NOTEspace/NoteService/noteservice.h \

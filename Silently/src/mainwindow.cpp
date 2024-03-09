@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "Library/library.h"
+#include <sstream>
+#include <iomanip>
+#include <QMessageBox>
+#include <QRandomGenerator>
+
 #include "AddQuest/addquest.h"
 #include "ShowInfoQuest/showinfoquest.h"
 #include "MoreCharacteristics/morecharacteristics.h"

@@ -1,6 +1,7 @@
 #include "showinfoquest.h"
 #include "ui_showinfoquest.h"
 #include "mainwindow.h"
+#include <QMessageBox>
 ShowInfoQuest::ShowInfoQuest(QWidget *parent,Quest mainQuest) :
     QDialog(parent),
     ui(new Ui::ShowInfoQuest),

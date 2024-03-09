@@ -1,6 +1,5 @@
 #include "addquest.h"
 #include "ui_addquest.h"
-#include "Library/library.h"
 AddQuest::AddQuest(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::AddQuest)
