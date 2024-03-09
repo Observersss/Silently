@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:white;</string>
+   <string notr="true">background-color:silver;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="2" column="0">
@@ -119,8 +119,7 @@ background-color:rgb(0, 150, 255);</string>
         <property name="styleSheet">
          <string notr="true">border-radius:18px;
 background-color:white;
-color:black;
-border:2px solid silver;</string>
+color:black;</string>
         </property>
        </widget>
       </item>
@@ -129,7 +128,7 @@ border:2px solid silver;</string>
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>21</height>
+          <height>20</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -146,7 +145,7 @@ border-radius:10px;</string>
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>21</height>
+          <height>20</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -203,8 +202,7 @@ border-radius:10px;</string>
         <property name="styleSheet">
          <string notr="true">border-radius:18px;
 background-color:white;
-color:black;
-border:2px solid silver;</string>
+color:black;</string>
         </property>
        </widget>
       </item>

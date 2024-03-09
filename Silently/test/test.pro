@@ -1,10 +1,8 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    Character_test \
-    Inventory_test \
-    item_test \
-    noteService_test
+    NoteSpace_test \
+    RPGSpace_Test \
 
 
 

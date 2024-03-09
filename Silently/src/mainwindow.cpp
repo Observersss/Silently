@@ -105,7 +105,7 @@ void MainWindow::on_change_space_clicked()
 void MainWindow::on_AddingQuest_clicked()
 {
     AddQuest window(this);
-    // window.show();
+    window.show();
     window.exec();
 }
 
@@ -124,7 +124,7 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
     ShowInfoQuest window(this,quest);
 
 
-    //window.show();
+    window.show();
     window.exec();
     }
 
