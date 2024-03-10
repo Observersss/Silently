@@ -119,11 +119,11 @@ void Item::generateImage(const QString& name) {
     auto it = itemImages_.find(name);
     if (it != itemImages_.end()) {
 
-        imageOfItem = QPixmap(it->second);
+        pathToImg = it->second;
 
     } else {
 
-        imageOfItem = QPixmap(":/icon/img/axe.jpg");
+        pathToImg =":/icon/img/axe.jpg";
 
     }
 }
@@ -145,8 +145,8 @@ void Item::setEqipment(Equipment type){
     typeItem=type;
 }
 
-void Item::setImage(QString name){
-    QPixmap imageOfItem(name); // Завантаження зображення з файлу
+void Item::setPathToImg(QString name){
+    pathToImg = name; // Завантаження зображення з файлу
 }
 
 
@@ -167,8 +167,8 @@ Equipment Item::getTypeItem()const{
     return typeItem;
 }
 
-QPixmap Item::getImageOfItem() const {
-    return imageOfItem;
+QString Item::getPathToImg() const {
+    return pathToImg;
 }
 
 int Item::getIndex()const{

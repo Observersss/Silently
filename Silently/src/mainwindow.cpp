@@ -115,24 +115,39 @@ void MainWindow::on_AddingQuest_clicked()
 
 void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 {
-    QString titleName = item->text(); // Отримали назву квесту
-    quest = character.findQuest(titleName); // І передали у функцію findQuest для пошуку по назві
+    QString titleName = item->text(); // Получаем название квеста
+    int startIndex = titleName.indexOf(":") + 1; // Ищем начало числовой части после "ID:"
+    int endIndex = titleName.indexOf(" ", startIndex); // Ищем конец числовой части перед первым пробелом
 
-    //Перевірка на quest_eror якщо квест не був знайдений
-    if(quest.getTitle()=="0"){
-//    QMessageBox::warning(this,"Помилка","Квест не знайдено");
-    qDebug() << "Квест не знайдено mainwindow.cpp/on_QuestList_itemDoubleClicked";
+    if (startIndex != -1 && endIndex != -1) {
+        QString idString = titleName.mid(startIndex, endIndex - startIndex); // Извлекаем числовую часть
+        bool conversionOK;
+        int id = idString.toInt(&conversionOK);
+
+        if (conversionOK) {
+            qDebug() << "ID:" << id;
+            quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
+
+            // Проверка на ошибку, если квест не был найден
+            if (quest.getTitle() == "0") {
+                qDebug() << "Квест не найден в mainwindow.cpp/on_QuestList_itemDoubleClicked";
+            } else {
+                // Если проверка пройдена, запускаем новое окно ShowInfoQuest_DialogWindow
+                ShowInfoQuest_DialogWindow window(this, quest);
+                window.exec();
+            }
+        } else {
+            // Обработка случая, если не удалось преобразовать строку в числовой ID
+            qDebug() << "Не удалось преобразовать в числовой ID";
+        }
+    } else {
+        // Обработка случая, если строка не соответствует ожидаемому формату "ID:id name"
+        qDebug() << "Строка не содержит ID в ожидаемом формате";
     }
-    else{
-    //Якщо перевірку пройдено запускається нове вікно ShowInfoQuest_DialogWindow
-    ShowInfoQuest_DialogWindow window(this,quest);
-
-
-
-    window.exec();
-    }
-
 }
+
+
+
 
 void MainWindow::updateInfoOnCharacter(){
     //Оновлення інформації про характеристики персонажа
@@ -161,7 +176,7 @@ void MainWindow::updateInfoOnQuest(){
     if (!quests.empty()) {
     //Вектор не пустий, можна отримати доступ до елементів
     Quest quest = quests.back();
-    QString title = quest.getTitle();
+    QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
     ui->QuestList->addItem(title);
 
     } else {

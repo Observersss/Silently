@@ -20,6 +20,7 @@ private slots:
     void on_Delete_Quest_clicked();
 
     void on_Quest_complete_clicked();
+
 private:
     Ui::ShowInfoQuest_DialogWindow *ui;
     Quest quest;

@@ -141,7 +141,7 @@ void RPGSpace_test::testNameGeneration() {
 // Test case to check if item image is loaded correctly
 void RPGSpace_test::testImageLoading() {
     Item item;
-    QPixmap image = item.getImageOfItem();
+    QString image = item.getPathToImg();
     QVERIFY(image.isNull());
 }
 

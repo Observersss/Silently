@@ -3,7 +3,7 @@
 
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
-
+#include <QPixmap>
 #include <iostream>
 
 class Character
@@ -54,6 +54,7 @@ public:
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
     Quest findQuest(const QString& title);
+    Quest findQuest(const int id);
 
                 /*Функції для роботи з інвентарем*/
 

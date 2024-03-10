@@ -5,6 +5,8 @@
 
 class Quest{
 private:
+    static int idCount;
+    int id;
     QString title;
     QString discription;
     int difficulty;
@@ -30,6 +32,7 @@ public:
     void setDeadline(std::chrono::system_clock::time_point newDeadline);
 
     //Геттери
+    int getId() const;
     QString getTitle()const;
     QString getDiscription()const;
     int getDifficulty()const;

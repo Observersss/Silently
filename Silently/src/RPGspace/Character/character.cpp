@@ -47,6 +47,13 @@ Quest Character::findQuest(const QString& title){
     quest_eror.setTitle(nullptr);
     return quest_eror;
 }
+Quest Character::findQuest(const int id){
+    for(const Quest& quest : activeQuest){
+        if(quest.getId() == id){
+            return quest;
+        }
+    }
+}
 
                 /*Функції для роботи з інвентарем*/
 void Character::addItemToInventory(Item item){

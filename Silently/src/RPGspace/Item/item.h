@@ -2,7 +2,6 @@
 #define ITEM_H
 
 #include<QString>
-#include <QPixmap>
 #include <map>
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
@@ -25,7 +24,7 @@ private:
     QString discriptionOfItem;
     std::vector<std::pair<QString ,int>> Characteristics;
     Equipment typeItem;
-    QPixmap imageOfItem;
+    QString pathToImg;
     static int itemCount; // Статична змінна для підрахунку елементів
     int index; // Індекс предмета
     static std::map<QString, QString> itemImages_;
@@ -72,7 +71,7 @@ public:
 
     //Задання зображення предмету
     //Приймає string(повний шлях до зображення і передає у imageOfItem
-    void setImage(QString name);
+    void setPathToImg(QString name);
 
 
     //Геттери
@@ -81,7 +80,7 @@ public:
     QString getdiscriptionOfItem()const;
     std::vector<std::pair<QString, int>> getCharacteristics() const;
     Equipment getTypeItem()const;
-    QPixmap getImageOfItem() const;
+    QString getPathToImg() const;
     int getIndex()const;
 };
 
