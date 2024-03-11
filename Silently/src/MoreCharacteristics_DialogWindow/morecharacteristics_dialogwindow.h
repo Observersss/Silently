@@ -12,12 +12,18 @@ class MoreCharacteristics_DialogWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit MoreCharacteristics_DialogWindow(QWidget *parent = nullptr,Character maincharacter=Character());
+    explicit MoreCharacteristics_DialogWindow(QWidget *parent = nullptr,Character* maincharacter=nullptr,bool show=false);
     ~MoreCharacteristics_DialogWindow();
+
+    void updateInfo();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::MoreCharacteristics_DialogWindow *ui;
-    Character character;
+    Character* character;
+    int countPoint = 12;
 };
 
 #endif // MORECHARACTERISTICS_DIALOGWINDOW_H
