@@ -126,7 +126,7 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 
         if (conversionOK) {
             qDebug() << "ID:" << id;
-            quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
+            Quest quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
 
             // Проверка на ошибку, если квест не был найден
             if (quest.getTitle() == "0") {
@@ -198,7 +198,7 @@ void MainWindow::deleteQuest(){
 
 void MainWindow::questComplete(){
     int levelNow= character.getLevel();
-    character.increaseExperience();
+    character.setExperience();
     int levelAfter= character.getLevel();
 
     if(levelNow<levelAfter){
