@@ -35,7 +35,7 @@ public:
     QLabel *LevelLabel;
     QLabel *DexterityLabel;
     QLabel *LucklLabel;
-    QLabel *DamgeLabel;
+    QLabel *DamageLabel;
     QLabel *ChanceOfCriticalDamage;
     QLabel *IntelligenceLabel;
     QLabel *ManaLabel;
@@ -158,11 +158,11 @@ public:
 
         gridLayout->addWidget(LucklLabel, 10, 1, 1, 1);
 
-        DamgeLabel = new QLabel(frame);
-        DamgeLabel->setObjectName("DamgeLabel");
-        DamgeLabel->setFont(font1);
+        DamageLabel = new QLabel(frame);
+        DamageLabel->setObjectName("DamageLabel");
+        DamageLabel->setFont(font1);
 
-        gridLayout->addWidget(DamgeLabel, 4, 1, 1, 1);
+        gridLayout->addWidget(DamageLabel, 4, 1, 1, 1);
 
         ChanceOfCriticalDamage = new QLabel(frame);
         ChanceOfCriticalDamage->setObjectName("ChanceOfCriticalDamage");
@@ -300,6 +300,7 @@ public:
         spinBox_mana = new QSpinBox(frame_2);
         spinBox_mana->setObjectName("spinBox_mana");
         spinBox_mana->setMaximumSize(QSize(40, 50));
+        spinBox_mana->setReadOnly(false);
 
         horizontalLayout_2->addWidget(spinBox_mana);
 
@@ -404,8 +405,13 @@ public:
         QFont font3;
         font3.setPointSize(15);
         font3.setBold(false);
+        font3.setStyleStrategy(QFont::PreferDefault);
         spinBox_health->setFont(font3);
+        spinBox_health->setAutoFillBackground(false);
+        spinBox_health->setInputMethodHints(Qt::ImhDigitsOnly);
         spinBox_health->setReadOnly(false);
+        spinBox_health->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        spinBox_health->setAccelerated(false);
         spinBox_health->setMaximum(200);
 
         horizontalLayout->addWidget(spinBox_health);
@@ -449,12 +455,16 @@ public:
 
         pushButton = new QPushButton(frame_2);
         pushButton->setObjectName("pushButton");
+        pushButton->setEnabled(true);
         QFont font4;
         font4.setPointSize(20);
         font4.setBold(false);
         pushButton->setFont(font4);
+        pushButton->setAutoFillBackground(false);
         pushButton->setStyleSheet(QString::fromUtf8("background-color:orange;\n"
 "border-radius:10px;"));
+        pushButton->setAutoDefault(false);
+        pushButton->setFlat(false);
 
         gridLayout_3->addWidget(pushButton, 10, 0, 1, 1);
 
@@ -463,6 +473,9 @@ public:
 
 
         retranslateUi(MoreCharacteristics_DialogWindow);
+
+        pushButton->setDefault(true);
+
 
         QMetaObject::connectSlotsByName(MoreCharacteristics_DialogWindow);
     } // setupUi
@@ -478,7 +491,7 @@ public:
         LevelLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
         DexterityLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
         LucklLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
-        DamgeLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
+        DamageLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
         ChanceOfCriticalDamage->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Chance of critical damage:", nullptr));
         IntelligenceLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
         ManaLabel->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
@@ -498,7 +511,7 @@ public:
         Mana_2->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Mana:", nullptr));
         Intelligence_2->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Intelligence:", nullptr));
         label_point->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Unused points:", nullptr));
-        label_pointCount->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "TextLabel", nullptr));
+        label_pointCount->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "12", nullptr));
         Force_2->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Force:", nullptr));
         ChanceOfCriticalDamage_2->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Chance of CD:", nullptr));
         Dexterity_2->setText(QCoreApplication::translate("MoreCharacteristics_DialogWindow", "Dexterity:", nullptr));

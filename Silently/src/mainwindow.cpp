@@ -225,9 +225,14 @@ void MainWindow::questComplete(){
 
 void MainWindow::on_more_characteristics_clicked()
 {
+    showUpdateCharacteristics = true;
     MoreCharacteristics_DialogWindow window(this,&character,showUpdateCharacteristics);
 
     window.exec();
+
+    if(showUpdateCharacteristics){
+        updateInfoOnCharacter();
+    }
 }
 
 
