@@ -141,7 +141,7 @@ background-color:rgb(0, 150, 255);</string>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLabel" name="DamgeLabel">
+       <widget class="QLabel" name="DamageLabel">
         <property name="font">
          <font>
           <pointsize>15</pointsize>
@@ -413,6 +413,9 @@ background-color:rgb(0, 150, 255);</string>
             <height>50</height>
            </size>
           </property>
+          <property name="readOnly">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -458,7 +461,7 @@ background-color:rgb(0, 150, 255);</string>
         <item>
          <widget class="QLabel" name="label_pointCount">
           <property name="text">
-           <string>TextLabel</string>
+           <string>12</string>
           </property>
          </widget>
         </item>
@@ -568,9 +571,22 @@ background-color:rgb(0, 150, 255);</string>
            <font>
             <pointsize>15</pointsize>
             <bold>false</bold>
+            <stylestrategy>PreferDefault</stylestrategy>
            </font>
           </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhDigitsOnly</set>
+          </property>
           <property name="readOnly">
+           <bool>false</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="accelerated">
            <bool>false</bool>
           </property>
           <property name="maximum">
@@ -634,11 +650,17 @@ background-color:rgb(0, 150, 255);</string>
       </item>
       <item row="10" column="0">
        <widget class="QPushButton" name="pushButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="font">
          <font>
           <pointsize>20</pointsize>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:orange;
@@ -646,6 +668,15 @@ border-radius:10px;</string>
         </property>
         <property name="text">
          <string>Update</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
