@@ -81,13 +81,9 @@ void Character::updateCharacteristicsFromInventory() {
         */
         for (const auto& characteristic : itemCharacteristics) {
             if (characteristic.first == "health") {
-                setHealth(characteristic.second);
+                health+=(characteristic.second);
             } else if (characteristic.first == "mana") {
-                setMana(characteristic.second);
-            } else if (characteristic.first == "experience") {
-                experience += characteristic.second;
-            } else if (characteristic.first == "level") {
-                level += characteristic.second;
+                mana+=(characteristic.second);
             } else if (characteristic.first == "damage") {
                 damage += characteristic.second;
             } else if (characteristic.first == "chanceOfCriticalDamage") {
@@ -119,23 +115,23 @@ void Character::removeCharacteristicsFromUnequippedItems(const Item& item) {
     */
     for (const auto& characteristic : itemCharacteristics) {
         if (characteristic.first == "health") {
-            setHealth(-characteristic.second);
+            health-=characteristic.second;
         } else if (characteristic.first == "mana") {
-            setMana(-characteristic.second);
+            mana-=characteristic.second;
         } else if(characteristic.first=="damage"){
-            setDamage(-characteristic.second);
+            damage-=characteristic.second;
         } else if(characteristic.first=="chanceOfCriticalDamage"){
-            setChanceOfCriticalDamade(-characteristic.second);
+            chanceOfCriticalDamade-=characteristic.second;
         } else if(characteristic.first=="criticalDamage"){
-            setCriticalDamage(-characteristic.second);
+            criticalDamage-=characteristic.second;
         } else if (characteristic.first=="dexterity"){
-            setDexterity(-characteristic.second);
+            dexterity-=characteristic.second;
         } else if(characteristic.first=="force"){
-            setForce(-characteristic.second);
+            force-=characteristic.second;
         } else if(characteristic.first=="intelligence"){
-            setIntelligence(-characteristic.second);
+            intelligence-=characteristic.second;
         } else if(characteristic.first=="luck"){
-            setLuck(-characteristic.second);
+            luck-=characteristic.second;
         } else {
             std::cout<<"Something wrond in character.cpp/removeCharacteristicsFromUnequippedItems\n";
         }
@@ -155,46 +151,36 @@ void Character::setExperience(){
 void Character::updateLevel(){
     level+=1;
     experience=0;
-
-    health+=10;
-    mana+=5;
-    damage+=4;
-    chanceOfCriticalDamade+=1;
-    criticalDamage+=1;
-    dexterity+=1;
-    force+=1;
-    intelligence+=1;
-    luck+=1;
 }
 
 void Character::setHealth(int amount){
-    health+=amount;
+    health = amount;
 }
 
 void Character::setMana(int amount){
-    mana+=amount;
+    mana = amount;
 }
 
 void Character::setDamage(int amount){
-    damage+=amount;
+    damage = amount;
 }
 void Character::setChanceOfCriticalDamade(int amount){
-    chanceOfCriticalDamade+=amount;
+    chanceOfCriticalDamade = amount;
 }
 void Character::setCriticalDamage(int amount){
-    criticalDamage+=amount;
+    criticalDamage = amount;
 }
 void Character::setDexterity(int amount){
-    dexterity+=amount;
+    dexterity = amount;
 }
 void Character::setForce(int amount){
-    force+=amount;
+    force = amount;
 }
 void Character::setIntelligence(int amount){
-    intelligence+=amount;
+    intelligence = amount;
 }
 void Character::setLuck(int amount){
-    luck+=amount;
+    luck = amount;
 }
 
                 /*Геттери*/
