@@ -76,7 +76,42 @@ MainWindow::MainWindow(QWidget *parent)
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
     /////////////////////////////////////////////////
     //ТЕСТИРОВАНИЕ
+    checkQuestDeadlinePassed();
 }
+
+void MainWindow::checkQuestDeadlinePassed() {
+    qDebug() << "Checking quest deadlines...";
+
+    // Получаем текущее время
+    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+    qDebug() << "Current time: " << std::chrono::system_clock::to_time_t(currentTime);
+
+    // Проверяем, достигнут ли дедлайн квеста
+    for(Quest& quest : character.getActiveQuest()){
+        std::chrono::system_clock::time_point deadline = quest.getDeadline();
+        qDebug() << "Quest deadline: " << std::chrono::system_clock::to_time_t(deadline);
+
+        if (currentTime >= deadline) {
+            qDebug() << "Deadline passed!";
+            QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest.getTitle() + "' has passed.");
+            character.deleteActiveQuest(quest);
+            // Действия по обработке прошедшего дедлайна квеста
+
+            QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
+            for (int i = 0; i < ui->QuestList->count(); ++i) {
+                QListWidgetItem *item = ui->QuestList->item(i);
+                if (item->text() == title) {
+                    delete ui->QuestList->takeItem(i);
+                    break;
+                }
+            }
+        }
+    }
+    // Повторно вызываем эту же функцию через минуту
+    QTimer::singleShot(60 * 1000, this, &MainWindow::checkQuestDeadlinePassed);
+}
+
+
 void MainWindow::addActiveQuest(Quest* quest){
     character.addActiveQuest(quest);
 }
@@ -225,7 +260,7 @@ void MainWindow::questComplete(){
 
 void MainWindow::on_more_characteristics_clicked()
 {
-    showUpdateCharacteristics = true;
+    // showUpdateCharacteristics = true;
     MoreCharacteristics_DialogWindow window(this,&character,showUpdateCharacteristics);
 
     window.exec();
