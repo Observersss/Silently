@@ -37,9 +37,6 @@ public:
     QString getDiscription()const;
     int getDifficulty()const;
     std::chrono::system_clock::time_point getDeadline()const;
-
-
-
 };
 
 #endif // QUEST_H
