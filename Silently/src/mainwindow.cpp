@@ -66,8 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->date_create_note->setStyleSheet("QLabel { padding-top: 10px; font-size:11px; }");
 
 
-    //bufferNoteId=firstNote->getIdNote();
-    //qDebug()<<bufferNoteId;
+    checkQuestDeadlinePassed();
 
 
 
@@ -76,7 +75,14 @@ MainWindow::MainWindow(QWidget *parent)
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
     /////////////////////////////////////////////////
     //ТЕСТИРОВАНИЕ
-    checkQuestDeadlinePassed();
+    Item item,item1,item2,item3,item4;
+    qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
+    character.addItemToInventory(item);
+    character.addItemToInventory(item1);
+    character.addItemToInventory(item2);
+    character.addItemToInventory(item3);
+    character.addItemToInventory(item4);
+
 }
 
 void MainWindow::checkQuestDeadlinePassed() {

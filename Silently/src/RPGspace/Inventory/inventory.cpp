@@ -22,6 +22,7 @@ void Inventory::deleteItemEuipment(Item item) {
     // Видалення предмету з обладнання
     for (auto it = itemEquipment.begin(); it != itemEquipment.end(); ++it) {
         if (it->getIndex() == item.getIndex()) {
+
             itemEquipment.erase(it);
             break;
         }
@@ -37,8 +38,8 @@ void Inventory::addToEquipment(const Item& item) {
     }
 
     // Якщо предмет не є активним, додаємо його у спорядження та видаляємо з інвентаря
-    itemEquipment.push_back(item);
     deleteItemInInventory(item);
+    itemEquipment.push_back(item);
 }
 
 void Inventory::removeFromEquipment(Item item) {
