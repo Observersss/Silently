@@ -7,7 +7,6 @@ class Inventory {
 private:
     std::vector<Item> itemInInventory;   // Предмети, що знаходяться в інвентарі користувача
     std::vector<Item> itemEquipment;    // Предмети, що зараз активні (обладнання)
-
 public:
     // Пустий конструктор класу
     Inventory();

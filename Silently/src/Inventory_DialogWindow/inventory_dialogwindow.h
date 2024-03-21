@@ -20,6 +20,10 @@ public:
 
     void showItemDetails(const Item& selectedItem);
 
+    bool checkTypeCount(Equipment equipment);
+    bool EquipmentAddToEquipment(Equipment equipment);
+    bool EquipmentRemoveFromEquipment(Equipment equipment);
+
     ~Inventory_DialogWindow();
 private slots:
     void on_listWidget_itemClicked(QListWidgetItem *item);
@@ -33,6 +37,7 @@ private slots:
 private:
     Ui::Inventory_DialogWindow *ui;
     Character *character;
+    std::map<Equipment,int> typeCount;
 
     void addItemToListWidget(const QString &itemName, QListWidget *listWidget);
     void removeItemFromListWidget(QListWidget *listWidget, int selectedIndex);

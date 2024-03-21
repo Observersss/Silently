@@ -40,32 +40,29 @@ Item::Item(){
     generateRandomRank();
     generateCharacteristics();
     generateName();
-
+    //generateType();
     }
 
 void Item::generateRandomRank() {
-
     int randomRankIndex = arc4random() % 5; // Генеруєм випадкове число від 0 до 4
-
-
-        //В залежності від значення randomRankIndex обраємо ранг
-        switch (randomRankIndex) {
-        case 0:
-            rank = "S";
-            break;
-        case 1:
-            rank = "A";
-            break;
-        case 2:
-            rank = "B";
-            break;
+    //В залежності від значення randomRankIndex обраємо ранг
+    switch (randomRankIndex) {
+    case 0:
+       rank = "S";
+       break;
+    case 1:
+       rank = "A";
+        break;
+    case 2:
+        rank = "B";
+        break;
         case 3:
-            rank = "C";
-            break;
-        default:
-            rank = "D";
-            break;
-        }
+        rank = "C";
+        break;
+    default:
+        rank = "D";
+        break;
+    }
 }
 
 void Item::generateCharacteristics() {
@@ -79,16 +76,23 @@ void Item::generateCharacteristics() {
         int characteristicType = arc4random() % nameCharacteristic.size(); // Вибираємо випадковий тип характеристики
         int characteristicValue;
 
+
+        //ОШИБКА ГДЕ_ТО ТУТ ЧТО_ТО НЕ ТАК С СОЗДАНИЕМ ЧИСЕЛ ХАРАКТЕрИСТИК
         if (rank == "D") {
             characteristicValue = arc4random() % 3 + 1; // Для ранга D: 1-3
+            //characteristicValue = 1;
         } else if (rank == "C") {
             characteristicValue = arc4random() % 4 + 2; // Для ранга C: 2-5
+            //characteristicValue = 1;
         } else if (rank == "B") {
-            characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 3 + 1); // Для ранга B: 3-7 (damage), 1-3 (chanceOfCriticalDamage)
+            characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 3 + 1);            // Для ранга B: 3-7 (damage), 1-3 (chanceOfCriticalDamage)
+            //characteristicValue = 1;
         } else if (rank == "A") {
+            //characteristicValue = 1;
             characteristicValue = (characteristicType == 0) ? (arc4random() % 5 + 3) : (arc4random() % 4 + 2); // Для ранга A: 3-7 (damage), 2-5 (mana)
         } else if (rank == "S") {
             characteristicValue = (characteristicType == 0) ? (arc4random() % 4 + 5) : (characteristicType == 1) ? (arc4random() % 4 + 4) : (arc4random() % 4 + 2); // Для ранга S: 5-8 (health), 4-7 (mana), 2-5 (damage)
+            //characteristicValue = 1;
         }
 
         Characteristics.push_back(std::make_pair(nameCharacteristic[characteristicType], characteristicValue));
@@ -103,11 +107,12 @@ void Item::generateName() {
     const std::vector<QString> adjectives = { "Могутній", "Священний", "Забутий", "Магічний", "Легендарний","Заборонений","" };
 
     const std::vector<QString> nouns =
-    { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
-    "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
+        { "Катана","Меч квітів", "Перстень","Посох","Посох Архімага","Страшний шолом","Хомяк","Cолом'яний шолом","Wi-Fi","Сендвіч","Факел","Кавун","Молочний продукт",
+         "Знак","Онігірі","Бантик","Музичний інструмент","Шолом капітана","Шолом матроса","Небесний знак","Топор","Варварський топор","Дрин","Панда"};
 
     int adjectiveIndex = arc4random() % adjectives.size();
     int nounIndex = arc4random() % nouns.size();
+    generateType(nouns[nounIndex]);
     nameOfItem = adjectives[adjectiveIndex] + " " + nouns[nounIndex];
 
     generateImage(nouns[nounIndex]);
@@ -115,17 +120,52 @@ void Item::generateName() {
 }
 
 void Item::generateImage(const QString& name) {
-
     auto it = itemImages_.find(name);
-    if (it != itemImages_.end()) {
-
+    if (it != itemImages_.end())
         pathToImg = it->second;
-
-    } else {
-
+    else
         pathToImg =":/icon/img/axe.jpg";
+}
 
+void Item::generateType(QString name){
+    static std::map<QString,Equipment> name_and_type;
+    if(name_and_type.empty()){
+        name_and_type["Катана"] = WEAPON;
+        name_and_type["Меч квітів"] = WEAPON;
+        name_and_type["Перстень"] = RING;
+        name_and_type["Посох"] = WEAPON;
+        name_and_type["Посох Архімага"] = WEAPON;
+        name_and_type["Страшний шолом"] = HELMET;
+        name_and_type["Хомяк"] = PETS;
+        name_and_type["Cолом'яний шолом"] = HELMET;
+        name_and_type["Wi-Fi"] = PETS;
+        name_and_type["Сендвіч"] = ANOTHER;
+        name_and_type["Факел"]  = WEAPON;
+        name_and_type["Кавун"] = ANOTHER;
+        name_and_type["Молочний продукт"] = ANOTHER;
+        name_and_type["Знак"] = WEAPON;
+        name_and_type["Онігірі"] = ANOTHER;
+        name_and_type["Бантик"]  = HELMET;
+        name_and_type["Музичний інструмент"] = WEAPON;
+        name_and_type["Шолом капітана"] = HELMET;
+        name_and_type["Шолом матроса"] = HELMET;
+        name_and_type["Небесний знак"] = ANOTHER;
+        name_and_type["Топор"] = WEAPON;
+        name_and_type["Варварський топор"] = WEAPON;
+        name_and_type["Дрин"] = WEAPON;
+        name_and_type["Панда"] = PETS;
     }
+
+    try {
+        auto it = name_and_type.find(name);
+        if (it != name_and_type.end())
+            typeItem = it->second;
+        else
+            throw std::runtime_error("Failed to find type from name in map");
+    } catch (std::runtime_error& e) {
+        std::cout << e.what() << std::endl; // Вывод сообщения об ошибке
+    }
+
 }
 
 void Item::setName(QString name){
