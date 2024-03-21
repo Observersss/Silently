@@ -75,13 +75,13 @@ MainWindow::MainWindow(QWidget *parent)
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
     /////////////////////////////////////////////////
     //ТЕСТИРОВАНИЕ
-    Item item,item1,item2,item3,item4;
-    qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
-    character.addItemToInventory(item);
-    character.addItemToInventory(item1);
-    character.addItemToInventory(item2);
-    character.addItemToInventory(item3);
-    character.addItemToInventory(item4);
+    // Item item,item1,item2,item3,item4;
+    // qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
+    // character.addItemToInventory(item);
+    // character.addItemToInventory(item1);
+    // character.addItemToInventory(item2);
+    // character.addItemToInventory(item3);
+    // character.addItemToInventory(item4);
 
 }
 
