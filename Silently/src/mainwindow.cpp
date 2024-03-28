@@ -43,8 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     //noteService.addNewElementToNameNoteAndNoteID(firstNote->getTitle(),firstNote->getIdNote());
     noteSpaces.push_back(noteService);
 
-//    qDebug()<<firstNote->getIdNote();
-//    qDebug()<<firstNote->getTitle();
+
     bufferNoteId=firstNote->getIdNote();
 
     QString title=firstNote->getTitle()/*"Your first note"*/;
