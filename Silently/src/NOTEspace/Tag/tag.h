@@ -14,8 +14,6 @@ public:
     QString getNameTag()const{
         return tagName;
     }
-
-
 };
 
 #endif // TAG_H

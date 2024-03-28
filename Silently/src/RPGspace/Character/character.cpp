@@ -47,6 +47,13 @@ Quest Character::findQuest(const QString& title){
     quest_eror.setTitle(nullptr);
     return quest_eror;
 }
+Quest Character::findQuest(const int id){
+    for(const Quest& quest : activeQuest){
+        if(quest.getId() == id){
+            return quest;
+        }
+    }
+}
 
                 /*Функції для роботи з інвентарем*/
 void Character::addItemToInventory(Item item){
@@ -74,13 +81,9 @@ void Character::updateCharacteristicsFromInventory() {
         */
         for (const auto& characteristic : itemCharacteristics) {
             if (characteristic.first == "health") {
-                increaseHealth(characteristic.second);
+                health+=(characteristic.second);
             } else if (characteristic.first == "mana") {
-                increaseMana(characteristic.second);
-            } else if (characteristic.first == "experience") {
-                experience += characteristic.second;
-            } else if (characteristic.first == "level") {
-                level += characteristic.second;
+                mana+=(characteristic.second);
             } else if (characteristic.first == "damage") {
                 damage += characteristic.second;
             } else if (characteristic.first == "chanceOfCriticalDamage") {
@@ -112,23 +115,23 @@ void Character::removeCharacteristicsFromUnequippedItems(const Item& item) {
     */
     for (const auto& characteristic : itemCharacteristics) {
         if (characteristic.first == "health") {
-            increaseHealth(-characteristic.second);
+            health-=characteristic.second;
         } else if (characteristic.first == "mana") {
-            increaseMana(-characteristic.second);
+            mana-=characteristic.second;
         } else if(characteristic.first=="damage"){
-            increaseDamage(-characteristic.second);
+            damage-=characteristic.second;
         } else if(characteristic.first=="chanceOfCriticalDamage"){
-            increaseChanceOfCriticalDamade(-characteristic.second);
+            chanceOfCriticalDamade-=characteristic.second;
         } else if(characteristic.first=="criticalDamage"){
-            increaseCriticalDamage(-characteristic.second);
+            criticalDamage-=characteristic.second;
         } else if (characteristic.first=="dexterity"){
-            increaseDexterity(-characteristic.second);
+            dexterity-=characteristic.second;
         } else if(characteristic.first=="force"){
-            increaseForce(-characteristic.second);
+            force-=characteristic.second;
         } else if(characteristic.first=="intelligence"){
-            increaseIntelligence(-characteristic.second);
+            intelligence-=characteristic.second;
         } else if(characteristic.first=="luck"){
-            increaseLuck(-characteristic.second);
+            luck-=characteristic.second;
         } else {
             std::cout<<"Something wrond in character.cpp/removeCharacteristicsFromUnequippedItems\n";
         }
@@ -138,7 +141,7 @@ void Character::removeCharacteristicsFromUnequippedItems(const Item& item) {
 
 
                 /*Функції для збільшення показників характеристик персонажа*/
-void Character::increaseExperience(){
+void Character::setExperience(){
     experience+=10;
     if(experience==100){
         updateLevel();
@@ -148,46 +151,36 @@ void Character::increaseExperience(){
 void Character::updateLevel(){
     level+=1;
     experience=0;
-
-    increaseHealth(10);
-    increaseMana(5);
-    increaseDamage(4);
-    increaseChanceOfCriticalDamade(1);
-    increaseCriticalDamage(2);
-    increaseDexterity(1);
-    increaseForce(1);
-    increaseIntelligence(1);
-    increaseLuck(1);
 }
 
-void Character::increaseHealth(int amount){
-    health+=amount;
+void Character::setHealth(int amount){
+    health = amount;
 }
 
-void Character::increaseMana(int amount){
-    mana+=amount;
+void Character::setMana(int amount){
+    mana = amount;
 }
 
-void Character::increaseDamage(int amount){
-    damage+=amount;
+void Character::setDamage(int amount){
+    damage = amount;
 }
-void Character::increaseChanceOfCriticalDamade(int amount){
-    chanceOfCriticalDamade+=amount;
+void Character::setChanceOfCriticalDamade(int amount){
+    chanceOfCriticalDamade = amount;
 }
-void Character::increaseCriticalDamage(int amount){
-    criticalDamage+=amount;
+void Character::setCriticalDamage(int amount){
+    criticalDamage = amount;
 }
-void Character::increaseDexterity(int amount){
-    dexterity+=amount;
+void Character::setDexterity(int amount){
+    dexterity = amount;
 }
-void Character::increaseForce(int amount){
-    force+=amount;
+void Character::setForce(int amount){
+    force = amount;
 }
-void Character::increaseIntelligence(int amount){
-    intelligence+=amount;
+void Character::setIntelligence(int amount){
+    intelligence = amount;
 }
-void Character::increaseLuck(int amount){
-    luck+=amount;
+void Character::setLuck(int amount){
+    luck = amount;
 }
 
                 /*Геттери*/

@@ -1,12 +1,16 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "Library/library.h"
-#include "AddQuest/addquest.h"
-#include "ShowInfoQuest/showinfoquest.h"
-#include "MoreCharacteristics/morecharacteristics.h"
-#include "InventoryWindow/inventorywindow.h"
-#include "addTag/addtag.h"
-#include "createNewNoteSpaceWindow/createnewnotespacewindow.h"
+#include <sstream>
+#include <iomanip>
+#include <QMessageBox>
+#include <QRandomGenerator>
+
+#include "addQuest_DialogWindow/addQuest_DialogWindow.h"
+#include "ShowInfoQuest_DialogWindow/ShowInfoQuest_DialogWindow.h"
+#include "MoreCharacteristics_DialogWindow/MoreCharacteristics_DialogWindow.h"
+#include "Inventory_DialogWindow/Inventory_DialogWindow.h"
+#include "AddTag_DialogWindow/AddTag_dialogwindow.h"
+#include "AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h"
 int MainWindow::noteCounter=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -62,8 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->date_create_note->setStyleSheet("QLabel { padding-top: 10px; font-size:11px; }");
 
 
-    //bufferNoteId=firstNote->getIdNote();
-    //qDebug()<<bufferNoteId;
+    checkQuestDeadlinePassed();
 
 
 
@@ -72,7 +75,49 @@ MainWindow::MainWindow(QWidget *parent)
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
     /////////////////////////////////////////////////
     //ТЕСТИРОВАНИЕ
+    // Item item,item1,item2,item3,item4;
+    // qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
+    // character.addItemToInventory(item);
+    // character.addItemToInventory(item1);
+    // character.addItemToInventory(item2);
+    // character.addItemToInventory(item3);
+    // character.addItemToInventory(item4);
+
 }
+
+void MainWindow::checkQuestDeadlinePassed() {
+    qDebug() << "Checking quest deadlines...";
+
+    // Получаем текущее время
+    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+    qDebug() << "Current time: " << std::chrono::system_clock::to_time_t(currentTime);
+
+    // Проверяем, достигнут ли дедлайн квеста
+    for(Quest& quest : character.getActiveQuest()){
+        std::chrono::system_clock::time_point deadline = quest.getDeadline();
+        qDebug() << "Quest deadline: " << std::chrono::system_clock::to_time_t(deadline);
+
+        if (currentTime >= deadline) {
+            qDebug() << "Deadline passed!";
+            QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest.getTitle() + "' has passed.");
+            character.deleteActiveQuest(quest);
+            // Действия по обработке прошедшего дедлайна квеста
+
+            QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
+            for (int i = 0; i < ui->QuestList->count(); ++i) {
+                QListWidgetItem *item = ui->QuestList->item(i);
+                if (item->text() == title) {
+                    delete ui->QuestList->takeItem(i);
+                    break;
+                }
+            }
+        }
+    }
+    // Повторно вызываем эту же функцию через минуту
+    QTimer::singleShot(60 * 1000, this, &MainWindow::checkQuestDeadlinePassed);
+}
+
+
 void MainWindow::addActiveQuest(Quest* quest){
     character.addActiveQuest(quest);
 }
@@ -91,60 +136,77 @@ void MainWindow::on_change_space_clicked()
         ui->info->setText("Space now: RPG");
         updateInfoOnQuest();
         updateInfoOnCharacter();
+        ui->stackedWidget->setCurrentIndex(1);
 
     } else
     {
         ui->spaces->setCurrentIndex(1);
         ui->change_space->setText("Go RPG");
         ui->info->setText("Space now: Notes");
+        ui->stackedWidget->setCurrentIndex(0);
     }
 }
 
 void MainWindow::on_AddingQuest_clicked()
 {
-    AddQuest window(this);
-    window.show();
+    addQuest_DialogWindow window(this);
+
     window.exec();
 }
 
 void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 {
-    QString titleName = item->text(); // Отримали назву квесту
-    quest = character.findQuest(titleName); // І передали у функцію findQuest для пошуку по назві
+    QString titleName = item->text(); // Получаем название квеста
+    int startIndex = titleName.indexOf(":") + 1; // Ищем начало числовой части после "ID:"
+    int endIndex = titleName.indexOf(" ", startIndex); // Ищем конец числовой части перед первым пробелом
 
-    //Перевірка на quest_eror якщо квест не був знайдений
-    if(quest.getTitle()=="0"){
-//    QMessageBox::warning(this,"Помилка","Квест не знайдено");
-    qDebug() << "Квест не знайдено mainwindow.cpp/on_QuestList_itemDoubleClicked";
+    if (startIndex != -1 && endIndex != -1) {
+        QString idString = titleName.mid(startIndex, endIndex - startIndex); // Извлекаем числовую часть
+        bool conversionOK;
+        int id = idString.toInt(&conversionOK);
+
+        if (conversionOK) {
+            qDebug() << "ID:" << id;
+            Quest quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
+
+            // Проверка на ошибку, если квест не был найден
+            if (quest.getTitle() == "0") {
+                qDebug() << "Квест не найден в mainwindow.cpp/on_QuestList_itemDoubleClicked";
+            } else {
+                // Если проверка пройдена, запускаем новое окно ShowInfoQuest_DialogWindow
+                ShowInfoQuest_DialogWindow window(this, quest);
+                window.exec();
+            }
+        } else {
+            // Обработка случая, если не удалось преобразовать строку в числовой ID
+            qDebug() << "Не удалось преобразовать в числовой ID";
+        }
+    } else {
+        // Обработка случая, если строка не соответствует ожидаемому формату "ID:id name"
+        qDebug() << "Строка не содержит ID в ожидаемом формате";
     }
-    else{
-    //Якщо перевірку пройдено запускається нове вікно ShowInfoQuest
-    ShowInfoQuest window(this,quest);
-
-
-    window.show();
-    window.exec();
-    }
-
 }
+
+
+
 
 void MainWindow::updateInfoOnCharacter(){
     //Оновлення інформації про характеристики персонажа
 
     int health = character.getHealth();
-    QString healthText = QString("Здоровье: %1").arg(health);
+    QString healthText = QString("Health: %1").arg(health);
     ui->HealthLabel->setText(healthText);
 
     int mana = character.getMana();
-    QString manatext = QString("Мана: %1").arg(mana);
+    QString manatext = QString("Mana: %1").arg(mana);
     ui->ManaLabel->setText(manatext);
 
     int level = character.getLevel();
-    QString levelText =QString("Рівень: %1").arg(level);
+    QString levelText =QString("Level: %1").arg(level);
     ui->LevelLabel->setText(levelText);
 
     int experience = character.getExperience();
-    QString experinceText =QString("Досвід: %1").arg(experience);
+    QString experinceText =QString("Exp: %1").arg(experience);
     ui->ExperienceLabel->setText(experinceText);
 
 }
@@ -155,7 +217,7 @@ void MainWindow::updateInfoOnQuest(){
     if (!quests.empty()) {
     //Вектор не пустий, можна отримати доступ до елементів
     Quest quest = quests.back();
-    QString title = quest.getTitle();
+    QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
     ui->QuestList->addItem(title);
 
     } else {
@@ -177,11 +239,12 @@ void MainWindow::deleteQuest(){
 
 void MainWindow::questComplete(){
     int levelNow= character.getLevel();
-    character.increaseExperience();
+    character.setExperience();
     int levelAfter= character.getLevel();
 
     if(levelNow<levelAfter){
     QMessageBox::information(this,"New level","New Level");
+        showUpdateCharacteristics = true;
     }
 
 
@@ -203,16 +266,21 @@ void MainWindow::questComplete(){
 
 void MainWindow::on_more_characteristics_clicked()
 {
-    MoreCharacteristics window(this,character);
-    window.show();
+    // showUpdateCharacteristics = true;
+    MoreCharacteristics_DialogWindow window(this,&character,showUpdateCharacteristics);
+
     window.exec();
+
+    if(showUpdateCharacteristics){
+        updateInfoOnCharacter();
+    }
 }
 
 
 void MainWindow::on_Open_inventory_clicked()
 {
-    InventoryWindow window(this,&character);
-    window.show();
+    Inventory_DialogWindow window(this,&character);
+
     window.exec();
     Inventory inventory=character.getInventory();
 
@@ -419,8 +487,8 @@ void MainWindow::unloadInfoNote(){
 void MainWindow::on_tags_option_clicked()
 {
     if (ui->tags_option->text() == "+") {
-    AddTag window(this);
-    window.show();
+    AddTag_DialogWindow window(this);
+
     window.exec();
     }
     else if (ui->tags_option->text() == "-") {
@@ -552,7 +620,7 @@ void MainWindow::on_delete_Note_clicked()
     delete current;
 }
 
-void MainWindow::createNewNoteSpace(QString nameNoteService){
+void MainWindow::AddNoteSpace(QString nameNoteService){
     NoteService noteService;
     noteService.setNameSpaceNote(nameNoteService);
     noteSpaces.push_back(noteService);
@@ -561,13 +629,6 @@ void MainWindow::createNewNoteSpace(QString nameNoteService){
 void MainWindow::deleteNoteSpace(QString nameNoteService){
     noteSpaces.erase(std::remove_if(noteSpaces.begin(), noteSpaces.end(),[&nameNoteService](const NoteService& note)
                                    { return note.getNameSpaceNote() == nameNoteService; }),noteSpaces.end());
-}
-
-void MainWindow::on_createNewNoteSpace_clicked()
-{
-    CreateNewNoteSpaceWindow window(this);
-    window.show();
-    window.exec();
 }
 
 
@@ -602,5 +663,13 @@ void MainWindow::on_listTag_itemDoubleClicked(QListWidgetItem *item)
 {
     returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()))->deleteTag(item->text());
     updateInfoTag();
+}
+
+
+void MainWindow::on_AddNoteSpace_clicked()
+{
+    AddNoteSpace_DialogWindow window(this);
+
+    window.exec();
 }
 

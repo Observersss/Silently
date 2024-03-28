@@ -9,9 +9,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    AddQuest/addquest.cpp \
-    InventoryWindow/inventorywindow.cpp \
-    MoreCharacteristics/morecharacteristics.cpp \
+    AddNoteSpace_DialogWindow/addnotespace_dialogwindow.cpp \
+    AddQuest_DialogWindow/addquest_dialogwindow.cpp \
+    AddTag_DialogWindow/addtag_dialogwindow.cpp \
+    Inventory_DialogWindow/inventory_dialogwindow.cpp \
+    MoreCharacteristics_DialogWindow/morecharacteristics_dialogwindow.cpp \
     NOTEspace/Note/note.cpp \
     NOTEspace/NoteService/noteservice.cpp \
     NOTEspace/Tag/tag.cpp \
@@ -19,17 +21,16 @@ SOURCES += \
     RPGspace/Inventory/inventory.cpp \
     RPGspace/Item/item.cpp \
     RPGspace/Quest/quest.cpp \
-    ShowInfoQuest/showinfoquest.cpp \
-    addTag/addtag.cpp \
-    createNewNoteSpaceWindow/createnewnotespacewindow.cpp \
+    ShowInfoQuest_DialogWindow/showinfoquest_dialogwindow.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    AddQuest/addquest.h \
-    InventoryWindow/inventorywindow.h \
-    Library/library.h \
-    MoreCharacteristics/morecharacteristics.h \
+    AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h \
+    AddQuest_DialogWindow/addquest_dialogwindow.h \
+    AddTag_DialogWindow/addtag_dialogwindow.h \
+    Inventory_DialogWindow/inventory_dialogwindow.h \
+    MoreCharacteristics_DialogWindow/morecharacteristics_dialogwindow.h \
     NOTEspace/Note/note.h \
     NOTEspace/NoteService/noteservice.h \
     NOTEspace/Tag/tag.h \
@@ -37,18 +38,16 @@ HEADERS += \
     RPGspace/Inventory/inventory.h \
     RPGspace/Item/item.h \
     RPGspace/Quest/quest.h \
-    ShowInfoQuest/showinfoquest.h \
-    addTag/addtag.h \
-    createNewNoteSpaceWindow/createnewnotespacewindow.h \
+    ShowInfoQuest_DialogWindow/showinfoquest_dialogwindow.h \
     mainwindow.h
 
 FORMS += \
-    AddQuest/addquest.ui \
-    InventoryWindow/inventorywindow.ui \
-    MoreCharacteristics/morecharacteristics.ui \
-    ShowInfoQuest/showinfoquest.ui \
-    addTag/addtag.ui \
-    createNewNoteSpaceWindow/createnewnotespacewindow.ui \
+    AddNoteSpace_DialogWindow/addnotespace_dialogwindow.ui \
+    AddQuest_DialogWindow/addquest_dialogwindow.ui \
+    AddTag_DialogWindow/addtag_dialogwindow.ui \
+    Inventory_DialogWindow/inventory_dialogwindow.ui \
+    MoreCharacteristics_DialogWindow/morecharacteristics_dialogwindow.ui \
+    ShowInfoQuest_DialogWindow/showinfoquest_dialogwindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -58,3 +57,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     ico-img.qrc
+
+STATECHARTS += \
+    activiti diagram.scxml

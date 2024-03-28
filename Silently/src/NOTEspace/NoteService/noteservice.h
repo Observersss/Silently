@@ -54,6 +54,10 @@ public:
 
     std::vector<std::pair<QString,int>> returnNameNoteAndNoteID()const;
 
+    static std::vector<Tag> getAllTags() {
+        return allTag;
+    }
+
 };
 
 #endif // NOTESERVICE_H

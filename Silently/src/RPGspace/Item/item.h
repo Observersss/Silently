@@ -1,22 +1,46 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include <iostream>
 #include<QString>
-#include <QPixmap>
 #include <map>
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
 enum Equipment{
-    WEAPON,
-    PETS,
-    HELMET,
-    LEGGINGS,
-    BOOTS,
-    CHESTPLATE,
-    RING,
-    GLOVES,
-    CLOAKS
+    WEAPON = 0,
+    PETS = 1,
+    HELMET = 2,
+    LEGGINGS = 3,
+    BOOTS = 4,
+    CHESTPLATE = 5,
+    RING = 6,
+    GLOVES = 7,
+    ANOTHER = 8
 };
+// class itemFactory{
+//     Item create(){
+//         Item item;
+//         // generateRandomRank();
+
+//         // generateCharacteristics();
+
+//         // generateName();
+
+//         // generateImage(const QString& name);
+
+//         // generateType();
+//     }
+
+//     // void generateRandomRank();
+
+//     // void generateCharacteristicsSrank();
+
+//     // void generateName();
+
+//     // void generateImage(const QString& name);
+
+//     // void generateType();
+// };
 
 class Item{
 private:
@@ -25,16 +49,16 @@ private:
     QString discriptionOfItem;
     std::vector<std::pair<QString ,int>> Characteristics;
     Equipment typeItem;
-    QPixmap imageOfItem;
+    QString pathToImg;
     static int itemCount; // Статична змінна для підрахунку елементів
     int index; // Індекс предмета
     static std::map<QString, QString> itemImages_;
 
 
 public:
-
     //Пустий базовий конструктор
     Item();
+    //Item(int idx, const QString& nm) : index(idx), nameOfItem(nm) {}
 
     void generateRandomRank();
 
@@ -44,6 +68,7 @@ public:
 
     void generateImage(const QString& name);
 
+    void generateType(QString name);
 
 
     //Задання рангу предмета
@@ -71,7 +96,7 @@ public:
 
     //Задання зображення предмету
     //Приймає string(повний шлях до зображення і передає у imageOfItem
-    void setImage(QString name);
+    void setPathToImg(QString name);
 
 
     //Геттери
@@ -80,7 +105,7 @@ public:
     QString getdiscriptionOfItem()const;
     std::vector<std::pair<QString, int>> getCharacteristics() const;
     Equipment getTypeItem()const;
-    QPixmap getImageOfItem() const;
+    QString getPathToImg() const;
     int getIndex()const;
 };
 

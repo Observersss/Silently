@@ -3,7 +3,7 @@
 
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
-
+#include <QPixmap>
 #include <iostream>
 
 class Character
@@ -54,6 +54,7 @@ public:
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
     Quest findQuest(const QString& title);
+    Quest findQuest(const int id);
 
                 /*Функції для роботи з інвентарем*/
 
@@ -71,19 +72,19 @@ public:
 
     /*Функція додавання досвіду до персонажа
      * Якщо досвід = 100 то запускається updateLevel яка збільшує всі інші характеристики
-     * за допомогою функцій типу increase...
+     * за допомогою функцій типу set...
     */
-    void increaseExperience();
+    void setExperience();
     void updateLevel();
-    void increaseHealth(int amount);
-    void increaseMana(int amount);
-    void increaseDamage(int amount);
-    void increaseChanceOfCriticalDamade(int amount);
-    void increaseCriticalDamage(int amount);
-    void increaseDexterity(int amount);
-    void increaseForce(int amount);
-    void increaseIntelligence(int amount);
-    void increaseLuck(int amount);
+    void setHealth(int amount);
+    void setMana(int amount);
+    void setDamage(int amount);
+    void setChanceOfCriticalDamade(int amount);
+    void setCriticalDamage(int amount);
+    void setDexterity(int amount);
+    void setForce(int amount);
+    void setIntelligence(int amount);
+    void setLuck(int amount);
 
 
                 /*Геттери*/
