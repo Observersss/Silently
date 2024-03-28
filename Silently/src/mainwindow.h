@@ -4,6 +4,8 @@
 #include "RPGspace/Character/character.h"
 #include "NOTEspace/NoteService/noteservice.h"
 #include <QListWidgetItem>
+#include <QTime>
+#include <QTimer>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -57,6 +59,8 @@ public:
 private slots:
     void on_change_space_clicked();
 
+    void checkQuestDeadlinePassed();
+
     void on_AddingQuest_clicked();
 
     void on_QuestList_itemDoubleClicked(QListWidgetItem *item);
@@ -82,16 +86,15 @@ private slots:
 
     void on_listTag_itemDoubleClicked(QListWidgetItem *item);
 
+
 private:
     Ui::MainWindow *ui;
     Character character;
     Quest quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
-    //std::vector<std::pair<QString,int>> NameNoteAndNoteID;
-    //Переменная используеться для подсчёта новой заметки для уникальности
-    //Для правильного поиска по названию чтобы избежать возвращаения индекса
     static int noteCounter;
+    bool showUpdateCharacteristics = false;
 
 };
 #endif // MAINWINDOW_H

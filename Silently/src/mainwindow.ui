@@ -402,7 +402,7 @@ border-radius:15px;</string>
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QWidget" name="layoutWidget">

@@ -66,8 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->date_create_note->setStyleSheet("QLabel { padding-top: 10px; font-size:11px; }");
 
 
-    //bufferNoteId=firstNote->getIdNote();
-    //qDebug()<<bufferNoteId;
+    checkQuestDeadlinePassed();
 
 
 
@@ -76,7 +75,49 @@ MainWindow::MainWindow(QWidget *parent)
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
     /////////////////////////////////////////////////
     //ТЕСТИРОВАНИЕ
+    // Item item,item1,item2,item3,item4;
+    // qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
+    // character.addItemToInventory(item);
+    // character.addItemToInventory(item1);
+    // character.addItemToInventory(item2);
+    // character.addItemToInventory(item3);
+    // character.addItemToInventory(item4);
+
 }
+
+void MainWindow::checkQuestDeadlinePassed() {
+    qDebug() << "Checking quest deadlines...";
+
+    // Получаем текущее время
+    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+    qDebug() << "Current time: " << std::chrono::system_clock::to_time_t(currentTime);
+
+    // Проверяем, достигнут ли дедлайн квеста
+    for(Quest& quest : character.getActiveQuest()){
+        std::chrono::system_clock::time_point deadline = quest.getDeadline();
+        qDebug() << "Quest deadline: " << std::chrono::system_clock::to_time_t(deadline);
+
+        if (currentTime >= deadline) {
+            qDebug() << "Deadline passed!";
+            QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest.getTitle() + "' has passed.");
+            character.deleteActiveQuest(quest);
+            // Действия по обработке прошедшего дедлайна квеста
+
+            QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
+            for (int i = 0; i < ui->QuestList->count(); ++i) {
+                QListWidgetItem *item = ui->QuestList->item(i);
+                if (item->text() == title) {
+                    delete ui->QuestList->takeItem(i);
+                    break;
+                }
+            }
+        }
+    }
+    // Повторно вызываем эту же функцию через минуту
+    QTimer::singleShot(60 * 1000, this, &MainWindow::checkQuestDeadlinePassed);
+}
+
+
 void MainWindow::addActiveQuest(Quest* quest){
     character.addActiveQuest(quest);
 }
@@ -153,19 +194,19 @@ void MainWindow::updateInfoOnCharacter(){
     //Оновлення інформації про характеристики персонажа
 
     int health = character.getHealth();
-    QString healthText = QString("Здоровье: %1").arg(health);
+    QString healthText = QString("Health: %1").arg(health);
     ui->HealthLabel->setText(healthText);
 
     int mana = character.getMana();
-    QString manatext = QString("Мана: %1").arg(mana);
+    QString manatext = QString("Mana: %1").arg(mana);
     ui->ManaLabel->setText(manatext);
 
     int level = character.getLevel();
-    QString levelText =QString("Рівень: %1").arg(level);
+    QString levelText =QString("Level: %1").arg(level);
     ui->LevelLabel->setText(levelText);
 
     int experience = character.getExperience();
-    QString experinceText =QString("Досвід: %1").arg(experience);
+    QString experinceText =QString("Exp: %1").arg(experience);
     ui->ExperienceLabel->setText(experinceText);
 
 }
@@ -203,6 +244,7 @@ void MainWindow::questComplete(){
 
     if(levelNow<levelAfter){
     QMessageBox::information(this,"New level","New Level");
+        showUpdateCharacteristics = true;
     }
 
 
@@ -224,9 +266,14 @@ void MainWindow::questComplete(){
 
 void MainWindow::on_more_characteristics_clicked()
 {
-    MoreCharacteristics_DialogWindow window(this,character);
+    // showUpdateCharacteristics = true;
+    MoreCharacteristics_DialogWindow window(this,&character,showUpdateCharacteristics);
 
     window.exec();
+
+    if(showUpdateCharacteristics){
+        updateInfoOnCharacter();
+    }
 }
 
 

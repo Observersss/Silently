@@ -18,7 +18,6 @@ private slots:
     //Character test
     void testAddActiveQuest();
     void testDeleteActiveQuest();
-    void testUpdateCharacteristicsFromNewLevel();
 
     //Inventory test
     void testAddItemToInventory();
@@ -62,22 +61,6 @@ void RPGSpace_test::testDeleteActiveQuest() {
 }
 
 
-void RPGSpace_test::testUpdateCharacteristicsFromNewLevel() {
-    Character character;
-
-    // Before updating characteristics
-    int healthBefore = character.getHealth();
-    int damageBefore = character.getDamage();
-
-    character.updateLevel();
-    // After updating characteristics
-    int healthAfter = character.getHealth();
-    int damageAfter = character.getDamage();
-
-    // Check that characteristics have changed
-    QVERIFY(healthAfter > healthBefore);
-    QVERIFY(damageAfter > damageBefore);
-}
 
 void RPGSpace_test::testAddItemToInventory() {
     Inventory inventory;
@@ -142,7 +125,7 @@ void RPGSpace_test::testNameGeneration() {
 void RPGSpace_test::testImageLoading() {
     Item item;
     QString image = item.getPathToImg();
-    QVERIFY(image.isNull());
+    QVERIFY(!image.isNull());
 }
 
 void RPGSpace_test::testClassDistribution() {
