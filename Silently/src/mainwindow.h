@@ -45,7 +45,7 @@ public:
 
     //void deleteTag(Note *note);
 
-    void addTag(QString name);
+    void addTag(QString name,bool needAddToAllTags = true);
 
     void updateInfoTag();
     NoteService* returnNoteServicePtr();

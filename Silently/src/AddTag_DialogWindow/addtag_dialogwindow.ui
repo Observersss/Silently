@@ -6,40 +6,186 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
-    <height>320</height>
+    <width>350</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>250</y>
-     <width>100</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Add tag</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="tagName">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>150</y>
-     <width>113</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:black;
-background-color:white;</string>
-   </property>
-  </widget>
+  <property name="styleSheet">
+   <string notr="true">background-color:white;</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:orange;</string>
+     </property>
+     <property name="text">
+      <string>Tag manege</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="select_tag_frame">
+     <property name="styleSheet">
+      <string notr="true">border:none</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;			</string>
+        </property>
+        <property name="text">
+         <string>Select tag:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBox">
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+        border: 3px solid silver;
+        border-radius: 10px;/* Закругление углов */
+        background-color: white;
+        color: black;
+        }
+        QComboBox::down-arrow {
+        background-color: orange;
+        color: white;
+        border-radius: 6px; /* Закругление углов */
+       
+        width: 18px; /* Ширина изображения */
+        height: 18px; /* Высота изображения */
+        }
+        QComboBox::down-arrow:disabled {
+        background-color: lightgray;
+        color: darkgray;
+        }
+        QComboBox::down-arrow:pressed {
+        background-color: darkorange;
+        }
+        QComboBox::drop-down {
+        border: none;
+        width: 20px; /* Ширина кнопки */
+        height: 20px; /* Высота кнопки */
+        }
+        QComboBox QAbstractItemView {
+        background-color: white; /* Цвет фона выпадающего списка */
+        color: black; /* Цвет текста в выпадающем списке */
+        border: 1px solid silver;  /* Граница выпадающего списка */
+        }</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="create_tag_frame">
+     <property name="styleSheet">
+      <string notr="true">border:none;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
+        </property>
+        <property name="text">
+         <string>Name of tag:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="tagName">
+        <property name="styleSheet">
+         <string notr="true">color:black;
+background-color:white;
+border-radius:10px;
+border:3px solid silver;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="button_option">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius:12px;
+color:white;
+background-color:orange;</string>
+       </property>
+       <property name="text">
+        <string>Need new tag</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius:12px;
+color:white;
+background-color:orange;</string>
+       </property>
+       <property name="text">
+        <string>Add tag</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

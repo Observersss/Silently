@@ -55,9 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
     std::string timeString = stream.str();
     QString qTimeString = QString::fromStdString(timeString);
 
-    QListWidget *listWidget=ui->listNote;
-    listWidget->setCurrentRow(1);
-
     QString nameSpaceNote=noteService.getNameSpaceNote();
     ui->NoteSpaces->addItem(nameSpaceNote);
     // Установка строки в QLabel
@@ -67,21 +64,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     checkQuestDeadlinePassed();
 
-
-
     //unloadInfoNote();
     //////////////////////////////////////////////
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
     /////////////////////////////////////////////////
     //ТЕСТИРОВАНИЕ
-    // Item item,item1,item2,item3,item4;
-    // qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
-    // character.addItemToInventory(item);
-    // character.addItemToInventory(item1);
-    // character.addItemToInventory(item2);
-    // character.addItemToInventory(item3);
-    // character.addItemToInventory(item4);
+    int newIndex = ui->listNote->count() - 1;
 
+    // Устанавливаем текущий элемент в список по его индексу
+    ui->listNote->setCurrentRow(newIndex);
 }
 
 void MainWindow::checkQuestDeadlinePassed() {
@@ -486,7 +477,8 @@ void MainWindow::unloadInfoNote(){
 void MainWindow::on_tags_option_clicked()
 {
     if (ui->tags_option->text() == "+") {
-    AddTag_DialogWindow window(this);
+        std::vector<Tag>tags = returnNoteServicePtr()->getAllTags();
+        AddTag_DialogWindow window(this,&tags);
 
     window.exec();
     }
@@ -543,7 +535,7 @@ void MainWindow::addNewNoteToList(QString nameNote){
     ui->listNote->addItem(nameNote);
 }
 
-void MainWindow::addTag(QString name) {
+void MainWindow::addTag(QString name,bool needAddToAllTags) {
 
     if (ui->listNote->currentItem() == nullptr) {
     std::cout<<"Проблема \n";
@@ -554,6 +546,9 @@ void MainWindow::addTag(QString name) {
 
     Note *note = returnNoteServicePtr()->getNotePtr(returnNoteServicePtr()->findIdNote(title));
     note->addActiveTag(name);
+    if(needAddToAllTags){
+    returnNoteServicePtr()->addToAllTag(name);
+    }
 }
 
 
