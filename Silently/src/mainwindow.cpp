@@ -11,6 +11,8 @@
 #include "Inventory_DialogWindow/Inventory_DialogWindow.h"
 #include "AddTag_DialogWindow/AddTag_dialogwindow.h"
 #include "AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h"
+
+#include "NOTEspace/CustomLineEditManager/customlineeditmanager.h"
 int MainWindow::noteCounter=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -62,8 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->date_create_note->setStyleSheet("QLabel { padding-top: 10px; font-size:11px; }");
 
 
-    checkQuestDeadlinePassed();
-
     //unloadInfoNote();
     //////////////////////////////////////////////
     //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
@@ -73,6 +73,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Устанавливаем текущий элемент в список по его индексу
     ui->listNote->setCurrentRow(newIndex);
+
+    CustomLineEditManager* manager = CustomLineEditManager::getInstance(this);
+    manager->setLayout(ui->verticalLayout_for_CustomLineEditManager);
+    manager->create_CustomLineEdit();
+
 }
 
 void MainWindow::checkQuestDeadlinePassed() {
@@ -110,6 +115,7 @@ void MainWindow::checkQuestDeadlinePassed() {
 
 void MainWindow::addActiveQuest(Quest* quest){
     character.addActiveQuest(quest);
+    checkQuestDeadlinePassed();
 }
 
 MainWindow::~MainWindow()
@@ -291,52 +297,52 @@ void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {
 //Функція створює замітку та повністю зчитує всі дані та повертає цю замітку
 //Функція використовується в saveInfoNote
 Note MainWindow::saveInfoInNewNote(){
-    QString title=ui->listNote->currentItem()->text();
-    Note newNote;
-    newNote.setTitle(title);
+    // QString title=ui->listNote->currentItem()->text();
+    // Note newNote;
+    // newNote.setTitle(title);
 
-    QString text = ui->TextNote->toPlainText();
-
-
-    QStringList lines = text.split('\n');
-    std::vector<QString> textLines;
-
-    for (const QString &line : lines)
-        textLines.push_back(line);
+    // QString text = ui->TextNote->toPlainText();
 
 
-    newNote.setText(textLines);
-    //Далі ми зчитуємо час створення нотатки, переоснащуємо його в std::chrono::system_clock::time_point і так само передаємо в newNote
+    // QStringList lines = text.split('\n');
+    // std::vector<QString> textLines;
+
+    // for (const QString &line : lines)
+    //     textLines.push_back(line);
 
 
-    // Отримання тексту з QLabel
-    QString qTimeString = ui->date_create_note->text();
-
-    // Перетворення QString на std::string
-    std::string timeString = qTimeString.toStdString();
-
-    // Перетворення рядка на std::tm
-    std::tm tmTime = {};
-    std::stringstream stream(timeString);
-    stream >> std::get_time(&tmTime, "%a %b %d %H:%M:%S %Y"); // Вказуйте тут потрібний формат, який відповідає формату часу
-
-    // Перетворення std::tm на std::chrono::system_clock::time_point
-    std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(std::mktime(&tmTime));
-
-    newNote.setData_time(timePoint);
+    // newNote.setText(textLines);
+    // //Далі ми зчитуємо час створення нотатки, переоснащуємо його в std::chrono::system_clock::time_point і так само передаємо в newNote
 
 
-    std::vector<QString> tagNames;
-    for (int i = 0; i < ui->listTag->count(); ++i) {
-    QListWidgetItem *item = ui->listTag->item(i);
-    QString itemText = item->text();
-    tagNames.push_back(itemText);
-    }
+    // // Отримання тексту з QLabel
+    // QString qTimeString = ui->date_create_note->text();
 
-    NoteService *noteService=returnNoteServicePtr();
-    noteService->tagsExists(tagNames);
-    newNote.addActiveTag(tagNames);
-    return newNote;
+    // // Перетворення QString на std::string
+    // std::string timeString = qTimeString.toStdString();
+
+    // // Перетворення рядка на std::tm
+    // std::tm tmTime = {};
+    // std::stringstream stream(timeString);
+    // stream >> std::get_time(&tmTime, "%a %b %d %H:%M:%S %Y"); // Вказуйте тут потрібний формат, який відповідає формату часу
+
+    // // Перетворення std::tm на std::chrono::system_clock::time_point
+    // std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(std::mktime(&tmTime));
+
+    // newNote.setData_time(timePoint);
+
+
+    // std::vector<QString> tagNames;
+    // for (int i = 0; i < ui->listTag->count(); ++i) {
+    // QListWidgetItem *item = ui->listTag->item(i);
+    // QString itemText = item->text();
+    // tagNames.push_back(itemText);
+    // }
+
+    // NoteService *noteService=returnNoteServicePtr();
+    // noteService->tagsExists(tagNames);
+    // newNote.addActiveTag(tagNames);
+    // return newNote;
 }
 void MainWindow::saveInfoNote(){
 
@@ -374,102 +380,102 @@ void MainWindow::saveInfoNote(){
 }
 void MainWindow::savePreviousCurrentNote(QListWidgetItem *previous){
 
-    bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
-    Note*newNote=returnNoteServicePtr()->getNotePtr(bufferNoteId);
+    // bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
+    // Note*newNote=returnNoteServicePtr()->getNotePtr(bufferNoteId);
 
-    QString title=ui->TitleNote->text();
+    // QString title=ui->TitleNote->text();
 
-    bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
-    previous->setText(title);
-    newNote->setTitle(title);
-
-
-    QString text = ui->TextNote->toPlainText();
-
-    QStringList lines = text.split('\n');
-
-    std::vector<QString> textLines;
-    for (const QString &line : lines)
-    textLines.push_back(line);
-
-    newNote->setText(textLines);
-
-    //Далі ми зчитуємо час створення нотатки, переоснащуємо його в std::chrono::system_clock::time_point і так само передаємо в newNote
+    // bufferNoteId=returnNoteServicePtr()->findIdNote(previous->text());
+    // previous->setText(title);
+    // newNote->setTitle(title);
 
 
-    // Отримання тексту з QLabel
-    QString qTimeString = ui->date_create_note->text();
+    // QString text = ui->TextNote->toPlainText();
 
-    // Перетворення QString на std::string
-    std::string timeString = qTimeString.toStdString();
+    // QStringList lines = text.split('\n');
 
-    // Перетворення рядка на std::tm
-    std::tm tmTime = {};
-    std::stringstream stream(timeString);
-    stream >> std::get_time(&tmTime, "%a %b %d %H:%M:%S %Y"); // Вказуйте тут потрібний формат, який відповідає формату часу
+    // std::vector<QString> textLines;
+    // for (const QString &line : lines)
+    // textLines.push_back(line);
 
-    // Перетворення std::tm на std::chrono::system_clock::time_point
-    std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(std::mktime(&tmTime));
+    // newNote->setText(textLines);
 
-    newNote->setData_time(timePoint);
+    // //Далі ми зчитуємо час створення нотатки, переоснащуємо його в std::chrono::system_clock::time_point і так само передаємо в newNote
 
-    std::vector<QString> tagNames;
 
-    for (int i = 0; i < ui->listTag->count(); ++i) {
-    QListWidgetItem *item = ui->listTag->item(i);
-    QString itemText = item->text();
-    tagNames.push_back(itemText);
-    }
+    // // Отримання тексту з QLabel
+    // QString qTimeString = ui->date_create_note->text();
 
-    NoteService *noteService=returnNoteServicePtr();
+    // // Перетворення QString на std::string
+    // std::string timeString = qTimeString.toStdString();
 
-    newNote->addActiveTag(tagNames);
+    // // Перетворення рядка на std::tm
+    // std::tm tmTime = {};
+    // std::stringstream stream(timeString);
+    // stream >> std::get_time(&tmTime, "%a %b %d %H:%M:%S %Y"); // Вказуйте тут потрібний формат, який відповідає формату часу
 
-    noteService->tagsExists(tagNames);
-    noteService->changeNameNoteInVector(newNote->getTitle(),bufferNoteId);
+    // // Перетворення std::tm на std::chrono::system_clock::time_point
+    // std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(std::mktime(&tmTime));
 
-    previous->setText(newNote->getTitle());
+    // newNote->setData_time(timePoint);
 
-    bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
+    // std::vector<QString> tagNames;
+
+    // for (int i = 0; i < ui->listTag->count(); ++i) {
+    // QListWidgetItem *item = ui->listTag->item(i);
+    // QString itemText = item->text();
+    // tagNames.push_back(itemText);
+    // }
+
+    // NoteService *noteService=returnNoteServicePtr();
+
+    // newNote->addActiveTag(tagNames);
+
+    // noteService->tagsExists(tagNames);
+    // noteService->changeNameNoteInVector(newNote->getTitle(),bufferNoteId);
+
+    // previous->setText(newNote->getTitle());
+
+    // bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
 }
 
 void MainWindow::unloadInfoNote(){
-    NoteService *noteService=returnNoteServicePtr();
-    if(noteService->getNameSpaceNote()==nullptr){
-    std::cout<<"LOX\n";
-    }
+    // NoteService *noteService=returnNoteServicePtr();
+    // if(noteService->getNameSpaceNote()==nullptr){
+    // std::cout<<"LOX\n";
+    // }
 
 
-    bool noteChecked=noteService->noteExists(bufferNoteId);
+    // bool noteChecked=noteService->noteExists(bufferNoteId);
 
-    if(noteChecked==true){
-    bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
-    Note note=noteService->getNote(bufferNoteId);
+    // if(noteChecked==true){
+    // bufferNoteId=returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text());
+    // Note note=noteService->getNote(bufferNoteId);
 
-    ui->TitleNote->setText(note.getTitle());
+    // ui->TitleNote->setText(note.getTitle());
 
-    std::vector<QString> textNote=note.getText();
-    QString text;
-    for (const QString& line : textNote)
-        text += line + "\n";
+    // std::vector<QString> textNote=note.getText();
+    // QString text;
+    // for (const QString& line : textNote)
+    //     text += line + "\n";
 
-    ui->TextNote->setPlainText(text);
+    // ui->TextNote->setPlainText(text);
 
-    std::chrono::system_clock::time_point data_time=note.getDataTime();
-    std::time_t time = std::chrono::system_clock::to_time_t(data_time);
-    std::stringstream stream;
-    stream << std::ctime(&time);
-    std::string timeString = stream.str();
-    QString qTimeString = QString::fromStdString(timeString);
+    // std::chrono::system_clock::time_point data_time=note.getDataTime();
+    // std::time_t time = std::chrono::system_clock::to_time_t(data_time);
+    // std::stringstream stream;
+    // stream << std::ctime(&time);
+    // std::string timeString = stream.str();
+    // QString qTimeString = QString::fromStdString(timeString);
 
 
-    updateInfoTag();
+    // updateInfoTag();
 
-    ui->date_create_note->setText(qTimeString);
-    ui->date_create_note->setStyleSheet("QLabel { padding-top: 7px; font-size:11px; }");
+    // ui->date_create_note->setText(qTimeString);
+    // ui->date_create_note->setStyleSheet("QLabel { padding-top: 7px; font-size:11px; }");
 
-    }else
-    std::cout<<"Заметка не найдена что-то не так mainWindow.h/unloadInfoNote \n";
+    // }else
+    // std::cout<<"Заметка не найдена что-то не так mainWindow.h/unloadInfoNote \n";
 }
 
 
@@ -564,17 +570,17 @@ void MainWindow::updateInfoTag() {
 
 void MainWindow::on_listNote_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
-    if(ui->listNote->count()<=1)
-        saveInfoNote();
-    if(previous!=nullptr){
-        qDebug()<<"if СРАБОТАЛ";
-       savePreviousCurrentNote(previous);
-    }
+    // if(ui->listNote->count()<=1)
+    //     saveInfoNote();
+    // if(previous!=nullptr){
+    //     qDebug()<<"if СРАБОТАЛ";
+    //    savePreviousCurrentNote(previous);
+    // }
 
-    ui->TitleNote->clear();
-    ui->TextNote->clear();
+    // ui->TitleNote->clear();
+    // ui->TextNote->clear();
 
-    unloadInfoNote();
+    // unloadInfoNote();
 }
 
 
