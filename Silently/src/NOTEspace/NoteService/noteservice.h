@@ -26,7 +26,7 @@ public:
 
     Note* getFirstNote();
 
-    bool noteExists(std::chrono::system_clock::time_point noteTime);
+    bool noteExists(QDateTime  noteTime);
     bool noteExists(QString noteTitle);
     bool noteExists(int noteID);
 
@@ -44,6 +44,7 @@ public:
 
     Note* getNotePtr(const QString& title);
     Note* getNotePtr(const int& id);
+    Note* getNotePtr(const QDateTime& data_create);
 
     int findIdNote(QString nameNote);
     void changeNameNoteInVector(QString newName,int oldID);

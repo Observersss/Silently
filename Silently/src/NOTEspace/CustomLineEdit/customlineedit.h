@@ -15,9 +15,11 @@ class CustomLineEdit : public QWidget
 public:
     explicit CustomLineEdit(QWidget *parent = nullptr);
     QString text()const;
+    QString style() const;
     QLineEdit* getlineEdit()const;
 
     ~CustomLineEdit();
+    QLineEdit *lineEdit;
 
 signals:
     void deleteRequested();
@@ -40,7 +42,7 @@ protected:
     void focusOutEvent(QFocusEvent *event) override;
 
 private:
-    QLineEdit *lineEdit;
+    // QLineEdit *lineEdit;
     QPushButton *menuButton;
     QMenu *popupMenu;
 };

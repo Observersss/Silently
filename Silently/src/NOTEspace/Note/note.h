@@ -1,15 +1,17 @@
 #ifndef NOTE_H
 #define NOTE_H
 
+#include <QVector>
+#include <QDateTime>
+
 #include "NOTEspace/Tag/tag.h"
-
-
 class Note{
     private:
         QString title;
-        std::vector<QString> text;
-        std::chrono::system_clock::time_point data_time;
-        std::vector<Tag> activeTag;
+        QVector<QString> text;
+        QVector<QString> styles;
+        QDateTime data_time;
+        QVector<Tag> activeTag;
         static int idMaxValue;
         int id;
     public:
@@ -25,24 +27,30 @@ class Note{
         //приймає string і передає y text
         void setText(QString newText);
 
-        void setText(std::vector<QString> newText);
+        void setText(QVector<QString> newText);
 
-        void setData_time(std::chrono::system_clock::time_point timePoint);
+        void setStyles(QVector<QString> _styles);
+
+        void setTextWithStyles(std::pair<QVector<QString>,QVector<QString>> vectors);
+
+        void setData_time(QDateTime timePoint);
 
 
         //додавання тегу
         //приймає Tag і передає у teg
         void addActiveTag(Tag newActiveTag);
         void addActiveTag(const QString& newActiveTag);
-        void addActiveTag(std::vector<QString> newActiveTags);
+        void addActiveTag(QVector<QString> newActiveTags);
 
         void deleteTag(const QString& tagName);
 
-        std::vector<Tag> getActiveTag()const;
+        QVector<Tag> getActiveTag()const;
 
         QString getTitle()const;
-        std::vector<QString> getText()const;
-        std::chrono::system_clock::time_point getDataTime()const;
+        QVector<QString> getText()const;
+        QVector<QString> getStyles()const;
+        std::pair<QVector<QString>,QVector<QString>> getTextWithStyles();
+        QDateTime getDataTime()const;
         int getIdNote()const;
 };
 

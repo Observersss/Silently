@@ -85,6 +85,10 @@ CustomLineEdit::CustomLineEdit(QWidget *parent) : QWidget(parent)
 QString CustomLineEdit::text()const{
     return lineEdit->text();
 }
+QString CustomLineEdit::style() const{
+    return lineEdit->styleSheet();
+}
+
 QLineEdit* CustomLineEdit::getlineEdit()const{
     return lineEdit;
 }
@@ -204,8 +208,8 @@ void CustomLineEdit::manageActiveButton(bool isActive)
         menuButton->setEnabled(true);
     } else {
         // Кнопка становится белой, круглой и без границы
-        menuButton->setStyleSheet("QPushButton { background-color: white; border: none; border-radius: 10px; width:20px; height:20px;  font-size: 14px; }");
-        menuButton->setEnabled(false);
+        menuButton->setStyleSheet("QPushButton { background-color: white; border: none; border-radius: 10px; width:20px; height:20px; color:black;  font-size: 14px; }");
+        menuButton->setEnabled(true);
     }
 }
 CustomLineEdit::~CustomLineEdit(){

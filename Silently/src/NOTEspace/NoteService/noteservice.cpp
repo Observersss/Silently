@@ -86,9 +86,9 @@ Note* NoteService::getFirstNote(){
     return &notes[0];
 }
 
-bool NoteService::noteExists(std::chrono::system_clock::time_point noteTime) {
+bool NoteService::noteExists(QDateTime  noteTime) {
     for (const Note& note : notes) {
-        // Предполагаем, что getTime() возвращает время создания заметки типа std::chrono::system_clock::time_point
+        // Предполагаем, что getTime() возвращает время создания заметки типа QDateTime
         if (note.getDataTime() == noteTime) {
             return true; // Если найдена заметка с указанным временем, возвращаем true
         }
@@ -110,7 +110,7 @@ bool NoteService::noteExists(QString noteTitle){
 }
 bool NoteService::noteExists(int noteID){
     for (const Note& note : notes) {
-        // Предполагаем, что getTime() возвращает время создания заметки типа std::chrono::system_clock::time_point
+        // Предполагаем, что getTime() возвращает время создания заметки типа QDateTime
         if (note.getIdNote() == noteID) {
             //qDebug()<<"ID какое нашло при проверки noteExists"<<note.getIdNote();
             return true; // Если найдена заметка с указанным временем, возвращаем true
@@ -166,14 +166,22 @@ Note* NoteService::getNotePtr(const int &id) {
     }
     return nullptr; // Если заметка не найдена, возвращаем nullptr
 }
-//Note* NoteService::getNotePtr(const int& id){
-//    for (Note& note : notes) {
-//        if (note.getIdNote() == id) {
-//            return &note; // Возвращаем указатель на объект Note из списка notes
-//        }
-//    }
-//    return nullptr; // Если заметка не найдена, возвращаем nullptr
-//}
+Note* NoteService::getNotePtr(const QString &title){
+    for(Note& note : notes){
+        if(note.getTitle() == title){
+            return &note;
+        }
+    }
+    return nullptr;
+}
+Note* NoteService::getNotePtr(const QDateTime& data_create){
+    for(Note& note : notes){
+        if(note.getDataTime() == data_create){
+            return &note;
+        }
+    }
+    return nullptr;
+}
 
 int NoteService::findIdNote(QString nameNote){
     for (const auto& pair : NameNoteAndNoteID) {

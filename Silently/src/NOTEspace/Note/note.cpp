@@ -2,9 +2,11 @@
 int Note::idMaxValue=0;
 
 Note::Note(){
-    data_time = std::chrono::system_clock::now();
+    data_time = QDateTime::currentDateTime();
     idMaxValue+=1;
     id=idMaxValue;
+    text.push_back("f");
+    styles.push_back("QLineEdit {height:20px; border: 1px solid silver; border-radius: 8px; color: black; }");
 }
 
 void Note::setTitle(QString newTitle){
@@ -16,10 +18,17 @@ void Note::setText(QString newText){
 }
 
 
-void Note::setText(std::vector<QString> newText){
+void Note::setText(QVector <QString> newText){
     text = newText;
 }
-void Note::setData_time(std::chrono::system_clock::time_point timePoint){
+void Note::setStyles(QVector <QString> _styles){
+    styles = _styles;
+}
+void Note::setTextWithStyles(std::pair<QVector<QString>,QVector<QString>> vectors){
+    text = vectors.first;
+    styles = vectors.second;
+}
+void Note::setData_time(QDateTime  timePoint){
     data_time = timePoint;
 }
 
@@ -30,7 +39,7 @@ void Note::addActiveTag(const QString& newActiveTag) {
     Tag newTag(newActiveTag);
     activeTag.push_back(newTag);
 }
-void Note::addActiveTag(std::vector<QString> newActiveTags){
+void Note::addActiveTag(QVector <QString> newActiveTags){
 //    for(QString& tagName:newActiveTags){
 //        addActiveTag(tagName);
 //    }
@@ -59,13 +68,18 @@ void Note::deleteTag(const QString& tagName) {
 
 
 
-std::vector<Tag> Note::getActiveTag()const{return activeTag;}
+QVector <Tag> Note::getActiveTag()const{return activeTag;}
 
 QString Note::getTitle()const{return title;}
 
-std::vector<QString> Note::getText()const{return text;}
+QVector <QString> Note::getText()const{return text;}
 
-std::chrono::system_clock::time_point Note::getDataTime()const{return data_time;}
-int Note::getIdNote()const{
-    return id;
+QVector <QString> Note::getStyles()const{return styles;}
+
+std::pair<QVector<QString>,QVector<QString>> Note::getTextWithStyles(){
+    return std::make_pair(text,styles);
 }
+
+QDateTime  Note::getDataTime()const{return data_time;}
+
+int Note::getIdNote()const{ return id; }

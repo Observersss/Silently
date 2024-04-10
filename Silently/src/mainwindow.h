@@ -30,30 +30,20 @@ public:
 
     void updateCharacterEquipment(const std::vector<Item>& equipment);
 
-    void saveInfoNote();
-    void savePreviousCurrentNote(QListWidgetItem *previous);
-
-    void unloadInfoNote();
-
-    Note saveInfoInNewNote();
-
-    NoteService returnNoteService();
-
-    void updateListNote();
-
     void addNewNoteToList(QString nameNote);
-
-    //void deleteTag(Note *note);
 
     void addTag(QString name,bool needAddToAllTags = true);
 
     void updateInfoTag();
+    NoteService returnNoteService();
     NoteService* returnNoteServicePtr();
-
-
+    NoteService* returnNoteServicePtr(QString text);
 
     void AddNoteSpace(QString nameNoteService);
     void deleteNoteSpace(QString nameNoteService);
+
+    void saveInfoNote(QListWidgetItem *previous);
+    void uploadInfoNote(QListWidgetItem *current);
 
     ~MainWindow();
 private slots:
@@ -72,8 +62,6 @@ private slots:
 
     void on_listTag_itemClicked(QListWidgetItem *item);
 
-    void on_listNote_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
-
     void on_pushButton_clicked();
 
     void on_delete_Note_clicked();
@@ -82,10 +70,7 @@ private slots:
 
     void on_delete_Note_Service_clicked();
 
-    void on_NoteSpaces_currentIndexChanged(int index);
-
     void on_listTag_itemDoubleClicked(QListWidgetItem *item);
-
 
 private:
     Ui::MainWindow *ui;
@@ -93,6 +78,7 @@ private:
     Quest quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
+    QString bufferNoteSpace;
     static int noteCounter;
     bool showUpdateCharacteristics = false;
 
