@@ -72,6 +72,8 @@ private slots:
 
     void on_listTag_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_NoteSpaces_textActivated(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     Character character;

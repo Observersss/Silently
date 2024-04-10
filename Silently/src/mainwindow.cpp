@@ -264,7 +264,6 @@ void MainWindow::on_more_characteristics_clicked()
     }
 }
 
-
 void MainWindow::on_Open_inventory_clicked()
 {
     Inventory_DialogWindow window(this,&character);
@@ -436,53 +435,59 @@ void MainWindow::on_AddNoteSpace_clicked()
 
 void MainWindow::saveInfoNote(QListWidgetItem *previous){
     QString title = ui->TitleNote->text();
-    if(title == ""){
-        QMessageBox::warning(this,"warning","alert");
+    if(title.isEmpty()){
+        QMessageBox::warning(this, "Warning", "Title cannot be empty.");
         return;
     }
-    if(!previous) {
+
+    if (!previous)
         return;
-    }
+
     CustomLineEditManager* manager = CustomLineEditManager::getInstance(this);
-    std::pair<QVector<QString>,QVector<QString>> vectorsWithTextAndStyles = manager->getTextWithStyles();
     QVector<QString> text = manager->getTextFromLineEdits();
-    //QVector<QString> styles = manager->getStylesFromLineEdits();
-    qDebug()<<"Size vector of text: "<<text.size()<<'\n';
-    //qDebug()<<"Size vector of styles: "<<styles.size()<<'\n';
-    Note* note1 = nullptr;
-    qDebug()<<bufferNoteSpace<<"  "<<ui->NoteSpaces->currentText()<<'\n';
-    if(bufferNoteSpace == ui->NoteSpaces->currentText()){
-        Note* note = returnNoteServicePtr()->getNotePtr(previous->text());
-        if(note == nullptr){
-            qDebug()<<"DDDDDDD  "<<'\n';
-        }
+
+    Note* note = nullptr;
+    if (bufferNoteSpace == ui->NoteSpaces->currentText()) {
+        note = returnNoteServicePtr()->getNotePtr(previous->text());
+    } else {
+        QString dateTimeString = ui->date_create_note->text();
+        note = returnNoteServicePtr(bufferNoteSpace)->getNotePtr(QDateTime::fromString(dateTimeString, "dd.MM.yyyy hh:mm:ss"));
+    }
+
+    if (note) {
         note->setTitle(title);
         note->setText(text);
-        //note->setStyles(styles);
-    }else{
-        QString dateTimeString = ui->date_create_note->text();
-        note1 = returnNoteServicePtr(bufferNoteSpace)->getNotePtr(QDateTime::fromString(dateTimeString, "dd.MM.yyyy hh:mm:ss"));
-        note1->setTitle(title);
     }
-    bufferNoteSpace = ui->NoteSpaces->currentText();
-    previous->setText(title);
 }
+
 void MainWindow::uploadInfoNote(QListWidgetItem *current){
+    if (!current)
+        return;
+
     Note* note = returnNoteServicePtr()->getNotePtr(current->text());
+    if (!note)
+        return;
+
     ui->TitleNote->setText(note->getTitle());
+
     CustomLineEditManager* manager = CustomLineEditManager::getInstance(this);
     manager->clearLayout();
-    // std::pair<QVector<QString>,QVector<QString>> vectorsWithTextAndStyles = note->getTextWithStyles();
-    // qDebug()<<"Text: "<<vectorsWithTextAndStyles.first[0]<<"\n Styles: "<<vectorsWithTextAndStyles.second[0];
-    // manager->setTextWithStylesForCustomLineEdit(vectorsWithTextAndStyles);
     QVector<QString> text = note->getText();
-    //QVector<QString> styles = note->getStyles();
     manager->setTextForCustomLineEdit(text);
-    //manager->setStyleForCustomLineEdit(styles);
+
     updateInfoTag();
-    //QVector<QString> text = note->getText();
-    //manager->setTextForCustomLineEdit(text);
     bufferNoteId = note->getIdNote();
+    bufferNoteSpace = ui->NoteSpaces->currentText();
+}
+
+void MainWindow::on_NoteSpaces_textActivated(const QString &arg1) {
+
+    ui->listNote->clear();
+    std::vector<Note> notes = returnNoteServicePtr()->getAllNotes();
+    for (Note& note : notes) {
+        ui->listNote->addItem(note.getTitle());
+    }
+    ui->listNote->setCurrentRow(0);
 }
 
 
