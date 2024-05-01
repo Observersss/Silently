@@ -11,9 +11,10 @@
 #include "Inventory_DialogWindow/Inventory_DialogWindow.h"
 #include "AddTag_DialogWindow/AddTag_dialogwindow.h"
 #include "AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h"
-
 #include "NOTEspace/CustomLineEditManager/customlineeditmanager.h"
+
 int MainWindow::noteCounter=0;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
