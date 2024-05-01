@@ -12,11 +12,9 @@ CustomLineEdit::CustomLineEdit(QWidget *parent) : QWidget(parent)
     menuButton = new QPushButton("...", this);
     popupMenu = new QMenu(this);
 
-    QString lineEditStyle = "QLineEdit {height:20px; border: 1px solid silver; border-radius: 8px; color: black; }";
-    lineEdit->setStyleSheet(lineEditStyle);
+    lineEdit->setStyleSheet(LINE_EDIT_STYLE);
 
-    QString popupMenuStyle = "QMenu { border: 2px solid orange; color: black; }";
-    popupMenu->setStyleSheet(popupMenuStyle);
+    popupMenu->setStyleSheet(POPUP_MENU_STYLE);
 
     QAction *boldAction = popupMenu->addAction("Bold");
     QAction *italicAction = popupMenu->addAction("Italic");
@@ -80,6 +78,12 @@ CustomLineEdit::CustomLineEdit(QWidget *parent) : QWidget(parent)
 
     lineEdit->installEventFilter(this);
     lineEdit->setText(" ");
+}
+void CustomLineEdit::setText(const QString& text){
+    lineEdit->setText(text);
+}
+void CustomLineEdit::setStyleSheet(const QString &styleSheet){
+    lineEdit->setStyleSheet(styleSheet);
 }
 
 QString CustomLineEdit::text()const{
@@ -169,20 +173,16 @@ void CustomLineEdit::handleDeleteCustomLineEdit(){
 
 void CustomLineEdit::focusInEvent(QFocusEvent *event)
 {
-    std::cout<<"2\n";
     QWidget::focusInEvent(event);
     if (menuButton) {
-        std::cout<<"22\n";
         menuButton->setVisible(true);
     }
 }
 
 void CustomLineEdit::focusOutEvent(QFocusEvent *event)
 {
-    std::cout<<"1\n";
     QWidget::focusOutEvent(event);
     if (menuButton) {
-        std::cout<<"11\n";
         menuButton->setVisible(false);
     }
 }
@@ -212,13 +212,15 @@ void CustomLineEdit::manageActiveButton(bool isActive)
         menuButton->setEnabled(true);
     }
 }
-CustomLineEdit::~CustomLineEdit(){
-    delete lineEdit;
-    delete popupMenu;
-    delete menuButton;
-}
 
-CustomLineEdit *CustomLineEditFactory::createCustomLineEdit(QWidget *parent)
-{
-    return new CustomLineEdit(parent);
+void CustomLineEdit::connectSignalsAndSlots(){
+
+}
+void CustomLineEdit::createPopupMenu(){
+
+}
+CustomLineEdit::~CustomLineEdit(){
+    lineEdit->deleteLater();
+    menuButton->deleteLater();
+    popupMenu->deleteLater();
 }

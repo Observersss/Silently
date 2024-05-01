@@ -281,7 +281,7 @@ Note* NoteService::getFirstNote() const{
     }
 }
 
-Note* NoteService::getNote(const int &id){
+Note* NoteService::getNote(const int& id){
     Note* find = findNote(id);
     if(find != nullptr){
         return find;
@@ -316,6 +316,9 @@ Note* NoteService::getNote(const T& arg) {
 }
 QVector<Note*> NoteService::getAllNotes()const{
     return notes_;
+}
+QVector<Tag> NoteService::getAllTags()const{
+    return allTag_;
 }
 QString NoteService::getNameSpaceNote()const{
     return nameSpaceNote_;

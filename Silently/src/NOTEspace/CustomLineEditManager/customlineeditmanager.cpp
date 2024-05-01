@@ -20,7 +20,7 @@ void CustomLineEditManager::setLayoutAndScroolArea(QLayout* layout,QScrollArea* 
 
 void CustomLineEditManager::create_CustomLineEdit(){
     if(layout){
-        CustomLineEdit* customLineEdit = CustomLineEditFactory::createCustomLineEdit();
+        CustomLineEdit* customLineEdit = CustomLineEditFactory::create();
         QLineEdit* lineEdit = customLineEdit->getlineEdit();
         connect(lineEdit, &QLineEdit::returnPressed,this,[=]{
             auto it = std::find(lineEdits.begin(), lineEdits.end(), customLineEdit);
@@ -141,7 +141,7 @@ void CustomLineEditManager::setTextWithStylesForCustomLineEdit(std::pair<QVector
 }
 void CustomLineEditManager::create_CustomLineEdit_with_Text(QString text){
     if(layout){
-        CustomLineEdit* customLineEdit = CustomLineEditFactory::createCustomLineEdit();
+        CustomLineEdit* customLineEdit = CustomLineEditFactory::create_with_text(text);
         QLineEdit* lineEdit = customLineEdit->getlineEdit();
         connect(lineEdit, &QLineEdit::returnPressed,this,[=]{
             auto it = std::find(lineEdits.begin(), lineEdits.end(), customLineEdit);
@@ -158,7 +158,6 @@ void CustomLineEditManager::create_CustomLineEdit_with_Text(QString text){
                 delete_CustomLineEdit(customLineEdit);
             }
         });
-        lineEdit->setText(text);
         scroolArea->resize(scroolArea->width(),scroolArea->height()+30);
         layout->addWidget(customLineEdit);
         lineEdits.append(customLineEdit);
@@ -167,7 +166,7 @@ void CustomLineEditManager::create_CustomLineEdit_with_Text(QString text){
 }
 void CustomLineEditManager::create_CustomLineEdit_with_Style(QString style){
     if(layout){
-        CustomLineEdit* customLineEdit = CustomLineEditFactory::createCustomLineEdit();
+        CustomLineEdit* customLineEdit = CustomLineEditFactory::create_with_style(style);
         QLineEdit* lineEdit = customLineEdit->getlineEdit();
         connect(lineEdit, &QLineEdit::returnPressed,this,[=]{
             auto it = std::find(lineEdits.begin(), lineEdits.end(), customLineEdit);
@@ -184,7 +183,6 @@ void CustomLineEditManager::create_CustomLineEdit_with_Style(QString style){
                 delete_CustomLineEdit(customLineEdit);
             }
         });
-        lineEdit->setStyleSheet(style);
         scroolArea->resize(scroolArea->width(),scroolArea->height()+30);
         layout->addWidget(customLineEdit);
         lineEdits.append(customLineEdit);
@@ -193,7 +191,7 @@ void CustomLineEditManager::create_CustomLineEdit_with_Style(QString style){
 }
 void CustomLineEditManager::create_CustomLineEdit_with_Text_and_Style(QString text,QString style){
     if(layout){
-        CustomLineEdit* customLineEdit = CustomLineEditFactory::createCustomLineEdit();
+        CustomLineEdit* customLineEdit = CustomLineEditFactory::create_with_text_and_style(text,style);
         QLineEdit* lineEdit = customLineEdit->getlineEdit();
         connect(lineEdit, &QLineEdit::returnPressed,this,[=]{
             auto it = std::find(lineEdits.begin(), lineEdits.end(), customLineEdit);
