@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     //set basic optinal
+    connect_Signals_and_Slots();
+
     ui->spaces->setCurrentIndex(1);
     ui->button_change_space->setText("Go RPG");
     ui->label_InfoSpace->setText("Space now: Notes");
@@ -69,52 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     manager->create_CustomLineEdit();
 
 
-    connect(ui->QListWidget_Notes,&QListWidget::currentItemChanged,this, [this](QListWidgetItem *current, QListWidgetItem *previous){
-        if(previous)
-            saveInfoNote(previous);
 
-        uploadInfoNote(current);
-    });
-    connect(ui->button_addNote, &QPushButton::clicked, this, &MainWindow::createNote);
-    connect(ui->button_deleteNote,&QPushButton::clicked,this,[this]{
-        //Треба пофіксити видалення нотатки
-
-        //QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();
-        //returnNoteServicePtr()->deleteNote(currentItem->text());
-    });
-
-    connect(ui->button_AddNoteSpace,&QPushButton::clicked,this,[this]{
-        AddNoteSpace_DialogWindow window(this);
-        window.exec();
-    });
-
-    connect(ui->QComboBox_NoteSpaces,&QComboBox::textActivated,this,[this]{
-        ui->QListWidget_Notes->clear();
-        QVector <Note*> notes = returnNoteServicePtr()->getAllNotes();
-        for (Note* note : notes) {
-            ui->QListWidget_Notes->addItem(note->getTitle());
-        }
-        ui->QListWidget_Notes->setCurrentRow(0);
-    });
-
-    connect(ui->button_change_space,&QPushButton::clicked,this,[this]{
-        if(ui->spaces->currentIndex()==1)
-        {
-            ui->spaces->setCurrentIndex(0);
-            ui->button_change_space->setText("Go Notes");
-            ui->label_InfoSpace->setText("Space now: RPG");
-            updateInfoOnQuest();
-            updateInfoOnCharacter();
-            ui->stackedWidget->setCurrentIndex(1);
-
-        } else
-        {
-            ui->spaces->setCurrentIndex(1);
-            ui->button_change_space->setText("Go RPG");
-            ui->label_InfoSpace->setText("Space now: Notes");
-            ui->stackedWidget->setCurrentIndex(0);
-        }
-    });
 }
 
 void MainWindow::checkQuestDeadlinePassed() {
@@ -465,3 +422,59 @@ void MainWindow::createNote(){
     }
 }
 
+void MainWindow::connect_Signals_and_Slots(){
+
+    //For save previous note and upload selected
+    connect(ui->QListWidget_Notes,&QListWidget::currentItemChanged,this, [this](QListWidgetItem *current, QListWidgetItem *previous){
+        if(previous)
+            saveInfoNote(previous);
+
+        uploadInfoNote(current);
+    });
+
+    //If button clicked create new note
+    connect(ui->button_addNote, &QPushButton::clicked, this, &MainWindow::createNote);
+    //If button clicked delete active note
+    connect(ui->button_deleteNote,&QPushButton::clicked,this,[this]{
+        //Треба пофіксити видалення нотатки
+
+        //QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();
+        //returnNoteServicePtr()->deleteNote(currentItem->text());
+    });
+
+    // If button clicked show AddNoteSpace_DialogWindow for create new NoteSpace
+    connect(ui->button_AddNoteSpace,&QPushButton::clicked,this,[this]{
+        AddNoteSpace_DialogWindow window(this);
+        window.exec();
+    });
+
+    // If current NoteSpace changed update QListWidget_Notes for this NoteSpace
+    connect(ui->QComboBox_NoteSpaces,&QComboBox::textActivated,this,[this]{
+        ui->QListWidget_Notes->clear();
+        QVector <Note*> notes = returnNoteServicePtr()->getAllNotes();
+        for (Note* note : notes) {
+            ui->QListWidget_Notes->addItem(note->getTitle());
+        }
+        ui->QListWidget_Notes->setCurrentRow(0);
+    });
+
+    //connect for control visiable element program in space
+    connect(ui->button_change_space,&QPushButton::clicked,this,[this]{
+        if(ui->spaces->currentIndex()==1)
+        {
+            ui->spaces->setCurrentIndex(0);
+            ui->button_change_space->setText("Go Notes");
+            ui->label_InfoSpace->setText("Space now: RPG");
+            updateInfoOnQuest();
+            updateInfoOnCharacter();
+            ui->stackedWidget->setCurrentIndex(1);
+
+        } else
+        {
+            ui->spaces->setCurrentIndex(1);
+            ui->button_change_space->setText("Go RPG");
+            ui->label_InfoSpace->setText("Space now: Notes");
+            ui->stackedWidget->setCurrentIndex(0);
+        }
+    });
+}

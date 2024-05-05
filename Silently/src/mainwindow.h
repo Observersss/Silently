@@ -75,5 +75,7 @@ private:
     static int noteCounter;
     bool showUpdateCharacteristics = false;
 
+    void connect_Signals_and_Slots();
+
 };
 #endif // MAINWINDOW_H
