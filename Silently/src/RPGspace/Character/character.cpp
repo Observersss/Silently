@@ -23,6 +23,7 @@ void Character::addActiveQuest(Quest* quest) {
 
 //Треба виправити функцію проблема з пошуком(класс буде переписано тому зміниться пошук)
 void Character::deleteActiveQuest(const Quest* quest) {
+
     //Використовуюємо цикл foreach для перебору елементів вектора
     for (auto it = activeQuest.begin(); it != activeQuest.end(); ++it) {
 
