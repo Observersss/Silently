@@ -35,13 +35,13 @@ void NoteService::deleteNote(const QString& noteTitle) {
     Note* find = findNote(noteTitle);
     if (find != nullptr) {
         removeElement_from_nameNoteAndNoteID(find->getIdNote());
-        delete find;
         int index = notes_.indexOf(find);
         if (index != -1) {
             notes_.remove(index);
         } else {
             throw std::runtime_error("Failed to find note 1 /NoteService::deleteNote");
         }
+        delete find;
     } else {
         throw std::runtime_error("Failed to find note 1.1 /NoteService::deleteNote");
     }

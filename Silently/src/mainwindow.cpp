@@ -413,8 +413,8 @@ void MainWindow::createNote(){
         return;
     } else{
         Note* note = NoteFactory::create();
-        QString nameNote="Your new Note "+QString::number(noteCounter);
         noteCounter+=1;
+        QString nameNote="Your new Note "+QString::number(noteCounter);
         note->setTitle(nameNote);
 
         ui->QListWidget_Notes->addItem(nameNote);
@@ -435,12 +435,27 @@ void MainWindow::connect_Signals_and_Slots(){
     //If button clicked create new note
     connect(ui->button_addNote, &QPushButton::clicked, this, &MainWindow::createNote);
     //If button clicked delete active note
-    connect(ui->button_deleteNote,&QPushButton::clicked,this,[this]{
-        //Треба пофіксити видалення нотатки
+    connect(ui->button_deleteNote, &QPushButton::clicked, this, [this]{
+        QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();
+        if (currentItem) {
+            if(ui->QListWidget_Notes->count() == 1){
+                QMessageBox::warning(this,"Error","You not can delete this note, please create new and delete this");
+                return;
+            }
 
-        //QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();
-        //returnNoteServicePtr()->deleteNote(currentItem->text());
+            int currentIndex = ui->QListWidget_Notes->row(currentItem);
+            ui->QListWidget_Notes->takeItem(currentIndex);
+
+            returnNoteServicePtr()->deleteNote(currentItem->text());
+            delete currentItem;
+
+            if (ui->QListWidget_Notes->count() > 0) {
+                int newIndex = qMax(0, currentIndex - 1);
+                ui->QListWidget_Notes->setCurrentRow(newIndex);
+            }
+        }
     });
+
 
     // If button clicked show AddNoteSpace_DialogWindow for create new NoteSpace
     connect(ui->button_AddNoteSpace,&QPushButton::clicked,this,[this]{
