@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    // quest = QuestFactory::create();
     ui->setupUi(this);
 
     //СДЕЛАЙ СРАВНЕНИЕ ПО СЕКУНДАМ В SETCHANGENOTE
@@ -89,21 +90,23 @@ void MainWindow::checkQuestDeadlinePassed() {
     qDebug() << "Checking quest deadlines...";
 
     // Получаем текущее время
-    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
-    qDebug() << "Current time: " << std::chrono::system_clock::to_time_t(currentTime);
+    // std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+    // qDebug() << "Current time: " << std::chrono::system_clock::to_time_t(currentTime);
+
+    QDateTime currentTime = QDateTime::currentDateTime();
 
     // Проверяем, достигнут ли дедлайн квеста
-    for(Quest& quest : character.getActiveQuest()){
-        std::chrono::system_clock::time_point deadline = quest.getDeadline();
-        qDebug() << "Quest deadline: " << std::chrono::system_clock::to_time_t(deadline);
+    for(Quest* quest : character.getActiveQuest()){
+        // std::chrono::system_clock::time_point deadline = quest.getDeadline();
+        // qDebug() << "Quest deadline: " << std::chrono::system_clock::to_time_t(deadline);
 
-        if (currentTime >= deadline) {
+        if (currentTime >= quest->getDeadline()) {
             qDebug() << "Deadline passed!";
-            QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest.getTitle() + "' has passed.");
+            QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest->getTitle() + "' has passed.");
             character.deleteActiveQuest(quest);
             // Действия по обработке прошедшего дедлайна квеста
 
-            QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
+            QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
             for (int i = 0; i < ui->QuestList->count(); ++i) {
                 QListWidgetItem *item = ui->QuestList->item(i);
                 if (item->text() == title) {
@@ -167,10 +170,10 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 
         if (conversionOK) {
             qDebug() << "ID:" << id;
-            Quest quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
+            Quest* quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
 
             // Проверка на ошибку, если квест не был найден
-            if (quest.getTitle() == "0") {
+            if (quest->getTitle() == "0") {
                 qDebug() << "Квест не найден в mainwindow.cpp/on_QuestList_itemDoubleClicked";
             } else {
                 // Если проверка пройдена, запускаем новое окно ShowInfoQuest_DialogWindow
@@ -212,12 +215,12 @@ void MainWindow::updateInfoOnCharacter(){
 }
 
 void MainWindow::updateInfoOnQuest(){
-    std::vector<Quest> quests = character.getActiveQuest();
+    QVector<Quest*> quests = character.getActiveQuest();
 
     if (!quests.empty()) {
     //Вектор не пустий, можна отримати доступ до елементів
-    Quest quest = quests.back();
-    QString title ="ID:"+QString::number(quest.getId())+" " + quest.getTitle();
+    Quest* quest = quests.back();
+    QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
     ui->QuestList->addItem(title);
 
     } else {

@@ -19,7 +19,7 @@ addQuest_DialogWindow::~addQuest_DialogWindow()
 
 void addQuest_DialogWindow::on_pushButton_clicked()
 {
-    Quest* quest = new Quest;
+    Quest* quest = QuestFactory::create();
 
     QString title = ui->Title->text();
     quest->setTitle(title);
@@ -46,8 +46,7 @@ void addQuest_DialogWindow::on_pushButton_clicked()
     if(ui->dateTimeEdit->YearSection==00&&ui->dateTimeEdit->MonthSection==00&&ui->dateTimeEdit->DaySection==00){
 
     }else{
-        std::chrono::system_clock::time_point timePoint = std::chrono::system_clock::from_time_t(selectedDateTime.toSecsSinceEpoch());
-        quest->setDeadline(timePoint);
+        quest->setDeadline(selectedDateTime);
     }
     // Создаем MainWindow
     MainWindow* w = dynamic_cast<MainWindow*>(parent());

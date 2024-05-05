@@ -17,39 +17,41 @@ Character::Character(){
 
                 /*Функції для роботи з квестами*/
 void Character::addActiveQuest(Quest* quest) {
-    Quest newQuest = *quest; // Створюємо копію об'єкта Quest
-    activeQuest.push_back(newQuest); // Додаємо його у вектор
+    //Quest newQuest = *quest; // Створюємо копію об'єкта Quest
+    activeQuest.push_back(quest); // Додаємо його у вектор
 }
 
-void Character::deleteActiveQuest(Quest& quest) {
+//Треба виправити функцію проблема з пошуком(класс буде переписано тому зміниться пошук)
+void Character::deleteActiveQuest(const Quest* quest) {
     //Використовуюємо цикл foreach для перебору елементів вектора
     for (auto it = activeQuest.begin(); it != activeQuest.end(); ++it) {
 
         //Порівнюємо назву квеста з getTitile()
-        if (it->getTitle() == quest.getTitle()) {
+        //if ((*it)->getTitle() == quest->getTitle()) {
 
             //Видаляємо квест з вектора
-            activeQuest.erase(it);
+            //activeQuest.erase(it);
+            //delete *it;
             break; //Ми знайшли і видалили квест тому виходимо з цикла
-        }
+        //}
     }
 }
 
-Quest Character::findQuest(const QString& title){
-    for (const Quest& quest : activeQuest) {
-        if (quest.getTitle() == title) {
+Quest* Character::findQuest(const QString& title){
+    for (Quest* quest : activeQuest) {
+        if (quest->getTitle() == title) {
             return quest; // Якщо квест знайшли то виходимо з функції
         }
     }
 
     //Квест не знайдемо виведеться помилка при перевірці чи повернуло квест
-    Quest quest_eror;
-    quest_eror.setTitle(nullptr);
+    Quest* quest_eror = QuestFactory::create();
+    quest_eror->setTitle(nullptr);
     return quest_eror;
 }
-Quest Character::findQuest(const int id){
-    for(const Quest& quest : activeQuest){
-        if(quest.getId() == id){
+Quest* Character::findQuest(const int id){
+    for( Quest* quest : activeQuest){
+        if(quest->getId() == id){
             return quest;
         }
     }
@@ -222,7 +224,7 @@ Inventory Character::getInventory() {
     return inventory;
 }
 
-std::vector<Quest> Character::getActiveQuest(){
+QVector<Quest*> Character::getActiveQuest(){
     return activeQuest;
 }
 

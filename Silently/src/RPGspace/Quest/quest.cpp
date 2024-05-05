@@ -1,47 +1,47 @@
 #include "quest.h"
-int Quest::idCount = -1;
+int Quest::idCount_ = -1;
 Quest::Quest(){
-    idCount++;
-    id = idCount;
+    idCount_++;
+    id_ = idCount_;
 }
 
-bool Quest::checkDeadline()const{
-    return deadline==std::chrono::system_clock::now();
-}
-
-
-void Quest::setTitle(QString newTitle){
-    title=newTitle;
+bool Quest::checkDeadline(){
+    return deadline_ < QDateTime::currentDateTime();
 }
 
 
-void Quest::setDiscription(QString newDiscription){
-    discription=newDiscription;
+void Quest::setTitle(const QString& newTitle){
+    title_=newTitle;
 }
 
 
-void Quest::setDifficulti(int newDifficulty){
-    difficulty=newDifficulty;
+void Quest::setDiscription(const QString& newDiscription){
+    discription_=newDiscription;
 }
 
 
-void Quest::setDeadline(std::chrono::system_clock::time_point newDeadline){
-    deadline=newDeadline;
+void Quest::setDifficulti(const int& newDifficulty){
+    difficulty_=newDifficulty;
+}
+
+
+void Quest::setDeadline(const QDateTime& newDeadline){
+    deadline_=newDeadline;
 }
 
 
 int Quest::getId() const{
-    return id;
+    return id_;
 }
 QString Quest::getTitle()const{
-    return title;
+    return title_;
 }
 QString Quest::getDiscription()const{
-    return discription;
+    return discription_;
 }
 int Quest::getDifficulty()const{
-    return difficulty;
+    return difficulty_;
 }
-std::chrono::system_clock::time_point Quest::getDeadline()const{
-    return deadline;
+QDateTime Quest::getDeadline()const{
+    return deadline_;
 }

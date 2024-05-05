@@ -44,8 +44,8 @@ void RPGSpace_test::cleanupTestCase() {}
 // Test adding a quest to active quests
 void RPGSpace_test::testAddActiveQuest() {
     Character character;
-    Quest quest;
-    character.addActiveQuest(&quest);
+    Quest* quest = QuestFactory::create();
+    character.addActiveQuest(quest);
 
     QCOMPARE(character.getActiveQuest().size(), size_t(1));
 }
@@ -53,8 +53,8 @@ void RPGSpace_test::testAddActiveQuest() {
 // Test deleting a quest from active quests
 void RPGSpace_test::testDeleteActiveQuest() {
     Character character;
-    Quest quest;
-    character.addActiveQuest(&quest);
+    Quest* quest = QuestFactory::create();
+    character.addActiveQuest(quest);
     character.deleteActiveQuest(quest);
 
     QCOMPARE(character.getActiveQuest().size(), size_t(0));

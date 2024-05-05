@@ -90,7 +90,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Character character;
-    Quest quest;
+    Quest* quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
     static int noteCounter;

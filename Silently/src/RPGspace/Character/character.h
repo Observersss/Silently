@@ -6,6 +6,8 @@
 #include <QPixmap>
 #include <iostream>
 
+#include <QVector>
+
 class Character
 {
 private:
@@ -40,7 +42,7 @@ private:
      *Зображення самого персонажа
     */
     Inventory inventory;
-    std::vector<Quest>activeQuest;
+    QVector<Quest*>activeQuest;
     QPixmap characterImage;
 public:
     //Конструктор який ініціалізує об'єкт і надає персонажу базові дані про параметри
@@ -48,13 +50,13 @@ public:
 
                 /*Функції для роботи з квестами*/
 
-    void addActiveQuest(Quest* quest);
-    void deleteActiveQuest(Quest& quest);
+    void addActiveQuest( Quest* quest);
+    void deleteActiveQuest(const Quest* quest);
 
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
-    Quest findQuest(const QString& title);
-    Quest findQuest(const int id);
+    Quest* findQuest(const QString& title);
+    Quest* findQuest(const int id);
 
                 /*Функції для роботи з інвентарем*/
 
@@ -101,7 +103,7 @@ public:
     int getIntelligence() const;
     int getLuck() const;
     Inventory getInventory() ;
-    std::vector<Quest> getActiveQuest();
+    QVector<Quest*> getActiveQuest();
 };
 
 
