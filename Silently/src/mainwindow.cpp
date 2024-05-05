@@ -22,18 +22,22 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    on_change_space_clicked();
+    ui->spaces->setCurrentIndex(1);
+    ui->button_change_space->setText("Go RPG");
+    ui->label_InfoSpace->setText("Space now: Notes");
+    ui->stackedWidget->setCurrentIndex(0);
+
     updateInfoOnQuest();
     updateInfoOnCharacter();
 
 
     QPixmap pix(":/icon/img/Character.jpg");
-    int w = ui->character_icon->width();
-    int h = ui->character_icon->height();
+    int w = ui->label_CharacterIcon->width();
+    int h = ui->label_CharacterIcon->height();
 
-    ui->character_icon->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
+    ui->label_CharacterIcon->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
     //ТЕСТИРОВАНИЕ
-    ui->tags_option->setText("+");
+    ui->button_tagsOption->setText("+");
     NoteService noteService = NoteServiceFactory::create();
     Note *firstNote=noteService.getFirstNote();
     //noteService.addNewElementToNameNoteAndNoteID(firstNote->getTitle(),firstNote->getIdNote());
@@ -44,15 +48,15 @@ MainWindow::MainWindow(QWidget *parent)
     bufferNoteSpace = noteService.getNameSpaceNote();
 
     QString title=firstNote->getTitle()/*"Your first note"*/;
-    ui->listNote->addItem(title);
+    ui->QListWidget_Notes->addItem(title);
 
     //QDateTime data_time=firstNote->getDataTime();
 
     QString nameSpaceNote=noteService.getNameSpaceNote();
-    ui->NoteSpaces->addItem(nameSpaceNote);
+    ui->QComboBox_NoteSpaces->addItem(nameSpaceNote);
     // Установка строки в QLabel
     //ui->date_create_note->setText(data_time.toString("dd.MM.yyyy hh:mm:ss"));
-    ui->date_create_note->setStyleSheet("QLabel { padding-top: 10px; font-size:11px; }");
+    ui->label_DateOfCreation->setStyleSheet("QLabel { padding-top: 10px; font-size:11px; }");
 
 
     //unloadInfoNote();
@@ -71,11 +75,51 @@ MainWindow::MainWindow(QWidget *parent)
     //manager->create_CustomLineEdit();
 
 
-    connect(ui->listNote,&QListWidget::currentItemChanged,this, [this](QListWidgetItem *current, QListWidgetItem *previous){
+    connect(ui->QListWidget_Notes,&QListWidget::currentItemChanged,this, [this](QListWidgetItem *current, QListWidgetItem *previous){
         if(previous)
             saveInfoNote(previous);
 
         uploadInfoNote(current);
+    });
+    connect(ui->button_addNote, &QPushButton::clicked, this, &MainWindow::createNote);
+    connect(ui->button_deleteNote,&QPushButton::clicked,this,[this]{
+        //Треба пофіксити видалення нотатки
+
+        //QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();
+        //returnNoteServicePtr()->deleteNote(currentItem->text());
+    });
+
+    connect(ui->button_AddNoteSpace,&QPushButton::clicked,this,[this]{
+        AddNoteSpace_DialogWindow window(this);
+        window.exec();
+    });
+
+    connect(ui->QComboBox_NoteSpaces,&QComboBox::textActivated,this,[this]{
+        ui->QListWidget_Notes->clear();
+        QVector <Note*> notes = returnNoteServicePtr()->getAllNotes();
+        for (Note* note : notes) {
+            ui->QListWidget_Notes->addItem(note->getTitle());
+        }
+        ui->QListWidget_Notes->setCurrentRow(0);
+    });
+
+    connect(ui->button_change_space,&QPushButton::clicked,this,[this]{
+        if(ui->spaces->currentIndex()==1)
+        {
+            ui->spaces->setCurrentIndex(0);
+            ui->button_change_space->setText("Go Notes");
+            ui->label_InfoSpace->setText("Space now: RPG");
+            updateInfoOnQuest();
+            updateInfoOnCharacter();
+            ui->stackedWidget->setCurrentIndex(1);
+
+        } else
+        {
+            ui->spaces->setCurrentIndex(1);
+            ui->button_change_space->setText("Go RPG");
+            ui->label_InfoSpace->setText("Space now: Notes");
+            ui->stackedWidget->setCurrentIndex(0);
+        }
     });
 }
 
@@ -123,25 +167,25 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_change_space_clicked()
-{
-    if(ui->spaces->currentIndex()==1)
-    {
-        ui->spaces->setCurrentIndex(0);
-        ui->change_space->setText("Go Notes");
-        ui->info->setText("Space now: RPG");
-        updateInfoOnQuest();
-        updateInfoOnCharacter();
-        ui->stackedWidget->setCurrentIndex(1);
+// void MainWindow::on_change_space_clicked()
+// {
+//     if(ui->spaces->currentIndex()==1)
+//     {
+//         ui->spaces->setCurrentIndex(0);
+//         ui->button_change_space->setText("Go Notes");
+//         ui->label_InfoSpace->setText("Space now: RPG");
+//         updateInfoOnQuest();
+//         updateInfoOnCharacter();
+//         ui->stackedWidget->setCurrentIndex(1);
 
-    } else
-    {
-        ui->spaces->setCurrentIndex(1);
-        ui->change_space->setText("Go RPG");
-        ui->info->setText("Space now: Notes");
-        ui->stackedWidget->setCurrentIndex(0);
-    }
-}
+//     } else
+//     {
+//         ui->spaces->setCurrentIndex(1);
+//         ui->button_change_space->setText("Go RPG");
+//         ui->label_InfoSpace->setText("Space now: Notes");
+//         ui->stackedWidget->setCurrentIndex(0);
+//     }
+// }
 
 void MainWindow::on_AddingQuest_clicked()
 {
@@ -178,9 +222,6 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
         qDebug() << "Строка не содержит ID в ожидаемом формате";
     }
 }
-
-
-
 
 void MainWindow::updateInfoOnCharacter(){
 
@@ -287,14 +328,14 @@ void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {
 
 void MainWindow::on_tags_option_clicked()
 {
-    if (ui->tags_option->text() == "+") {
+    if (ui->button_tagsOption->text() == "+") {
         QVector<Tag>tags = returnNoteServicePtr()->getAllTags();
         //AddTag_DialogWindow window(this,&tags);
 
     //window.exec();
     }
-    else if (ui->tags_option->text() == "-") {
-    Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()));
+    else if (ui->button_tagsOption->text() == "-") {
+    Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->QListWidget_Notes->currentItem()->text()));
     if (note->getTitle().isEmpty()) {
         return;
         qDebug()<<"Заголовок заметки пустой mainwindow.h/on_tags_option_clicked";
@@ -307,22 +348,22 @@ void MainWindow::on_tags_option_clicked()
 
 void MainWindow::on_listTag_itemClicked(QListWidgetItem *item)
 {
-   ui->tags_option->setText("-");
+   ui->button_tagsOption->setText("-");
 }
 
-NoteService MainWindow::returnNoteService(){
-    QString nameNoteService=ui->NoteSpaces->currentText();
-    for (const NoteService& value : noteSpaces) {
-    if (value.getNameSpaceNote() == nameNoteService)
-        return value;
-    }
-    NoteService noteSpace_eror = NoteServiceFactory::create();
-    noteSpace_eror.setNameSpaceNote(nullptr);
-    return noteSpace_eror;
-}
+// NoteService MainWindow::returnNoteService(){
+//     QString nameNoteService=ui->QComboBox_NoteSpaces->currentText();
+//     for (const NoteService& value : noteSpaces) {
+//     if (value.getNameSpaceNote() == nameNoteService)
+//         return value;
+//     }
+//     NoteService noteSpace_eror = NoteServiceFactory::create();
+//     noteSpace_eror.setNameSpaceNote(nullptr);
+//     return noteSpace_eror;
+// }
 
 NoteService* MainWindow::returnNoteServicePtr() {
-    QString nameNoteService = ui->NoteSpaces->currentText();
+    QString nameNoteService = ui->QComboBox_NoteSpaces->currentText();
     for (NoteService& value : noteSpaces) {
     if (value.getNameSpaceNote() == nameNoteService) {
         return &value;
@@ -339,77 +380,81 @@ NoteService* MainWindow::returnNoteServicePtr(QString text){
     return nullptr;
 }
 
-void MainWindow::addNewNoteToList(QString nameNote){
-    ui->listNote->addItem(nameNote);
-}
+// void MainWindow::addNewNoteToList(QString nameNote){
+//     ui->QListWidget_Notes->addItem(nameNote);
+// }
 
 void MainWindow::addTag(QString name,bool needAddToAllTags) {
 
-    if (ui->listNote->currentItem() == nullptr) {
-    std::cout<<"Проблема \n";
-    return;
+    if (ui->QListWidget_Notes->currentItem() == nullptr) {
+        throw std::runtime_error("Fail! ui->listNote->currentItem() == nullptr /MainWindow::addTag(QString name,bool needAddToAllTags)");
+        return;
     }
 
-    QString title = ui->listNote->currentItem()->text();
+    QString title = ui->QListWidget_Notes->currentItem()->text();
 
     Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(title));
     note->addActiveTag(name);
-    if(needAddToAllTags){
+
+    if(needAddToAllTags)
     returnNoteServicePtr()->addToAllTag(name);
-    }
+
 }
 
 
 void MainWindow::updateInfoTag() {
-    // ui->listTag->clear();
-    // QVector<Tag> tags=returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()))->getActiveTag();
-    // if(!tags.isEmpty()){
-    //     for(const Tag& tag:tags){
-    //         ui->listTag->addItem(tag.getNameTag());
-    //     }
-    // }
-}
+    ui->QListWidget_tags->clear();
+    QVector<Tag> tags = returnNoteServicePtr()->getNote(ui->QListWidget_Notes->currentItem()->text())->getActiveTag();
 
+    if(!tags.isEmpty()){
 
-void MainWindow::on_pushButton_clicked()
-{
-    NoteService *noteService=returnNoteServicePtr();
-    if(noteService==nullptr){
-       return;
-    } else{
-        Note* note = NoteFactory::create();
-        QString nameNote="Your new Note "+QString::number(noteCounter);
-        noteCounter+=1;
-        note->setTitle(nameNote);
+        for(const Tag& tag:tags){
+            ui->QListWidget_tags->addItem(tag.getNameTag());
+        }
 
-        addNewNoteToList(nameNote);
-
-        noteService->addNote(note);
-    //noteService->addNewElementToNameNoteAndNoteID(note.getTitle(),note.getIdNote());
-    //qDebug()<<"ID только что созданой заметки"<<note.getIdNote();
     }
 }
 
 
+// void MainWindow::on_pushButton_clicked()
+// {
+//     if(returnNoteServicePtr()==nullptr){
+//         throw std::runtime_error("Fail! noteService == nullptr /MainWindow::on_pushButton_clicked()");
+//        return;
+//     } else{
+//         Note* note = NoteFactory::create();
+//         QString nameNote="Your new Note "+QString::number(noteCounter);
+//         noteCounter+=1;
+//         note->setTitle(nameNote);
 
-void MainWindow::on_delete_Note_clicked()
-{
-    /*
-     * Цей рядок працює за принципом:
-     * у функцію findIdNote передається текст поточного елемента в listNote
-     * і знайдений індекс який повертає функція передається в removeNoteFromVector
-     * для видалення з вектора NameNoteAndNoteID
-    */
-    //returnNoteServicePtr()->removeNoteFromVector(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()));
-    //QListWidgetItem *current=ui->listNote->currentItem();
-    //delete current;
-}
+//         addNewNoteToList(nameNote);
+
+//         returnNoteServicePtr()->addNote(note);
+//     }
+// }
+
+
+
+// void MainWindow::on_delete_Note_clicked()
+// {
+//     /*
+//      * Цей рядок працює за принципом:
+//      * у функцію findIdNote передається текст поточного елемента в listNote
+//      * і знайдений індекс який повертає функція передається в removeNoteFromVector
+//      * для видалення з вектора NameNoteAndNoteID
+//     */
+
+//     QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();
+//     returnNoteServicePtr()->deleteNote(currentItem->text());
+
+//     //delete currentItem;
+// }
 
 void MainWindow::AddNoteSpace(QString nameNoteService){
     NoteService noteService = NoteServiceFactory::create();
     noteService.setNameSpaceNote(nameNoteService);
     noteSpaces.push_back(noteService);
-    ui->NoteSpaces->addItem(nameNoteService);
+    ui->QComboBox_NoteSpaces->addItem(nameNoteService);
 }
 void MainWindow::deleteNoteSpace(QString nameNoteService){
     noteSpaces.erase(std::remove_if(noteSpaces.begin(), noteSpaces.end(),[&nameNoteService](const NoteService& note)
@@ -419,25 +464,25 @@ void MainWindow::deleteNoteSpace(QString nameNoteService){
 
 void MainWindow::on_delete_Note_Service_clicked()
 {
-    deleteNoteSpace(ui->NoteSpaces->currentText());
+    deleteNoteSpace(ui->QComboBox_NoteSpaces->currentText());
 }
 
 void MainWindow::on_listTag_itemDoubleClicked(QListWidgetItem *item)
 {
-    returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->listNote->currentItem()->text()))->deleteTag(item->text());
+    returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->QListWidget_Notes->currentItem()->text()))->deleteTag(item->text());
     updateInfoTag();
 }
 
 
-void MainWindow::on_AddNoteSpace_clicked()
-{
-    AddNoteSpace_DialogWindow window(this);
+// void MainWindow::on_AddNoteSpace_clicked()
+// {
+//     AddNoteSpace_DialogWindow window(this);
 
-    window.exec();
-}
+//     window.exec();
+// }
 
 void MainWindow::saveInfoNote(QListWidgetItem *previous){
-    QString title = ui->TitleNote->text();
+    QString title = ui->QLineEdit_TitleNote->text();
     if(title.isEmpty()){
         QMessageBox::warning(this, "Warning", "Title cannot be empty.");
         return;
@@ -450,10 +495,10 @@ void MainWindow::saveInfoNote(QListWidgetItem *previous){
     QVector<QString> text = manager->getTextFromLineEdits();
 
     Note* note = nullptr;
-    if (bufferNoteSpace == ui->NoteSpaces->currentText()) {
+    if (bufferNoteSpace == ui->QComboBox_NoteSpaces->currentText()) {
         note = returnNoteServicePtr()->getNote(previous->text());
     } else {
-        QString dateTimeString = ui->date_create_note->text();
+        QString dateTimeString = ui->label_DateOfCreation->text();
         note = returnNoteServicePtr(bufferNoteSpace)->getNote(QDateTime::fromString(dateTimeString, "dd.MM.yyyy hh:mm:ss"));
     }
 
@@ -473,7 +518,7 @@ void MainWindow::uploadInfoNote(QListWidgetItem *current){
     if (!note)
         return;
 
-    ui->TitleNote->setText(note->getTitle());
+    ui->QLineEdit_TitleNote->setText(note->getTitle());
 
     CustomLineEditManager* manager = CustomLineEditManager::getInstance(this);
     manager->clearLayout();
@@ -482,17 +527,30 @@ void MainWindow::uploadInfoNote(QListWidgetItem *current){
 
     updateInfoTag();
     bufferNoteId = note->getIdNote();
-    bufferNoteSpace = ui->NoteSpaces->currentText();
+    bufferNoteSpace = ui->QComboBox_NoteSpaces->currentText();
 }
 
-void MainWindow::on_NoteSpaces_textActivated(const QString &arg1) {
+// void MainWindow::on_NoteSpaces_textActivated(const QString &arg1) {
 
-    ui->listNote->clear();
-    QVector <Note*> notes = returnNoteServicePtr()->getAllNotes();
-    for (Note* note : notes) {
-        ui->listNote->addItem(note->getTitle());
+//     ui->QListWidget_Notes->clear();
+//     QVector <Note*> notes = returnNoteServicePtr()->getAllNotes();
+//     for (Note* note : notes) {
+//         ui->QListWidget_Notes->addItem(note->getTitle());
+//     }
+//     ui->QListWidget_Notes->setCurrentRow(0);
+// }
+void MainWindow::createNote(){
+    if(returnNoteServicePtr()==nullptr){
+        throw std::runtime_error("Fail! noteService == nullptr /MainWindow::on_pushButton_clicked()");
+        return;
+    } else{
+        Note* note = NoteFactory::create();
+        QString nameNote="Your new Note "+QString::number(noteCounter);
+        noteCounter+=1;
+        note->setTitle(nameNote);
+
+        ui->QListWidget_Notes->addItem(nameNote);
+        returnNoteServicePtr()->addNote(note);
     }
-    ui->listNote->setCurrentRow(0);
 }
-
 
