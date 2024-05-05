@@ -241,13 +241,17 @@ border-radius:15px;</string>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">font-size:10px;
+                <string notr="true">
+QLabel { 
+padding-top: 10px;
+ font-size:11px; 
 padding-top:5px;
 margin:0;
-color:white</string>
+color:white
+}</string>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string/>
                </property>
               </widget>
              </item>

@@ -1,7 +1,7 @@
 #include "addtag_dialogwindow.h"
 #include "ui_addtag_dialogwindow.h"
 #include <QMessageBox>
-AddTag_DialogWindow::AddTag_DialogWindow(QWidget *parent, const std::vector<Tag>* tags)
+AddTag_DialogWindow::AddTag_DialogWindow(QWidget *parent, const QVector<Tag>* tags)
     : QDialog(parent)
     , ui(new Ui::AddTag_DialogWindow)
     , _tags(tags)

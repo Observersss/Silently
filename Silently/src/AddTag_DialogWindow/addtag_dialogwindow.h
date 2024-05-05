@@ -13,7 +13,7 @@ class AddTag_DialogWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddTag_DialogWindow(QWidget *parent = nullptr,const std::vector<Tag>* tags = nullptr);
+    explicit AddTag_DialogWindow(QWidget *parent = nullptr,const QVector<Tag>* tags = nullptr);
     ~AddTag_DialogWindow();
 private slots:
     void on_pushButton_clicked();
@@ -21,7 +21,7 @@ private slots:
 
 private:
     Ui::AddTag_DialogWindow *ui;
-    const std::vector<Tag>* _tags;
+    const QVector<Tag>* _tags;
     bool select_tag_frame_hide = false;
     bool create_tag_frame_hide = false;
 };

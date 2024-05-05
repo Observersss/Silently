@@ -30,12 +30,10 @@ public:
 
     void updateCharacterEquipment(const std::vector<Item>& equipment);
 
-    //void addNewNoteToList(QString nameNote);
-
     void addTag(QString name,bool needAddToAllTags = true);
 
     void updateInfoTag();
-    //NoteService returnNoteService();
+
     NoteService* returnNoteServicePtr();
     NoteService* returnNoteServicePtr(QString text);
 
@@ -47,7 +45,6 @@ public:
 
     ~MainWindow();
 private slots:
-    //void on_change_space_clicked();
 
     void checkQuestDeadlinePassed();
 
@@ -62,17 +59,9 @@ private slots:
 
     void on_listTag_itemClicked(QListWidgetItem *item);
 
-    //void on_pushButton_clicked();
-
-    //void on_delete_Note_clicked();
-
-    //void on_AddNoteSpace_clicked();
-
     void on_delete_Note_Service_clicked();
 
     void on_listTag_itemDoubleClicked(QListWidgetItem *item);
-
-    //void on_NoteSpaces_textActivated(const QString &arg1);
 
     void createNote();
 
