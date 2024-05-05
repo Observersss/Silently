@@ -55,9 +55,9 @@ private slots:
     void on_more_characteristics_clicked();
 
     void on_Open_inventory_clicked();
-    void on_tags_option_clicked();
+    //void on_tags_option_clicked();
 
-    void on_listTag_itemClicked(QListWidgetItem *item);
+    //void on_listTag_itemClicked(QListWidgetItem *item);
 
     void on_delete_Note_Service_clicked();
 

@@ -260,30 +260,30 @@ void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {
 /*-----------------------------------------------------------*/
 //                      Note space
 
-void MainWindow::on_tags_option_clicked()
-{
-    if (ui->button_tagsOption->text() == "+") {
-        QVector<Tag>tags = returnNoteServicePtr()->getAllTags();
-        AddTag_DialogWindow window(this,&tags);
+// void MainWindow::on_tags_option_clicked()
+// {
+//     if (ui->button_tagsOption->text() == "+") {
+//         QVector<Tag>tags = returnNoteServicePtr()->getAllTags();
+//         AddTag_DialogWindow window(this,&tags);
 
-        window.exec();
-    }
-    else if (ui->button_tagsOption->text() == "-") {
-    Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->QListWidget_Notes->currentItem()->text()));
-    if (note->getTitle().isEmpty()) {
-        throw std::runtime_error("Title of note is empty /MainWindow::on_tags_option_clicked()");
-        return;
-    }
-   }
+//         window.exec();
+//     }
+//     else if (ui->button_tagsOption->text() == "-") {
+//     Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->QListWidget_Notes->currentItem()->text()));
+//     if (note->getTitle().isEmpty()) {
+//         throw std::runtime_error("Title of note is empty /MainWindow::on_tags_option_clicked()");
+//         return;
+//     }
+//    }
 
-}
+// }
 
 
 
-void MainWindow::on_listTag_itemClicked(QListWidgetItem *item)
-{
-   ui->button_tagsOption->setText("-");
-}
+// void MainWindow::on_listTag_itemClicked(QListWidgetItem *item)
+// {
+//    ui->button_tagsOption->setText("-");
+// }
 
 NoteService* MainWindow::returnNoteServicePtr() {
     QString nameNoteService = ui->QComboBox_NoteSpaces->currentText();
@@ -491,5 +491,32 @@ void MainWindow::connect_Signals_and_Slots(){
             ui->label_InfoSpace->setText("Space now: Notes");
             ui->stackedWidget->setCurrentIndex(0);
         }
+    });
+
+    connect(ui->QListWidget_tags, &QListWidget::itemClicked, this, [this](QListWidgetItem *item){
+        // if(item){
+        //     ui->button_tagsOption->setText("-");
+        // }else{
+        //     ui->button_tagsOption->setText("+");
+        // }
+    });
+
+    connect(ui->button_tagsOption,&QPushButton::clicked,this,[this](){
+        if (ui->button_tagsOption->text() == "+") {
+            QVector<Tag>tags = returnNoteServicePtr()->getAllTags();
+            AddTag_DialogWindow window(this,&tags);
+
+            window.exec();
+        }
+        // else if (ui->button_tagsOption->text() == "-") {
+        //     Note *note = returnNoteServicePtr()->getNote(ui->QListWidget_Notes->currentItem()->text());
+        //     if (note == nullptr) {
+        //         throw std::runtime_error("Title of note is empty /MainWindow::on_tags_option_clicked()");
+        //         return;
+        //     }
+        //     note->deleteTag(ui->QListWidget_tags->currentItem()->text());
+        //     QListWidgetItem* current = ui->QListWidget_tags->currentItem();
+        //     delete current;
+        // }
     });
 }
