@@ -49,7 +49,7 @@ public:
 
                 /*Функції для роботи з квестами*/
 
-    void addActiveQuest( Quest* quest);
+    void addActiveQuest(Quest* quest);
     void deleteActiveQuest(const Quest* quest);
 
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
@@ -59,22 +59,18 @@ public:
 
                 /*Функції для роботи з інвентарем*/
 
-    void addItemToInventory(Item item);
-    void removeItemFromInventory(Item item);
+    void addItemToInventory(Item* item);
+    void removeItemFromInventory(Item* item);
     void setInventory(Inventory value);
 
                 /*Функції для оновлення характеристик персонажа на основі екіпірованих предметів*/
 
     void updateCharacteristicsFromInventory();
-    void removeCharacteristicsFromUnequippedItems(const Item& item);
+    void removeCharacteristicsFromUnequippedItems(const Item* item);
 
 
                 /*Функції для збільшення показників характеристик персонажа*/
 
-    /*Функція додавання досвіду до персонажа
-     * Якщо досвід = 100 то запускається updateLevel яка збільшує всі інші характеристики
-     * за допомогою функцій типу set...
-    */
     void setExperience();
     void updateLevel();
     void setHealth(int amount);
