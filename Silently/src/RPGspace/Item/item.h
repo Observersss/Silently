@@ -79,6 +79,7 @@ protected:
 };
 
 class ItemFactory{
+public:
     static Item* create_by_default(){
         DefaultItemGenerator generator;
         return generator.generateItem();

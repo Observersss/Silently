@@ -28,7 +28,7 @@ public:
 
     void questComplete();
 
-    void updateCharacterEquipment(const std::vector<Item>& equipment);
+    void updateCharacterEquipment(const QVector<Item*>& equipment);
 
     void saveInfoNote();
     void savePreviousCurrentNote(QListWidgetItem *previous);

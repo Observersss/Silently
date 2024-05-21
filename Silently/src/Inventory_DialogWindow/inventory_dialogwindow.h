@@ -41,7 +41,7 @@ private:
 
     void addItemToListWidget(const QString &itemName, QListWidget *listWidget);
     void removeItemFromListWidget(QListWidget *listWidget, int selectedIndex);
-    Item findItemByName(const QString &itemName, const std::vector<Item> &items);
+    Item* findItemByName(const QString &itemName, const QVector<Item*>& items);
     void updateCharacterFromInventory();
     void removeCharacteristicsFromItems(const std::vector<Item> &items);
 };
