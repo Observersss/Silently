@@ -2,6 +2,11 @@
 #include "ui_inventory_dialogwindow.h"
 
 #include <QMessageBox>
+
+//To-Do list for Inventory_DialogWindow:
+//re-write functional for work:
+//with class Inventory(now is not one object)
+//with class Item (work with std::shared_ptr<Item>, old version Item*)
 Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playerCharacter) :
     QDialog(parent),
     ui(new Ui::Inventory_DialogWindow),
@@ -19,8 +24,8 @@ Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playe
     typeCount[GLOVES] = 1;
     typeCount[ANOTHER] = 3;
 
-    QVector<Item*> itemInInventory = character->getInventory().getItemInInventory();
-    QVector<Item*> equipItem = character->getInventory().getItemEquipment();
+    QVector<Item*> itemInInventory = character->getInventory().getItemsInInventory();
+    QVector<Item*> equipItem = character->getInventory().getItemsEquipment();
     if (!itemInInventory.empty()) {
         for (auto &item : itemInInventory) {
             QString name = item->getnameOfitem();
@@ -126,7 +131,6 @@ void Inventory_DialogWindow::on_Equip_Item_itemClicked(QListWidgetItem *item) {
 void Inventory_DialogWindow::on_listWidget_itemClicked(QListWidgetItem *item) {
     Inventory inventory = character->getInventory();
     int selectedIndex = ui->listWidget->currentRow();
-
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
         try {
             const Item* selectedItem = inventory.getItemAtIndex(selectedIndex);
@@ -168,7 +172,7 @@ void Inventory_DialogWindow::on_Equip_clicked() {
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            Item* foundItem = findItemByName(selectedName, inventory.getItemsInInventory());
 
             if(!EquipmentAddToEquipment(foundItem->getTypeItem())){
                 QMessageBox::warning(this,"Error","Cannot add this item to inventory");
@@ -196,7 +200,7 @@ void Inventory_DialogWindow::on_take_off_clicked() {
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item* foundItem = findItemByName(selectedName, inventory.getItemEquipment());
+            Item* foundItem = findItemByName(selectedName, inventory.getItemsEquipment());
             if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
                 QMessageBox::warning(this,"Error","Cannot add this item to inventory");
                 return;
@@ -224,9 +228,9 @@ void Inventory_DialogWindow::on_Delete_clicked()
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            Item* foundItem = findItemByName(selectedName, inventory.getItemsInInventory());
             if ((!foundItem->getnameOfitem().isEmpty())) {
-                inventory.deleteItemFromInventory(foundItem);
+                inventory.removeItemFromInventory(foundItem);
                 removeItemFromListWidget(ui->listWidget, selectedIndex);
                 character->setInventory(inventory);
             }
@@ -245,7 +249,7 @@ void Inventory_DialogWindow::on_Delete_2_clicked()
         QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
-            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            Item* foundItem = findItemByName(selectedName, inventory.getItemsInInventory());
             if ((!foundItem->getnameOfitem().isEmpty())) {
                 if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
                     QMessageBox::warning(this,"Error","Cannot add this item to inventory");

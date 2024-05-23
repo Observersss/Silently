@@ -7,6 +7,14 @@
 
 #include <QVector>
 
+//To-Do list in Character:
+//select new naming(must be easy for reading)
+//Write new functional for Character for work with new Inventory(because Inventory it`s basic class for items and active items)
+//Getters needs return const objects(?)
+//need read and re-write name for functions and atributes
+
+
+
 class Character
 {
 private:
@@ -41,6 +49,7 @@ private:
      *Зображення самого персонажа
     */
     Inventory inventory;
+    Inventory equipment;
     QVector<Quest*>activeQuest;
     QPixmap characterImage;
 public:
@@ -97,7 +106,8 @@ public:
     int getForce() const;
     int getIntelligence() const;
     int getLuck() const;
-    Inventory getInventory() ;
+    Inventory* getInventory();
+    Inventory* getEquipment();
     QVector<Quest*> getActiveQuest();
 };
 

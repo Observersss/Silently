@@ -4,6 +4,9 @@
 #include <iostream>
 #include <QString>
 #include <map>
+//To-Do list for Item:
+//need re-write functional for std::shared_ptr in ItemFactory/ItemGeneratorStrategy/DefaultItemGenerator
+// also re-write work with std::shared_ptr in Inventory_DialogWindow
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
 enum Equipment{
@@ -81,8 +84,7 @@ protected:
 class ItemFactory{
 public:
     static Item* create_by_default(){
-        DefaultItemGenerator generator;
-        return generator.generateItem();
+        return DefaultItemGenerator().generateItem();
     }
 };
 

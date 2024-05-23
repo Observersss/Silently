@@ -51,7 +51,7 @@ void Character::addItemToInventory(Item* item){
 }
 
 void Character::removeItemFromInventory(Item* item){
-    inventory.deleteItemFromInventory(item);
+    inventory.removeItemFromInventory(item);
 }
 
 void Character::setInventory(Inventory value){
@@ -60,7 +60,7 @@ void Character::setInventory(Inventory value){
 
                 /*Функції для оновлення характеристик персонажа на основі екіпірованих предметів*/
 void Character::updateCharacteristicsFromInventory() {
-    QVector<Item*> activeItems = inventory.getItemEquipment();
+    QVector<Item*> activeItems = inventory.getItemsEquipment();
 
     for (const auto& item : activeItems) {
         std::map<QString, int> itemCharacteristics = item->getCharacteristics();

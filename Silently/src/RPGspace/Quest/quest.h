@@ -4,6 +4,11 @@
 #include <QString>
 #include <QDateTime>
 
+//To-Do list for Quest functional
+//re-write for std::shared_ptr<Quest> (old version Quest*)
+// move private section in Quest in end class Quest
+// write new truth naming atribute/methods
+
 class Quest{
 private:
     static int idCount_;
