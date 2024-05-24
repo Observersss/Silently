@@ -10,23 +10,23 @@ bool Quest::checkDeadline(){
 }
 
 
-void Quest::setTitle(const QString& newTitle){
-    title_=newTitle;
+void Quest::setTitle(const QString& title){
+    title_ = title;
 }
 
 
-void Quest::setDiscription(const QString& newDiscription){
-    discription_=newDiscription;
+void Quest::setDescription(const QString& description){
+    description_ = description;
 }
 
 
-void Quest::setDifficulti(const int& newDifficulty){
-    difficulty_=newDifficulty;
+void Quest::setComplexity(const int& complexity){
+    complexity_ = complexity;
 }
 
 
-void Quest::setDeadline(const QDateTime& newDeadline){
-    deadline_=newDeadline;
+void Quest::setDeadline(const QDateTime& deadline){
+    deadline_ = deadline;
 }
 
 
@@ -36,11 +36,11 @@ int Quest::getId() const{
 QString Quest::getTitle()const{
     return title_;
 }
-QString Quest::getDiscription()const{
-    return discription_;
+QString Quest::getDescription()const{
+    return description_;
 }
-int Quest::getDifficulty()const{
-    return difficulty_;
+int Quest::getComplexity()const{
+    return complexity_;
 }
 QDateTime Quest::getDeadline()const{
     return deadline_;
