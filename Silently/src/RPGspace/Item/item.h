@@ -4,9 +4,7 @@
 #include <iostream>
 #include <QString>
 #include <map>
-//To-Do list for Item:
-//COMPLETE \ need re-write functional for std::shared_ptr in ItemFactory/ItemGeneratorStrategy/DefaultItemGenerator
-//Commited all code \ also re-write work with std::shared_ptr in Inventory_DialogWindow
+#include <memory>
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
 enum Equipment{

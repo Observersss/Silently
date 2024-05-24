@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDateTime>
+#include <memory>
 
 class Quest{
 public:
@@ -17,7 +18,6 @@ public:
 
     void setDeadline(const QDateTime& deadline);
 
-    //Геттери
     int getId() const;
     QString getTitle()const;
     QString getDescription()const;
