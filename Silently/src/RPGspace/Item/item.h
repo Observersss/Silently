@@ -5,8 +5,8 @@
 #include <QString>
 #include <map>
 //To-Do list for Item:
-//need re-write functional for std::shared_ptr in ItemFactory/ItemGeneratorStrategy/DefaultItemGenerator
-// also re-write work with std::shared_ptr in Inventory_DialogWindow
+//COMPLETE \ need re-write functional for std::shared_ptr in ItemFactory/ItemGeneratorStrategy/DefaultItemGenerator
+//Commited all code \ also re-write work with std::shared_ptr in Inventory_DialogWindow
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
 enum Equipment{
@@ -59,7 +59,7 @@ private:
 
 class ItemGeneratorStrategy{
 protected:
-    virtual Item* generateItem() = 0;
+    virtual std::shared_ptr<Item> generateItem() = 0;
     virtual ~ItemGeneratorStrategy() = default;
 
     //Basic
@@ -76,14 +76,14 @@ protected:
 
 class DefaultItemGenerator: public ItemGeneratorStrategy{
 protected:
-    Item* generateItem() override;
+    std::shared_ptr<Item> generateItem() override;
 
     friend class ItemFactory;
 };
 
 class ItemFactory{
 public:
-    static Item* create_by_default(){
+    static std::shared_ptr<Item> create_by_default(){
         return DefaultItemGenerator().generateItem();
     }
 };

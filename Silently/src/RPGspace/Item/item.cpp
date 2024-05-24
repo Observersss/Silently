@@ -207,8 +207,9 @@ Equipment ItemGeneratorStrategy::generateTypeOfItem(const QString& name){
     }
 }
 
-Item* DefaultItemGenerator::generateItem(){
+std::shared_ptr<Item> DefaultItemGenerator::generateItem(){
     Item* item = new Item();
+    std::shared_ptr ptrItem(item);
     QString rank = generateRank();
     std::pair<QString,QString> fullName_and_basicName = generateName();
     item->setRank(rank);
@@ -216,5 +217,5 @@ Item* DefaultItemGenerator::generateItem(){
     item->setTypeOfItem(generateTypeOfItem(fullName_and_basicName.second)); // Передаем базовое имя
     item->setPathToImg(generatePathToImg(fullName_and_basicName.second)); // Передаем базовое имя
     item->setCharacteristics(generateCharacteristics(rank));
-    return item;
+    return ptrItem;
 }
