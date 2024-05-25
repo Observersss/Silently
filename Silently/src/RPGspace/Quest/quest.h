@@ -3,44 +3,47 @@
 
 #include <QString>
 #include <QDateTime>
+#include <memory>
 
 class Quest{
-private:
-    static int idCount_;
-    int id_;
-    QString title_;
-    QString discription_;
-    int difficulty_;
-    QDateTime deadline_;
-    bool needDeadLine_ = false;
-
-    Quest();
 public:
 
     bool checkDeadline();
 
-    void setTitle(const QString& newTitle);
+    void setTitle(const QString& title);
 
-    void setDiscription(const QString& newDiscription);
+    void setDescription(const QString& description);
 
-    void setDifficulti(const int& newDifficulty);
+    void setComplexity(const int& complexity);
 
-    void setDeadline(const QDateTime& newDeadline);
+    void setDeadline(const QDateTime& deadline);
 
-    //Геттери
     int getId() const;
     QString getTitle()const;
-    QString getDiscription()const;
-    int getDifficulty()const;
+    QString getDescription()const;
+    int getComplexity()const;
     QDateTime getDeadline()const;
 
     friend class QuestFactory;
+
+protected:
+    Quest();
+
+private:
+    static int idCount_;
+    int id_;
+    QString title_;
+    QString description_;
+    int complexity_;
+    QDateTime deadline_;
+    bool need_to_follow_the_deadline = false;
+
 };
 
 class QuestFactory{
 public:
-    static Quest* create(){
-        return new Quest();
+    static std::shared_ptr<Quest> create(){
+        return std::shared_ptr<Quest>(new Quest());
     }
 };
 

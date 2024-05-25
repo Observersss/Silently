@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <QMessageBox>
-#include <QRandomGenerator>
+
 
 #include "addQuest_DialogWindow/addQuest_DialogWindow.h"
 #include "ShowInfoQuest_DialogWindow/ShowInfoQuest_DialogWindow.h"
@@ -11,6 +11,11 @@
 #include "Inventory_DialogWindow/Inventory_DialogWindow.h"
 #include "AddTag_DialogWindow/AddTag_dialogwindow.h"
 #include "AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h"
+
+// To-Do list for MainWindow:
+// set normal naming with GUI objects/methods/atributes
+// move short function in connect(...)
+//
 int MainWindow::noteCounter=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -83,6 +88,11 @@ MainWindow::MainWindow(QWidget *parent)
     // character.addItemToInventory(item2);
     // character.addItemToInventory(item3);
     // character.addItemToInventory(item4);
+
+    character.addItemToInventory(ItemFactory::create_by_default());
+    character.addItemToInventory(ItemFactory::create_by_default());
+    character.addItemToInventory(ItemFactory::create_by_default());
+    character.addItemToInventory(ItemFactory::create_by_default());
 
 }
 
@@ -288,7 +298,7 @@ void MainWindow::on_Open_inventory_clicked()
     Inventory inventory=character.getInventory();
 
     // После закрытия окна обновите экипировку персонажа
-    updateCharacterEquipment(inventory.getItemEquipment());
+    updateCharacterEquipment(inventory.getItemsEquipment());
     updateInfoOnCharacter();
 }
 

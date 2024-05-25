@@ -1,4 +1,5 @@
 #include "item.h"
+#include <qDebug>
 
 int Item::itemCount_=0;
 
@@ -85,8 +86,9 @@ std::map<QString,int> ItemGeneratorStrategy::generateCharacteristics(const QStri
 
     int numCharacteristics = arc4random() % 3 + 1; //Генеруємо випадкову кількість характеристик (від 1 до 3)
     std::map<QString,int> characteristic;
-
+    qDebug()<<rank<<'\n';
     for (int i = 0; i < numCharacteristics; i++) {
+        qDebug()<<'\n'<<"Run generate \n";
         int characteristicType = arc4random() % nameCharacteristic.size(); // Вибираємо випадковий тип характеристики
         int characteristicValue;
         if (rank == "D") {
@@ -105,7 +107,8 @@ std::map<QString,int> ItemGeneratorStrategy::generateCharacteristics(const QStri
             characteristicValue = (characteristicType == 0) ? (arc4random() % 4 + 5) : (characteristicType == 1) ? (arc4random() % 4 + 4) : (arc4random() % 4 + 2); // Для ранга S: 5-8 (health), 4-7 (mana), 2-5 (damage)
         }
 
-        characteristic[nameCharacteristic[characteristicValue]] = characteristicValue;
+        qDebug()<<nameCharacteristic[characteristicType]<<" "<<characteristicValue<<'\n';
+        characteristic[nameCharacteristic[characteristicType]] = characteristicValue;
     }
     return characteristic;
 }
@@ -195,23 +198,24 @@ Equipment ItemGeneratorStrategy::generateTypeOfItem(const QString& name){
     try {
         auto it = name_and_type.find(name);
         if (it != name_and_type.end())
-            typeItem = it->second;
+            return it->second;
         else
             throw std::runtime_error("Failed to find type from name in map");
     } catch (std::runtime_error& e) {
         std::cout << e.what() << std::endl; // Вывод сообщения об ошибке
-        typeItem = ANOTHER;
+        return ANOTHER;
     }
 }
 
-Item* DefaultItemGenerator::generateItem(){
+std::shared_ptr<Item> DefaultItemGenerator::generateItem(){
     Item* item = new Item();
+    std::shared_ptr<Item> ptrItem(item);
     QString rank = generateRank();
     std::pair<QString,QString> fullName_and_basicName = generateName();
     item->setRank(rank);
     item->setName(fullName_and_basicName.first);
-    item->setTypeOfItem(generateTypeOfItem(fullName_and_basicName.first));
-    item->setPathToImg(fullName_and_basicName.second);
+    item->setTypeOfItem(generateTypeOfItem(fullName_and_basicName.second)); // Передаем базовое имя
+    item->setPathToImg(generatePathToImg(fullName_and_basicName.second)); // Передаем базовое имя
     item->setCharacteristics(generateCharacteristics(rank));
-    return item;
+    return ptrItem;
 }

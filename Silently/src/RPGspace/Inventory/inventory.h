@@ -4,43 +4,25 @@
 
 #include <QVector>
 
-class Inventory {
+class Inventory{
 public:
-    Inventory();
+    Inventory() = default;
 
-    void addItemInInventory(Item* item);
+    void addItem(std::shared_ptr<Item> item);
+    void removeItem(const std::shared_ptr<Item>& item);
 
-    void removeItemFromInventory(Item* item);
+    bool check_if_it_contains(std::shared_ptr<Item> item);
 
-    void deleteItemFromInventory(Item* item);
+    QVector<std::shared_ptr<Item>> getItems() const;
 
-    void addToEquipment(Item* item);
+    size_t getSize() const;
 
-    void removeFromEquipment(Item* item);
-
-    QVector<Item*> getItemInInventory() const;
-
-    QVector<Item*> getItemEquipment() const;
-
-    size_t getItemInInventoryCount() const;
-
-    size_t getItemInEquipCount() const;
-
-    Item* getItemAtIndex(size_t index) const;
-    Item* getItemAtIndexEquip(size_t index) const;
-
-    // Ітератор початку вектора інвентаря
-    auto begin() {
-        return itemInInventory_.begin();
-    }
-
-    // Ітератор кінця вектора інвентаря
-    auto end() {
-        return itemInInventory_.end();
-    }
+    std::shared_ptr<Item> getItemAtIndex(size_t index) const;
+    std::shared_ptr<Item> getItemAtName(const QString& name) const;
 private:
-    QVector<Item*> itemInInventory_;   // Предмети, що знаходяться в інвентарі користувача
-    QVector<Item*> itemEquipment_;    // Предмети, що зараз активні (обладнання)
+    int indexOfItem(const QString& name) const;
+
+    QVector<std::shared_ptr<Item>> items_;
 };
 
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QString>
 #include <map>
+#include <memory>
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
 enum Equipment{
@@ -56,7 +57,7 @@ private:
 
 class ItemGeneratorStrategy{
 protected:
-    virtual Item* generateItem() = 0;
+    virtual std::shared_ptr<Item> generateItem() = 0;
     virtual ~ItemGeneratorStrategy() = default;
 
     //Basic
@@ -73,16 +74,15 @@ protected:
 
 class DefaultItemGenerator: public ItemGeneratorStrategy{
 protected:
-    Item* generateItem() override;
+    std::shared_ptr<Item> generateItem() override;
 
     friend class ItemFactory;
 };
 
 class ItemFactory{
 public:
-    static Item* create_by_default(){
-        DefaultItemGenerator generator;
-        return generator.generateItem();
+    static std::shared_ptr<Item> create_by_default(){
+        return DefaultItemGenerator().generateItem();
     }
 };
 
