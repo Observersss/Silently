@@ -3,21 +3,22 @@
 
 #include "mainwindow.h"
 #include <QMessageBox>
+
 ShowInfoQuest_DialogWindow::ShowInfoQuest_DialogWindow(QWidget *parent,Quest* mainQuest) :
+
     QDialog(parent),
     ui(new Ui::ShowInfoQuest_DialogWindow),
     quest(mainQuest)
 {
     ui->setupUi(this);
 
+
     ui->Title_2->setText(quest->getTitle());
 
-    ui->Discription_2->setText(quest->getDiscription());
 
-    int difficulty = quest->getDifficulty();
-    QString qdifficulty = QString::number(difficulty);
-    ui->Difficulty_2->setText(qdifficulty);
-
+    int complexity = quest->getComplexity();
+    QString qcomplexity = QString::number(complexity);
+    ui->Difficulty_2->setText(qcomplexity);
     // if (deadline == targetTime) {
     //     //Якщо deadline дорівнює "01.01.2000 00:00", ховаємо віджети які стосуються deadline
     //     ui->dateTimeEdit_2->setHidden(true);
@@ -29,6 +30,19 @@ ShowInfoQuest_DialogWindow::ShowInfoQuest_DialogWindow(QWidget *parent,Quest* ma
 
         ui->dateTimeEdit_2->setDateTime(quest->getDeadline());
     //}
+
+    // if (deadline == targetTime) {
+    //     //Якщо deadline дорівнює "01.01.2000 00:00", ховаємо віджети які стосуються deadline
+    //     ui->dateTimeEdit_2->setHidden(true);
+    //     ui->label_4->setHidden(true);
+    // } else {
+    //     //Якщо deadline не дорівнює "01.01.2000 00:00", ми їх показуємо і передаємо значення deadline
+    //     ui->dateTimeEdit_2->setHidden(false);
+    //     ui->label_4->setHidden(false);
+
+    //     QDateTime deadlineDateTime = QDateTime::fromSecsSinceEpoch(std::chrono::system_clock::to_time_t(deadline));
+    //     ui->dateTimeEdit_2->setDateTime(deadlineDateTime);
+    // }
 
 
 }
@@ -43,12 +57,11 @@ void ShowInfoQuest_DialogWindow::on_change_button_clicked()
     QString title = ui->Title_2->text();
     quest->setTitle(title);
 
-    QString discription = ui->Discription_2->text();
-    quest->setDiscription(discription);
 
     QString qdifficulty = ui->Difficulty_2->text();
     int difficulty = qdifficulty.toInt();
-    quest->setDifficulti(difficulty);
+    quest->setComplexity(difficulty);
+
 
 
 

@@ -47,3 +47,4 @@ int Inventory::indexOfItem(const QString& name) const{
     }
     return -1;
 }
+

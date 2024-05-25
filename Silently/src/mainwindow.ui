@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>744</width>
-    <height>705</height>
+    <height>711</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,7 +57,7 @@ color:black;</string>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="character_icon">
+         <widget class="QLabel" name="label_CharacterIcon">
           <property name="minimumSize">
            <size>
             <width>135</width>
@@ -88,7 +88,7 @@ color:black;</string>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QFrame" name="infoCharacter">
+         <widget class="QFrame" name="frame_infoCharacter">
           <property name="minimumSize">
            <size>
             <width>160</width>
@@ -176,7 +176,7 @@ border-radius:10px;</string>
            <item row="1" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QListWidget" name="listTag">
+              <widget class="QListWidget" name="QListWidget_tags">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -198,7 +198,7 @@ border-radius:9px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="tags_option">
+              <widget class="QPushButton" name="button_tagsOption">
                <property name="minimumSize">
                 <size>
                  <width>30</width>
@@ -227,7 +227,7 @@ border-radius:15px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="date_create_note">
+              <widget class="QLabel" name="label_DateOfCreation">
                <property name="minimumSize">
                 <size>
                  <width>15</width>
@@ -241,13 +241,16 @@ border-radius:15px;</string>
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">font-size:10px;
+                <string notr="true">
+QLabel { 
+padding-top: 10px;
+ font-size:11px; 
 padding-top:5px;
 margin:0;
-color:white</string>
+color:white}</string>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -286,7 +289,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLineEdit" name="TitleNote">
+            <widget class="QLineEdit" name="QLineEdit_TitleNote">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -299,6 +302,65 @@ color:black;
 margin:0;
 border-radius:10px;</string>
              </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QFrame" name="frame_parentForTextNote">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>500</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:white;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QScrollArea" name="scrollArea_for_CustomLineEdit">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>471</width>
+                <height>80</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>80</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>500</height>
+               </size>
+              </property>
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>471</width>
+                 <height>80</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <item row="0" column="0">
+                 <layout class="QVBoxLayout" name="verticalLayout_for_CustomLineEditManager"/>
+                </item>
+               </layout>
+              </widget>
+             </widget>
             </widget>
            </item>
           </layout>
@@ -343,7 +405,7 @@ border-radius:10px;</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
-         <widget class="QLabel" name="info">
+         <widget class="QLabel" name="label_InfoSpace">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -361,7 +423,7 @@ border-radius:10px;</string>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QPushButton" name="change_space">
+         <widget class="QPushButton" name="button_change_space">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -402,7 +464,7 @@ border-radius:15px;</string>
         </size>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QWidget" name="layoutWidget">
@@ -430,7 +492,7 @@ border-radius:15px;</string>
              <number>4</number>
             </property>
             <item>
-             <widget class="QPushButton" name="AddNoteSpace">
+             <widget class="QPushButton" name="button_AddNoteSpace">
               <property name="minimumSize">
                <size>
                 <width>60</width>
@@ -459,7 +521,7 @@ border-radius:5px;</string>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="delete_Note_Service">
+             <widget class="QPushButton" name="button_deleteNoteService">
               <property name="minimumSize">
                <size>
                 <width>60</width>
@@ -490,7 +552,7 @@ border-radius:5px;</string>
            </layout>
           </item>
           <item row="1" column="0">
-           <widget class="QComboBox" name="NoteSpaces">
+           <widget class="QComboBox" name="QComboBox_NoteSpaces">
             <property name="maximumSize">
              <size>
               <width>25987</width>
@@ -503,7 +565,7 @@ border-radius:5px;</string>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QListWidget" name="listNote">
+           <widget class="QListWidget" name="QListWidget_Notes">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -533,7 +595,7 @@ border-radius:8px;
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="button_addNote">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -562,7 +624,7 @@ border-radius:5px;</string>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="delete_Note">
+             <widget class="QPushButton" name="button_deleteNote">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -706,9 +768,9 @@ border-radius:15px;</string>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>change_space</tabstop>
+  <tabstop>button_change_space</tabstop>
   <tabstop>QuestList</tabstop>
-  <tabstop>TitleNote</tabstop>
+  <tabstop>QLineEdit_TitleNote</tabstop>
  </tabstops>
  <resources/>
  <connections/>

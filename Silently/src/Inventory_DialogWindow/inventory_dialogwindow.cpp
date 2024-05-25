@@ -7,6 +7,7 @@
 //re-write functional for work:
 //with class Inventory(now is not one object)
 //with class Item (work with std::shared_ptr<Item>, old version Item*)
+
 Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playerCharacter) :
     QDialog(parent),
     ui(new Ui::Inventory_DialogWindow),
@@ -24,25 +25,24 @@ Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playe
     typeCount[GLOVES] = 1;
     typeCount[ANOTHER] = 3;
 
-    QVector<Item*> itemInInventory = character->getInventory().getItemsInInventory();
-    QVector<Item*> equipItem = character->getInventory().getItemsEquipment();
-    if (!itemInInventory.empty()) {
-        for (auto &item : itemInInventory) {
-            QString name = item->getnameOfitem();
+    // QVector<Item*> itemInInventory = character->getInventory()->getItemsInInventory();
+    // QVector<Item*> equipItem = character->getInventory()->getItemsEquipment();
+    // if (!itemInInventory.empty()) {
+    //     for (auto &item : itemInInventory) {
+    //         QString name = item->getnameOfitem();
 
-            //Вивід назви предмета
-            ui->listWidget->addItem(name);
-        }
-    }
+    //         //Вивід назви предмета
+    //         ui->listWidget->addItem(name);
+    //     }
+    // }
 
-    if (!equipItem.empty()) {
-        for (auto &item : equipItem) {
-            QString name =item->getnameOfitem();
-
-            //Вивід назви предмета
-            ui->Equip_Item->addItem(name);
-        }
-    }
+    // if (!equipItem.empty()) {
+    //     for (auto &item : equipItem) {
+    //         QString name =item->getnameOfitem();
+    //         //Вивід назви предмета
+    //         ui->Equip_Item->addItem(name);
+    //     }
+    // }
 }
 
 bool Inventory_DialogWindow::checkTypeCount(Equipment equipment){
@@ -218,28 +218,6 @@ void Inventory_DialogWindow::on_take_off_clicked() {
     // }
 }
 
-void Inventory_DialogWindow::on_Delete_clicked()
-{
-    // Inventory inventory=character->getInventory();
-
-    // int selectedIndex = ui->listWidget->currentRow();
-    // if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
-    //     QListWidgetItem* selectedItemWidget = ui->listWidget->item(selectedIndex);
-    //     if (selectedItemWidget) {
-    //         QString selectedName = selectedItemWidget->text();
-
-    //         Item* foundItem = findItemByName(selectedName, inventory.getItemsInInventory());
-    //         if ((!foundItem->getnameOfitem().isEmpty())) {
-    //             inventory.removeItemFromInventory(foundItem);
-    //             removeItemFromListWidget(ui->listWidget, selectedIndex);
-    //             character->setInventory(inventory);
-    //         }
-    //     }
-    // }else{
-    //     qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_Delete_clicked \n";
-    // }
-}
-
 void Inventory_DialogWindow::on_Delete_2_clicked()
 {
     // Inventory inventory=character->getInventory();
@@ -264,4 +242,10 @@ void Inventory_DialogWindow::on_Delete_2_clicked()
     //     qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_Delete_2_clicked \n";
     // }
 }
+void Inventory_DialogWindow::on_Delete_clicked() {
+    // Реализация метода on_Delete_clicked
+    // Например, можно вывести сообщение об удалении элемента
+    QMessageBox::information(this, "Delete", "Item deleted!");
+}
+
 

@@ -37,7 +37,6 @@ private:
     int complexity_;
     QDateTime deadline_;
     bool need_to_follow_the_deadline = false;
-
 };
 
 class QuestFactory{

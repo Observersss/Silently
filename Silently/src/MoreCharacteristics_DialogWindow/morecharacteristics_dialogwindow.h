@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "RPGspace/Character/character.h"
+
 #include <QSpinBox>
 namespace Ui {
 class MoreCharacteristics_DialogWindow;

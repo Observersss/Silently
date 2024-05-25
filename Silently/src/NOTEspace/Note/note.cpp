@@ -1,57 +1,52 @@
 #include "note.h"
-int Note::idMaxValue=0;
+int Note::idMaxValue_=0;
 
 Note::Note(){
-    data_time = std::chrono::system_clock::now();
-    idMaxValue+=1;
-    id=idMaxValue;
+    dateOfCreation_ = QDateTime::currentDateTime();
+    idMaxValue_+=1;
+    id_=idMaxValue_;
+    text_.push_back(" ");
 }
 
-void Note::setTitle(QString newTitle){
-    title = newTitle;
+void Note::setTitle(const QString& newTitle){
+    title_ = newTitle;
 }
 
-void Note::setText(QString newText){
-    text.push_back(newText);
+void Note::setText(const QString& newText){
+    text_.push_back(newText);
 }
 
 
-void Note::setText(std::vector<QString> newText){
-    text = newText;
+void Note::setText(const QVector<QString>& newText){
+    text_ = newText;
 }
-void Note::setData_time(std::chrono::system_clock::time_point timePoint){
-    data_time = timePoint;
+void Note::setStyles(const QVector<QString>& _styles){
+    styles_ = _styles;
+}
+void Note::setTextWithStyles(const std::pair<QVector<QString>,QVector<QString>>& vectors){
+    text_ = vectors.first;
+    styles_ = vectors.second;
+}
+void Note::setData_time(const QDateTime&  timePoint){
+    dateOfCreation_ = timePoint;
 }
 
-void Note::addActiveTag(Tag newActiveTag){
-    activeTag.push_back(newActiveTag);
-}
 void Note::addActiveTag(const QString& newActiveTag) {
-    Tag newTag(newActiveTag);
-    activeTag.push_back(newTag);
+    activeTag_.push_back(Tag::create(newActiveTag));
 }
-void Note::addActiveTag(std::vector<QString> newActiveTags){
-//    for(QString& tagName:newActiveTags){
-//        addActiveTag(tagName);
-//    }
-    activeTag.clear();
-    for(QString& tagname:newActiveTags){
-        Tag tag(tagname);
-        activeTag.push_back(tag);
+void Note::setNewActiveTags(const QVector<QString>& newActiveTags){
+    activeTag_.clear();
+    for(const QString& tagname:newActiveTags){
+        activeTag_.push_back(Tag::create(tagname));
     }
 }
 
 void Note::deleteTag(const QString& tagName) {
-    // Создайте итератор для перебора элементов вектора activeTag
-    auto it = activeTag.begin();
-
-    // Используйте цикл для поиска тега с заданным именем
-    while (it != activeTag.end()) {
+    auto it = activeTag_.begin();
+    while (it != activeTag_.end()) {
         if (it->getNameTag() == tagName) {
-            // Если найден тег с заданным именем, удаляем его из вектора
-            it = activeTag.erase(it);
+            it = activeTag_.erase(it);
         } else {
-            // В противном случае, переходим к следующему элементу вектора
             ++it;
         }
     }
@@ -59,13 +54,18 @@ void Note::deleteTag(const QString& tagName) {
 
 
 
-std::vector<Tag> Note::getActiveTag()const{return activeTag;}
+QVector <Tag> Note::getActiveTag()const{return activeTag_;}
 
-QString Note::getTitle()const{return title;}
+QString Note::getTitle()const{return title_;}
 
-std::vector<QString> Note::getText()const{return text;}
+QVector <QString> Note::getText()const{return text_;}
 
-std::chrono::system_clock::time_point Note::getDataTime()const{return data_time;}
-int Note::getIdNote()const{
-    return id;
+QVector <QString> Note::getStyles()const{return styles_;}
+
+std::pair<QVector<QString>,QVector<QString>> Note::getTextWithStyles()const {
+    return std::make_pair(text_,styles_);
 }
+
+QDateTime  Note::getDataTime()const{return dateOfCreation_;}
+
+int Note::getIdNote()const{ return id_; }

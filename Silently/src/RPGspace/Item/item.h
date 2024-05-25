@@ -21,7 +21,6 @@ enum Equipment{
 
 class Item{
 public:
-
     QString getRank()const;
     QString getnameOfitem()const;
     QString getdescriptionOfItem()const;

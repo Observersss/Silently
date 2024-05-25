@@ -8,6 +8,7 @@
 #include <QRandomGenerator>
 #include <QVector>
 
+
 class Character
 {
 public:

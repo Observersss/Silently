@@ -19,48 +19,49 @@ addQuest_DialogWindow::~addQuest_DialogWindow()
 
 void addQuest_DialogWindow::on_pushButton_clicked()
 {
-    Quest* quest = QuestFactory::create();
+    // Quest* quest = QuestFactory::create();
 
-    QString title = ui->Title->text();
-    quest->setTitle(title);
+    // QString title = ui->Title->text();
+    // quest->setTitle(title);
 
-    QString discription = ui->Discription->text();
-    quest->setDiscription(discription);
+    // QString discription = ui->Discription->text();
+    // quest->setDiscription(discription);
 
-    quest->setDifficulti(0);
+    // quest->setDifficulti(0);
 
-    if(ui->easy->isChecked()==true){
-        quest->setDifficulti(1);
-    }
-    if (ui->meduim->isChecked()==true){
-        quest->setDifficulti(2);
-    }
-    if(ui->hard->isChecked()==true){
-        quest->setDifficulti(3);
-    }
-    if(ui->dead->isChecked()==true){
-        quest->setDifficulti(4);
-    }
+    // if(ui->easy->isChecked()==true){
+    //     quest->setDifficulti(1);
+    // }
+    // if (ui->meduim->isChecked()==true){
+    //     quest->setDifficulti(2);
+    // }
+    // if(ui->hard->isChecked()==true){
+    //     quest->setDifficulti(3);
+    // }
+    // if(ui->dead->isChecked()==true){
+    //     quest->setDifficulti(4);
+    // }
 
-    QDateTime selectedDateTime = ui->dateTimeEdit->dateTime();
-    if(ui->dateTimeEdit->YearSection==00&&ui->dateTimeEdit->MonthSection==00&&ui->dateTimeEdit->DaySection==00){
+    // QDateTime selectedDateTime = ui->dateTimeEdit->dateTime();
+    // if(ui->dateTimeEdit->YearSection==00&&ui->dateTimeEdit->MonthSection==00&&ui->dateTimeEdit->DaySection==00){
 
-    }else{
-        quest->setDeadline(selectedDateTime);
-    }
-    // Создаем MainWindow
-    MainWindow* w = dynamic_cast<MainWindow*>(parent());
+    // }else{
+    //     quest->setDeadline(selectedDateTime);
 
-    if (w) {
+    // }
+    // // Создаем MainWindow
+    // MainWindow* w = dynamic_cast<MainWindow*>(parent());
 
-        w->addActiveQuest(quest);//Додоємо до вектора квестів персонажа
-        w->updateInfoOnQuest();  //Відображаємо назву квесту у QListWidget
+    // if (w) {
 
-        hide();
-    } else {
-        //Вивід повідомлення що не вдалося передати квест
-        qDebug()<<"Невдалося передати квест \n";
-    }
+    //     w->addActiveQuest(quest);//Додоємо до вектора квестів персонажа
+    //     w->updateInfoOnQuest();  //Відображаємо назву квесту у QListWidget
+
+    //     hide();
+    // } else {
+    //     //Вивід повідомлення що не вдалося передати квест
+    //     qDebug()<<"Невдалося передати квест \n";
+    // }
 }
 
 void addQuest_DialogWindow::on_pushButton_2_clicked()

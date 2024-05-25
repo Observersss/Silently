@@ -5,14 +5,16 @@
 
 class Tag{
 private:
-    QString tagName;
+    QString tagName_;
 
+    Tag(const QString& new_name_tag):tagName_(new_name_tag){}
 public:
-    //базовий пустий конструктор
-    Tag(QString new_name_tag){tagName=new_name_tag;}
+    static Tag create(const QString& new_name_tag_){
+        return Tag(new_name_tag_);
+    }
 
     QString getNameTag()const{
-        return tagName;
+        return tagName_;
     }
 };
 

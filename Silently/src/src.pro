@@ -14,6 +14,8 @@ SOURCES += \
     AddTag_DialogWindow/addtag_dialogwindow.cpp \
     Inventory_DialogWindow/inventory_dialogwindow.cpp \
     MoreCharacteristics_DialogWindow/morecharacteristics_dialogwindow.cpp \
+    NOTEspace/CustomLineEdit/customlineedit.cpp \
+    NOTEspace/CustomLineEditManager/customlineeditmanager.cpp \
     NOTEspace/Note/note.cpp \
     NOTEspace/NoteService/noteservice.cpp \
     NOTEspace/Tag/tag.cpp \
@@ -31,6 +33,8 @@ HEADERS += \
     AddTag_DialogWindow/addtag_dialogwindow.h \
     Inventory_DialogWindow/inventory_dialogwindow.h \
     MoreCharacteristics_DialogWindow/morecharacteristics_dialogwindow.h \
+    NOTEspace/CustomLineEdit/customlineedit.h \
+    NOTEspace/CustomLineEditManager/customlineeditmanager.h \
     NOTEspace/Note/note.h \
     NOTEspace/NoteService/noteservice.h \
     NOTEspace/Tag/tag.h \

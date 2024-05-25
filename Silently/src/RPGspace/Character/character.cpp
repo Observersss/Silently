@@ -111,6 +111,7 @@ void Character::applyCharacteristicsDelta(const std::map<QString, int>& itemChar
 
 
                 /*Функції для збільшення показників характеристик персонажа*/
+
 void Character::incrementExperience(){
     QRandomGenerator randomGenerator(static_cast<quint32>(std::time(nullptr)));
     int randomExperience = randomGenerator.bounded(1, 11);

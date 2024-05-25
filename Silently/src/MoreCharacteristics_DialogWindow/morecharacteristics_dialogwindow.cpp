@@ -54,6 +54,7 @@ MoreCharacteristics_DialogWindow::MoreCharacteristics_DialogWindow(QWidget *pare
 
 
         //connect всіх spinBox_() при події valueChanged для виклику on_spinBox_valueChanged
+
         // for(QSpinBOx* box: boxe
         connect(ui->spinBox_health, SIGNAL(valueChanged(int)), this, SLOT(on_spinBox_valueChanged(int)));
         connect(ui->spinBox_mana, SIGNAL(valueChanged(int)), this, SLOT(on_spinBox_valueChanged(int)));
