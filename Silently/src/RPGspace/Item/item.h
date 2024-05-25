@@ -2,7 +2,7 @@
 #define ITEM_H
 
 #include <iostream>
-#include<QString>
+#include <QString>
 #include <map>
 
 //Перечислення можливих варіантів спорядження, буде використовуватись для классу активного спорядження
@@ -17,96 +17,73 @@ enum Equipment{
     GLOVES = 7,
     ANOTHER = 8
 };
-// class itemFactory{
-//     Item create(){
-//         Item item;
-//         // generateRandomRank();
-
-//         // generateCharacteristics();
-
-//         // generateName();
-
-//         // generateImage(const QString& name);
-
-//         // generateType();
-//     }
-
-//     // void generateRandomRank();
-
-//     // void generateCharacteristicsSrank();
-
-//     // void generateName();
-
-//     // void generateImage(const QString& name);
-
-//     // void generateType();
-// };
 
 class Item{
-private:
-    QString rank;
-    QString nameOfItem;
-    QString discriptionOfItem;
-    std::vector<std::pair<QString ,int>> Characteristics;
-    Equipment typeItem;
-    QString pathToImg;
-    static int itemCount; // Статична змінна для підрахунку елементів
-    int index; // Індекс предмета
-    static std::map<QString, QString> itemImages_;
-
-
 public:
-    //Пустий базовий конструктор
-    Item();
-    //Item(int idx, const QString& nm) : index(idx), nameOfItem(nm) {}
 
-    void generateRandomRank();
-
-    void generateCharacteristics();
-
-    void generateName();
-
-    void generateImage(const QString& name);
-
-    void generateType(QString name);
-
-
-    //Задання рангу предмета
-    void setRank();
-
-
-    //задання ім'я предмету
-    //Прймае string (звичану назву) і передає у nameOfItem
-    void setName(QString name);
-
-
-    //Задання опису
-    //Приймає string і передає у  discriptionOfItem
-    void setDiscription(QString discription);
-
-
-    //Задання бонусів які надає предмет
-    //Приймає string(назва характеристики) і double(значення)
-    //Передає у вектор Characteristics у вигляді пари
-    void setCharacteristics(QString nameCharacteristic,double value);
-
-    //Задання типу предмета
-    //Приймає int і передає у typeItem
-    void setEqipment(Equipment type);
-
-    //Задання зображення предмету
-    //Приймає string(повний шлях до зображення і передає у imageOfItem
-    void setPathToImg(QString name);
-
-
-    //Геттери
     QString getRank()const;
     QString getnameOfitem()const;
-    QString getdiscriptionOfItem()const;
-    std::vector<std::pair<QString, int>> getCharacteristics() const;
+    QString getdescriptionOfItem()const;
+    std::map<QString,int> getCharacteristics() const;
     Equipment getTypeItem()const;
     QString getPathToImg() const;
     int getIndex()const;
+    ~Item();
+
+protected:
+    Item();
+    void setRank(const QString& rank);
+    void setName(const QString& name);
+    void setDescription(const QString& description);
+    void setCharacteristics(const std::map<QString,int>& characteristics);
+    void setTypeOfItem(const Equipment& type);
+    void setPathToImg(const QString& name);
+
+private:
+    QString rank_;
+    QString nameOfItem_;
+    QString descriptionOfItem_;
+    std::map<QString,int> characteristics_;
+    Equipment typeItem_;
+    QString pathToImg_;
+    int index_;
+    static int itemCount_;
+
+    friend class DefaultItemGenerator;
+};
+
+
+
+class ItemGeneratorStrategy{
+protected:
+    virtual Item* generateItem() = 0;
+    virtual ~ItemGeneratorStrategy() = default;
+
+    //Basic
+    QString generateRank();
+    std::map<QString,int> generateCharacteristics(const QString &rank);
+    QString generatePathToImg(const QString& name);
+    Equipment generateTypeOfItem(const QString& name);
+    //first - fullname, second - basic name
+    std::pair<QString,QString> generateName();
+
+    //if needs new generate...
+
+};
+
+class DefaultItemGenerator: public ItemGeneratorStrategy{
+protected:
+    Item* generateItem() override;
+
+    friend class ItemFactory;
+};
+
+class ItemFactory{
+public:
+    static Item* create_by_default(){
+        DefaultItemGenerator generator;
+        return generator.generateItem();
+    }
 };
 
 

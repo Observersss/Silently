@@ -17,25 +17,12 @@ Character::Character(){
 
                 /*Функції для роботи з квестами*/
 void Character::addActiveQuest(Quest* quest) {
-    //Quest newQuest = *quest; // Створюємо копію об'єкта Quest
-    activeQuest.push_back(quest); // Додаємо його у вектор
+    activeQuest.push_back(quest);
 }
 
 //Треба виправити функцію проблема з пошуком(класс буде переписано тому зміниться пошук)
 void Character::deleteActiveQuest(const Quest* quest) {
-
-    //Використовуюємо цикл foreach для перебору елементів вектора
-    for (auto it = activeQuest.begin(); it != activeQuest.end(); ++it) {
-
-        //Порівнюємо назву квеста з getTitile()
-        //if ((*it)->getTitle() == quest->getTitle()) {
-
-            //Видаляємо квест з вектора
-            //activeQuest.erase(it);
-            //delete *it;
-            break; //Ми знайшли і видалили квест тому виходимо з цикла
-        //}
-    }
+    activeQuest.removeAt(activeQuest.indexOf(quest));
 }
 
 Quest* Character::findQuest(const QString& title){
@@ -59,12 +46,12 @@ Quest* Character::findQuest(const int id){
 }
 
                 /*Функції для роботи з інвентарем*/
-void Character::addItemToInventory(Item item){
+void Character::addItemToInventory(Item* item){
     inventory.addItemInInventory(item);
 }
 
-void Character::removeItemFromInventory(Item item){
-    inventory.deleteItemInInventory(item);
+void Character::removeItemFromInventory(Item* item){
+    inventory.deleteItemFromInventory(item);
 }
 
 void Character::setInventory(Inventory value){
@@ -73,10 +60,10 @@ void Character::setInventory(Inventory value){
 
                 /*Функції для оновлення характеристик персонажа на основі екіпірованих предметів*/
 void Character::updateCharacteristicsFromInventory() {
-    std::vector<Item> activeItems = inventory.getItemEquipment();
+    QVector<Item*> activeItems = inventory.getItemEquipment();
 
     for (const auto& item : activeItems) {
-        std::vector<std::pair<QString, int>> itemCharacteristics = item.getCharacteristics();
+        std::map<QString, int> itemCharacteristics = item->getCharacteristics();
 
         /*
         * Застосовуємо характеристики предмета до характеристик персонажа
@@ -109,8 +96,8 @@ void Character::updateCharacteristicsFromInventory() {
 }
 
 
-void Character::removeCharacteristicsFromUnequippedItems(const Item& item) {
-    std::vector<std::pair<QString, int>> itemCharacteristics = item.getCharacteristics();
+void Character::removeCharacteristicsFromUnequippedItems(const Item* item) {
+    std::map<QString, int> itemCharacteristics = item->getCharacteristics();
 
     /*
      * Застосовуємо характеристики предмета до характеристик персонажа

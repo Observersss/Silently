@@ -19,11 +19,11 @@ Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playe
     typeCount[GLOVES] = 1;
     typeCount[ANOTHER] = 3;
 
-    std::vector<Item> itemInInventory = character->getInventory().getItemInInventory();
-    std::vector<Item> equipItem = character->getInventory().getItemEquipment();
+    QVector<Item*> itemInInventory = character->getInventory().getItemInInventory();
+    QVector<Item*> equipItem = character->getInventory().getItemEquipment();
     if (!itemInInventory.empty()) {
         for (auto &item : itemInInventory) {
-            QString name = item.getnameOfitem();
+            QString name = item->getnameOfitem();
 
             //Вивід назви предмета
             ui->listWidget->addItem(name);
@@ -32,7 +32,7 @@ Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playe
 
     if (!equipItem.empty()) {
         for (auto &item : equipItem) {
-            QString name =item.getnameOfitem();
+            QString name =item->getnameOfitem();
 
             //Вивід назви предмета
             ui->Equip_Item->addItem(name);
@@ -84,21 +84,22 @@ Inventory_DialogWindow::~Inventory_DialogWindow()
 void Inventory_DialogWindow::showItemDetails(const Item& selectedItem) {
     QString rank = selectedItem.getRank();
     ui->Rank->setText(rank);
-    std::vector<std::pair<QString, int>> characteristics = selectedItem.getCharacteristics();
+    std::map<QString, int> characteristics = selectedItem.getCharacteristics();
     QPixmap image(selectedItem.getPathToImg());
     // Встановлення тексту із характеристиками предмета
     ui->Option1->setText("0");
     ui->Option2->setText("0");
     ui->Option3->setText("0");
-    if (characteristics.size() >= 1) {
-        ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
-    }
-    if (characteristics.size() >= 2) {
-        ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
-    }
-    if (characteristics.size() >= 3) {
-        ui->Option3->setText(characteristics[2].first + ":  " + QString::number(characteristics[2].second));
-    }
+    //need fix this
+    // if (characteristics.size() >= 1) {
+    //     ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
+    // }
+    // if (characteristics.size() >= 2) {
+    //     ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
+    // }
+    // if (characteristics.size() >= 3) {
+    //     ui->Option3->setText(characteristics[2].first + ":  " + QString::number(characteristics[2].second));
+    // }
 
 
     // Встановлення зображення предмета
@@ -112,8 +113,8 @@ void Inventory_DialogWindow::on_Equip_Item_itemClicked(QListWidgetItem *item) {
     int selectedIndex = ui->Equip_Item->currentRow();
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInEquipCount()) {
         try {
-            const Item& selectedItem = inventory.getItemAtIndexEquip(selectedIndex);
-            showItemDetails(selectedItem);
+            const Item* selectedItem = inventory.getItemAtIndexEquip(selectedIndex);
+            showItemDetails(*selectedItem);
         } catch (const std::out_of_range& e) {
             qDebug() << "Error: " << e.what();
         }
@@ -128,8 +129,8 @@ void Inventory_DialogWindow::on_listWidget_itemClicked(QListWidgetItem *item) {
 
     if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
         try {
-            const Item& selectedItem = inventory.getItemAtIndex(selectedIndex);
-            showItemDetails(selectedItem);
+            const Item* selectedItem = inventory.getItemAtIndex(selectedIndex);
+            showItemDetails(*selectedItem);
         } catch (const std::out_of_range& e) {
             qDebug() << "Error: " << e.what();
         }
@@ -139,13 +140,14 @@ void Inventory_DialogWindow::on_listWidget_itemClicked(QListWidgetItem *item) {
 }
 
 
-Item Inventory_DialogWindow::findItemByName(const QString& itemName, const std::vector<Item>& items) {
-    for (const Item& item : items) {
-        if (item.getnameOfitem() == itemName) {
+Item* Inventory_DialogWindow::findItemByName(const QString& itemName, const QVector<Item*>& items) {
+    for (Item* item : items) {
+        if (item->getnameOfitem() == itemName) {
             return item;
         }
     }
-    return Item();
+
+    return nullptr;
 }
 
 void Inventory_DialogWindow::addItemToListWidget(const QString& itemName, QListWidget* listWidget) {
@@ -166,15 +168,15 @@ void Inventory_DialogWindow::on_Equip_clicked() {
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
 
-            if(!EquipmentAddToEquipment(foundItem.getTypeItem())){
+            if(!EquipmentAddToEquipment(foundItem->getTypeItem())){
                 QMessageBox::warning(this,"Error","Cannot add this item to inventory");
                 return;
             }
 
             ui->Equip_Item->addItem(selectedName);
-            if ((!foundItem.getnameOfitem().isEmpty())) {
+            if ((!foundItem->getnameOfitem().isEmpty())) {
                 inventory.addToEquipment(foundItem);
                 removeItemFromListWidget(ui->listWidget, selectedIndex);
                 character->setInventory(inventory);
@@ -194,13 +196,13 @@ void Inventory_DialogWindow::on_take_off_clicked() {
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item foundItem = findItemByName(selectedName, inventory.getItemEquipment());
-            if(!EquipmentRemoveFromEquipment(foundItem.getTypeItem())){
+            Item* foundItem = findItemByName(selectedName, inventory.getItemEquipment());
+            if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
                 QMessageBox::warning(this,"Error","Cannot add this item to inventory");
                 return;
             }
             ui->listWidget->addItem(selectedName);
-            if ((!foundItem.getnameOfitem().isEmpty())) {
+            if ((!foundItem->getnameOfitem().isEmpty())) {
                 inventory.removeFromEquipment(foundItem);
                 removeItemFromListWidget(ui->Equip_Item, selectedIndex);
                 character->removeCharacteristicsFromUnequippedItems(foundItem);
@@ -222,9 +224,9 @@ void Inventory_DialogWindow::on_Delete_clicked()
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
 
-            Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            if ((!foundItem.getnameOfitem().isEmpty())) {
-                inventory.deleteItemInInventory(foundItem);
+            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            if ((!foundItem->getnameOfitem().isEmpty())) {
+                inventory.deleteItemFromInventory(foundItem);
                 removeItemFromListWidget(ui->listWidget, selectedIndex);
                 character->setInventory(inventory);
             }
@@ -243,13 +245,13 @@ void Inventory_DialogWindow::on_Delete_2_clicked()
         QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
         if (selectedItemWidget) {
             QString selectedName = selectedItemWidget->text();
-            Item foundItem = findItemByName(selectedName, inventory.getItemInInventory());
-            if ((!foundItem.getnameOfitem().isEmpty())) {
-                if(!EquipmentRemoveFromEquipment(foundItem.getTypeItem())){
+            Item* foundItem = findItemByName(selectedName, inventory.getItemInInventory());
+            if ((!foundItem->getnameOfitem().isEmpty())) {
+                if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
                     QMessageBox::warning(this,"Error","Cannot add this item to inventory");
                     return;
                 }
-                inventory.deleteItemEuipment(foundItem);
+                inventory.removeFromEquipment(foundItem);
                 removeItemFromListWidget(ui->listWidget, selectedIndex);
                 character->setInventory(inventory);
             }

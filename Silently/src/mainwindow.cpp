@@ -259,9 +259,9 @@ void MainWindow::questComplete(){
 
     //Перевірка на виконання функції з 30% вірогідністю(від 0 до 19)
     if (randomNumber < 20) {
-    Item item;
-    QMessageBox::information(this,"New Item","You find new Item");
-    character.addItemToInventory(item);
+        Item* item = ItemFactory::create_by_default();
+        QMessageBox::information(this,"New Item","You find new Item");
+        character.addItemToInventory(item);
     }
 
     updateInfoOnCharacter();
@@ -292,7 +292,7 @@ void MainWindow::on_Open_inventory_clicked()
     updateInfoOnCharacter();
 }
 
-void MainWindow::updateCharacterEquipment(const std::vector<Item>& equipment) {
+void MainWindow::updateCharacterEquipment(const QVector<Item*>& equipment) {
     character.updateCharacteristicsFromInventory(); // Подобная функция должна быть в классе Character
     // Обновите представление персонажа в соответствии с изменениями
 }

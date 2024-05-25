@@ -2,55 +2,45 @@
 #define INVENTORY_H
 #include "RPGspace/Item/item.h"
 
+#include <QVector>
 
 class Inventory {
-private:
-    std::vector<Item> itemInInventory;   // Предмети, що знаходяться в інвентарі користувача
-    std::vector<Item> itemEquipment;    // Предмети, що зараз активні (обладнання)
 public:
-    // Пустий конструктор класу
     Inventory();
 
-    // Додавання предмету в інвентар
-    void addItemInInventory(Item item);
+    void addItemInInventory(Item* item);
 
-    // Видалення предмету з інвентаря
-    void deleteItemInInventory(Item item);
+    void removeItemFromInventory(Item* item);
 
-    // Видалення предмету з обладнання
-    void deleteItemEuipment(Item item);
+    void deleteItemFromInventory(Item* item);
 
-    // Додавання предмету в обладнання (використовується на персонажі)
-    void addToEquipment(const Item& item);
+    void addToEquipment(Item* item);
 
-    // Зняття предмету з обладнання
-    void removeFromEquipment(Item item);
+    void removeFromEquipment(Item* item);
 
-    // Отримання вектора всіх предметів в інвентарі
-    std::vector<Item> getItemInInventory() const;
+    QVector<Item*> getItemInInventory() const;
 
-    // Отримання вектора предметів у обладнанні
-    std::vector<Item> getItemEquipment() const;
+    QVector<Item*> getItemEquipment() const;
 
-    // Отримання кількості предметів в інвентарі
     size_t getItemInInventoryCount() const;
 
-    // Отримання кількості предметів у обладнанні
     size_t getItemInEquipCount() const;
 
-    // Отримання предмету за індексом
-    const Item& getItemAtIndex(size_t index) const;
-    const Item& getItemAtIndexEquip(size_t index) const;
+    Item* getItemAtIndex(size_t index) const;
+    Item* getItemAtIndexEquip(size_t index) const;
 
     // Ітератор початку вектора інвентаря
     auto begin() {
-        return itemInInventory.begin();
+        return itemInInventory_.begin();
     }
 
     // Ітератор кінця вектора інвентаря
     auto end() {
-        return itemInInventory.end();
+        return itemInInventory_.end();
     }
+private:
+    QVector<Item*> itemInInventory_;   // Предмети, що знаходяться в інвентарі користувача
+    QVector<Item*> itemEquipment_;    // Предмети, що зараз активні (обладнання)
 };
 
 
