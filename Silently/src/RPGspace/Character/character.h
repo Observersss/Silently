@@ -85,7 +85,6 @@ private:
     Inventory inventory_;
     Inventory equipment_;
     QVector<std::shared_ptr<Quest>>activeQuests_;
-    QPixmap characterImage_;
 };
 
 
