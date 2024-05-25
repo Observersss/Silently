@@ -11,6 +11,8 @@ public:
     void addItem(std::shared_ptr<Item> item);
     void removeItem(const std::shared_ptr<Item>& item);
 
+    bool check_if_it_contains(std::shared_ptr<Item> item);
+
     QVector<std::shared_ptr<Item>> getItems() const;
 
     size_t getSize() const;

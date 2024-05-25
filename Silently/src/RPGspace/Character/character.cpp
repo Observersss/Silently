@@ -1,129 +1,109 @@
 #include "character.h"
 
 Character::Character(){
-    health = 100;
-    mana = 50;
-    experience = 0;
-    level = 1;
+    health_ = 100;
+    mana_ = 50;
+    experience_ = 0;
+    level_ = 1;
 
-    damage = 15;
-    chanceOfCriticalDamade = 5;
-    criticalDamage = 50;
-    dexterity = 5;
-    force = 8;
-    intelligence = 7;
-    luck = 3;
+    damage_ = 15;
+    chanceOfCriticalDamage_ = 5;
+    criticalDamage_ = 50;
+    dexterity_ = 5;
+    force_ = 8;
+    intelligence_ = 7;
+    luck_ = 3;
 }
 
                 /*Функції для роботи з квестами*/
-void Character::addActiveQuest(Quest* quest) {
-    activeQuest.push_back(quest);
+void Character::addActiveQuest(std::shared_ptr<Quest> quest) {
+    activeQuests_.push_back(quest);
 }
 
 //Треба виправити функцію проблема з пошуком(класс буде переписано тому зміниться пошук)
-void Character::deleteActiveQuest(const Quest* quest) {
-    activeQuest.removeAt(activeQuest.indexOf(quest));
+void Character::deleteActiveQuest(std::shared_ptr<Quest> quest) {
+    activeQuests_.removeAt(activeQuests_.indexOf(quest));
 }
 
-Quest* Character::findQuest(const QString& title){
-    for (Quest* quest : activeQuest) {
+std::shared_ptr<Quest> Character::findQuest(const QString& title){
+    for (std::shared_ptr<Quest> quest : activeQuests_) {
         if (quest->getTitle() == title) {
             return quest; // Якщо квест знайшли то виходимо з функції
         }
     }
 
-    //Квест не знайдемо виведеться помилка при перевірці чи повернуло квест
-    Quest* quest_eror = QuestFactory::create();
+    //if not found
+    std::shared_ptr<Quest> quest_eror = QuestFactory::create();
     quest_eror->setTitle(nullptr);
     return quest_eror;
 }
-Quest* Character::findQuest(const int id){
-    for( Quest* quest : activeQuest){
+std::shared_ptr<Quest> Character::findQuest(const int id){
+    for(std::shared_ptr<Quest> quest : activeQuests_){
         if(quest->getId() == id){
             return quest;
         }
     }
+
+    //if not found
+    std::shared_ptr<Quest> quest_eror = QuestFactory::create();
+    quest_eror->setTitle(nullptr);
+    return quest_eror;
 }
 
                 /*Функції для роботи з інвентарем*/
-void Character::addItemToInventory(Item* item){
-    inventory.addItemInInventory(item);
+void Character::addItemToInventory(std::shared_ptr<Item> item){
+    inventory_.addItem(item);
 }
-
-void Character::removeItemFromInventory(Item* item){
-    inventory.removeItemFromInventory(item);
+void Character::addItemToEquipment(std::shared_ptr<Item> item){
+    if(inventory_.check_if_it_contains(item)){
+        inventory_.removeItem(item);
+        equipment_.addItem(item);
+    }
 }
-
-void Character::setInventory(Inventory value){
-    inventory=value;
+void Character::removeItemFromEquipment(std::shared_ptr<Item> item){
+    if(equipment_.check_if_it_contains(item)){
+        equipment_.removeItem(item);
+        inventory_.addItem(item);
+    }
 }
 
                 /*Функції для оновлення характеристик персонажа на основі екіпірованих предметів*/
 void Character::updateCharacteristicsFromInventory() {
-    QVector<Item*> activeItems = inventory.getItemsEquipment();
+    QVector<std::shared_ptr<Item>> activeItems = equipment_.getItems();
 
     for (const auto& item : activeItems) {
         std::map<QString, int> itemCharacteristics = item->getCharacteristics();
-
-        /*
-        * Застосовуємо характеристики предмета до характеристик персонажа
-        * Збільшуємо характеристики на певне значення предмету
-        */
-        for (const auto& characteristic : itemCharacteristics) {
-            if (characteristic.first == "health") {
-                health+=(characteristic.second);
-            } else if (characteristic.first == "mana") {
-                mana+=(characteristic.second);
-            } else if (characteristic.first == "damage") {
-                damage += characteristic.second;
-            } else if (characteristic.first == "chanceOfCriticalDamage") {
-                chanceOfCriticalDamade += characteristic.second;
-            } else if (characteristic.first == "criticalDamage") {
-                criticalDamage += characteristic.second;
-            } else if (characteristic.first == "dexterity") {
-                dexterity += characteristic.second;
-            } else if (characteristic.first == "force") {
-                force += characteristic.second;
-            } else if (characteristic.first == "intelligence") {
-                intelligence += characteristic.second;
-            } else if (characteristic.first == "luck") {
-                luck += characteristic.second;
-            }else {
-                std::cout<<"Something wrond in character.cpp/updateCharacteristicsFromInventory\n";
-            }
-        }
+        applyCharacteristicsDelta(itemCharacteristics, 1);
     }
 }
 
-
-void Character::removeCharacteristicsFromUnequippedItems(const Item* item) {
+void Character::removeCharacteristicsFromUnequippedItems(const std::shared_ptr<Item> item) {
     std::map<QString, int> itemCharacteristics = item->getCharacteristics();
+    applyCharacteristicsDelta(itemCharacteristics, -1);
+}
 
-    /*
-     * Застосовуємо характеристики предмета до характеристик персонажа
-     * Зменшуємо характеристики на зворотне значення
-    */
+
+void Character::applyCharacteristicsDelta(const std::map<QString, int>& itemCharacteristics, int delta) {
+    // Карта, связывающая названия характеристик с переменными-членами класса
+    std::map<QString, int*> characteristicMap = {
+        {"health", &health_},
+        {"mana", &mana_},
+        {"damage", &damage_},
+        {"chanceOfCriticalDamage", &chanceOfCriticalDamage_},
+        {"criticalDamage", &criticalDamage_},
+        {"dexterity", &dexterity_},
+        {"force", &force_},
+        {"intelligence", &intelligence_},
+        {"luck", &luck_}
+    };
+
     for (const auto& characteristic : itemCharacteristics) {
-        if (characteristic.first == "health") {
-            health-=characteristic.second;
-        } else if (characteristic.first == "mana") {
-            mana-=characteristic.second;
-        } else if(characteristic.first=="damage"){
-            damage-=characteristic.second;
-        } else if(characteristic.first=="chanceOfCriticalDamage"){
-            chanceOfCriticalDamade-=characteristic.second;
-        } else if(characteristic.first=="criticalDamage"){
-            criticalDamage-=characteristic.second;
-        } else if (characteristic.first=="dexterity"){
-            dexterity-=characteristic.second;
-        } else if(characteristic.first=="force"){
-            force-=characteristic.second;
-        } else if(characteristic.first=="intelligence"){
-            intelligence-=characteristic.second;
-        } else if(characteristic.first=="luck"){
-            luck-=characteristic.second;
+        auto it = characteristicMap.find(characteristic.first);
+        if (it != characteristicMap.end()) {
+            *(it->second) += delta * characteristic.second;
         } else {
-            std::cout<<"Something wrond in character.cpp/removeCharacteristicsFromUnequippedItems\n";
+            // Использование правильного логирования ошибок или обработки исключений
+            std::cerr << "Неизвестная характеристика: " << characteristic.first.toStdString() << std::endl;
         }
     }
 }
@@ -131,89 +111,91 @@ void Character::removeCharacteristicsFromUnequippedItems(const Item* item) {
 
 
                 /*Функції для збільшення показників характеристик персонажа*/
-void Character::setExperience(){
-    experience+=10;
-    if(experience==100){
-        updateLevel();
+void Character::incrementExperience(){
+    QRandomGenerator randomGenerator(static_cast<quint32>(std::time(nullptr)));
+    int randomExperience = randomGenerator.bounded(1, 11);
+    experience_ += randomExperience;
+
+    if (experience_ >= 100) {
+        experience_ -= 100;
+        level_ += 1;
     }
 }
 
-void Character::updateLevel(){
-    level+=1;
-    experience=0;
-}
-
 void Character::setHealth(int amount){
-    health = amount;
+    health_ = amount;
 }
 
 void Character::setMana(int amount){
-    mana = amount;
+    mana_ = amount;
 }
 
 void Character::setDamage(int amount){
-    damage = amount;
+    damage_ = amount;
 }
 void Character::setChanceOfCriticalDamade(int amount){
-    chanceOfCriticalDamade = amount;
+    chanceOfCriticalDamage_ = amount;
 }
 void Character::setCriticalDamage(int amount){
-    criticalDamage = amount;
+    criticalDamage_ = amount;
 }
 void Character::setDexterity(int amount){
-    dexterity = amount;
+    dexterity_ = amount;
 }
 void Character::setForce(int amount){
-    force = amount;
+    force_ = amount;
 }
 void Character::setIntelligence(int amount){
-    intelligence = amount;
+    intelligence_ = amount;
 }
 void Character::setLuck(int amount){
-    luck = amount;
+    luck_ = amount;
 }
 
                 /*Геттери*/
 int Character::getHealth()const{
-    return health;
+    return health_;
 }
 int Character::getMana()const{
-    return mana;
+    return mana_;
 }
 int Character::getLevel()const{
-    return level;
+    return level_;
 }
 int Character::getExperience()const{
-    return experience;
+    return experience_;
 }
 
 int Character::getDamage() const{
-    return damage;
+    return damage_;
 }
 int Character::getChanceOfCriticalDamade() const{
-    return chanceOfCriticalDamade;
+    return chanceOfCriticalDamage_;
 }
 int Character::getCriticalDamage() const{
-    return criticalDamage;
+    return criticalDamage_;
 }
 int Character::getDexterity() const{
-    return dexterity;
+    return dexterity_;
 }
 int Character::getForce() const{
-    return force;
+    return force_;
 }
 int Character::getIntelligence() const{
-    return intelligence;
+    return intelligence_;
 }
 int Character::getLuck() const{
-    return luck;
+    return luck_;
 }
-Inventory Character::getInventory() {
-    return inventory;
+Inventory* Character::getInventory(){
+    return &inventory_;
+}
+Inventory* Character::getEquipment(){
+    return &equipment_;
 }
 
-QVector<Quest*> Character::getActiveQuest(){
-    return activeQuest;
+QVector<std::shared_ptr<Quest>> Character::getActiveQuest(){
+    return activeQuests_;
 }
 
 

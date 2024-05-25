@@ -9,6 +9,10 @@ void Inventory::removeItem(const std::shared_ptr<Item>& item){
         items_.removeAt(items_.indexOf(item));
 }
 
+bool Inventory::check_if_it_contains(std::shared_ptr<Item> item){
+    return items_.contains(item);
+}
+
 QVector<std::shared_ptr<Item>> Inventory::getItems() const{
     return items_;
 }

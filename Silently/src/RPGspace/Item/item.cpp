@@ -209,7 +209,7 @@ Equipment ItemGeneratorStrategy::generateTypeOfItem(const QString& name){
 
 std::shared_ptr<Item> DefaultItemGenerator::generateItem(){
     Item* item = new Item();
-    std::shared_ptr ptrItem(item);
+    std::shared_ptr<Item> ptrItem(item);
     QString rank = generateRank();
     std::pair<QString,QString> fullName_and_basicName = generateName();
     item->setRank(rank);

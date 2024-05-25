@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <QMessageBox>
-#include <QRandomGenerator>
+
 
 #include "addQuest_DialogWindow/addQuest_DialogWindow.h"
 #include "ShowInfoQuest_DialogWindow/ShowInfoQuest_DialogWindow.h"
