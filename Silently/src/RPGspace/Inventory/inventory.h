@@ -2,55 +2,27 @@
 #define INVENTORY_H
 #include "RPGspace/Item/item.h"
 
+#include <QVector>
 
-class Inventory {
-private:
-    std::vector<Item> itemInInventory;   // Предмети, що знаходяться в інвентарі користувача
-    std::vector<Item> itemEquipment;    // Предмети, що зараз активні (обладнання)
+class Inventory{
 public:
-    // Пустий конструктор класу
-    Inventory();
+    Inventory() = default;
 
-    // Додавання предмету в інвентар
-    void addItemInInventory(Item item);
+    void addItem(std::shared_ptr<Item> item);
+    void removeItem(const std::shared_ptr<Item>& item);
 
-    // Видалення предмету з інвентаря
-    void deleteItemInInventory(Item item);
+    bool check_if_it_contains(std::shared_ptr<Item> item);
 
-    // Видалення предмету з обладнання
-    void deleteItemEuipment(Item item);
+    QVector<std::shared_ptr<Item>> getItems() const;
 
-    // Додавання предмету в обладнання (використовується на персонажі)
-    void addToEquipment(const Item& item);
+    size_t getSize() const;
 
-    // Зняття предмету з обладнання
-    void removeFromEquipment(Item item);
+    std::shared_ptr<Item> getItemAtIndex(size_t index) const;
+    std::shared_ptr<Item> getItemAtName(const QString& name) const;
+private:
+    int indexOfItem(const QString& name) const;
 
-    // Отримання вектора всіх предметів в інвентарі
-    std::vector<Item> getItemInInventory() const;
-
-    // Отримання вектора предметів у обладнанні
-    std::vector<Item> getItemEquipment() const;
-
-    // Отримання кількості предметів в інвентарі
-    size_t getItemInInventoryCount() const;
-
-    // Отримання кількості предметів у обладнанні
-    size_t getItemInEquipCount() const;
-
-    // Отримання предмету за індексом
-    const Item& getItemAtIndex(size_t index) const;
-    const Item& getItemAtIndexEquip(size_t index) const;
-
-    // Ітератор початку вектора інвентаря
-    auto begin() {
-        return itemInInventory.begin();
-    }
-
-    // Ітератор кінця вектора інвентаря
-    auto end() {
-        return itemInInventory.end();
-    }
+    QVector<std::shared_ptr<Item>> items_;
 };
 
 

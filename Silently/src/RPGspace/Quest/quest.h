@@ -2,41 +2,49 @@
 #define QUEST_H
 
 #include <QString>
+#include <QDateTime>
+#include <memory>
 
 class Quest{
-private:
-    static int idCount;
-    int id;
-    QString title;
-    QString discription;
-    int difficulty;
-    std::chrono::system_clock::time_point deadline;
 public:
-    //Пустий базовий конструктор
-    Quest();
 
-    //Перевірка дедлайну
-    //Повертає true або false в залежності від того чи пройшов час дедлайну чи ні
-    bool checkDeadline()const;
+    bool checkDeadline();
 
-    //Сеттер для назви
-    void setTitle(QString newTitle);
+    void setTitle(const QString& title);
 
-    //Сеттер для опису
-    void setDiscription(QString newDiscription);
+    void setDescription(const QString& description);
 
-    //Сеттер для складності
-    void setDifficulti(int newDifficulty);
+    void setComplexity(const int& complexity);
 
-    //Сеттер для часу дедлайну
-    void setDeadline(std::chrono::system_clock::time_point newDeadline);
+    void setDeadline(const QDateTime& deadline);
 
-    //Геттери
     int getId() const;
     QString getTitle()const;
-    QString getDiscription()const;
-    int getDifficulty()const;
-    std::chrono::system_clock::time_point getDeadline()const;
+    QString getDescription()const;
+    int getComplexity()const;
+    QDateTime getDeadline()const;
+
+    friend class QuestFactory;
+
+protected:
+    Quest();
+
+private:
+    static int idCount_;
+    int id_;
+    QString title_;
+    QString description_;
+    int complexity_;
+    QDateTime deadline_;
+    bool need_to_follow_the_deadline = false;
+
+};
+
+class QuestFactory{
+public:
+    static std::shared_ptr<Quest> create(){
+        return std::shared_ptr<Quest>(new Quest());
+    }
 };
 
 #endif // QUEST_H

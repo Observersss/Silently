@@ -3,79 +3,42 @@
 
 #include"RPGspace/Inventory/inventory.h"
 #include "RPGspace/Quest/quest.h"
+
 #include <QPixmap>
-#include <iostream>
+#include <QRandomGenerator>
+#include <QVector>
 
 class Character
 {
-private:
-    /*Основні характеристики персонажа:
-     *Здоров'я
-     *Мана
-     *Рівень
-     *Досвід
-     *
-     *Урон
-     *Шанс крит.
-     *Крит. урон
-     *Спритність
-     *Сила
-     *Інтелект
-     *Удача
- */
-    int health;
-    int mana;
-    int experience;
-    int level;
-    int damage;
-    int chanceOfCriticalDamade;
-    int criticalDamage;
-    int dexterity;
-    int force;
-    int intelligence;
-    int luck;
-
-    /*Інвентар персонажа(складається з вектора активних предметів та неактивних)
-     *Вектор з створених користувачем квестів
-     *Зображення самого персонажа
-    */
-    Inventory inventory;
-    std::vector<Quest>activeQuest;
-    QPixmap characterImage;
 public:
     //Конструктор який ініціалізує об'єкт і надає персонажу базові дані про параметри
     Character();
 
                 /*Функції для роботи з квестами*/
 
-    void addActiveQuest(Quest* quest);
-    void deleteActiveQuest(Quest& quest);
+    void addActiveQuest(std::shared_ptr<Quest> quest);
+    void deleteActiveQuest(std::shared_ptr<Quest> quest);
 
     //Пошук квеста у векторі за допомогою порівняння за title через цикл foreach
     //Повертає об'єкт класса Quest
-    Quest findQuest(const QString& title);
-    Quest findQuest(const int id);
+    std::shared_ptr<Quest> findQuest(const QString& title);
+    std::shared_ptr<Quest> findQuest(const int id);
 
                 /*Функції для роботи з інвентарем*/
+    void addItemToInventory(std::shared_ptr<Item> item);
+    void addItemToEquipment(std::shared_ptr<Item> item);
+    void removeItemFromEquipment(std::shared_ptr<Item> item);
 
-    void addItemToInventory(Item item);
-    void removeItemFromInventory(Item item);
-    void setInventory(Inventory value);
 
                 /*Функції для оновлення характеристик персонажа на основі екіпірованих предметів*/
 
     void updateCharacteristicsFromInventory();
-    void removeCharacteristicsFromUnequippedItems(const Item& item);
+    void removeCharacteristicsFromUnequippedItems(const std::shared_ptr<Item> item);
 
 
                 /*Функції для збільшення показників характеристик персонажа*/
 
-    /*Функція додавання досвіду до персонажа
-     * Якщо досвід = 100 то запускається updateLevel яка збільшує всі інші характеристики
-     * за допомогою функцій типу set...
-    */
-    void setExperience();
-    void updateLevel();
+    void incrementExperience();
     void setHealth(int amount);
     void setMana(int amount);
     void setDamage(int amount);
@@ -100,8 +63,28 @@ public:
     int getForce() const;
     int getIntelligence() const;
     int getLuck() const;
-    Inventory getInventory() ;
-    std::vector<Quest> getActiveQuest();
+    Inventory* getInventory();
+    Inventory* getEquipment();
+    QVector<std::shared_ptr<Quest>> getActiveQuest();
+protected:
+    void applyCharacteristicsDelta(const std::map<QString, int>& itemCharacteristics, int delta);
+
+private:
+    int health_;
+    int mana_;
+    int experience_;
+    int level_;
+    int damage_;
+    int chanceOfCriticalDamage_;
+    int criticalDamage_;
+    int dexterity_;
+    int force_;
+    int intelligence_;
+    int luck_;
+
+    Inventory inventory_;
+    Inventory equipment_;
+    QVector<std::shared_ptr<Quest>>activeQuests_;
 };
 
 

@@ -28,7 +28,7 @@ public:
 
     void questComplete();
 
-    void updateCharacterEquipment(const std::vector<Item>& equipment);
+    void updateCharacterEquipment(const QVector<Item*>& equipment);
 
     void saveInfoNote();
     void savePreviousCurrentNote(QListWidgetItem *previous);
@@ -86,11 +86,10 @@ private slots:
 
     void on_listTag_itemDoubleClicked(QListWidgetItem *item);
 
-
 private:
     Ui::MainWindow *ui;
     Character character;
-    Quest quest;
+    Quest* quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
     static int noteCounter;

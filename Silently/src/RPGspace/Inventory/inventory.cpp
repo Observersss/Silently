@@ -1,92 +1,49 @@
 #include "inventory.h"
 
-
-Inventory::Inventory() {}
-
-void Inventory::addItemInInventory(Item item) {
-    // Додавання предмету в інвентар
-    itemInInventory.push_back(item);
+void Inventory::addItem(std::shared_ptr<Item> item){
+    if(!items_.contains(item))
+        items_.push_back(item);
+}
+void Inventory::removeItem(const std::shared_ptr<Item>& item){
+    if(items_.contains(item))
+        items_.removeAt(items_.indexOf(item));
 }
 
-void Inventory::deleteItemInInventory(Item item) {
-    // Видалення предмету з інвентаря
-    for (auto it = itemInInventory.begin(); it != itemInInventory.end(); ++it) {
-        if (it->getIndex() == item.getIndex()) {
-            itemInInventory.erase(it);
-            break;
+bool Inventory::check_if_it_contains(std::shared_ptr<Item> item){
+    return items_.contains(item);
+}
+
+QVector<std::shared_ptr<Item>> Inventory::getItems() const{
+    return items_;
+}
+
+size_t Inventory::getSize() const{
+    if(items_.isEmpty()){
+        return 0;
+    }
+
+    return items_.size();
+}
+
+std::shared_ptr<Item> Inventory::getItemAtIndex(size_t index) const{
+    if (index < items_.size()) {
+        return items_[index];
+    }
+    throw std::out_of_range("Index out of range");
+}
+std::shared_ptr<Item> Inventory::getItemAtName(const QString& name) const{
+    int index = indexOfItem(name);
+    if (index != -1) {
+        return items_[index];
+    }
+    return nullptr;
+}
+
+int Inventory::indexOfItem(const QString& name) const{
+    for (size_t i = 0; i < items_.size(); ++i) {
+        if (items_[i]->getnameOfitem() == name) {
+            return static_cast<int>(i);
         }
     }
+    return -1;
 }
-
-void Inventory::deleteItemEuipment(Item item) {
-    // Видалення предмету з обладнання
-    for (auto it = itemEquipment.begin(); it != itemEquipment.end(); ++it) {
-        if (it->getIndex() == item.getIndex()) {
-
-            itemEquipment.erase(it);
-            break;
-        }
-    }
-}
-
-void Inventory::addToEquipment(const Item& item) {
-    for (const Item& existingItem : itemEquipment) {
-        if (existingItem.getIndex() == item.getIndex()) {
-            // Якщо предмет вже є у спорядженні, повертаємося без змін
-            return;
-        }
-    }
-
-    // Якщо предмет не є активним, додаємо його у спорядження та видаляємо з інвентаря
-    deleteItemInInventory(item);
-    itemEquipment.push_back(item);
-}
-
-void Inventory::removeFromEquipment(Item item) {
-    // Видалення предмету з обладнання та повернення у інвентар
-    for (auto it = itemEquipment.begin(); it != itemEquipment.end(); ++it) {
-        if (it->getIndex() == item.getIndex()) {
-            itemEquipment.erase(it);
-            itemInInventory.push_back(item);
-            break;
-        }
-    }
-}
-
-std::vector<Item> Inventory::getItemInInventory() const {
-    // Повернення вектора предметів у інвентарі
-    return itemInInventory;
-}
-
-std::vector<Item> Inventory::getItemEquipment() const {
-    // Повернення вектора активного спорядження
-    return itemEquipment;
-}
-
-size_t Inventory::getItemInInventoryCount() const {
-    // Повернення кількості предметів у інвентарі
-    return itemInInventory.size();
-}
-
-size_t Inventory::getItemInEquipCount() const {
-    // Повернення кількості активного спорядження
-    return itemEquipment.size();
-}
-
-const Item& Inventory::getItemAtIndex(size_t index) const {
-    if (index < itemInInventory.size()) {
-        // Повернення предмету за вказаним індексом
-        return itemInInventory[index];
-    }
-    // Якщо індекс за межами діапазону, генеруємо помилку
-    throw std::out_of_range("Індекс вийшов за межі");
-}
-const Item& Inventory::getItemAtIndexEquip(size_t index) const{
-    if (index < itemEquipment.size()) {
-        // Повернення предмету за вказаним індексом
-        return itemEquipment[index];
-    }
-    // Якщо індекс за межами діапазону, генеруємо помилку
-    throw std::out_of_range("Індекс вийшов за межі");
-}
-
