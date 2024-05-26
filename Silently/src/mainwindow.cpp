@@ -12,10 +12,17 @@
 #include "AddNoteSpace_DialogWindow/addnotespace_dialogwindow.h"
 #include "NOTEspace/CustomLineEditManager/customlineeditmanager.h"
 
-// To-Do list for MainWindow:
-// set normal naming with GUI objects/methods/atributes
-// move short function in connect(...)
-//
+/* To-Do list for MainWindow:
+* set normal naming with GUI objects/methods/atributes
+* move short function( < 5 string of code, if more use function) in connect(...)
+* update functional for new RPG_space code
+* re-write :
+*           checkQuestDeadlinePassed
+*           questComplete
+*           deleteQuest
+*           on_Open_inventory_clicked
+*/
+
 
 int MainWindow::noteCounter=0;
 

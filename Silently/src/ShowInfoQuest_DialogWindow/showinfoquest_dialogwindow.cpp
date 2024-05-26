@@ -4,6 +4,14 @@
 #include "mainwindow.h"
 #include <QMessageBox>
 
+/*
+ * To-Do list for ShowInfoQuest_DialogWindow:
+ * repair this function:
+ *                      constructor
+ *                      on_change_button_clicked
+ *
+*/
+
 ShowInfoQuest_DialogWindow::ShowInfoQuest_DialogWindow(QWidget *parent,Quest* mainQuest) :
 
     QDialog(parent),

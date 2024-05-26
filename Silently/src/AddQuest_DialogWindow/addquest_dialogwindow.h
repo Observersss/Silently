@@ -4,6 +4,11 @@
 #include <QDialog>
 #include "RPGspace/Quest/quest.h"
 #include "mainwindow.h"
+
+/*
+ * To-Do list addQuest_DialogWindow:
+ * update functional for new Quest
+ */
 namespace Ui {
 class addQuest_DialogWindow;
 }

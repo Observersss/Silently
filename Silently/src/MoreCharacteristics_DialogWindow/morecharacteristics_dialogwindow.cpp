@@ -1,6 +1,11 @@
 #include "morecharacteristics_dialogwindow.h"
 #include "ui_morecharacteristics_dialogwindow.h"
 
+/*
+ * To-Do list for MoreCharacteristics_DialogWindow
+ * re-work functional for automatics him
+*/
+
 MoreCharacteristics_DialogWindow::MoreCharacteristics_DialogWindow(QWidget *parent,Character* maincharacter,bool show) :
     QDialog(parent),
     ui(new Ui::MoreCharacteristics_DialogWindow),

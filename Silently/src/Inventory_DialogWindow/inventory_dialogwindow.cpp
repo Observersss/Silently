@@ -5,8 +5,26 @@
 
 //To-Do list for Inventory_DialogWindow:
 //re-write functional for work:
+//re-work constructor for 2 inventory
 //with class Inventory(now is not one object)
 //with class Item (work with std::shared_ptr<Item>, old version Item*)
+// repair functions:
+/*
+ * constructor
+ * checkTypeCount
+ * EquipmentAddToEquipment
+ * EquipmentRemoveFromEquipment
+ * showItemDetails
+ * on_Equip_Item_itemClicked
+ * on_listWidget_itemClicked
+ * findItemByName
+ * addItemToListWidget
+ * removeItemFromListWidget
+ * on_Equip_clicked
+ * on_take_off_clicked
+ * on_Delete_2_clicked
+ * on_Delete_clicked
+*/
 
 Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playerCharacter) :
     QDialog(parent),
@@ -243,8 +261,7 @@ void Inventory_DialogWindow::on_Delete_2_clicked()
     // }
 }
 void Inventory_DialogWindow::on_Delete_clicked() {
-    // Реализация метода on_Delete_clicked
-    // Например, можно вывести сообщение об удалении элемента
+
     QMessageBox::information(this, "Delete", "Item deleted!");
 }
 
