@@ -18,7 +18,7 @@ class Inventory_DialogWindow : public QDialog
 public:
     explicit Inventory_DialogWindow(QWidget *parent = nullptr, Character *playerCharacter = nullptr);
 
-    void showItemDetails(const Item& selectedItem);
+    void showItemDetails(std::shared_ptr<Item> selectedItem);
 
     bool checkTypeCount(Equipment equipment);
     bool EquipmentAddToEquipment(Equipment equipment);
@@ -26,13 +26,16 @@ public:
 
     ~Inventory_DialogWindow();
 private slots:
-    void on_listWidget_itemClicked(QListWidgetItem *item);
-    void on_Equip_clicked();
-    void on_take_off_clicked();
-    void on_Delete_clicked();
-    void on_Delete_2_clicked();
 
-    void on_Equip_Item_itemClicked(QListWidgetItem *item);
+    void on_listWidget_Inventory_Items_itemClicked(QListWidgetItem *item);
+
+    void on_listWidget_Equip_Items_itemClicked(QListWidgetItem *item);
+
+    void on_pushButton_Equip_current_item_clicked();
+
+    void on_pushButton_take_off_current_item_clicked();
+
+    void on_pushButton_delete_current_Item_clicked();
 
 private:
     Ui::Inventory_DialogWindow *ui;

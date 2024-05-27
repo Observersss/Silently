@@ -285,9 +285,9 @@ void MainWindow::on_more_characteristics_clicked()
 
 void MainWindow::on_Open_inventory_clicked()
 {
-    // Inventory_DialogWindow window(this,&character);
+    Inventory_DialogWindow window(this,&character);
 
-    // window.exec();
+    window.exec();
     // Inventory inventory=character.getInventory();
 
     // // После закрытия окна обновите экипировку персонажа

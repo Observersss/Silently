@@ -17,7 +17,7 @@ QVector<std::shared_ptr<Item>> Inventory::getItems() const{
     return items_;
 }
 
-size_t Inventory::getSize() const{
+int Inventory::getSize() const{
     if(items_.isEmpty()){
         return 0;
     }

@@ -15,7 +15,7 @@ public:
 
     QVector<std::shared_ptr<Item>> getItems() const;
 
-    size_t getSize() const;
+    int getSize() const;
 
     std::shared_ptr<Item> getItemAtIndex(size_t index) const;
     std::shared_ptr<Item> getItemAtName(const QString& name) const;

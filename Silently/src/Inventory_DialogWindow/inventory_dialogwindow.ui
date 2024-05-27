@@ -49,7 +49,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0" colspan="2">
-       <widget class="QListWidget" name="listWidget">
+       <widget class="QListWidget" name="listWidget_Inventory_Items">
         <property name="minimumSize">
          <size>
           <width>300</width>
@@ -64,7 +64,7 @@ color:black;</string>
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QPushButton" name="Equip">
+       <widget class="QPushButton" name="pushButton_Equip_current_item">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -81,7 +81,7 @@ border-radius:10px;</string>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QPushButton" name="Delete">
+       <widget class="QPushButton" name="pushButton_delete_current_Item">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -192,7 +192,7 @@ background-color:rgb(0, 150, 255);</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0" colspan="2">
-       <widget class="QListWidget" name="Equip_Item">
+       <widget class="QListWidget" name="listWidget_Equip_Items">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -206,8 +206,8 @@ color:black;</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="take_off">
+      <item row="1" column="0" colspan="2">
+       <widget class="QPushButton" name="pushButton_take_off_current_item">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -220,23 +220,6 @@ border-radius:10px;</string>
         </property>
         <property name="text">
          <string>take off</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="Delete_2">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:orange;
-border-radius:10px;</string>
-        </property>
-        <property name="text">
-         <string>Delete</string>
         </property>
        </widget>
       </item>

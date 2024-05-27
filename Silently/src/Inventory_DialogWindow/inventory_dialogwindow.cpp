@@ -3,28 +3,6 @@
 
 #include <QMessageBox>
 
-//To-Do list for Inventory_DialogWindow:
-//re-write functional for work:
-//re-work constructor for 2 inventory
-//with class Inventory(now is not one object)
-//with class Item (work with std::shared_ptr<Item>, old version Item*)
-// repair functions:
-/*
- * constructor
- * checkTypeCount
- * EquipmentAddToEquipment
- * EquipmentRemoveFromEquipment
- * showItemDetails
- * on_Equip_Item_itemClicked
- * on_listWidget_itemClicked
- * findItemByName
- * addItemToListWidget
- * removeItemFromListWidget
- * on_Equip_clicked
- * on_take_off_clicked
- * on_Delete_2_clicked
- * on_Delete_clicked
-*/
 
 Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playerCharacter) :
     QDialog(parent),
@@ -43,60 +21,53 @@ Inventory_DialogWindow::Inventory_DialogWindow(QWidget *parent, Character *playe
     typeCount[GLOVES] = 1;
     typeCount[ANOTHER] = 3;
 
-    // QVector<Item*> itemInInventory = character->getInventory()->getItemsInInventory();
-    // QVector<Item*> equipItem = character->getInventory()->getItemsEquipment();
-    // if (!itemInInventory.empty()) {
-    //     for (auto &item : itemInInventory) {
-    //         QString name = item->getnameOfitem();
 
-    //         //Вивід назви предмета
-    //         ui->listWidget->addItem(name);
-    //     }
-    // }
-
-    // if (!equipItem.empty()) {
-    //     for (auto &item : equipItem) {
-    //         QString name =item->getnameOfitem();
-    //         //Вивід назви предмета
-    //         ui->Equip_Item->addItem(name);
-    //     }
-    // }
+    if(character->getInventory()->getSize() > 0){
+        foreach(std::shared_ptr<Item> item , character->getInventory()->getItems()){
+            ui->listWidget_Inventory_Items->addItem(item->getnameOfitem());
+        };
+    }
+    if(character->getEquipment()->getSize() > 0){
+        foreach(std::shared_ptr<Item> item , character->getEquipment()->getItems()){
+            ui->listWidget_Equip_Items->addItem(item->getnameOfitem());
+        }
+    }
 }
 
 bool Inventory_DialogWindow::checkTypeCount(Equipment equipment){
-    // auto it = typeCount.find(equipment);
+    auto it = typeCount.find(equipment);
 
-    // if(it==typeCount.end()){
-    //     qDebug()<<"Equipment type:"<<equipment<<" not found \n";
-    //     return false;
-    // }
-    // return true;
+    if(it==typeCount.end()){
+        qDebug()<<"Equipment type:"<<equipment<<" not found \n";
+        return false;
+    }
+    return true;
 }
 bool Inventory_DialogWindow::EquipmentAddToEquipment(Equipment equipment){
-    // if(!checkTypeCount(equipment)){
-    //     return false;
-    // }
+    if(!checkTypeCount(equipment)){
+        return false;
+    }
 
-    // auto it = typeCount.find(equipment);
-    // qDebug()<<"Emum: "<<equipment<<" find enum: "<< it->second <<'\n';
-    // if(it->second == 0){
-    //     qDebug()<<"Cannot add quipment to active inventory \n";
-    //     return false;
-    // }else{
-    // it->second -= 1;
-    //     return true;
-    // }
+    auto it = typeCount.find(equipment);
+    qDebug()<<"Emum: "<<equipment<<" find enum: "<< it->second <<'\n';
+    if(it->second == 0){
+        qDebug()<<"Cannot add quipment to active inventory \n";
+        return false;
+    }else{
+    it->second -= 1;
+        return true;
+    }
 }
 bool Inventory_DialogWindow::EquipmentRemoveFromEquipment(Equipment equipment){
-    // if(!checkTypeCount(equipment)){
-    //     return false;
-    // }
+    if(!checkTypeCount(equipment)){
+        return false;
+    }
 
-    // auto it = typeCount.find(equipment);
+    auto it = typeCount.find(equipment);
 
-    // it->second += 1;
+    it->second += 1;
 
-    // return true;
+    return true;
 }
 
 Inventory_DialogWindow::~Inventory_DialogWindow()
@@ -104,165 +75,146 @@ Inventory_DialogWindow::~Inventory_DialogWindow()
     delete ui;
 }
 
-void Inventory_DialogWindow::showItemDetails(const Item& selectedItem) {
-    // QString rank = selectedItem.getRank();
-    // ui->Rank->setText(rank);
-    // std::map<QString, int> characteristics = selectedItem.getCharacteristics();
-    // QPixmap image(selectedItem.getPathToImg());
-    // // Встановлення тексту із характеристиками предмета
-    // ui->Option1->setText("0");
-    // ui->Option2->setText("0");
-    // ui->Option3->setText("0");
-    // //need fix this
-    // // if (characteristics.size() >= 1) {
-    // //     ui->Option1->setText(characteristics[0].first + ":  " + QString::number(characteristics[0].second));
-    // // }
-    // // if (characteristics.size() >= 2) {
-    // //     ui->Option2->setText(characteristics[1].first + ":  " + QString::number(characteristics[1].second));
-    // // }
-    // // if (characteristics.size() >= 3) {
-    // //     ui->Option3->setText(characteristics[2].first + ":  " + QString::number(characteristics[2].second));
-    // // }
+void Inventory_DialogWindow::showItemDetails(std::shared_ptr<Item> selectedItem) {
+
+    ui->Rank->setText(selectedItem->getRank());
+    std::map<QString, int> characteristics = selectedItem->getCharacteristics();
+    QPixmap image(selectedItem->getPathToImg());
+
+    QLabel* optionLabels[] = { ui->Option1, ui->Option2, ui->Option3 };
 
 
-    // // Встановлення зображення предмета
-    // int w = ui->label->width();
-    // int h = ui->label->height();
-    // ui->label->setPixmap(image.scaled(w, h, Qt::KeepAspectRatio));
-}
+    for (QLabel* label : optionLabels) {
+        label->setText("0");
+    }
 
-void Inventory_DialogWindow::on_Equip_Item_itemClicked(QListWidgetItem *item) {
-    // Inventory inventory = character->getInventory();
-    // int selectedIndex = ui->Equip_Item->currentRow();
-    // if (selectedIndex >= 0 && selectedIndex < inventory.getItemInEquipCount()) {
-    //     try {
-    //         const Item* selectedItem = inventory.getItemAtIndexEquip(selectedIndex);
-    //         showItemDetails(*selectedItem);
-    //     } catch (const std::out_of_range& e) {
-    //         qDebug() << "Error: " << e.what();
-    //     }
-    // } else {
-    //     qDebug() << "Індекс за межами вектора Inventory_DialogWindow.cpp/on_Equip_Item_itemClicked";
-    // }
-}
+    int i = 0;
+    for (const auto& characteristic : characteristics) {
+        if (i >= 3) break;
+        optionLabels[i]->setText(characteristic.first + ": " + QString::number(characteristic.second));
+        ++i;
+    }
 
-void Inventory_DialogWindow::on_listWidget_itemClicked(QListWidgetItem *item) {
-    // Inventory inventory = character->getInventory();
-    // int selectedIndex = ui->listWidget->currentRow();
-    // if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
-    //     try {
-    //         const Item* selectedItem = inventory.getItemAtIndex(selectedIndex);
-    //         showItemDetails(*selectedItem);
-    //     } catch (const std::out_of_range& e) {
-    //         qDebug() << "Error: " << e.what();
-    //     }
-    // } else {
-    //     qDebug() << "Індекс за межами вектора Inventory_DialogWindow.cpp/on_listWidget_itemClicked";
-    // }
-}
+    int w = ui->label->width();
+    int h = ui->label->height();
+    ui->label->setPixmap(image.scaled(w, h, Qt::KeepAspectRatio));
 
-
-Item* Inventory_DialogWindow::findItemByName(const QString& itemName, const QVector<Item*>& items) {
-    // for (Item* item : items) {
-    //     if (item->getnameOfitem() == itemName) {
-    //         return item;
-    //     }
-    // }
-
-    // return nullptr;
-}
-
-void Inventory_DialogWindow::addItemToListWidget(const QString& itemName, QListWidget* listWidget) {
-    // QListWidgetItem* newItem = new QListWidgetItem(itemName);
-    // listWidget->addItem(newItem);
 }
 
 void Inventory_DialogWindow::removeItemFromListWidget(QListWidget* listWidget, int selectedIndex) {
-    // QListWidgetItem* item = listWidget->takeItem(selectedIndex);
-    // delete item;
+    QListWidgetItem* item = listWidget->takeItem(selectedIndex);
+    delete item;
 }
 
-void Inventory_DialogWindow::on_Equip_clicked() {
-    // Inventory inventory=character->getInventory();
-    // int selectedIndex = ui->listWidget->currentRow();
-    // if (selectedIndex >= 0 && selectedIndex < inventory.getItemInInventoryCount()) {
-    //     QListWidgetItem* selectedItemWidget = ui->listWidget->item(selectedIndex);
-    //     if (selectedItemWidget) {
-    //         QString selectedName = selectedItemWidget->text();
 
-    //         Item* foundItem = findItemByName(selectedName, inventory.getItemsInInventory());
-
-    //         if(!EquipmentAddToEquipment(foundItem->getTypeItem())){
-    //             QMessageBox::warning(this,"Error","Cannot add this item to inventory");
-    //             return;
-    //         }
-
-    //         ui->Equip_Item->addItem(selectedName);
-    //         if ((!foundItem->getnameOfitem().isEmpty())) {
-    //             inventory.addToEquipment(foundItem);
-    //             removeItemFromListWidget(ui->listWidget, selectedIndex);
-    //             character->setInventory(inventory);
-    //         }
-    //     }
-    // }else{
-    //     qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_Equip_clicked \n";
-    // }
-}
-
-void Inventory_DialogWindow::on_take_off_clicked() {
-    // Inventory inventory=character->getInventory();
-
-    // int selectedIndex = ui->Equip_Item->currentRow();
-    // if (selectedIndex >= 0 && selectedIndex < inventory.getItemInEquipCount()) {
-    //     QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
-    //     if (selectedItemWidget) {
-    //         QString selectedName = selectedItemWidget->text();
-
-    //         Item* foundItem = findItemByName(selectedName, inventory.getItemsEquipment());
-    //         if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
-    //             QMessageBox::warning(this,"Error","Cannot add this item to inventory");
-    //             return;
-    //         }
-    //         ui->listWidget->addItem(selectedName);
-    //         if ((!foundItem->getnameOfitem().isEmpty())) {
-    //             inventory.removeFromEquipment(foundItem);
-    //             removeItemFromListWidget(ui->Equip_Item, selectedIndex);
-    //             character->removeCharacteristicsFromUnequippedItems(foundItem);
-    //             character->setInventory(inventory);
-    //         }
-    //     }
-    // }else{
-    //     qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_take_off_clicked \n";
-    // }
-}
-
-void Inventory_DialogWindow::on_Delete_2_clicked()
+void Inventory_DialogWindow::on_listWidget_Inventory_Items_itemClicked(QListWidgetItem *item)
 {
-    // Inventory inventory=character->getInventory();
 
-    // int selectedIndex = ui->Equip_Item->currentRow();
-    // if (selectedIndex >= 0 && selectedIndex <= inventory.getItemInEquipCount()) {
-    //     QListWidgetItem* selectedItemWidget = ui->Equip_Item->item(selectedIndex);
-    //     if (selectedItemWidget) {
-    //         QString selectedName = selectedItemWidget->text();
-    //         Item* foundItem = findItemByName(selectedName, inventory.getItemsInInventory());
-    //         if ((!foundItem->getnameOfitem().isEmpty())) {
-    //             if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
-    //                 QMessageBox::warning(this,"Error","Cannot add this item to inventory");
-    //                 return;
-    //             }
-    //             inventory.removeFromEquipment(foundItem);
-    //             removeItemFromListWidget(ui->listWidget, selectedIndex);
-    //             character->setInventory(inventory);
-    //         }
-    //     }
-    // }else{
-    //     qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_Delete_2_clicked \n";
-    // }
-}
-void Inventory_DialogWindow::on_Delete_clicked() {
+    int selectedIndex = ui->listWidget_Inventory_Items->currentRow();
+    if (selectedIndex >= 0 && selectedIndex < character->getInventory()->getSize()) {
+        try {
+            std::shared_ptr<Item> selectedItem = character->getInventory()->getItemAtIndex(selectedIndex);
+            showItemDetails(selectedItem);
+        } catch (const std::out_of_range& e) {
+            qDebug() << "Error: " << e.what();
+        }
+    } else {
+        qDebug() << "Індекс за межами вектора Inventory_DialogWindow.cpp/on_listWidget_itemClicked";
+    }
 
-    QMessageBox::information(this, "Delete", "Item deleted!");
 }
 
+
+void Inventory_DialogWindow::on_listWidget_Equip_Items_itemClicked(QListWidgetItem *item)
+{
+    int selectedIndex = ui->listWidget_Equip_Items->currentRow();
+    if (selectedIndex >= 0 && selectedIndex < character->getEquipment()->getSize()) {
+        try {
+            std::shared_ptr<Item> selectedItem = character->getEquipment()->getItemAtIndex(selectedIndex);
+            showItemDetails(selectedItem);
+        } catch (const std::out_of_range& e) {
+            qDebug() << "Error: " << e.what();
+        }
+    } else {
+        qDebug() << "Індекс за межами вектора Inventory_DialogWindow.cpp/on_listWidget_itemClicked";
+    }
+}
+
+
+void Inventory_DialogWindow::on_pushButton_Equip_current_item_clicked()
+{
+    Inventory* inventory=character->getInventory();
+    int selectedIndex = ui->listWidget_Inventory_Items->currentRow();
+    if (selectedIndex >= 0 && selectedIndex < inventory->getSize()) {
+        QListWidgetItem* selectedItemWidget = ui->listWidget_Inventory_Items->item(selectedIndex);
+        if (selectedItemWidget) {
+            QString selectedName = selectedItemWidget->text();
+
+            std::shared_ptr<Item> foundItem = inventory->getItemAtName(selectedName);
+
+            if(!EquipmentAddToEquipment(foundItem->getTypeItem())){
+                QMessageBox::warning(this,"Error","Cannot add this item to inventory");
+                return;
+            }
+
+            ui->listWidget_Equip_Items->addItem(selectedName);
+            if ((!foundItem->getnameOfitem().isEmpty())) {
+                character->addItemToEquipment(foundItem);
+                removeItemFromListWidget(ui->listWidget_Inventory_Items, selectedIndex);
+                EquipmentAddToEquipment(foundItem->getTypeItem());
+            }
+        }
+    }else{
+        qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_Equip_clicked \n";
+    }
+}
+
+
+void Inventory_DialogWindow::on_pushButton_take_off_current_item_clicked()
+{
+    Inventory* equipment=character->getEquipment();
+
+    int selectedIndex = ui->listWidget_Equip_Items->currentRow();
+    if (selectedIndex >= 0 && selectedIndex < equipment->getSize()) {
+        QListWidgetItem* selectedItemWidget = ui->listWidget_Equip_Items->item(selectedIndex);
+        if (selectedItemWidget) {
+            QString selectedName = selectedItemWidget->text();
+
+            std::shared_ptr<Item> foundItem = equipment->getItemAtName(selectedName);
+            if(!EquipmentRemoveFromEquipment(foundItem->getTypeItem())){
+                QMessageBox::warning(this,"Error","Cannot add this item to inventory");
+                return;
+            }
+            ui->listWidget_Inventory_Items->addItem(selectedName);
+            if ((!foundItem->getnameOfitem().isEmpty())) {
+                character->removeItemFromEquipment(foundItem);
+                removeItemFromListWidget(ui->listWidget_Equip_Items, selectedIndex);
+                EquipmentRemoveFromEquipment(foundItem->getTypeItem());
+            }
+        }
+    }else{
+        qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_take_off_clicked \n";
+    }
+}
+
+
+void Inventory_DialogWindow::on_pushButton_delete_current_Item_clicked()
+{
+    Inventory* inventory=character->getInventory();
+
+    int selectedIndex = ui->listWidget_Inventory_Items->currentRow();
+    if (selectedIndex >= 0 && selectedIndex <= inventory->getSize()) {
+        QListWidgetItem* selectedItemWidget = ui->listWidget_Inventory_Items->item(selectedIndex);
+        if (selectedItemWidget) {
+            QString selectedName = selectedItemWidget->text();
+            std::shared_ptr<Item> foundItem = inventory->getItemAtName(selectedName);
+            if ((!foundItem->getnameOfitem().isEmpty())) {
+                inventory->removeItem(foundItem);
+                removeItemFromListWidget(ui->listWidget_Inventory_Items, selectedIndex);
+            }
+        }
+    }else{
+        qDebug()<<"Індекс за межами вектора Inventory_DialogWindow.cpp/on_Delete_2_clicked \n";
+    }
+}
 
