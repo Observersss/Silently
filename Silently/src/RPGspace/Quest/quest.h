@@ -18,6 +18,8 @@ public:
 
     void setDeadline(const QDateTime& deadline);
 
+    void switch_need_to_follow_the_deadline();
+
     int getId() const;
     QString getTitle()const;
     QString getDescription()const;

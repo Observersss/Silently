@@ -5,10 +5,7 @@
 #include "RPGspace/Quest/quest.h"
 #include "mainwindow.h"
 
-/*
- * To-Do list addQuest_DialogWindow:
- * update functional for new Quest
- */
+
 namespace Ui {
 class addQuest_DialogWindow;
 }
@@ -22,10 +19,13 @@ public:
     ~addQuest_DialogWindow();
 
 private slots:
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    void on_pushButton_show_deadline_clicked();
+
+    void on_pushButton_add_quest_clicked();
+
 private:
     Ui::addQuest_DialogWindow *ui;
+    std::shared_ptr<Quest> quest_;
 };
 
 #endif // ADDQUEST_DIALOGWINDOW_H

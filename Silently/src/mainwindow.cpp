@@ -140,9 +140,14 @@ void MainWindow::checkQuestDeadlinePassed() {
 }
 
 
-void MainWindow::addActiveQuest(Quest* quest){
-    //character.addActiveQuest(quest);
-    //checkQuestDeadlinePassed();
+void MainWindow::addActiveQuest(std::shared_ptr<Quest> quest){
+    try{
+        character.addActiveQuest(quest);
+        //checkQuestDeadlinePassed();
+    }catch(std::runtime_error& e){
+        QMessageBox::warning(this,"Eror!","Failed to add new quest, try again");
+            qDebug()<<"Runtime error: "<<e.what()<<'\n';
+    }
 }
 
 MainWindow::~MainWindow()
@@ -154,7 +159,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_AddingQuest_clicked()
 {
     addQuest_DialogWindow window(this);
-
     window.exec();
 }
 
@@ -215,17 +219,17 @@ void MainWindow::updateInfoOnCharacter(){
 }
 
 void MainWindow::updateInfoOnQuest(){
-    // QVector<Quest*> quests = character.getActiveQuest();
+    QVector<std::shared_ptr<Quest>> quests = character.getActiveQuest();
 
-    // if (!quests.empty()) {
-    // //Вектор не пустий, можна отримати доступ до елементів
-    // Quest* quest = quests.back();
-    // QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
-    // ui->QuestList->addItem(title);
+    if (!quests.empty()) {
+        //Вектор не пустий, можна отримати доступ до елементів
+        std::shared_ptr<Quest> quest = quests.back();
+        QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
+        ui->QuestList->addItem(title);
 
-    // } else {
-    // qDebug() << "Вектора квестів пустий mainwindow.cpp/updateInfoOnQuest";
-    // }
+    } else {
+        qDebug() << "Вектора квестів пустий mainwindow.cpp/updateInfoOnQuest";
+    }
 }
 
 void MainWindow::handleQuestInfoClosed() {

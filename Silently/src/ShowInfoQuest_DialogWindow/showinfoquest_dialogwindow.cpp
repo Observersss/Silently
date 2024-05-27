@@ -99,17 +99,17 @@ void ShowInfoQuest_DialogWindow::on_change_button_clicked()
     // Создаем MainWindow
     MainWindow* w = dynamic_cast<MainWindow*>(parent());
 
-    if (w) {
+    // if (w) {
 
-        w->addActiveQuest(quest);//Додоємо до вектора квестів персонажа
-        w->updateInfoOnQuest();  //Відображаємо назву квесту у QListWidget
-        w->handleQuestInfoClosed();//Видаляємо стару версію квеста у QlistWidget
+    //     w->addActiveQuest(quest);//Додоємо до вектора квестів персонажа
+    //     w->updateInfoOnQuest();  //Відображаємо назву квесту у QListWidget
+    //     w->handleQuestInfoClosed();//Видаляємо стару версію квеста у QlistWidget
 
-        hide();
-    } else {
-        //Вивід повідомлення що не вдалося передати квест
-        QMessageBox::warning(this, "Помилка", "Невдалося передати квест");
-    }
+    //     hide();
+    // } else {
+    //     //Вивід повідомлення що не вдалося передати квест
+    //     QMessageBox::warning(this, "Помилка", "Невдалося передати квест");
+    // }
 }
 
 

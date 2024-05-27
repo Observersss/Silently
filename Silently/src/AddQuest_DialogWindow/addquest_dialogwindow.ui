@@ -59,7 +59,7 @@
        </widget>
       </item>
       <item row="0" column="1" colspan="2">
-       <widget class="QLineEdit" name="Title">
+       <widget class="QLineEdit" name="lineEdit_Title">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -85,7 +85,7 @@ border:3px solid silver;</string>
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QLineEdit" name="Discription">
+       <widget class="QLineEdit" name="lineEdit_Description">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -169,7 +169,7 @@ border:3px solid silver;</string>
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QFrame" name="frame_2">
+    <widget class="QFrame" name="frame_deadline">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -199,7 +199,7 @@ color:black;</string>
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="pushButton_show_deadline">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -216,7 +216,7 @@ border-radius:10px;</string>
     </widget>
    </item>
    <item row="4" column="1">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="pushButton_add_quest">
      <property name="minimumSize">
       <size>
        <width>0</width>

@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void addActiveQuest(Quest* quest);
+    void addActiveQuest(std::shared_ptr<Quest> quest);
 
     void updateInfoOnCharacter();
 
