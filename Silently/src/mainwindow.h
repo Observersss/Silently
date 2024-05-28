@@ -43,6 +43,8 @@ public:
     void saveInfoNote(QListWidgetItem *previous);
     void uploadInfoNote(QListWidgetItem *current);
 
+    void update_listWidget_Quests();
+
     ~MainWindow();
 private slots:
 

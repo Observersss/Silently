@@ -81,10 +81,10 @@ void MainWindow::checkQuestDeadlinePassed() {
                 character.deleteActiveQuest(quest);
 
                 QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
-                for (int i = 0; i < ui->QuestList->count(); ++i) {
-                    QListWidgetItem *item = ui->QuestList->item(i);
+                for (int i = 0; i < ui->listWidget_Quests->count(); ++i) {
+                    QListWidgetItem *item = ui->listWidget_Quests->item(i);
                     if (item->text() == title) {
-                        delete ui->QuestList->takeItem(i);
+                        delete ui->listWidget_Quests->takeItem(i);
                         break;
                     }
                 }
@@ -212,7 +212,7 @@ void MainWindow::updateInfoOnQuest(){
     if (!quests.empty()) {
         std::shared_ptr<Quest> quest = quests.back();
         QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
-        ui->QuestList->addItem(title);
+        //ui->QuestList->addItem(title);
 
     } else {
         qDebug() << "Вектора квестів пустий mainwindow.cpp/updateInfoOnQuest";
@@ -220,9 +220,9 @@ void MainWindow::updateInfoOnQuest(){
 }
 
 void MainWindow::handleQuestInfoClosed() {
-    int indexToRemove = ui->QuestList->currentRow();
+    int indexToRemove = ui->listWidget_Quests->currentRow();
     if (indexToRemove >= 0) {
-    QListWidgetItem* item = ui->QuestList->takeItem(indexToRemove);
+    QListWidgetItem* item = ui->listWidget_Quests->takeItem(indexToRemove);
     delete item;
     }
 }
@@ -557,6 +557,14 @@ void MainWindow::change_space(){
         ui->button_change_space->setText("Go RPG");
         ui->label_InfoSpace->setText("Space now: Notes");
         ui->stackedWidget->setCurrentIndex(0);
+    }
+}
+
+void MainWindow::update_listWidget_Quests(){
+    ui->listWidget_Quests->clear();
+    foreach(std::shared_ptr quest, character.getActiveQuest()){
+        QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
+        ui->listWidget_Quests->addItem(title);
     }
 }
 
