@@ -112,6 +112,11 @@ border: 3px solid silver;</string>
      </item>
      <item>
       <widget class="QSpinBox" name="spinBox_Complexity">
+       <property name="styleSheet">
+        <string notr="true">color:black;
+border:3px solid silver;
+border-radius: 10px;</string>
+       </property>
        <property name="minimum">
         <number>1</number>
        </property>
@@ -137,7 +142,9 @@ border: 3px solid silver;</string>
      <item>
       <widget class="QDateTimeEdit" name="dateTimeEdit_deadline">
        <property name="styleSheet">
-        <string notr="true">color:black;</string>
+        <string notr="true">color:black;
+border-radius:10px;
+border:3px solid silver;</string>
        </property>
       </widget>
      </item>

@@ -680,7 +680,7 @@ border-radius:15px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="more_characteristics">
+           <widget class="QPushButton" name="pushButton_show_MoreCharacteristics_DialogWindow">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -697,7 +697,7 @@ border-radius:15px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="Open_inventory">
+           <widget class="QPushButton" name="pushButton_show_Inventory_DialogWindow">
             <property name="minimumSize">
              <size>
               <width>0</width>

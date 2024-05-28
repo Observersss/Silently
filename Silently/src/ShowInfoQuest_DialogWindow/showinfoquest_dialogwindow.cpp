@@ -53,7 +53,7 @@ void ShowInfoQuest_DialogWindow::on_pushButton_delete_Quest_clicked()
     MainWindow* w = getMainWindow();
     if(w){
 
-        w->deleteQuest();
+        w->deleteQuest(quest_);
         w->handleQuestInfoClosed();
 
         close();
@@ -67,7 +67,7 @@ void ShowInfoQuest_DialogWindow::on_pushButton_complete_Quest_clicked()
     MainWindow* w = getMainWindow();
     if(w){
         w->questComplete();
-        w->deleteQuest();
+        w->deleteQuest(quest_);
         w->handleQuestInfoClosed();
 
         close();

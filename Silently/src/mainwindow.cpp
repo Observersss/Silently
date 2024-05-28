@@ -111,45 +111,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-// void MainWindow::on_AddingQuest_clicked()
-// {
-//     // addQuest_DialogWindow window(this);
-//     // window.exec();
-// }
-
-void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
-{
-    // QString titleName = item->text(); // Получаем название квеста
-    // int startIndex = titleName.indexOf(":") + 1; // Ищем начало числовой части после "ID:"
-    // int endIndex = titleName.indexOf(" ", startIndex); // Ищем конец числовой части перед первым пробелом
-
-    // if (startIndex != -1 && endIndex != -1) {
-    //     QString idString = titleName.mid(startIndex, endIndex - startIndex); // Извлекаем числовую часть
-    //     bool conversionOK;
-    //     int id = idString.toInt(&conversionOK);
-
-    //     if (conversionOK) {
-    //         qDebug() << "ID:" << id;
-    //         Quest* quest = character.findQuest(id); // Передаем в функцию findQuest для поиска по ID
-
-    //         // Проверка на ошибку, если квест не был найден
-    //         if (quest->getTitle() == "0") {
-    //             qDebug() << "Квест не найден в mainwindow.cpp/on_QuestList_itemDoubleClicked";
-    //         } else {
-    //             // Если проверка пройдена, запускаем новое окно ShowInfoQuest_DialogWindow
-    //             ShowInfoQuest_DialogWindow window(this, quest);
-    //             window.exec();
-    //         }
-    //     } else {
-    //         // Обработка случая, если не удалось преобразовать строку в числовой ID
-    //         qDebug() << "Не удалось преобразовать в числовой ID";
-    //     }
-    // } else {
-    //     // Обработка случая, если строка не соответствует ожидаемому формату "ID:id name"
-    //     qDebug() << "Строка не содержит ID в ожидаемом формате";
-    // }
-}
 void MainWindow::on_listWidget_Quests_itemDoubleClicked(QListWidgetItem *item)
 {
     QString titleName = item->text();
@@ -164,23 +125,17 @@ void MainWindow::on_listWidget_Quests_itemDoubleClicked(QListWidgetItem *item)
         if (conversionOK) {
             qDebug() << "ID:" << id;
             std::shared_ptr<Quest> quest = character.findQuest(id);
-
-            // Проверка на ошибку, если квест не был найден
             if (quest == nullptr) {
                 qDebug() << "Quest not found mainwindow.cpp/on_QuestList_itemDoubleClicked";
                 QMessageBox::warning(this,"Eror","Sory but quest not found... maybe problem with him id");
             } else {
-
-                // ShowInfoQuest_DialogWindow window(this, quest);
-                // window.exec();
+                ShowInfoQuest_DialogWindow(this, quest).exec();
             }
         } else {
-            // Обработка случая, если не удалось преобразовать строку в числовой ID
-            qDebug() << "Не удалось преобразовать в числовой ID";
+            qDebug() << "Faild convert id to int ";
         }
     } else {
-        // Обработка случая, если строка не соответствует ожидаемому формату "ID:id name"
-        qDebug() << "Строка не содержит ID в ожидаемом формате";
+        qDebug() << "Fail! string format != ID:(int) ";
     }
 }
 
@@ -188,20 +143,16 @@ void MainWindow::on_listWidget_Quests_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::updateInfoOnCharacter(){
 
-    int health = character.getHealth();
-    QString healthText = QString("Health: %1").arg(health);
+    QString healthText = QString("Health: %1").arg(character.getHealth());
     ui->HealthLabel->setText(healthText);
 
-    int mana = character.getMana();
-    QString manatext = QString("Mana: %1").arg(mana);
+    QString manatext = QString("Mana: %1").arg(character.getMana());
     ui->ManaLabel->setText(manatext);
 
-    int level = character.getLevel();
-    QString levelText =QString("Level: %1").arg(level);
+    QString levelText =QString("Level: %1").arg(character.getLevel());
     ui->LevelLabel->setText(levelText);
 
-    int experience = character.getExperience();
-    QString experinceText =QString("Exp: %1").arg(experience);
+    QString experinceText =QString("Exp: %1").arg(character.getExperience());
     ui->ExperienceLabel->setText(experinceText);
 
 }
@@ -212,7 +163,7 @@ void MainWindow::updateInfoOnQuest(){
     if (!quests.empty()) {
         std::shared_ptr<Quest> quest = quests.back();
         QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
-        //ui->QuestList->addItem(title);
+        ui->listWidget_Quests->addItem(title);
 
     } else {
         qDebug() << "Вектора квестів пустий mainwindow.cpp/updateInfoOnQuest";
@@ -227,95 +178,37 @@ void MainWindow::handleQuestInfoClosed() {
     }
 }
 
-void MainWindow::deleteQuest(){
-    //character.deleteActiveQuest(quest);
+void MainWindow::deleteQuest(std::shared_ptr<Quest> quest){
+    character.deleteActiveQuest(quest);
 }
 
 void MainWindow::questComplete(){
-    // int levelNow= character.getLevel();
-    // character.setExperience();
-    // int levelAfter= character.getLevel();
+    int levelNow= character.getLevel();
+    character.incrementExperience();
+    int levelAfter= character.getLevel();
 
-    // if(levelNow<levelAfter){
-    // QMessageBox::information(this,"New level","New Level");
-    //     showUpdateCharacteristics = true;
-    // }
-
-
-    // //Налаштування псевдо генератора випадкових чисел
-    // QRandomGenerator randomGenerator(static_cast<quint32>(std::time(nullptr)));
-
-    // //Генерація випадкового числа від 0 до 99
-    // int randomNumber = randomGenerator.bounded(100);
-
-    // //Перевірка на виконання функції з 30% вірогідністю(від 0 до 19)
-    // if (randomNumber < 20) {
-    //     Item* item = ItemFactory::create_by_default();
-    //     QMessageBox::information(this,"New Item","You find new Item");
-    //     character.addItemToInventory(item);
-    // }
-
-    // updateInfoOnCharacter();
-}
-
-void MainWindow::on_more_characteristics_clicked()
-{
-    // showUpdateCharacteristics = true;
-    MoreCharacteristics_DialogWindow window(this,&character,showUpdateCharacteristics);
-
-    window.exec();
-
-    if(showUpdateCharacteristics){
-        updateInfoOnCharacter();
+    if(levelNow < levelAfter){
+    QMessageBox::information(this,"New level","New Level");
+        showUpdateCharacteristics = true;
     }
-}
 
-void MainWindow::on_Open_inventory_clicked()
-{
-    Inventory_DialogWindow window(this,&character);
+    QRandomGenerator randomGenerator(static_cast<quint32>(std::time(nullptr)));
+    int randomNumber = randomGenerator.bounded(100);
 
-    window.exec();
-    // Inventory inventory=character.getInventory();
+    if (randomNumber < 20) {
+        std::shared_ptr<Item> item = ItemFactory::create_by_default();
+        QMessageBox::information(this,"New Item","You find new Item");
+        character.addItemToInventory(item);
+    }
 
-    // // После закрытия окна обновите экипировку персонажа
-    // updateCharacterEquipment(inventory.getItemsEquipment());
-    // updateInfoOnCharacter();
-}
-
-void MainWindow::updateCharacterEquipment(const QVector<Item*>& equipment) {
-    character.updateCharacteristicsFromInventory(); // Подобная функция должна быть в классе Character
-    // Обновите представление персонажа в соответствии с изменениями
+    updateInfoOnCharacter();
 }
 
 
 /*-----------------------------------------------------------*/
 //                      Note space
 
-// void MainWindow::on_tags_option_clicked()
-// {
-//     if (ui->button_tagsOption->text() == "+") {
-//         QVector<Tag>tags = returnNoteServicePtr()->getAllTags();
-//         AddTag_DialogWindow window(this,&tags);
 
-//         window.exec();
-//     }
-//     else if (ui->button_tagsOption->text() == "-") {
-//     Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(ui->QListWidget_Notes->currentItem()->text()));
-//     if (note->getTitle().isEmpty()) {
-//         throw std::runtime_error("Title of note is empty /MainWindow::on_tags_option_clicked()");
-//         return;
-//     }
-//    }
-
-// }
-
-
-
-
-// void MainWindow::on_listTag_itemClicked(QListWidgetItem *item)
-// {
-//    ui->button_tagsOption->setText("-");
-// }
 
 
 NoteService* MainWindow::returnNoteServicePtr() {
@@ -371,10 +264,9 @@ void MainWindow::updateInfoTag() {
 
 
 void MainWindow::AddNoteSpace(QString nameNoteService){
-    // NoteService noteService;
-    // noteService.setNameSpaceNote(nameNoteService);
-    // noteSpaces.push_back(noteService);
-    // ui->QComboBox_NoteSpaces->addItem(nameNoteService);
+    NoteService noteService = NoteServiceFactory::create_with_text(nameNoteService);
+    noteSpaces.push_back(noteService);
+    ui->QComboBox_NoteSpaces->addItem(nameNoteService);
 }
 void MainWindow::deleteNoteSpace(QString nameNoteService){
     noteSpaces.erase(std::remove_if(noteSpaces.begin(), noteSpaces.end(),[&nameNoteService](const NoteService& note)
@@ -461,6 +353,17 @@ void MainWindow::connect_Signals_and_Slots(){
     connect(ui->pushButton_show_AddQuest_DialogWindow,&QPushButton::clicked,this,[this]{
         addQuest_DialogWindow(this).exec();
     });
+    connect(ui->pushButton_show_MoreCharacteristics_DialogWindow,&QPushButton::clicked,this,[this]{
+        MoreCharacteristics_DialogWindow(this,&character,showUpdateCharacteristics).exec();
+        if(showUpdateCharacteristics){
+            updateInfoOnCharacter();
+        }
+    });
+    connect(ui->pushButton_show_Inventory_DialogWindow,&QPushButton::clicked,this,[this]{
+        Inventory_DialogWindow(this,&character).exec();
+        character.updateCharacteristicsFromInventory();
+        updateInfoOnCharacter();
+    });
 
     //For save previous note and upload selected
     connect(ui->QListWidget_Notes,&QListWidget::currentItemChanged,this, [this](QListWidgetItem *current, QListWidgetItem *previous){
@@ -472,6 +375,7 @@ void MainWindow::connect_Signals_and_Slots(){
 
     //If button clicked create new note
     connect(ui->button_addNote, &QPushButton::clicked, this, &MainWindow::createNote);
+
     //If button clicked delete active note
     connect(ui->button_deleteNote, &QPushButton::clicked, this, [this]{
         QListWidgetItem* currentItem = ui->QListWidget_Notes->currentItem();

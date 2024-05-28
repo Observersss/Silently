@@ -24,11 +24,9 @@ public:
 
     void handleQuestInfoClosed();
 
-    void deleteQuest();
+    void deleteQuest(std::shared_ptr<Quest> quest);
 
     void questComplete();
-
-    void updateCharacterEquipment(const QVector<Item*>& equipment);
 
     void addTag(QString name,bool needAddToAllTags = true);
 
@@ -50,16 +48,6 @@ private slots:
 
     void checkQuestDeadlinePassed();
 
-    //void on_AddingQuest_clicked();
-
-    void on_QuestList_itemDoubleClicked(QListWidgetItem *item);
-
-    void on_more_characteristics_clicked();
-
-    void on_Open_inventory_clicked();
-    //void on_tags_option_clicked();
-
-    //void on_listTag_itemClicked(QListWidgetItem *item);
 
     void on_delete_Note_Service_clicked();
 
@@ -72,7 +60,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Character character;
-    Quest* quest;
     std::vector<NoteService> noteSpaces;
     int bufferNoteId;
     QString bufferNoteSpace;
