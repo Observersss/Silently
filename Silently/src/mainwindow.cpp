@@ -31,72 +31,35 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    // quest = QuestFactory::create();
     ui->setupUi(this);
 
+    //set note space
+    change_space();
 
-    //set basic optinal
     connect_Signals_and_Slots();
-
-    ui->spaces->setCurrentIndex(1);
-    ui->button_change_space->setText("Go RPG");
-    ui->label_InfoSpace->setText("Space now: Notes");
-    ui->stackedWidget->setCurrentIndex(0);
-
     updateInfoOnQuest();
     updateInfoOnCharacter();
 
     QPixmap pix(":/icon/img/Character.jpg");
     int w = ui->label_CharacterIcon->width();
     int h = ui->label_CharacterIcon->height();
-
     ui->label_CharacterIcon->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
 
     ui->button_tagsOption->setText("+");
 
-    //ТЕСТИРОВАНИЕ
+
     NoteService noteService = NoteServiceFactory::create();
     Note *firstNote=noteService.getFirstNote();
     noteSpaces.push_back(noteService);
-
-
     bufferNoteId=firstNote->getIdNote();
     bufferNoteSpace = noteService.getNameSpaceNote();
 
-    QString title=firstNote->getTitle();
-    ui->QListWidget_Notes->addItem(title);
+    ui->QListWidget_Notes->addItem(firstNote->getTitle());
+    ui->QComboBox_NoteSpaces->addItem(noteService.getNameSpaceNote());
 
-    QString nameSpaceNote=noteService.getNameSpaceNote();
-    ui->QComboBox_NoteSpaces->addItem(nameSpaceNote);
-
-
-    checkQuestDeadlinePassed();
-
-
-
-    //unloadInfoNote();
-    //////////////////////////////////////////////
-    //NameNoteAndNoteID.push_back(std::pair(firstNote.getTitle(),firstNote.getIdNote()));
-    /////////////////////////////////////////////////
-    //ТЕСТИРОВАНИЕ
-    // Item item,item1,item2,item3,item4;
-    // qDebug()<<item.getTypeItem()<<" "<<item1.getTypeItem()<<' '<<item2.getTypeItem()<<' '<<item3.getTypeItem();
-    // character.addItemToInventory(item);
-    // character.addItemToInventory(item1);
-    // character.addItemToInventory(item2);
-    // character.addItemToInventory(item3);
-    // character.addItemToInventory(item4);
-
-    character.addItemToInventory(ItemFactory::create_by_default());
-    character.addItemToInventory(ItemFactory::create_by_default());
-    character.addItemToInventory(ItemFactory::create_by_default());
-    character.addItemToInventory(ItemFactory::create_by_default());
-    /////////////////////////////////////////////////
-    //ТЕСТИРОВАНИЕ
 
     //select first note for upload
-    int newIndex = ui->QListWidget_Notes->count() - 1;
-    ui->QListWidget_Notes->setCurrentRow(newIndex);
+    ui->QListWidget_Notes->setCurrentRow(ui->QListWidget_Notes->count() - 1);
     uploadInfoNote(ui->QListWidget_Notes->currentItem());
 
     //First declaration CustomLineEditManager for work width layout and scrollArea
@@ -106,36 +69,29 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::checkQuestDeadlinePassed() {
-    // qDebug() << "Checking quest deadlines...";
+    qDebug() << "Checking quest deadlines...";
 
-    // // Получаем текущее время
-    // // std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
-    // // qDebug() << "Current time: " << std::chrono::system_clock::to_time_t(currentTime);
+    QDateTime currentTime = QDateTime::currentDateTime();
 
-    // QDateTime currentTime = QDateTime::currentDateTime();
+    foreach(std::shared_ptr<Quest> quest, character.getActiveQuest()){
+        if(quest->get_need_to_follow_the_deadline()){
+            if (currentTime >= quest->getDeadline()) {
+                qDebug() << "Deadline passed!";
+                QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest->getTitle() + "' has passed.");
+                character.deleteActiveQuest(quest);
 
-    // // Проверяем, достигнут ли дедлайн квеста
-    // for(Quest* quest : character.getActiveQuest()){
-    //     // std::chrono::system_clock::time_point deadline = quest.getDeadline();
-    //     // qDebug() << "Quest deadline: " << std::chrono::system_clock::to_time_t(deadline);
+                QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
+                for (int i = 0; i < ui->QuestList->count(); ++i) {
+                    QListWidgetItem *item = ui->QuestList->item(i);
+                    if (item->text() == title) {
+                        delete ui->QuestList->takeItem(i);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
-    //     if (currentTime >= quest->getDeadline()) {
-    //         qDebug() << "Deadline passed!";
-    //         QMessageBox::warning(this, "Quest Deadline Passed", "The deadline for the quest '" + quest->getTitle() + "' has passed.");
-    //         character.deleteActiveQuest(quest);
-    //         // Действия по обработке прошедшего дедлайна квеста
-
-    //         QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
-    //         for (int i = 0; i < ui->QuestList->count(); ++i) {
-    //             QListWidgetItem *item = ui->QuestList->item(i);
-    //             if (item->text() == title) {
-    //                 delete ui->QuestList->takeItem(i);
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // }
-    // // Повторно вызываем эту же функцию через минуту
     QTimer::singleShot(60 * 1000, this, &MainWindow::checkQuestDeadlinePassed);
 }
 
@@ -143,7 +99,7 @@ void MainWindow::checkQuestDeadlinePassed() {
 void MainWindow::addActiveQuest(std::shared_ptr<Quest> quest){
     try{
         character.addActiveQuest(quest);
-        //checkQuestDeadlinePassed();
+        checkQuestDeadlinePassed();
     }catch(std::runtime_error& e){
         QMessageBox::warning(this,"Eror!","Failed to add new quest, try again");
             qDebug()<<"Runtime error: "<<e.what()<<'\n';
@@ -156,11 +112,11 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_AddingQuest_clicked()
-{
-    addQuest_DialogWindow window(this);
-    window.exec();
-}
+// void MainWindow::on_AddingQuest_clicked()
+// {
+//     // addQuest_DialogWindow window(this);
+//     // window.exec();
+// }
 
 void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
 {
@@ -194,7 +150,39 @@ void MainWindow::on_QuestList_itemDoubleClicked(QListWidgetItem *item)
     //     qDebug() << "Строка не содержит ID в ожидаемом формате";
     // }
 }
+void MainWindow::on_listWidget_Quests_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString titleName = item->text();
+    int startIndex = titleName.indexOf(":") + 1;
+    int endIndex = titleName.indexOf(" ", startIndex);
 
+    if (startIndex != -1 && endIndex != -1) {
+        QString idString = titleName.mid(startIndex, endIndex - startIndex);
+        bool conversionOK;
+        int id = idString.toInt(&conversionOK);
+
+        if (conversionOK) {
+            qDebug() << "ID:" << id;
+            std::shared_ptr<Quest> quest = character.findQuest(id);
+
+            // Проверка на ошибку, если квест не был найден
+            if (quest == nullptr) {
+                qDebug() << "Quest not found mainwindow.cpp/on_QuestList_itemDoubleClicked";
+                QMessageBox::warning(this,"Eror","Sory but quest not found... maybe problem with him id");
+            } else {
+
+                // ShowInfoQuest_DialogWindow window(this, quest);
+                // window.exec();
+            }
+        } else {
+            // Обработка случая, если не удалось преобразовать строку в числовой ID
+            qDebug() << "Не удалось преобразовать в числовой ID";
+        }
+    } else {
+        // Обработка случая, если строка не соответствует ожидаемому формату "ID:id name"
+        qDebug() << "Строка не содержит ID в ожидаемом формате";
+    }
+}
 
 
 
@@ -222,7 +210,6 @@ void MainWindow::updateInfoOnQuest(){
     QVector<std::shared_ptr<Quest>> quests = character.getActiveQuest();
 
     if (!quests.empty()) {
-        //Вектор не пустий, можна отримати доступ до елементів
         std::shared_ptr<Quest> quest = quests.back();
         QString title ="ID:"+QString::number(quest->getId())+" " + quest->getTitle();
         ui->QuestList->addItem(title);
@@ -471,6 +458,10 @@ void MainWindow::createNote(){
 
 void MainWindow::connect_Signals_and_Slots(){
 
+    connect(ui->pushButton_show_AddQuest_DialogWindow,&QPushButton::clicked,this,[this]{
+        addQuest_DialogWindow(this).exec();
+    });
+
     //For save previous note and upload selected
     connect(ui->QListWidget_Notes,&QListWidget::currentItemChanged,this, [this](QListWidgetItem *current, QListWidgetItem *previous){
         if(previous)
@@ -521,24 +512,7 @@ void MainWindow::connect_Signals_and_Slots(){
     });
 
     //connect for control visiable element program in space
-    connect(ui->button_change_space,&QPushButton::clicked,this,[this]{
-        if(ui->spaces->currentIndex()==1)
-        {
-            ui->spaces->setCurrentIndex(0);
-            ui->button_change_space->setText("Go Notes");
-            ui->label_InfoSpace->setText("Space now: RPG");
-            updateInfoOnQuest();
-            updateInfoOnCharacter();
-            ui->stackedWidget->setCurrentIndex(1);
-
-        } else
-        {
-            ui->spaces->setCurrentIndex(1);
-            ui->button_change_space->setText("Go RPG");
-            ui->label_InfoSpace->setText("Space now: Notes");
-            ui->stackedWidget->setCurrentIndex(0);
-        }
-    });
+    connect(ui->button_change_space,&QPushButton::clicked,this,&MainWindow::change_space);
 
     connect(ui->QListWidget_tags, &QListWidget::itemClicked, this, [this](QListWidgetItem *item){
         // if(item){
@@ -567,4 +541,23 @@ void MainWindow::connect_Signals_and_Slots(){
         // }
     });
 }
+void MainWindow::change_space(){
+    if(ui->spaces->currentIndex()==1)
+    {
+        ui->spaces->setCurrentIndex(0);
+        ui->button_change_space->setText("Go Notes");
+        ui->label_InfoSpace->setText("Space now: RPG");
+        updateInfoOnQuest();
+        updateInfoOnCharacter();
+        ui->stackedWidget->setCurrentIndex(1);
+
+    } else
+    {
+        ui->spaces->setCurrentIndex(1);
+        ui->button_change_space->setText("Go RPG");
+        ui->label_InfoSpace->setText("Space now: Notes");
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+}
+
 

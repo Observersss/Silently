@@ -48,7 +48,7 @@ private slots:
 
     void checkQuestDeadlinePassed();
 
-    void on_AddingQuest_clicked();
+    //void on_AddingQuest_clicked();
 
     void on_QuestList_itemDoubleClicked(QListWidgetItem *item);
 
@@ -65,6 +65,8 @@ private slots:
 
     void createNote();
 
+    void on_listWidget_Quests_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     Character character;
@@ -76,6 +78,7 @@ private:
     bool showUpdateCharacteristics = false;
 
     void connect_Signals_and_Slots();
+    void change_space();
 
 };
 #endif // MAINWINDOW_H

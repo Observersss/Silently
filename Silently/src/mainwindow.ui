@@ -39,7 +39,7 @@ border-radius:10px;</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="1" column="1">
-            <widget class="QListWidget" name="QuestList">
+            <widget class="QListWidget" name="listWidget_Quests">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -464,7 +464,7 @@ border-radius:15px;</string>
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QWidget" name="layoutWidget">
@@ -663,7 +663,7 @@ border-radius:5px;</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QPushButton" name="AddingQuest">
+           <widget class="QPushButton" name="pushButton_show_AddQuest_DialogWindow">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -769,7 +769,7 @@ border-radius:15px;</string>
  </widget>
  <tabstops>
   <tabstop>button_change_space</tabstop>
-  <tabstop>QuestList</tabstop>
+  <tabstop>listWidget_Quests</tabstop>
   <tabstop>QLineEdit_TitleNote</tabstop>
  </tabstops>
  <resources/>

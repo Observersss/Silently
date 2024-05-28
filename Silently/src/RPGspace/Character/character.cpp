@@ -32,10 +32,7 @@ std::shared_ptr<Quest> Character::findQuest(const QString& title){
         }
     }
 
-    //if not found
-    std::shared_ptr<Quest> quest_eror = QuestFactory::create();
-    quest_eror->setTitle(nullptr);
-    return quest_eror;
+    return nullptr;
 }
 std::shared_ptr<Quest> Character::findQuest(const int id){
     for(std::shared_ptr<Quest> quest : activeQuests_){
@@ -44,10 +41,7 @@ std::shared_ptr<Quest> Character::findQuest(const int id){
         }
     }
 
-    //if not found
-    std::shared_ptr<Quest> quest_eror = QuestFactory::create();
-    quest_eror->setTitle(nullptr);
-    return quest_eror;
+    return nullptr;
 }
 
                 /*Функції для роботи з інвентарем*/

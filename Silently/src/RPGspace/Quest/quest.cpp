@@ -28,6 +28,9 @@ void Quest::setComplexity(const int& complexity){
 void Quest::setDeadline(const QDateTime& deadline){
     deadline_ = deadline;
 }
+bool Quest::get_need_to_follow_the_deadline()const{
+    return need_to_follow_the_deadline;
+}
 void Quest::switch_need_to_follow_the_deadline(){
     need_to_follow_the_deadline == true ? false : true;
 }

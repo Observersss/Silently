@@ -25,6 +25,7 @@ public:
     QString getDescription()const;
     int getComplexity()const;
     QDateTime getDeadline()const;
+    bool get_need_to_follow_the_deadline()const;
 
     friend class QuestFactory;
 
