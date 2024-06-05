@@ -6,4 +6,12 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_notespace_test.cpp
+INCDIR = ../../src
+INCLUDEPATH += $$INCDIR
+
+HEADERS += $$INCDIR/NOTEspace/NoteService/noteservice.h
+
+SOURCES +=  tst_notespace_test.cpp \
+            $$INCDIR/Notespace/NoteService/noteservice.cpp \
+            $$INCDIR/NOTEspace/Note/note.cpp \
+            $$INCDIR/NOTEspace/Tag/tag.cpp

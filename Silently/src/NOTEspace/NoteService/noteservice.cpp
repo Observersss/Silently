@@ -50,6 +50,9 @@ void NoteService::deleteNote(const QString& noteTitle) {
 void NoteService::addToAllTag(const QString& tagName){
     allTag_.push_back(Tag::create(tagName));
 }
+void NoteService::addToAllTag(Tag tag){
+    allTag_.push_back(tag);
+}
 
 void NoteService::setChangeNote(Note *note){
     Note* find = findNote(note->getTitle());

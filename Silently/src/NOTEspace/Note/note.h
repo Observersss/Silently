@@ -28,6 +28,7 @@ public:
     void setData_time(const QDateTime& timePoint);
 
     void addActiveTag(const QString& newActiveTag);
+    void addActiveTag(Tag tag);
     void setNewActiveTags(const QVector<QString>& newActiveTags);
 
     void deleteTag(const QString& tagName);

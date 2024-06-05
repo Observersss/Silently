@@ -14,6 +14,7 @@ public:
     void deleteNote(const QString& noteTitle);
 
     void addToAllTag(const QString& tagName);
+    void addToAllTag(Tag tag);
 
     void setChangeNote(Note* note);
 

@@ -34,6 +34,9 @@ void Note::setData_time(const QDateTime&  timePoint){
 void Note::addActiveTag(const QString& newActiveTag) {
     activeTag_.push_back(Tag::create(newActiveTag));
 }
+void Note::addActiveTag(Tag tag){
+    activeTag_.push_back(tag);
+}
 void Note::setNewActiveTags(const QVector<QString>& newActiveTags){
     activeTag_.clear();
     for(const QString& tagname:newActiveTags){
