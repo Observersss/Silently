@@ -1,4 +1,4 @@
-// customlineeditmanager.h
+      // customlineeditmanager.h
 #ifndef CUSTOMLINEEDITMANAGER_H
 #define CUSTOMLINEEDITMANAGER_H
 

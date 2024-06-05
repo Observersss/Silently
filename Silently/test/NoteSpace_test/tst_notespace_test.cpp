@@ -24,9 +24,6 @@ private slots:
     void get_Note_by_name();
     void get_Note_by_date();
 
-    void set_change_note();
-
-
 };
 
 NoteSpace_test::NoteSpace_test() {}
@@ -96,15 +93,25 @@ void NoteSpace_test::get_Note_by_id(){
     QCOMPARE(noteService_t.getNote(note_t->getIdNote())->getIdNote(),note_t->getIdNote());
 }
 void NoteSpace_test::get_Note_by_name(){
+    NoteService noteService_t = NoteServiceFactory::create();
+    Note* note_t = NoteFactory::create();
 
+    QString title_t = "Test text";
+
+    note_t->setTitle(title_t);
+
+    noteService_t.addNote(note_t);
+
+    QCOMPARE(noteService_t.getNote(title_t)->getTitle(),title_t);
 }
 void NoteSpace_test::get_Note_by_date(){
+    NoteService noteService_t = NoteServiceFactory::create();
 
+    Note* note_t = noteService_t.getFirstNote();
+
+    QCOMPARE(noteService_t.getNote(note_t->getDataTime())->getTitle(),note_t->getTitle());
 }
 
-void NoteSpace_test::set_change_note(){
-
-}
 
 QTEST_APPLESS_MAIN(NoteSpace_test)
 
