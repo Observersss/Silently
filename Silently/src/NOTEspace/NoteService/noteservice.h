@@ -9,29 +9,29 @@ class NoteService{
 public:
     void setNameSpaceNote(const QString& name);
 
-    void addNote(Note* note);
+    void addNote(std::shared_ptr<Note> note);
 
     void deleteNote(const QString& noteTitle);
 
     void addToAllTag(const QString& tagName);
     void addToAllTag(Tag tag);
 
-    void setChangeNote(Note* note);
+    void setChangeNote(std::shared_ptr<Note> note);
 
-    void setChangeNote(Note *note,const QString& oldName);
+    void setChangeNote(std::shared_ptr<Note> note,const QString& oldName);
 
     int findIdNote(const QString& nameNote);
 
-    Note* getFirstNote()const;
+    std::shared_ptr<Note> getFirstNote()const;
 
-    Note* getNote(const int& id);
-    Note* getNote(const QString& name);
-    Note* getNote(const QDateTime& dateOfCreation);
+    std::shared_ptr<Note> getNote(const int& id);
+    std::shared_ptr<Note> getNote(const QString& name);
+    std::shared_ptr<Note> getNote(const QDateTime& dateOfCreation);
 
     template <typename T>
-    Note* getNote(const T& arg);
+    std::shared_ptr<Note> getNote(const T& arg);
 
-    QVector<Note*> getAllNotes()const;
+    QVector<std::shared_ptr<Note>> getAllNotes()const;
 
     QVector<Tag> getAllTags()const;
 
@@ -45,7 +45,7 @@ protected:
     NoteService(const QString& nameSpace);
 
     template<typename T>
-    Note* findNote(const T& value);
+    std::shared_ptr<Note> findNote(const T& value);
 
     void addNewElement_to_NameNoteAndNoteID(const QString& title,const int& id);
 
@@ -56,7 +56,7 @@ protected:
 private:
     QString nameSpaceNote_;
     static QVector<Tag> allTag_;
-    QVector<Note*> notes_;
+    QVector<std::shared_ptr<Note>> notes_;
     std::unordered_map <QString,int> nameNoteAndNoteID_;
 
     friend class NoteServiceFactory;

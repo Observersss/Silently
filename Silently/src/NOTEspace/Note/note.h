@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QDateTime>
+#include <memory>
 
 #include "NOTEspace/Tag/tag.h"
 class Note{
@@ -52,16 +53,16 @@ public:
         return this->dateOfCreation_ == otherDateOfCreation;
     }
 
-    Note& operator=(const Note& other) {
-        if (this != &other) {
-            this->title_ = other.title_;
-            this->dateOfCreation_ = other.dateOfCreation_;
-            this->id_ = other.id_;
-            this->text_ = other.text_;
-            this->styles_ = other.styles_;
-            this->activeTag_ = other.activeTag_;
-        }
-        return *this;
+    std::shared_ptr<Note>& operator=(const std::shared_ptr<Note>& other) {
+        // if (this != &other) {
+            this->title_ = other->title_;
+            this->dateOfCreation_ = other->dateOfCreation_;
+            this->id_ = other->id_;
+            this->text_ = other->text_;
+            this->styles_ = other->styles_;
+            this->activeTag_ = other->activeTag_;
+        // }
+        // return this;
     }
 
 private:
@@ -76,8 +77,8 @@ private:
 
 class NoteFactory{
 public:
-    static Note* create(){
-        return new Note();
+    static std::shared_ptr<Note> create(){
+        return std::make_shared<Note>();
     }
 };
 

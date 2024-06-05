@@ -4,7 +4,7 @@ QVector<Tag> NoteService::allTag_;
 
 
 NoteService::NoteService(){
-    Note* note  = NoteFactory::create();
+    std::shared_ptr<Note> note  = NoteFactory::create();
     nameSpaceNote_ = "FirstNoteSpace";
     note->setTitle(BASIC_NAME_NOTE);
     addNote(note);
@@ -12,7 +12,7 @@ NoteService::NoteService(){
 }
 NoteService::NoteService(const QString& nameSpace){
     nameSpaceNote_ = nameSpace;
-    Note* note = NoteFactory::create();
+    std::shared_ptr<Note> note = NoteFactory::create();
     note->setTitle(BASIC_NAME_NOTE);
     addNote(note);
     addNewElement_to_NameNoteAndNoteID(note->getTitle(),note->getIdNote());
@@ -21,7 +21,7 @@ void NoteService::setNameSpaceNote(const QString &name){
     nameSpaceNote_ = name;
 }
 
-void NoteService::addNote(Note* note){
+void NoteService::addNote(std::shared_ptr<Note> note){
     if(!note->getTitle().isEmpty()){
         notes_.push_back(note);
         addNewElement_to_NameNoteAndNoteID(note->getTitle(),note->getIdNote());
@@ -32,7 +32,7 @@ void NoteService::addNote(Note* note){
 }
 
 void NoteService::deleteNote(const QString& noteTitle) {
-    Note* find = findNote(noteTitle);
+    std::shared_ptr<Note> find = findNote(noteTitle);
     if (find != nullptr) {
         removeElement_from_nameNoteAndNoteID(find->getIdNote());
         int index = notes_.indexOf(find);
@@ -41,7 +41,6 @@ void NoteService::deleteNote(const QString& noteTitle) {
         } else {
             throw std::runtime_error("Failed to find note 1 /NoteService::deleteNote");
         }
-        delete find;
     } else {
         throw std::runtime_error("Failed to find note 1.1 /NoteService::deleteNote");
     }
@@ -54,25 +53,23 @@ void NoteService::addToAllTag(Tag tag){
     allTag_.push_back(tag);
 }
 
-void NoteService::setChangeNote(Note *note){
-    Note* find = findNote(note->getTitle());
+void NoteService::setChangeNote(std::shared_ptr<Note> note){
+    std::shared_ptr<Note> find = findNote(note->getTitle());
 
     if(find != nullptr){
-        *find = *note;
+        *find = note;
         changeInfo_into_NameNoteInVector(find->getTitle(),find->getIdNote());
-        delete note;
     }else{
         throw std::runtime_error("Faild change note, Note* find == nullptr /NoteService::setChangeNote(Note *note)");
     }
 }
 
-void NoteService::setChangeNote(Note* note, const QString& oldName) {
-    Note* find = findNote(oldName);
+void NoteService::setChangeNote(std::shared_ptr<Note> note, const QString& oldName) {
+    std::shared_ptr<Note> find = findNote(oldName);
 
     if(find != nullptr){
-        *find = *note;
+        *find = note;
         changeInfo_into_NameNoteInVector(find->getTitle(),find->getIdNote());
-        delete note;
     }else{
         throw std::runtime_error("Faild change note, Note* find == nullptr /NoteService::setChangeNote(Note* note, const QString& oldName)");
     }
@@ -82,7 +79,7 @@ int NoteService::findIdNote(const QString& nameNote){
     return nameNoteAndNoteID_[nameNote];
 }
 
-Note* NoteService::getFirstNote() const{
+std::shared_ptr<Note> NoteService::getFirstNote() const{
     if(!notes_.isEmpty()){
         return notes_[0];
     }else{
@@ -91,8 +88,8 @@ Note* NoteService::getFirstNote() const{
     }
 }
 
-Note* NoteService::getNote(const int& id){
-    Note* find = findNote(id);
+std::shared_ptr<Note> NoteService::getNote(const int& id){
+    std::shared_ptr<Note> find = findNote(id);
     if(find != nullptr){
         return find;
     }else{
@@ -100,8 +97,8 @@ Note* NoteService::getNote(const int& id){
         return nullptr;
     }
 }
-Note* NoteService::getNote(const QString& name){
-    Note* find = findNote(name);
+std::shared_ptr<Note> NoteService::getNote(const QString& name){
+    std::shared_ptr<Note> find = findNote(name);
     if(find != nullptr){
         return find;
     }else{
@@ -109,8 +106,8 @@ Note* NoteService::getNote(const QString& name){
         return nullptr;
     }
 }
-Note* NoteService::getNote(const QDateTime& dateOfCreation){
-    Note* find = findNote(dateOfCreation);
+std::shared_ptr<Note> NoteService::getNote(const QDateTime& dateOfCreation){
+    std::shared_ptr<Note> find = findNote(dateOfCreation);
     if(find != nullptr){
         return find;
     }else{
@@ -119,12 +116,12 @@ Note* NoteService::getNote(const QDateTime& dateOfCreation){
     }
 }
 template <typename T>
-Note* NoteService::getNote(const T& arg) {
+std::shared_ptr<Note> NoteService::getNote(const T& arg) {
     static_assert(std::is_same<T, int>::value || std::is_same<T, QString>::value || std::is_same<T, QDateTime>::value,
                   "Function getNote can only be called with int, QString, or QDateTime");
     return nullptr;
 }
-QVector<Note*> NoteService::getAllNotes()const{
+QVector<std::shared_ptr<Note>> NoteService::getAllNotes()const{
     return notes_;
 }
 QVector<Tag> NoteService::getAllTags()const{
@@ -137,8 +134,8 @@ std::unordered_map<QString,int> NoteService::returnNameNoteAndNoteID()const{
     return nameNoteAndNoteID_;
 }
 template<typename T>
-Note* NoteService::findNote(const T& value){
-    auto it = std::find_if(notes_.begin(), notes_.end(), [&value](const Note* note) {
+std::shared_ptr<Note> NoteService::findNote(const T& value){
+    auto it = std::find_if(notes_.begin(), notes_.end(), [&value](const std::shared_ptr<Note> note) {
         return *note == value;
     });
 

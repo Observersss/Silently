@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     NoteService noteService = NoteServiceFactory::create();
-    Note *firstNote=noteService.getFirstNote();
+    std::shared_ptr<Note> firstNote=noteService.getFirstNote();
     noteSpaces.push_back(noteService);
     bufferNoteId=firstNote->getIdNote();
     bufferNoteSpace = noteService.getNameSpaceNote();
@@ -238,7 +238,7 @@ void MainWindow::addTag(QString name,bool needAddToAllTags) {
 
     QString title = ui->QListWidget_Notes->currentItem()->text();
 
-    Note *note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(title));
+    std::shared_ptr<Note> note = returnNoteServicePtr()->getNote(returnNoteServicePtr()->findIdNote(title));
     note->addActiveTag(name);
 
     if(needAddToAllTags)
@@ -296,7 +296,7 @@ void MainWindow::saveInfoNote(QListWidgetItem *previous){
     CustomLineEditManager* manager = CustomLineEditManager::getInstance(this);
     QVector<QString> text = manager->getTextFromLineEdits();
 
-    Note* note = nullptr;
+    std::shared_ptr<Note> note = nullptr;
     if (bufferNoteSpace == ui->QComboBox_NoteSpaces->currentText()) {
         note = returnNoteServicePtr()->getNote(previous->text());
     } else {
@@ -316,7 +316,7 @@ void MainWindow::uploadInfoNote(QListWidgetItem *current){
     if (!current)
         return;
 
-    Note* note = returnNoteServicePtr()->getNote(current->text());
+    std::shared_ptr<Note> note = returnNoteServicePtr()->getNote(current->text());
     if (!note)
         return;
 
@@ -338,7 +338,7 @@ void MainWindow::createNote(){
         throw std::runtime_error("Fail! noteService == nullptr /MainWindow::on_pushButton_clicked()");
         return;
     } else{
-        Note* note = NoteFactory::create();
+        std::shared_ptr<Note> note = NoteFactory::create();
         noteCounter+=1;
         QString nameNote="Your new Note "+QString::number(noteCounter);
         note->setTitle(nameNote);
@@ -408,8 +408,8 @@ void MainWindow::connect_Signals_and_Slots(){
     // If current NoteSpace changed update QListWidget_Notes for this NoteSpace
     connect(ui->QComboBox_NoteSpaces,&QComboBox::textActivated,this,[this]{
         ui->QListWidget_Notes->clear();
-        QVector <Note*> notes = returnNoteServicePtr()->getAllNotes();
-        for (Note* note : notes) {
+        QVector <std::shared_ptr<Note>> notes = returnNoteServicePtr()->getAllNotes();
+        for (std::shared_ptr<Note> note : notes) {
             ui->QListWidget_Notes->addItem(note->getTitle());
         }
         ui->QListWidget_Notes->setCurrentRow(0);
