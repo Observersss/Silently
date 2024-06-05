@@ -33,7 +33,7 @@ NoteSpace_test::~NoteSpace_test() {}
 void NoteSpace_test::test_case1() {}
 
 void NoteSpace_test::create_note_with_text(){
-    Note* note = NoteFactory::create();
+    std::shared_ptr<Note> note = NoteFactory::create();
     note->setText("Lol");
     QCOMPARE(note->getText().size(),2);
     /*  because:
@@ -44,7 +44,7 @@ void NoteSpace_test::create_note_with_text(){
     */
 }
 void NoteSpace_test::create_note_with_text_and_styles(){
-    Note* note = NoteFactory::create();
+    std::shared_ptr<Note> note = NoteFactory::create();
     // I don`t have ideas why it`s not worked...
     // QVector<QString> styles;
     // note->setStyles(QVector<QString>('...'));
@@ -56,9 +56,9 @@ void NoteSpace_test::create_note_with_text_and_styles(){
 }
 
 void NoteSpace_test::test_add_2_notes_and_delete_1(){
-    Note* f_note = NoteFactory::create();
+    std::shared_ptr<Note> f_note = NoteFactory::create();
     f_note->setTitle("f_note");
-    Note* s_note = NoteFactory::create();
+    std::shared_ptr<Note> s_note = NoteFactory::create();
     s_note->setTitle("s_note");
 
     NoteService result = NoteServiceFactory::create();
@@ -72,12 +72,12 @@ void NoteSpace_test::test_alltags_add_for_another_note(){
     Tag tag_t = Tag::create("...");
     NoteService noteService_t = NoteServiceFactory::create();
 
-    Note* f_note_t = NoteFactory::create();
+    std::shared_ptr<Note> f_note_t = NoteFactory::create();
     f_note_t->addActiveTag(tag_t);
 
     noteService_t.addToAllTag(tag_t);
 
-    Note* s_note_t = NoteFactory::create();
+    std::shared_ptr<Note> s_note_t = NoteFactory::create();
     s_note_t->addActiveTag(noteService_t.getAllTags()[0]);
 
     QCOMPARE(s_note_t->getActiveTag()[0].getNameTag(),tag_t.getNameTag());
@@ -85,7 +85,7 @@ void NoteSpace_test::test_alltags_add_for_another_note(){
 
 void NoteSpace_test::get_Note_by_id(){
     NoteService noteService_t = NoteServiceFactory::create();
-    Note* note_t = NoteFactory::create();
+    std::shared_ptr<Note> note_t = NoteFactory::create();
     note_t->setTitle("...");
 
     noteService_t.addNote(note_t);
@@ -94,7 +94,7 @@ void NoteSpace_test::get_Note_by_id(){
 }
 void NoteSpace_test::get_Note_by_name(){
     NoteService noteService_t = NoteServiceFactory::create();
-    Note* note_t = NoteFactory::create();
+    std::shared_ptr<Note> note_t = NoteFactory::create();
 
     QString title_t = "Test text";
 
@@ -107,7 +107,7 @@ void NoteSpace_test::get_Note_by_name(){
 void NoteSpace_test::get_Note_by_date(){
     NoteService noteService_t = NoteServiceFactory::create();
 
-    Note* note_t = noteService_t.getFirstNote();
+    std::shared_ptr<Note> note_t = noteService_t.getFirstNote();
 
     QCOMPARE(noteService_t.getNote(note_t->getDataTime())->getTitle(),note_t->getTitle());
 }
