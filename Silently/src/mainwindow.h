@@ -57,6 +57,8 @@ private slots:
 
     void on_listWidget_Quests_itemDoubleClicked(QListWidgetItem *item);
 
+    void deleteSelectedTag(QListWidgetItem* item);
+
 private:
     Ui::MainWindow *ui;
     Character character;

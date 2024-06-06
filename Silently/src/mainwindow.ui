@@ -227,6 +227,42 @@ border-radius:15px;</string>
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="button_tagsOption_delete_tag">
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+QPushButton{
+	background-color:orange;
+	margin:0;
+	border-radius:15px;
+}
+QPushButton:disabled {
+        background-color: gray;
+        color: white;
+}</string>
+               </property>
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QLabel" name="label_DateOfCreation">
                <property name="minimumSize">
                 <size>

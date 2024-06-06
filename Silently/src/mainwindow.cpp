@@ -66,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent)
     CustomLineEditManager* manager = CustomLineEditManager::getInstance(this);
     manager->setLayoutAndScroolArea(ui->verticalLayout_for_CustomLineEditManager, ui->scrollArea_for_CustomLineEdit);
     manager->create_CustomLineEdit();
+
+    ui->button_tagsOption_delete_tag->setEnabled(false);
 }
 
 void MainWindow::checkQuestDeadlinePassed() {
@@ -418,31 +420,28 @@ void MainWindow::connect_Signals_and_Slots(){
     //connect for control visiable element program in space
     connect(ui->button_change_space,&QPushButton::clicked,this,&MainWindow::change_space);
 
-    connect(ui->QListWidget_tags, &QListWidget::itemClicked, this, [this](QListWidgetItem *item){
-        // if(item){
-        //     ui->button_tagsOption->setText("-");
-        // }else{
-        //     ui->button_tagsOption->setText("+");
-        // }
-    });
-
     connect(ui->button_tagsOption,&QPushButton::clicked,this,[this](){
-        if (ui->button_tagsOption->text() == "+") {
             QVector<Tag>tags = returnNoteServicePtr()->getAllTags();
             AddTag_DialogWindow window(this,&tags);
 
             window.exec();
+    });
+
+    //functional for activate button_tagsOption_delete_tag and delete current tag
+    connect(ui->QListWidget_tags, &QListWidget::itemSelectionChanged, this, [this]() {
+        ui->button_tagsOption_delete_tag->setEnabled(ui->QListWidget_tags->selectedItems().count() > 0);
+    });
+    connect(ui->QListWidget_tags, &QListWidget::itemClicked, this, [this](QListWidgetItem* current) {
+        ui->button_tagsOption_delete_tag->setEnabled(true);
+    });
+    connect(ui->QListWidget_tags, &QListWidget::itemSelectionChanged, this, [this]() {
+        ui->button_tagsOption_delete_tag->setEnabled(ui->QListWidget_tags->selectedItems().count() > 0);
+    });
+
+    connect(ui->button_tagsOption_delete_tag,&QPushButton::clicked,this,[this]{
+        if(ui->button_tagsOption_delete_tag->isEnabled()){
+            deleteSelectedTag(ui->QListWidget_tags->currentItem());
         }
-        // else if (ui->button_tagsOption->text() == "-") {
-        //     Note *note = returnNoteServicePtr()->getNote(ui->QListWidget_Notes->currentItem()->text());
-        //     if (note == nullptr) {
-        //         throw std::runtime_error("Title of note is empty /MainWindow::on_tags_option_clicked()");
-        //         return;
-        //     }
-        //     note->deleteTag(ui->QListWidget_tags->currentItem()->text());
-        //     QListWidgetItem* current = ui->QListWidget_tags->currentItem();
-        //     delete current;
-        // }
     });
 }
 void MainWindow::change_space(){
@@ -472,4 +471,9 @@ void MainWindow::update_listWidget_Quests(){
     }
 }
 
+void MainWindow::deleteSelectedTag(QListWidgetItem* item){
+    QString tag_name = item->text();
+    returnNoteServicePtr()->getNote(ui->QLineEdit_TitleNote->text())->deleteTag(tag_name);
+    delete item;
+}
 
